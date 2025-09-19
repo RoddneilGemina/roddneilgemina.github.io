@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Mixology: Inference Bar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c1810 0%, #8b4513 30%, #654321 70%, #1a0f0a 100%);
+            color: #f4e4bc;
+            overflow: hidden;
+            height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-areas:
+                "score score score"
+                "ingredients ingredients ingredients"
+                "workspace workspace customers"
+                "tutorial tutorial legend";
+            grid-template-rows: 80px 120px 1fr 200px;
+            grid-template-columns: 1fr 1fr 300px;
+            height: 100vh;
+            gap: 10px;
+            padding: 10px;
+            width: 60%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .score-panel {
+            grid-area: score;
+            background: linear-gradient(135deg, #3d2817 0%, #5c3f2a 50%, #4a3223 100%);
+            border: 2px solid #cd7f32;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 0 rgba(205, 127, 50, 0.3);
+        }
+
+        .score-info {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .score-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .game-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f4e4bc;
+            text-align: center;
+            flex: 1;
+        }
+
+        .ingredients-panel {
+            grid-area: ingredients;
+            background: linear-gradient(135deg, #3d2817 0%, #5c3f2a 50%, #4a3223 100%);
+            border: 2px solid #cd7f32;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 0 rgba(205, 127, 50, 0.3);
+        }
+
+        .ingredients-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #f4e4bc;
+            text-align: center;
+        }
+
+        .ingredients-shelf {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 70px;
+        }
+
+        .ingredient {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .ingredient:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+        }
+
+        .ingredient:active {
+            cursor: grabbing;
+        }
+
+        .ingredient.proposition,
+        .ingredient[data-type="fruit"] {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+        }
+
+        .ingredient.operator,
+        .ingredient[data-type="mixer"],
+        .ingredient[data-type="choice"],
+        .ingredient[data-type="flow"],
+        .ingredient[data-type="container"] {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .ingredient.negation,
+        .ingredient[data-type="negation"] {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .workspace {
+            grid-area: workspace;
+            background: linear-gradient(135deg, #3d2817 0%, #5c3f2a 50%, #4a3223 100%);
+            border: 2px solid #cd7f32;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 0 rgba(205, 127, 50, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .workspace-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #f4e4bc;
+            text-align: center;
+        }
+
+        .mixing-area {
+            flex: 1;
+            border: 3px dashed #cd7f32;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 200px;
+            background: linear-gradient(135deg, #1a110a 0%, #2a1b12 50%, #1a110a 100%);
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .mixing-area.drag-over {
+            border-color: #27ae60;
+            background-color: rgba(39, 174, 96, 0.1);
+        }
+
+        .mixing-placeholder {
+            color: #8b7355;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .mixed-formula {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .formula-element {
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-serve {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .btn-serve:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-clear {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            color: white;
+        }
+
+        .btn-clear:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(149, 165, 166, 0.3);
+        }
+
+        .customers-panel {
+            grid-area: customers;
+            background: linear-gradient(135deg, #3d2817 0%, #5c3f2a 50%, #4a3223 100%);
+            border: 2px solid #cd7f32;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 0 rgba(205, 127, 50, 0.3);
+            overflow-y: auto;
+        }
+
+        .customers-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #f4e4bc;
+            text-align: center;
+        }
+
+        .customer {
+            background: linear-gradient(135deg, #2a1b12 0%, #3d2817 50%, #2a1b12 100%);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #cd7f32;
+            transition: transform 0.2s;
+            color: #f4e4bc;
+        }
+
+        .customer.active {
+            border-left-color: #27ae60;
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.2);
+        }
+
+        .customer-name {
+            font-weight: bold;
+            color: #f4e4bc;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .customer-request {
+            font-size: 14px;
+            color: #d4c2a5;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .customer-premises {
+            background: rgba(205, 127, 50, 0.2);
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: monospace;
+            margin-bottom: 8px;
+            color: #f4e4bc;
+            border: 1px solid rgba(205, 127, 50, 0.3);
+        }
+
+        .customer-patience {
+            width: 100%;
+            height: 6px;
+            background: #1a110a;
+            border-radius: 3px;
+            overflow: hidden;
+            border: 1px solid #8b4513;
+        }
+
+        .patience-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #f39c12, #e74c3c);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .tutorial-panel {
+            grid-area: tutorial;
+            background: linear-gradient(135deg, #3d2817 0%, #5c3f2a 50%, #4a3223 100%);
+            border: 2px solid #cd7f32;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 0 rgba(205, 127, 50, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tutorial-content {
+            text-align: center;
+            color: #f4e4bc;
+            font-size: 14px;
+            max-width: 800px;
+        }
+
+        .tutorial-rule {
+            font-weight: bold;
+            color: #27ae60;
+            margin: 0 5px;
+        }
+
+        .feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feedback.success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .feedback.error {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .feedback.show {
+            opacity: 1;
+        }
+
+        .legend-panel {
+            grid-area: legend;
+            background: linear-gradient(135deg, #3d2817 0%, #5c3f2a 50%, #4a3223 100%);
+            border: 2px solid #cd7f32;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 0 rgba(205, 127, 50, 0.3);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .legend-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .legend-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #f4e4bc;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-toggle {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .legend-toggle.collapsed {
+            transform: rotate(180deg);
+        }
+
+        .legend-content {
+            display: block;
+            opacity: 1;
+            max-height: 150px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            scrollbar-width: thin;
+            scrollbar-color: #888 #f1f1f1;
+        }
+
+        .legend-content.hidden {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            border: none;
+        }
+
+        .legend-content.visible {
+            max-height: 150px;
+            opacity: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: block;
+        }
+
+        .legend-table {
+            width: 100%;
+            font-size: 12px;
+            border-collapse: collapse;
+        }
+
+        .legend-table th {
+            background-color: #f8f9fa;
+            padding: 6px 8px;
+            text-align: left;
+            font-weight: 600;
+            color: #f4e4bc;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .legend-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+            display: table-cell;
+            visibility: visible;
+        }
+
+        .legend-table tbody {
+            display: table-row-group;
+            visibility: visible;
+        }
+
+        .legend-table tr {
+            display: table-row;
+            visibility: visible;
+        }
+
+        .legend-bar-symbol {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .legend-logic-symbol {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #6c757d;
+        }
+
+        .legend-description {
+            color: #666;
+            font-size: 11px;
+        }
+
+        /* Custom scrollbar for legend content */
+        .legend-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .legend-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .legend-content::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+
+        .legend-content::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+
+        .test-button {
+            background: linear-gradient(135deg, #f39c12, #d68910);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-left: 10px;
+        }
+
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.3);
+        }
+
+        .test-button.disabled {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            cursor: not-allowed;
+        }
+
+        /* Solution Button on Customer Cards */
+        .solution-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.15s ease;
+            box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .solution-btn:hover {
+            background: linear-gradient(135deg, #2980b9, #2471a3);
+            box-shadow: 0 3px 8px rgba(52, 152, 219, 0.4);
+            transform: none;
+        }
+
+        .solution-btn:active {
+            transform: scale(0.98);
+            transition: transform 0.05s ease;
+        }
+
+        /* Customer solution display */
+        .customer-rule {
+            background: rgba(139, 69, 19, 0.3);
+            border-radius: 4px;
+            padding: 6px 8px;
+            margin: 8px 0 4px 0;
+            font-size: 12px;
+            border-left: 3px solid #cd7f32;
+            color: #f4e4bc;
+        }
+
+        .customer-solution {
+            background: rgba(39, 174, 96, 0.2);
+            border-radius: 4px;
+            padding: 8px;
+            margin: 6px 0;
+            font-size: 13px;
+            border-left: 3px solid #27ae60;
+            color: #f4e4bc;
+        }
+
+        .solution-formula {
+            font-size: 16px;
+            font-weight: bold;
+            background: #2a1b12;
+            color: #f4e4bc;
+            padding: 2px 6px;
+            border-radius: 3px;
+            border: 1px solid #cd7f32;
+            margin-left: 4px;
+        }
+
+        /* Solution Modal Styles */
+        .solution-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .solution-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .solution-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+        }
+
+        .solution-content {
+            position: relative;
+            background: white;
+            border-radius: 15px;
+            max-width: 600px;
+            max-height: 80vh;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .solution-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .solution-title {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .solution-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .solution-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .solution-body {
+            padding: 25px;
+            overflow-y: auto;
+            max-height: calc(80vh - 80px);
+        }
+
+        .solution-customer {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .customer-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .customer-avatar {
+            font-size: 24px;
+        }
+
+        .customer-name {
+            font-weight: bold;
+            color: #f4e4bc;
+            font-size: 18px;
+        }
+
+        .solution-steps h4 {
+            color: #f4e4bc;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .solution-steps h5 {
+            color: #34495e;
+            margin: 15px 0 8px 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .premises-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .premise-item {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border: 1px solid #27ae60;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-family: monospace;
+            font-weight: bold;
+            color: #155724;
+        }
+
+        .rule-explanation {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 1px solid #f39c12;
+            border-radius: 8px;
+            padding: 15px;
+            color: #856404;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .result-formula {
+            background: linear-gradient(135deg, #d1ecf1, #b8e6f1);
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 16px;
+            color: #0c5460;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .solution-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-apply {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .btn-hint {
+            background: linear-gradient(135deg, #f39c12, #d68910);
+            color: white;
+        }
+
+        .btn-apply:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-hint:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.3);
+        }
+
+        @media (max-width: 1200px) {
+            .game-container {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                grid-template-areas:
+                    "score score"
+                    "ingredients ingredients"
+                    "workspace customers"
+                    "tutorial legend";
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 80px 120px 1fr 180px;
+                width: 95%;
+                padding: 5px;
+            }
+
+            .legend-panel {
+                padding: 10px;
+            }
+
+            .legend-table {
+                font-size: 10px;
+            }
+
+            .legend-content {
+                max-height: 120px;
+            }
+
+            .ingredients-shelf {
+                flex-wrap: wrap;
+                height: auto;
+                gap: 10px;
+            }
+
+            .ingredient {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Score Panel -->
+        <div class="score-panel">
+            <div class="score-info">
+                <div class="score-item">
+                    <div class="score-value" id="current-score">0</div>
+                    <div class="score-label">Score</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value" id="combo-multiplier">1x</div>
+                    <div class="score-label">Combo</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value" id="accuracy">100%</div>
+                    <div class="score-label">Accuracy</div>
+                </div>
+            </div>
+            <div class="game-title">Logic Mixology: Inference Bar</div>
+            <div class="score-info">
+                <div class="score-item">
+                    <div class="score-value" id="level">1</div>
+                    <div class="score-label">Level</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value" id="served-customers">0</div>
+                    <div class="score-label">Served</div>
+                </div>
+                <button class="test-button" id="timer-toggle" title="Toggle customer timers for testing">⏰</button>
+            </div>
+        </div>
+
+        <!-- Ingredients Panel -->
+        <div class="ingredients-panel">
+            <div class="ingredients-title">Bar Ingredients</div>
+            <div class="ingredients-shelf">
+                <div class="ingredient proposition" draggable="true" data-symbol="🍋" data-type="fruit">🍋</div>
+                <div class="ingredient proposition" draggable="true" data-symbol="🍓" data-type="fruit">🍓</div>
+                <div class="ingredient proposition" draggable="true" data-symbol="🥝" data-type="fruit">🥝</div>
+                <div class="ingredient operator" draggable="true" data-symbol="🥤" data-type="mixer">🥤</div>
+                <div class="ingredient operator" draggable="true" data-symbol="🔀" data-type="choice">🔀</div>
+                <div class="ingredient operator" draggable="true" data-symbol="➡️" data-type="flow">➡️</div>
+                <div class="ingredient negation" draggable="true" data-symbol="❌" data-type="negation">❌</div>
+                <div class="ingredient operator" draggable="true" data-symbol="🫙" data-type="container">🫙</div>
+                <div class="ingredient operator" draggable="true" data-symbol="🍸" data-type="container">🍸</div>
+            </div>
+        </div>
+
+        <!-- Workspace -->
+        <div class="workspace">
+            <div class="workspace-title">Mixing Counter</div>
+            <div class="mixing-area" id="mixing-area">
+                <div class="mixing-placeholder">Drag ingredients here to create drink recipes</div>
+                <div class="mixed-formula" id="mixed-formula" style="display: none;"></div>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-serve" id="serve-btn">Serve Drink</button>
+                <button class="btn btn-clear" id="clear-btn">Clear Counter</button>
+            </div>
+        </div>
+
+        <!-- Customers Panel -->
+        <div class="customers-panel">
+            <div class="customers-title">Customer Queue</div>
+            <div id="customer-queue">
+                <!-- Customers will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Tutorial Panel -->
+        <div class="tutorial-panel">
+            <div class="tutorial-content" id="tutorial-content">
+                Welcome to your bar! Drag ingredients to mix drinks that satisfy customer recipes and requests.
+                Start with <span class="tutorial-rule">Classic Recipe</span>: If recipe calls for 🍋➡️🍓 and you have 🍋, serve 🍓.
+            </div>
+        </div>
+
+        <!-- Symbol Legend Panel -->
+        <div class="legend-panel">
+            <div class="legend-header" id="legend-header">
+                <div class="legend-title">
+                    🔍 Symbol Reference
+                </div>
+                <div class="legend-toggle" id="legend-toggle">▼</div>
+            </div>
+            <div class="legend-content visible" id="legend-content">
+                <table class="legend-table">
+                    <thead>
+                        <tr>
+                            <th>Bar Symbol</th>
+                            <th>Logic Symbol</th>
+                            <th>Meaning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="legend-bar-symbol">🍋🍓🥝</td>
+                            <td class="legend-logic-symbol">P, Q, R</td>
+                            <td class="legend-description">Ingredients/Propositions</td>
+                        </tr>
+                        <tr>
+                            <td class="legend-bar-symbol">➡️</td>
+                            <td class="legend-logic-symbol">→</td>
+                            <td class="legend-description">Recipe flow (implies)</td>
+                        </tr>
+                        <tr>
+                            <td class="legend-bar-symbol">🥤</td>
+                            <td class="legend-logic-symbol">∧</td>
+                            <td class="legend-description">Mix together (and)</td>
+                        </tr>
+                        <tr>
+                            <td class="legend-bar-symbol">🔀</td>
+                            <td class="legend-logic-symbol">∨</td>
+                            <td class="legend-description">Either choice (or)</td>
+                        </tr>
+                        <tr>
+                            <td class="legend-bar-symbol">❌</td>
+                            <td class="legend-logic-symbol">¬</td>
+                            <td class="legend-description">Not available (not)</td>
+                        </tr>
+                        <tr>
+                            <td class="legend-bar-symbol">🫙🍸</td>
+                            <td class="legend-logic-symbol">( )</td>
+                            <td class="legend-description">Container/grouping</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Messages -->
+    <div class="feedback" id="feedback-message"></div>
+
+    <!-- Solution Modal -->
+    <div class="solution-modal" id="solution-modal">
+        <div class="solution-overlay" id="solution-overlay"></div>
+        <div class="solution-content">
+            <div class="solution-header">
+                <h3 class="solution-title" id="solution-title">Recipe Solution</h3>
+                <button class="solution-close" id="solution-close">✕</button>
+            </div>
+            <div class="solution-body">
+                <div class="solution-customer" id="solution-customer">
+                    <div class="customer-info">
+                        <span class="customer-avatar" id="solution-avatar">🤓</span>
+                        <span class="customer-name" id="solution-name">Customer Name</span>
+                    </div>
+                    <div class="customer-request" id="solution-request">Customer's request description</div>
+                </div>
+
+                <div class="solution-steps">
+                    <h4>Mixing Technique: <span id="solution-technique">Classic Recipe</span></h4>
+
+                    <div class="solution-premises">
+                        <h5>Given ingredients:</h5>
+                        <div class="premises-list" id="solution-premises"></div>
+                    </div>
+
+                    <div class="solution-rule">
+                        <h5>Apply rule:</h5>
+                        <div class="rule-explanation" id="solution-rule-explanation"></div>
+                    </div>
+
+                    <div class="solution-result">
+                        <h5>Result:</h5>
+                        <div class="result-formula" id="solution-result"></div>
+                    </div>
+
+                    <div class="solution-actions">
+                        <button class="btn btn-apply" id="apply-solution">Apply Solution</button>
+                        <button class="btn btn-hint" id="show-hint">Show Hint</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Scripts -->
+    <script src="game-data.js"></script>
+    <script src="inference-rules.js"></script>
+    <script src="game-engine.js"></script>
+    <script src="ui-interactions.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>

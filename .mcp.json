@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "serena": {
+      "command": "C:/Users/X/.local/bin/uv.exe",
+      "args": [
+        "run",
+        "--directory",
+        "C:/CLI/serena",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "ide-assistant",
+        "--project",
+        "$(pwd)"
+      ],
+      "env": {
+        "SERENA_CONTEXT": "ide_assistant",
+        "SERENA_PROJECT": "C:/Users/X/Desktop/new/app-playground"
+      }
+    }
+  }
+}
