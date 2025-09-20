@@ -11,7 +11,8 @@
       "mcp__serena__find_symbol",
       "mcp__serena__check_onboarding_performed",
       "mcp__serena__onboarding",
-      "mcp__serena__replace_symbol_body"
+      "mcp__serena__replace_symbol_body",
+      "mcp__serena__write_memory"
     ]
   },
   "enableAllProjectMcpServers": true,
