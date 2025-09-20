@@ -1,15 +1,17 @@
-// Game Engine for Logic Mixology: Inference Bar
+// Game Engine for Boolean Smoothie Shop
 
 class GameEngine {
     constructor() {
         this.gameState = {
-            level: 1,
+            level: 4, // Start at level 4 to test complex scenarios
             score: 0,
             servedCustomers: 0,
             currentCombo: 0,
             maxCombo: 0,
             correctAnswers: 0,
             totalAnswers: 0,
+            hearts: 3,
+            maxHearts: 3,
             isPlaying: false,
             isPaused: false,
             startTime: null,
@@ -18,14 +20,15 @@ class GameEngine {
 
         this.customers = [];
         this.activeCustomer = null;
-        this.mixedFormula = [];
+        this.inventory = [];
+        this.selectedPremises = [];
         this.gameLoop = null;
         this.tutorialStep = 0;
 
         // Bind methods to preserve 'this' context
         this.update = this.update.bind(this);
         this.serveCustomer = this.serveCustomer.bind(this);
-        this.clearCounter = this.clearCounter.bind(this);
+        this.clearInventory = this.clearInventory.bind(this);
 
         this.achievements = new Set();
         this.timers = new Map();
@@ -33,7 +36,7 @@ class GameEngine {
 
     // Initialize the game
     init() {
-        console.log("Initializing Logic Mixology Bar Engine...");
+        console.log("Initializing Boolean Smoothie Shop Engine...");
         this.gameState.isPlaying = true;
         this.gameState.startTime = Date.now();
 
@@ -61,7 +64,17 @@ class GameEngine {
         const difficultySettings = this.getCurrentDifficultySettings();
         const availableRules = difficultySettings.availableRules;
         const selectedRule = availableRules[Math.floor(Math.random() * availableRules.length)];
+        console.log('Selected rule:', selectedRule);
+        console.log('Available rules:', availableRules);
+        console.log('All templates:', Object.keys(window.GameData.INFERENCE_TEMPLATES));
+
         const template = window.GameData.INFERENCE_TEMPLATES[selectedRule];
+        console.log('Template found:', template);
+
+        if (!template) {
+            console.error(`Template not found for rule: ${selectedRule}`);
+            return;
+        }
 
         // Generate premises and conclusion based on the template
         const customerRequest = this.generateInferenceRequest(template, selectedRule);
@@ -94,19 +107,39 @@ class GameEngine {
 
         // For demo purposes, we'll use the template directly
         // In a full implementation, this would generate varied propositions
-        return {
+        const request = {
             rule: ruleKey,
             premises: [...template.premises], // Copy the array
             expectedConclusion: template.conclusion,
             explanation: template.explanation,
             context: template.examples[0]?.context || template.description,
-            difficulty: template.difficulty
+            difficulty: template.difficulty,
+            isMultiStep: template.isMultiStep || false,
+            steps: template.steps || []
         };
+
+        // For multi-step problems, track intermediate goals
+        if (template.isMultiStep && template.steps) {
+            request.intermediateResults = [];
+            request.currentStep = 0;
+            request.solutionPath = template.steps.map(step => ({
+                rule: step.rule,
+                premises: step.premises,
+                expectedResult: step.result,
+                completed: false
+            }));
+        }
+
+        return request;
     }
 
     // Set a customer as the active customer
     setActiveCustomer(customer) {
         this.activeCustomer = customer;
+
+        // Initialize inventory with customer's premises
+        this.initializeInventory(customer);
+
         this.updateCustomerDisplay();
 
         // Update tutorial based on the rule
@@ -115,46 +148,64 @@ class GameEngine {
         }
     }
 
-    // Handle serving a customer with the current mixed formula
+    // Initialize inventory with customer premises
+    initializeInventory(customer) {
+        if (customer && customer.request && customer.request.premises) {
+            this.inventory = [...customer.request.premises]; // Copy premises to inventory
+            this.selectedPremises = []; // Clear any previous selections
+            this.updateInventoryDisplay();
+            this.updateSelectedPremisesDisplay();
+            console.log(`Inventory initialized with premises: ${this.inventory.join(', ')}`);
+            console.log(`Target conclusion: ${customer.request.expectedConclusion}`);
+        }
+    }
+
+    // Handle serving a customer (check if target conclusion is in inventory)
     serveCustomer() {
-        if (!this.activeCustomer || this.mixedFormula.length === 0) {
-            this.showFeedback("No customer to serve or empty formula!", "error");
+        if (!this.activeCustomer) {
+            this.showFeedback("No customer to serve!", "error");
             return;
         }
 
         const customer = this.activeCustomer;
-        const formulaString = this.mixedFormula.join('');
+        const targetConclusion = customer.request.expectedConclusion;
         const startTime = customer.arrivalTime;
         const endTime = Date.now();
         const responseTime = endTime - startTime;
 
-        // Validate the inference
-        console.log('Debugging validation:');
-        console.log('Customer premises:', customer.request.premises);
-        console.log('Your formula:', formulaString);
-        console.log('Expected rule:', customer.request.rule);
-        console.log('Expected conclusion:', customer.request.expectedConclusion);
-
-        const validationResult = window.inferenceEngine.validateInference(
-            customer.request.premises,
-            formulaString,
-            customer.request.rule
-        );
-
-        console.log('Validation result:', validationResult);
+        console.log('Checking inventory for target conclusion:');
+        console.log('Current inventory:', this.inventory);
+        console.log('Target conclusion:', targetConclusion);
 
         this.gameState.totalAnswers++;
 
-        if (validationResult.valid) {
+        // Check if target conclusion exists in inventory
+        if (this.inventory.includes(targetConclusion)) {
             this.handleCorrectAnswer(customer, responseTime);
         } else {
-            this.handleIncorrectAnswer(customer, validationResult.error);
+            this.handleIncorrectAnswer(customer, `Target conclusion "${targetConclusion}" not found in inventory`);
         }
 
-        // Clear the counter and move to next customer
-        this.clearCounter();
+        // Clear inventory and move to next customer
+        this.clearInventory();
         this.removeCustomer(customer);
         this.generateCustomer(); // Generate a new customer
+    }
+
+    // Add item to inventory (when rule is applied)
+    addToInventory(item) {
+        if (!this.inventory.includes(item)) {
+            this.inventory.push(item);
+            this.updateInventoryDisplay();
+            console.log(`Added "${item}" to inventory. Current inventory: ${this.inventory.join(', ')}`);
+        }
+    }
+
+    // Check if target conclusion exists in inventory
+    hasTargetConclusion() {
+        if (!this.activeCustomer) return false;
+        const target = this.activeCustomer.request.expectedConclusion;
+        return this.inventory.includes(target);
     }
 
     // Handle a correct answer
@@ -201,6 +252,9 @@ class GameEngine {
         const penalty = window.GameData.SCORING.basePoints.incorrect;
         this.gameState.score = Math.max(0, this.gameState.score + penalty);
 
+        // Lose a heart for incorrect answer
+        this.loseHeart(`Incorrect answer: ${error}`);
+
         this.showFeedback(`Incorrect: ${error}`, "error");
         console.log(`Incorrect answer: ${error}`);
     }
@@ -223,17 +277,175 @@ class GameEngine {
         this.updateCustomerDisplay();
     }
 
-    // Clear the mixing counter
-    clearCounter() {
-        this.mixedFormula = [];
-        this.updateMixingDisplay();
+    // Clear the inventory
+    clearInventory() {
+        this.inventory = [];
+        this.selectedPremises = [];
+        this.updateInventoryDisplay();
+        this.updateSelectedPremisesDisplay();
     }
 
-    // Add an ingredient to the mixing counter
-    addIngredient(symbol) {
-        this.mixedFormula.push(symbol);
-        this.updateMixingDisplay();
-        console.log(`Added ingredient: ${symbol}, Recipe: ${this.mixedFormula.join('')}`);
+    // Apply an inference rule to selected premises
+    applyRule(ruleKey) {
+        if (this.selectedPremises.length === 0) {
+            this.showFeedback("Please select premises first!", "error");
+            return;
+        }
+
+        // Get the rule template
+        const template = window.GameData.INFERENCE_TEMPLATES[ruleKey];
+        if (!template) {
+            this.showFeedback("Invalid rule selected!", "error");
+            return;
+        }
+
+        // Apply rule logic (simplified for now)
+        const result = this.applyInferenceRule(this.selectedPremises, ruleKey);
+        if (result) {
+            this.addToInventory(result);
+            this.selectedPremises = []; // Clear selection after applying rule
+            this.updateInventoryDisplay();
+            this.updateSelectedPremisesDisplay(); // Update the selected premises display to show it's cleared
+            this.showFeedback(`Applied ${template.name}: ${result}`, "success");
+        } else {
+            this.showFeedback("Rule cannot be applied to selected premises!", "error");
+        }
+    }
+
+    // Apply inference rule logic to selected premises
+    applyInferenceRule(premises, ruleKey) {
+        if (!premises || premises.length === 0) return null;
+
+        switch (ruleKey) {
+            case 'modusPonens':
+                // Look for P->Q and P, return Q
+                const implication = premises.find(p => p.includes('➡️'));
+                const antecedent = premises.find(p => !p.includes('➡️') && !p.includes('❌'));
+
+                if (implication && antecedent) {
+                    const [left, right] = implication.split('➡️');
+                    if (left === antecedent) {
+                        return right;
+                    }
+                }
+                break;
+
+            case 'simplification':
+                // Look for P🥤Q (P AND Q), return P or Q
+                const conjunction = premises.find(p => p.includes('🥤'));
+                if (conjunction) {
+                    const parts = conjunction.split('🥤');
+                    return parts[0]; // Return first part for simplicity
+                }
+                break;
+
+            case 'chainedModusPonens':
+                // Complex chained modus ponens: 🍋➡️🍓, 🍓➡️🥝, 🍋 → 🥝
+                const implications = premises.filter(p => p.includes('➡️'));
+                const facts = premises.filter(p => !p.includes('➡️') && !p.includes('❌'));
+
+                if (implications.length >= 2 && facts.length >= 1) {
+                    // Find a chain: fact → intermediate → conclusion
+                    for (const fact of facts) {
+                        for (const impl1 of implications) {
+                            const [left1, right1] = impl1.split('➡️');
+                            if (left1 === fact) {
+                                // Found first link, look for second
+                                for (const impl2 of implications) {
+                                    const [left2, right2] = impl2.split('➡️');
+                                    if (left2 === right1) {
+                                        return right2; // Final conclusion
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+
+            case 'complexDisjunction':
+                // Complex disjunction chain: 🍋🔀🍓, 🍓🔀🥝, ❌🍋 → 🥝
+                const disjunctions = premises.filter(p => p.includes('🔀'));
+                const negations = premises.filter(p => p.includes('❌'));
+
+                if (disjunctions.length >= 2 && negations.length >= 1) {
+                    // Start with what's not negated
+                    const negatedItem = negations[0].replace('❌', '');
+
+                    // Find first disjunction that contains the negated item
+                    for (const disj1 of disjunctions) {
+                        const [left1, right1] = disj1.split('🔀');
+                        if (left1 === negatedItem) {
+                            // Take the right option, look for it in next disjunction
+                            for (const disj2 of disjunctions) {
+                                if (disj2 !== disj1) {
+                                    const [left2, right2] = disj2.split('🔀');
+                                    if (left2 === right1) {
+                                        return right2;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+
+            case 'mixedLogicChain':
+                // Mixed logic: 🍋🥤🍓, 🍓➡️🥝, ❌🍋 → 🥝
+                const mixture = premises.find(p => p.includes('🥤'));
+                const mixedImplication = premises.find(p => p.includes('➡️'));
+                const mixedNegation = premises.find(p => p.includes('❌'));
+
+                if (mixture && mixedImplication) {
+                    // Extract from mixture (avoiding negated item)
+                    const mixParts = mixture.split('🥤');
+                    const negatedItem = mixedNegation ? mixedNegation.replace('❌', '') : null;
+
+                    // Choose the non-negated part
+                    let extractedItem;
+                    if (negatedItem && mixParts[0] === negatedItem) {
+                        extractedItem = mixParts[1];
+                    } else {
+                        extractedItem = mixParts[0];
+                    }
+
+                    // Apply implication
+                    const [implLeft, implRight] = mixedImplication.split('➡️');
+                    if (implLeft === extractedItem) {
+                        return implRight;
+                    }
+                }
+                break;
+
+            case 'addition':
+                // From P, can derive P🔀Q (P OR Q) - but need another premise for Q
+                if (premises.length >= 2) {
+                    return premises[0] + '🔀' + premises[1];
+                }
+                break;
+
+            case 'disjunctiveSyllogism':
+                // P🔀Q and ❌P, return Q
+                const disjunction = premises.find(p => p.includes('🔀'));
+                const disjNegation = premises.find(p => p.includes('❌'));
+
+                if (disjunction && disjNegation) {
+                    const [left, right] = disjunction.split('🔀');
+                    const negatedPart = disjNegation.replace('❌', '');
+                    if (left === negatedPart) {
+                        return right;
+                    } else if (right === negatedPart) {
+                        return left;
+                    }
+                }
+                break;
+
+            default:
+                console.log(`Rule ${ruleKey} not implemented yet`);
+                return null;
+        }
+
+        return null;
     }
 
     // Get current difficulty settings
@@ -250,7 +462,7 @@ class GameEngine {
     // Check for level progression
     checkLevelUp() {
         const requiredCustomers = this.gameState.level * 5; // 5 customers per level
-        if (this.gameState.servedCustomers >= requiredCustomers && this.gameState.level < 3) {
+        if (this.gameState.servedCustomers >= requiredCustomers && this.gameState.level < 6) {
             this.gameState.level++;
             this.showFeedback(`Level Up! Welcome to ${this.getCurrentDifficultySettings().name}`, "success");
             this.showTutorial('levelUp');
@@ -329,9 +541,104 @@ class GameEngine {
         const penalty = window.GameData.SCORING.basePoints.timeout;
         this.gameState.score = Math.max(0, this.gameState.score + penalty);
 
+        // Lose a heart for customer timeout
+        this.loseHeart(`${customer.persona.name} left due to timeout`);
+
         this.showFeedback(`${customer.persona.name} left! ${penalty} points`, "error");
         this.removeCustomer(customer);
         this.generateCustomer();
+    }
+
+    // Lose a heart and check for game over
+    loseHeart(reason) {
+        if (this.gameState.hearts > 0) {
+            this.gameState.hearts--;
+
+            // Deduct points for losing a heart
+            const heartPenalty = 50;
+            this.gameState.score = Math.max(0, this.gameState.score - heartPenalty);
+
+            console.log(`Lost a heart: ${reason}. Hearts remaining: ${this.gameState.hearts}`);
+
+            // Check for game over
+            if (this.gameState.hearts <= 0) {
+                this.gameOver();
+            }
+        }
+    }
+
+    // Handle game over
+    gameOver() {
+        this.gameState.isPlaying = false;
+        this.stopGameLoop();
+
+        const stats = this.getStats();
+
+        // Show game over feedback
+        this.showFeedback(`Game Over! Final Score: ${this.gameState.score}`, "error");
+
+        // Show game over screen after a short delay
+        setTimeout(() => {
+            const confirmed = confirm(
+                `Game Over!\n\n` +
+                `Final Score: ${stats.score}\n` +
+                `Customers Served: ${stats.servedCustomers}\n` +
+                `Accuracy: ${Math.round(stats.accuracy)}%\n` +
+                `Max Combo: ${stats.maxCombo}\n\n` +
+                `Would you like to play again?`
+            );
+
+            if (confirmed) {
+                this.restartGame();
+            } else {
+                // Return to menu
+                this.showMenu();
+            }
+        }, 2000);
+
+        console.log('Game Over! Stats:', stats);
+    }
+
+    // Restart the game
+    restartGame() {
+        // Reset game state
+        this.gameState = {
+            level: 1,
+            score: 0,
+            servedCustomers: 0,
+            currentCombo: 0,
+            maxCombo: 0,
+            correctAnswers: 0,
+            totalAnswers: 0,
+            hearts: 3,
+            maxHearts: 3,
+            isPlaying: false,
+            isPaused: false,
+            startTime: null,
+            timersDisabled: false
+        };
+
+        // Clear customers and reset UI
+        this.customers = [];
+        this.activeCustomer = null;
+        this.inventory = [];
+        this.selectedPremises = [];
+        this.achievements.clear();
+        this.timers.clear();
+
+        // Restart the game
+        this.init();
+    }
+
+    // Show menu screen
+    showMenu() {
+        const gameContainer = document.getElementById('game-container');
+        const menuScreen = document.getElementById('menu-screen');
+
+        if (gameContainer && menuScreen) {
+            gameContainer.style.display = 'none';
+            menuScreen.style.display = 'flex';
+        }
     }
 
     // Start the game loop
@@ -357,6 +664,13 @@ class GameEngine {
         document.getElementById('combo-multiplier').textContent = `${this.gameState.currentCombo}x`;
         document.getElementById('level').textContent = this.gameState.level;
         document.getElementById('served-customers').textContent = this.gameState.servedCustomers;
+
+        // Update hearts display
+        const heartsDisplay = document.getElementById('hearts-display');
+        if (heartsDisplay) {
+            const hearts = '❤️'.repeat(this.gameState.hearts) + '🤍'.repeat(this.gameState.maxHearts - this.gameState.hearts);
+            heartsDisplay.textContent = hearts;
+        }
 
         // Update accuracy
         const accuracy = this.gameState.totalAnswers > 0
@@ -505,22 +819,94 @@ class GameEngine {
         return { steps, formula };
     }
 
-    // Update mixing display
-    updateMixingDisplay() {
-        const mixingArea = document.getElementById('mixing-area');
-        const placeholder = mixingArea.querySelector('.mixing-placeholder');
-        const formulaDisplay = document.getElementById('mixed-formula');
+    // Update inventory display
+    updateInventoryDisplay() {
+        const inventoryArea = document.getElementById('inventory-area');
+        const placeholder = document.querySelector('.inventory-placeholder');
+        const inventoryItems = document.getElementById('inventory-items');
 
-        if (this.mixedFormula.length === 0) {
+        if (!inventoryArea || !inventoryItems) return;
+
+        if (this.inventory.length === 0) {
             placeholder.style.display = 'block';
-            formulaDisplay.style.display = 'none';
+            inventoryItems.style.display = 'none';
         } else {
             placeholder.style.display = 'none';
-            formulaDisplay.style.display = 'flex';
-            formulaDisplay.innerHTML = this.mixedFormula.map(symbol =>
-                `<span class="formula-element" style="background-color: ${this.getIngredientColor(symbol)}">${symbol}</span>`
-            ).join('');
+            inventoryItems.style.display = 'flex';
+
+            // Clear existing items
+            inventoryItems.innerHTML = '';
+
+            // Add inventory items
+            this.inventory.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'inventory-item';
+                itemElement.textContent = item;
+                itemElement.dataset.premise = item;
+
+                // Distinguish between original premises and derived items
+                if (this.activeCustomer && this.activeCustomer.request.premises.includes(item)) {
+                    itemElement.classList.add('premise');
+                } else {
+                    itemElement.classList.add('derived');
+                }
+
+                // Check if selected
+                if (this.isPremiseSelected(item)) {
+                    itemElement.classList.add('selected');
+                }
+
+                // Add click handler
+                itemElement.addEventListener('click', () => {
+                    this.togglePremiseSelection(item);
+                });
+
+                inventoryItems.appendChild(itemElement);
+            });
         }
+
+        console.log('Updated inventory display:', this.inventory);
+    }
+
+    // Toggle premise selection
+    togglePremiseSelection(premise) {
+        const index = this.selectedPremises.indexOf(premise);
+        if (index > -1) {
+            this.selectedPremises.splice(index, 1);
+        } else {
+            this.selectedPremises.push(premise);
+        }
+        console.log('Selected premises:', this.selectedPremises);
+        this.updateInventoryDisplay();
+        this.updateSelectedPremisesDisplay();
+    }
+
+    // Update selected premises display
+    updateSelectedPremisesDisplay() {
+        const premisesDisplay = document.getElementById('premises-display');
+        if (!premisesDisplay) return;
+
+        // Clear existing display
+        premisesDisplay.innerHTML = '';
+
+        if (this.selectedPremises.length === 0) {
+            const noSelection = document.createElement('div');
+            noSelection.className = 'no-selection';
+            noSelection.textContent = 'Select ingredients from your inventory first';
+            premisesDisplay.appendChild(noSelection);
+        } else {
+            this.selectedPremises.forEach(premise => {
+                const premiseElement = document.createElement('div');
+                premiseElement.className = 'selected-premise-item';
+                premiseElement.textContent = premise;
+                premisesDisplay.appendChild(premiseElement);
+            });
+        }
+    }
+
+    // Check if premise is selected
+    isPremiseSelected(premise) {
+        return this.selectedPremises.includes(premise);
     }
 
     // Get color for ingredient based on type
@@ -602,16 +988,14 @@ if (typeof module !== 'undefined' && module.exports) {
     window.gameEngine = gameEngine;
 }
 
-// Auto-start the game when DOM is loaded
+// Initialize game engine when DOM is loaded (but don't auto-start the game)
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM loaded, initializing game...");
+    console.log("DOM loaded, game engine ready...");
 
-    // Wait a bit for all scripts to load
-    setTimeout(() => {
-        if (typeof window.gameEngine !== 'undefined') {
-            window.gameEngine.init();
-        } else {
-            console.error("Game engine not available!");
-        }
-    }, 100);
+    // Game engine is ready but won't auto-start - waiting for menu interaction
+    if (typeof window.gameEngine === 'undefined') {
+        console.error("Game engine not available!");
+    } else {
+        console.log("Boolean Smoothie Shop ready to start from menu!");
+    }
 });

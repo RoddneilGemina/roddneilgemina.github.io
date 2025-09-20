@@ -1,4 +1,4 @@
-// Inference Rules Engine for Logic Mixology: Inference Bar
+// Inference Rules Engine for Boolean Smoothie Shop
 
 class InferenceEngine {
     constructor() {
@@ -203,6 +203,13 @@ class InferenceEngine {
         const ingredient2 = recipe2.tokens.slice(0, arrow2Index).join('');
         const result2 = recipe2.tokens.slice(arrow2Index + 1).join('');
 
+        // Debug logging to understand what's happening
+        console.log('Recipe Chain Debug:');
+        console.log('Recipe 1: ingredient1=', ingredient1, 'result1=', result1);
+        console.log('Recipe 2: ingredient2=', ingredient2, 'result2=', result2);
+        console.log('Comparing result1 === ingredient2:', result1 === ingredient2, '(', result1, '===', ingredient2, ')');
+        console.log('Comparing result2 === ingredient1:', result2 === ingredient1, '(', result2, '===', ingredient1, ')');
+
         // Find the chain: one result should match the other ingredient
         let startIngredient, finalResult;
 
@@ -215,6 +222,8 @@ class InferenceEngine {
             startIngredient = ingredient2;
             finalResult = result1;
         } else {
+            console.log('No chain found. result1=', JSON.stringify(result1), 'ingredient2=', JSON.stringify(ingredient2));
+            console.log('result2=', JSON.stringify(result2), 'ingredient1=', JSON.stringify(ingredient1));
             return { valid: false, error: "No valid recipe chain found between the steps" };
         }
 
@@ -226,6 +235,9 @@ class InferenceEngine {
         const conclusionArrowIndex = conclusion.tokens.indexOf('➡️');
         const conclusionIngredient = conclusion.tokens.slice(0, conclusionArrowIndex).join('');
         const conclusionResult = conclusion.tokens.slice(conclusionArrowIndex + 1).join('');
+
+        console.log('Expected: startIngredient=', startIngredient, 'finalResult=', finalResult);
+        console.log('Conclusion: ingredient=', conclusionIngredient, 'result=', conclusionResult);
 
         if (conclusionIngredient !== startIngredient || conclusionResult !== finalResult) {
             return { valid: false, error: "Conclusion doesn't match expected recipe chain result" };

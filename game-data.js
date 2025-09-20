@@ -1,59 +1,59 @@
-// Game Data Configuration for Logic Mixology: Inference Bar
+// Game Data Configuration for Boolean Smoothie Shop
 
 // Customer personas with different personalities and request styles
 const CUSTOMER_PERSONAS = [
     {
-        name: "Professor Mixer",
+        name: "Sarah",
         personality: "academic",
         patience: 60000, // 60 seconds
         dialogue: [
-            "I need a drink made by the proper recipe, please.",
+            "I need a smoothie made by the proper recipe, please.",
             "The ingredients must combine according to the rules.",
-            "Make sure your mixing technique is correct."
+            "Make sure your blending technique is correct."
         ],
         avatar: "🤓"
     },
     {
-        name: "Sophie Sipper",
+        name: "Emily",
         personality: "eager",
         patience: 75000, // 75 seconds
         dialogue: [
-            "I'm learning about cocktail recipes!",
-            "Can you help me understand this mixing technique?",
+            "I'm learning about smoothie recipes!",
+            "Can you help me understand this blending technique?",
             "I think it's the classic recipe method, right?"
         ],
         avatar: "👩‍🎓"
     },
     {
-        name: "Master Bartender",
+        name: "Mike",
         personality: "challenging",
         patience: 50000, // 50 seconds
         dialogue: [
             "Let's see if you can handle this recipe.",
-            "Not all drinks are as simple as they seem.",
-            "Show me you understand the mixing rules."
+            "Not all smoothies are as simple as they seem.",
+            "Show me you understand the blending rules."
         ],
         avatar: "👨‍🏫"
     },
     {
-        name: "Business Drinker",
+        name: "David",
         personality: "professional",
         patience: 65000, // 65 seconds
         dialogue: [
-            "I need this drink for my meeting.",
-            "Time is money, mix it right.",
+            "I need this smoothie for my meeting.",
+            "Time is money, blend it right.",
             "The recipe must be followed exactly."
         ],
         avatar: "👨‍💼"
     },
     {
-        name: "Curious Customer",
+        name: "Jessica",
         personality: "curious",
         patience: 70000, // 70 seconds
         dialogue: [
-            "I love learning about cocktail mixing!",
+            "I love learning about smoothie blending!",
             "Could you show me how this recipe works?",
-            "Bartending is so fascinating!"
+            "Smoothie making is so fascinating!"
         ],
         avatar: "🧠"
     }
@@ -72,7 +72,7 @@ const INFERENCE_TEMPLATES = {
             {
                 premises: ["🍋➡️🍓", "🍋"],
                 conclusion: "🍓",
-                context: "Recipe says: If you use lemon, then add strawberry. You have lemon available. Therefore, add strawberry to the drink."
+                context: "Recipe says: If you use lemon, then add strawberry. You have lemon available. Therefore, add strawberry to the smoothie."
             }
         ]
     },
@@ -135,6 +135,70 @@ const INFERENCE_TEMPLATES = {
                 context: "Recipe combines lemon and strawberry together. You can serve just the lemon part."
             }
         ]
+    },
+
+    // Complex 3-premise scenarios
+    chainedModusPonens: {
+        name: "Double Recipe Chain",
+        description: "Follow two recipe steps in sequence to reach the final ingredient",
+        premises: ["🍋➡️🍓", "🍓➡️🥝", "🍋"],
+        conclusion: "🥝",
+        explanation: "From 🍋➡️🍓, 🍓➡️🥝, and having 🍋, we can serve 🥝",
+        difficulty: 4,
+        isMultiStep: true,
+        steps: [
+            { rule: "modusPonens", premises: ["🍋➡️🍓", "🍋"], result: "🍓" },
+            { rule: "modusPonens", premises: ["🍓➡️🥝", "🍓"], result: "🥝" }
+        ],
+        examples: [
+            {
+                premises: ["🍋➡️🍓", "🍓➡️🥝", "🍋"],
+                conclusion: "🥝",
+                context: "Recipe chain: Lemon makes strawberry, strawberry makes kiwi. You have lemon. Follow the chain to make kiwi."
+            }
+        ]
+    },
+
+    complexDisjunction: {
+        name: "Choice Elimination Chain",
+        description: "Eliminate choices step by step to find the right ingredient",
+        premises: ["🍋🔀🍓", "🍓🔀🥝", "❌🍋"],
+        conclusion: "🥝",
+        explanation: "From 🍋🔀🍓, 🍓🔀🥝, and no 🍋, we choose 🍓, then 🥝",
+        difficulty: 4,
+        isMultiStep: true,
+        steps: [
+            { rule: "disjunctiveSyllogism", premises: ["🍋🔀🍓", "❌🍋"], result: "🍓" },
+            { rule: "disjunctiveSyllogism", premises: ["🍓🔀🥝", "🍓"], result: "🥝" }
+        ],
+        examples: [
+            {
+                premises: ["🍋🔀🍓", "🍓🔀🥝", "❌🍋"],
+                conclusion: "🥝",
+                context: "Customer wants either lemon or strawberry, and either strawberry or kiwi. Lemon is unavailable. Work through the choices."
+            }
+        ]
+    },
+
+    mixedLogicChain: {
+        name: "Mixed Logic Challenge",
+        description: "Combine different logical techniques to solve the recipe",
+        premises: ["🍋🥤🍓", "🍓➡️🥝", "❌🍋"],
+        conclusion: "🥝",
+        explanation: "From 🍋🥤🍓 mix, 🍓➡️🥝 recipe, and no 🍋, we extract 🍓 then make 🥝",
+        difficulty: 4,
+        isMultiStep: true,
+        steps: [
+            { rule: "simplification", premises: ["🍋🥤🍓"], result: "🍓" },
+            { rule: "modusPonens", premises: ["🍓➡️🥝", "🍓"], result: "🥝" }
+        ],
+        examples: [
+            {
+                premises: ["🍋🥤🍓", "🍓➡️🥝", "❌🍋"],
+                conclusion: "🥝",
+                context: "You have a lemon-strawberry mix, strawberry leads to kiwi, but lemon is spoiled. Extract strawberry from the mix and follow the recipe."
+            }
+        ]
     }
 };
 
@@ -176,6 +240,27 @@ const DIFFICULTY_SETTINGS = {
         timerBonus: 1.0,
         scoreMultiplier: 1.5,
         maxCustomers: 4
+    },
+    4: {
+        name: "Logic Expert",
+        availableRules: ["modusPonens", "modusTollens", "hypotheticalSyllogism", "disjunctiveSyllogism", "simplification", "chainedModusPonens", "complexDisjunction", "mixedLogicChain"],
+        timerBonus: 0.8,
+        scoreMultiplier: 2.0,
+        maxCustomers: 3
+    },
+    5: {
+        name: "Master Reasoner",
+        availableRules: ["modusPonens", "modusTollens", "hypotheticalSyllogism", "disjunctiveSyllogism", "simplification", "chainedModusPonens", "complexDisjunction", "mixedLogicChain"],
+        timerBonus: 0.6,
+        scoreMultiplier: 2.5,
+        maxCustomers: 4
+    },
+    6: {
+        name: "Logic Grandmaster",
+        availableRules: ["modusPonens", "modusTollens", "hypotheticalSyllogism", "disjunctiveSyllogism", "simplification", "chainedModusPonens", "complexDisjunction", "mixedLogicChain"],
+        timerBonus: 0.5,
+        scoreMultiplier: 3.0,
+        maxCustomers: 5
     }
 };
 
@@ -199,7 +284,10 @@ const SCORING = {
         difficulty: {
             1: 1.0,
             2: 1.3,
-            3: 1.6
+            3: 1.6,
+            4: 2.0,
+            5: 2.5,
+            6: 3.0
         }
     },
     accuracy: {

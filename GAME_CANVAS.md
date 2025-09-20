@@ -1,28 +1,28 @@
-# Logic Mixology: Inference Bar - Game Canvas
+# Boolean Smoothie Shop - Game Canvas
 
 ## PLATFORM
-Web-based browser game with HTML5/CSS3/JavaScript for maximum accessibility across devices. Cross-platform compatibility ensures students can play on laptops, tablets, or smartphones. Future mobile app versions for iOS/Android to support offline studying.
+Web-based browser game with HTML5/CSS3/JavaScript for maximum accessibility across devices. Cross-platform compatibility ensures students can play on laptops, tablets, or smartphones. Responsive design optimized for touch controls on mobile devices while supporting mouse/keyboard on desktop.
 
 ## GAMEPLAY
-Players drag emoji ingredients (🍋🍓🥝) and logical operators (➡️🥤🔀❌) to create formulas that satisfy customer orders using inference rules. Customers present logical premises and conclusions, requiring players to mix the correct logical "drink" recipe. Time pressure and combo multipliers create engaging challenge while reinforcing discrete math concepts.
+Players operate a smoothie shop where each customer presents logical premises as ingredients and requests a smoothie representing a specific conclusion. Players must apply inference rules (represented as blending operations) to transform the given ingredients into the required result. Success depends on selecting the correct logical operations and completing orders before customer patience runs out. Three hearts system creates meaningful consequences for failed orders.
 
 ## LEVELS
-Three progressive bartender skill levels: Junior Bartender (modus ponens, simplification), Skilled Mixologist (adds modus tollens, disjunctive syllogism), and Master Bartender (full inference rule set). Each level increases customer patience demands, introduces complex rule combinations, and unlocks achievement-based progression.
+Endless progression system with automatically scaling difficulty instead of fixed levels. Early customers require simple single-step operations (modus ponens, simplification), while later customers demand complex multi-step reasoning chains. Customer patience decreases and order complexity increases as the game progresses. New inference rules unlock based on player proficiency rather than level completion.
 
 ## AUDIENCE
-Primary target: College students (18-24) studying discrete mathematics and formal logic courses. Secondary audience includes logic puzzle enthusiasts, educators teaching mathematical reasoning, and brain-training mobile gamers. Designed for both classroom integration and independent study sessions.
+Primary target: Students (16-24) studying logic, discrete mathematics, and computer science. Secondary audience includes logic puzzle enthusiasts, educators teaching reasoning skills, and mobile gamers seeking brain training. Designed for both classroom practice and independent study sessions with varying difficulty accommodations.
 
 ## STORY
-Player manages "The Inference Bar," a mystical tavern where drinks are crafted through logical reasoning rather than traditional recipes. Customers are fellow scholars, professors, and logic enthusiasts seeking perfectly reasoned beverages. Progression unlocks new areas of the tavern and reveals the deeper mysteries of logical mixology.
+Player manages "The Logic Smoothie Shop," where customers arrive with ingredient combinations representing logical premises. Each customer expects a perfectly reasoned smoothie that demonstrates valid logical conclusions. Success depends on mastering the art of logical blending - transforming abstract reasoning into delicious results. Normal customers with everyday names (Sarah, Mike, Emma) create a friendly, approachable atmosphere.
 
 ## HERO
-The player embodies an aspiring logical bartender learning the ancient art of inference-based drink crafting. Starting as a novice with basic reasoning skills, they develop mastery through practice and customer feedback. Character growth mirrors real learning progression in discrete mathematics courses.
+The player embodies a smoothie shop owner learning to create drinks through logical reasoning rather than traditional recipes. Starting with basic inference skills, they develop mastery through serving increasingly demanding customers. Character growth mirrors real learning progression in logical thinking, from simple pattern recognition to complex multi-step reasoning.
 
 ## ENEMIES
-Time pressure serves as the primary antagonist, with impatient customers whose patience bars decrease over time. Logical fallacies appear as "contaminated ingredients" that must be avoided. Complex multi-step proofs create challenging boss encounters requiring chained inference rules to satisfy demanding master customers.
+Customer patience timers serve as the primary challenge, creating urgency as patience bars decrease over time. Logical dead-ends act as obstacles when players apply incorrect reasoning chains. Heart loss occurs when customers leave unsatisfied, creating meaningful stakes. Complex multi-step orders function as boss-level challenges requiring chained inference applications to satisfy demanding customers.
 
 ## SCORING
-Base points for correct answers (100), with multipliers for difficulty (1.0x-1.6x), speed bonuses (25-50 points), and combo chains (up to 3.0x multiplier). Achievement system rewards perfect streaks, rule mastery, and customer satisfaction. Negative points for timeouts (-10) and incorrect reasoning (-20) maintain challenge balance.
+Base points for correct orders (100), with speed bonus tiers: fast completion (+50 points), very fast completion (+25 points). Consecutive successful orders build combo multipliers for sustained excellence. Hearts lost result in point penalties (-50 per heart). No negative scoring for incorrect attempts to encourage experimentation and learning through trial and feedback.
 
 ## EXTRAS
-Symbol reference legend helps players learn emoji-to-logic mappings, keyboard shortcuts enable rapid ingredient selection, and solution hints provide guided learning support. Timer disable mode allows stress-free practice, while achievement unlocks and leaderboards motivate continued engagement and friendly competition among classmates.
+Inventory system resets for each customer, starting with their given premises and growing as inference rules generate new logical results. Menu includes infinite patience mode toggle for stress-free learning and practice. Debug game over button enables testing and development. Clean, colorful interface avoids intimidating mathematical notation, using smoothie shop metaphors to make abstract logical concepts accessible and engaging for all skill levels.

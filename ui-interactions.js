@@ -1,15 +1,7 @@
-// UI Interactions for Logic Mixology: Inference Bar
+// UI Interactions for Boolean Smoothie Shop
 
 class UIInteractions {
     constructor() {
-        this.isDragging = false;
-        this.draggedElement = null;
-        this.dragOffset = { x: 0, y: 0 };
-        this.ghostElement = null;
-
-        // Touch support for mobile
-        this.isTouchDevice = 'ontouchstart' in window;
-
         // Initialize interactions when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.init());
@@ -20,7 +12,6 @@ class UIInteractions {
 
     init() {
         console.log("Initializing UI interactions...");
-        this.setupDragAndDrop();
         this.setupButtons();
         this.setupKeyboardShortcuts();
         this.setupMobileSupport();
@@ -28,212 +19,19 @@ class UIInteractions {
         this.setupSolutionModal();
     }
 
-    // Set up drag and drop functionality
-    setupDragAndDrop() {
-        // Get all draggable ingredients
-        const ingredients = document.querySelectorAll('.ingredient[draggable="true"]');
-        const mixingArea = document.getElementById('mixing-area');
+    // Drag and drop functionality has been removed - now using premise selection system
 
-        // Add event listeners to ingredients
-        ingredients.forEach(ingredient => {
-            // Desktop drag events
-            ingredient.addEventListener('dragstart', (e) => this.handleDragStart(e));
-            ingredient.addEventListener('drag', (e) => this.handleDrag(e));
-            ingredient.addEventListener('dragend', (e) => this.handleDragEnd(e));
+    // Drag methods removed - using premise selection system
 
-            // Mobile touch events
-            if (this.isTouchDevice) {
-                ingredient.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: false });
-                ingredient.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: false });
-                ingredient.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: false });
-            }
+    // Drag method removed
 
-            // Click event for non-drag interaction (backup)
-            ingredient.addEventListener('click', (e) => this.handleIngredientClick(e));
-        });
+    // Drag end method removed
 
-        // Set up drop zone
-        if (mixingArea) {
-            mixingArea.addEventListener('dragover', (e) => this.handleDragOver(e));
-            mixingArea.addEventListener('drop', (e) => this.handleDrop(e));
-            mixingArea.addEventListener('dragenter', (e) => this.handleDragEnter(e));
-            mixingArea.addEventListener('dragleave', (e) => this.handleDragLeave(e));
-        }
-    }
+    // All drag drop zone methods removed
 
-    // Handle drag start
-    handleDragStart(e) {
-        this.isDragging = true;
-        this.draggedElement = e.target;
+    // All touch methods removed - using premise selection system
 
-        const symbol = e.target.dataset.symbol;
-        const type = e.target.dataset.type;
-
-        // Set drag data
-        e.dataTransfer.setData('text/plain', symbol);
-        e.dataTransfer.setData('application/json', JSON.stringify({ symbol, type }));
-        e.dataTransfer.effectAllowed = 'copy';
-
-        // Style the dragged element
-        e.target.style.opacity = '0.5';
-
-        console.log(`Started dragging: ${symbol}`);
-    }
-
-    // Handle drag
-    handleDrag(e) {
-        // Update drag position for visual feedback
-        if (this.ghostElement) {
-            this.ghostElement.style.left = e.clientX + 'px';
-            this.ghostElement.style.top = e.clientY + 'px';
-        }
-    }
-
-    // Handle drag end
-    handleDragEnd(e) {
-        this.isDragging = false;
-        e.target.style.opacity = '1';
-        this.draggedElement = null;
-
-        // Clean up ghost element
-        if (this.ghostElement) {
-            this.ghostElement.remove();
-            this.ghostElement = null;
-        }
-
-        console.log("Drag ended");
-    }
-
-    // Handle drag over drop zone
-    handleDragOver(e) {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'copy';
-    }
-
-    // Handle drag enter drop zone
-    handleDragEnter(e) {
-        e.preventDefault();
-        e.target.classList.add('drag-over');
-    }
-
-    // Handle drag leave drop zone
-    handleDragLeave(e) {
-        // Only remove the class if we're actually leaving the drop zone
-        if (!e.currentTarget.contains(e.relatedTarget)) {
-            e.target.classList.remove('drag-over');
-        }
-    }
-
-    // Handle drop in mixing area
-    handleDrop(e) {
-        e.preventDefault();
-        e.target.classList.remove('drag-over');
-
-        const symbol = e.dataTransfer.getData('text/plain');
-        if (symbol && window.gameEngine) {
-            window.gameEngine.addIngredient(symbol);
-            this.triggerVisualFeedback(e.target, 'drop-success');
-        }
-
-        console.log(`Dropped ingredient: ${symbol}`);
-    }
-
-    // Handle touch start (mobile)
-    handleTouchStart(e) {
-        e.preventDefault();
-        const touch = e.touches[0];
-        const element = e.target;
-
-        this.isDragging = true;
-        this.draggedElement = element;
-        this.dragOffset = {
-            x: touch.clientX - element.getBoundingClientRect().left,
-            y: touch.clientY - element.getBoundingClientRect().top
-        };
-
-        // Create ghost element for mobile dragging
-        this.createGhostElement(element, touch.clientX, touch.clientY);
-
-        element.style.opacity = '0.5';
-    }
-
-    // Handle touch move (mobile)
-    handleTouchMove(e) {
-        if (!this.isDragging || !this.ghostElement) return;
-
-        e.preventDefault();
-        const touch = e.touches[0];
-
-        this.ghostElement.style.left = (touch.clientX - this.dragOffset.x) + 'px';
-        this.ghostElement.style.top = (touch.clientY - this.dragOffset.y) + 'px';
-
-        // Check if we're over the mixing area
-        const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-        const mixingArea = document.getElementById('mixing-area');
-
-        if (mixingArea && mixingArea.contains(elementBelow)) {
-            mixingArea.classList.add('drag-over');
-        } else {
-            mixingArea?.classList.remove('drag-over');
-        }
-    }
-
-    // Handle touch end (mobile)
-    handleTouchEnd(e) {
-        if (!this.isDragging) return;
-
-        e.preventDefault();
-        const touch = e.changedTouches[0];
-        const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-        const mixingArea = document.getElementById('mixing-area');
-
-        // Check if dropped in mixing area
-        if (mixingArea && mixingArea.contains(elementBelow)) {
-            const symbol = this.draggedElement.dataset.symbol;
-            if (symbol && window.gameEngine) {
-                window.gameEngine.addIngredient(symbol);
-                this.triggerVisualFeedback(mixingArea, 'drop-success');
-            }
-        }
-
-        // Cleanup
-        this.isDragging = false;
-        this.draggedElement.style.opacity = '1';
-        this.draggedElement = null;
-        mixingArea?.classList.remove('drag-over');
-
-        if (this.ghostElement) {
-            this.ghostElement.remove();
-            this.ghostElement = null;
-        }
-    }
-
-    // Create ghost element for mobile dragging
-    createGhostElement(originalElement, x, y) {
-        this.ghostElement = originalElement.cloneNode(true);
-        this.ghostElement.style.position = 'fixed';
-        this.ghostElement.style.pointerEvents = 'none';
-        this.ghostElement.style.zIndex = '9999';
-        this.ghostElement.style.opacity = '0.7';
-        this.ghostElement.style.transform = 'scale(1.1)';
-        this.ghostElement.style.left = (x - this.dragOffset.x) + 'px';
-        this.ghostElement.style.top = (y - this.dragOffset.y) + 'px';
-
-        document.body.appendChild(this.ghostElement);
-    }
-
-    // Handle ingredient click (backup interaction)
-    handleIngredientClick(e) {
-        // If drag and drop isn't working, allow click to add ingredients
-        if (!this.isDragging) {
-            const symbol = e.target.dataset.symbol;
-            if (symbol && window.gameEngine) {
-                window.gameEngine.addIngredient(symbol);
-                this.triggerVisualFeedback(e.target, 'click-success');
-                console.log(`Clicked ingredient: ${symbol}`);
-            }
-        }
-    }
+    // Ghost element and ingredient click methods removed - using premise selection system
 
     // Set up button interactions
     setupButtons() {
@@ -248,12 +46,14 @@ class UIInteractions {
             });
         }
 
-        // Clear button
+        // Clear button (now clears selection)
         const clearBtn = document.getElementById('clear-btn');
         if (clearBtn) {
             clearBtn.addEventListener('click', () => {
                 if (window.gameEngine) {
-                    window.gameEngine.clearCounter();
+                    window.gameEngine.selectedPremises = [];
+                    window.gameEngine.updateInventoryDisplay();
+                    window.gameEngine.updateSelectedPremisesDisplay();
                     this.triggerVisualFeedback(clearBtn, 'button-click');
                 }
             });
@@ -270,6 +70,41 @@ class UIInteractions {
             });
         }
 
+        // Debug game over button
+        const debugGameOverBtn = document.getElementById('debug-gameover');
+        if (debugGameOverBtn) {
+            debugGameOverBtn.addEventListener('click', () => {
+                if (window.gameEngine && window.gameEngine.gameState.isPlaying) {
+                    window.gameEngine.gameOver();
+                    this.triggerVisualFeedback(debugGameOverBtn, 'button-click');
+                }
+            });
+        }
+
+        // Play button (menu)
+        const playBtn = document.getElementById('play-button');
+        console.log('Play button found:', playBtn);
+        if (playBtn) {
+            playBtn.addEventListener('click', () => {
+                console.log('Play button clicked!');
+                this.startGame();
+                this.triggerVisualFeedback(playBtn, 'button-click');
+            });
+        } else {
+            console.error('Play button not found!');
+        }
+
+        // Rule buttons
+        document.querySelectorAll('.rule-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const ruleKey = btn.getAttribute('data-rule');
+                if (window.gameEngine && ruleKey) {
+                    window.gameEngine.applyRule(ruleKey);
+                    this.triggerVisualFeedback(btn, 'button-click');
+                }
+            });
+        });
+
         // Add hover effects
         document.querySelectorAll('.btn').forEach(btn => {
             btn.addEventListener('mouseenter', () => {
@@ -280,6 +115,39 @@ class UIInteractions {
                 btn.style.transform = 'translateY(0)';
             });
         });
+    }
+
+    // Start the game from menu
+    startGame() {
+        console.log('startGame() called');
+
+        // Get infinite patience setting
+        const infinitePatienceToggle = document.getElementById('infinite-patience-toggle');
+        const infinitePatience = infinitePatienceToggle ? infinitePatienceToggle.checked : false;
+        console.log('Infinite patience:', infinitePatience);
+
+        // Hide menu and show game
+        const menuScreen = document.getElementById('menu-screen');
+        const gameContainer = document.getElementById('game-container');
+        console.log('Menu screen:', menuScreen, 'Game container:', gameContainer);
+
+        if (menuScreen && gameContainer) {
+            console.log('Hiding menu, showing game');
+            menuScreen.style.display = 'none';
+            gameContainer.style.display = 'grid';
+        }
+
+        // Initialize game with settings
+        console.log('Game engine:', window.gameEngine);
+        if (window.gameEngine) {
+            console.log('Initializing game engine');
+            window.gameEngine.gameState.timersDisabled = infinitePatience;
+            window.gameEngine.init();
+        } else {
+            console.error('Game engine not found!');
+        }
+
+        console.log(`Game started with infinite patience: ${infinitePatience}`);
     }
 
     // Set up keyboard shortcuts
@@ -303,7 +171,7 @@ class UIInteractions {
                 case 'c':
                     e.preventDefault();
                     if (window.gameEngine) {
-                        window.gameEngine.clearCounter();
+                        window.gameEngine.clearInventory();
                     }
                     break;
 
@@ -365,7 +233,7 @@ class UIInteractions {
     // Add ingredient by symbol (for keyboard shortcuts)
     addIngredientBySymbol(symbol) {
         if (window.gameEngine) {
-            window.gameEngine.addIngredient(symbol);
+            window.gameEngine.addToInventory(symbol);
 
             // Find and flash the corresponding ingredient button
             const ingredientBtn = document.querySelector(`.ingredient[data-symbol="${symbol}"]`);
@@ -394,18 +262,6 @@ class UIInteractions {
 
     // Set up mobile-specific features
     setupMobileSupport() {
-        if (this.isTouchDevice) {
-            // Prevent default touch behaviors that might interfere
-            document.addEventListener('touchmove', (e) => {
-                if (this.isDragging) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-
-            // Add mobile-specific styles
-            document.body.classList.add('touch-device');
-        }
-
         // Handle orientation changes
         window.addEventListener('orientationchange', () => {
             setTimeout(() => {
@@ -532,11 +388,11 @@ class UIInteractions {
                 const resultFormula = resultElement ? resultElement.textContent : '';
                 if (resultFormula && window.gameEngine) {
                     // Clear current formula and apply the solution
-                    window.gameEngine.clearCounter();
+                    window.gameEngine.clearInventory();
 
                     // Add each character of the solution formula
                     for (const symbol of resultFormula) {
-                        window.gameEngine.addIngredient(symbol);
+                        window.gameEngine.addToInventory(symbol);
                     }
 
                     closeModal();
@@ -583,8 +439,7 @@ class UIInteractions {
     // Clean up event listeners
     destroy() {
         // Remove event listeners to prevent memory leaks
-        document.removeEventListener('keydown', this.handleKeyDown);
-        window.removeEventListener('orientationchange', this.handleOrientationChange);
+        // Note: These methods were removed with drag-and-drop system
     }
 }
 

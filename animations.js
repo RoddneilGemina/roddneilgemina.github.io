@@ -1,4 +1,4 @@
-// Animations and Visual Effects for Logic Mixology: Inference Bar
+// Animations and Visual Effects for Boolean Smoothie Shop
 
 class AnimationEngine {
     constructor() {
