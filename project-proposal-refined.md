@@ -9,19 +9,61 @@ This innovative educational mobile game is designed to teach first-year Computer
 
 ---
 
-## SMART Goals
+## Problem Statement
 
-### 1. Learning Effectiveness Goal
-Develop a mobile educational game using Godot engine that demonstrates a 60% improvement in student post-assessment scores on boolean logic and inference rules compared to traditional teaching methods, leveraging research-proven gamification principles that enhance STEM learning outcomes by 40-75% and validating effectiveness through comparative studies within one academic year to directly address core Discrete Structures I curriculum objectives.
+Students studying logical proofs and rules of inference face significant learning challenges that impede their academic success, particularly in Discrete Mathematics courses:
 
-### 2. Student Engagement Goal
-Create an engaging mobile gaming experience that maintains 80% active participation rate among enrolled students during semester usage by leveraging proven gamification principles, intuitive touch-based interactions, and meaningful progression systems that address documented low engagement rates in traditional discrete mathematics instruction and achieve target metrics within the first four months of deployment.
+### Pain Point 1: Traditional Teaching Method Limitations
+Students struggle with understanding logical proofs and inference rules due to traditional teaching methods that rely heavily on lectures and static exercises. This approach results in low engagement, limited practice opportunities, and difficulty grasping complex logical concepts that require intensive critical thinking and detailed solution tracing.
 
-### 3. Technical Performance Goal
-Deliver a high-performance mobile application using Godot engine that achieves sub-2 second load times and maintains consistent 60fps gameplay on target smartphones and tablets through optimized asset management, efficient memory usage, and platform-specific performance tuning essential for maintaining student engagement in diverse mobile educational environments, with all benchmarks validated during beta testing within six months of project initiation.
+### Pain Point 2: Lack of Accessible Learning Resources
+The absence of convenient and accessible learning methods presents a significant challenge for students. Current resources fail to provide the interactive, hands-on practice necessary for students to internalize logical reasoning concepts without proper guidance, making it difficult for learners to find effective educational support.
 
-### 4. Content Coverage Goal
-Implement comprehensive boolean logic curriculum coverage that includes all 12 core inference rules (Modus Ponens, Modus Tollens, Simplification, Addition, Disjunctive Syllogism, Hypothetical Syllogism, De Morgan's Laws, Distribution, Absorption, plus 3 advanced multi-step techniques) through progressive gameplay mechanics following established educational scaffolding principles to ensure complete alignment with Discrete Structures I learning objectives and academic standards within the eight-month project delivery timeline.
+### Pain Point 3: Existing Solution Inadequacies
+Available learning solutions—including textbooks, video tutorials, and online courses—fall short of addressing student needs. While they provide theoretical knowledge, they lack the dynamic, interactive features necessary for effective practice and reinforcement. Students are left to manually formulate, write, and verify solutions through time-consuming processes prone to errors.
+
+### Pain Point 4: Individual Learning Adaptation Gaps
+Traditional educational resources fail to adapt to individual learning paces and styles, making it difficult for students to identify and address their specific weaknesses. The absence of instant feedback mechanisms and personalized learning pathways limits students' ability to build confidence in applying logical reasoning concepts.
+
+---
+
+## Main Objectives (SMART Goals)
+
+### 1. Learning Effectiveness Goal (Addresses Pain Point 1: Traditional Teaching Method Limitations)
+Demonstrate measurable improvement in student comprehension and retention of logical proofs and inference rules within one academic year by developing a mobile educational game using Godot engine that transforms static, lecture-based instruction into interactive, gamified learning experiences, validated through comparative pre/post assessment studies that track logical reasoning skill development in Discrete Mathematics students.
+
+### 2. Student Engagement Goal (Addresses Pain Point 2: Lack of Accessible Learning Resources)
+Increase student engagement and practice time in logical reasoning concepts within the first four months of deployment by creating accessible, convenient mobile learning experiences that provide interactive, hands-on practice opportunities through intuitive touch-based interactions and meaningful progression systems that address the current lack of engaging educational resources.
+
+### 3. Interactive Learning Goal (Addresses Pain Point 3: Existing Solution Inadequacies)
+Overcome limitations of traditional textbooks, videos, and online courses by delivering dynamic, interactive learning features within six months of project initiation through AI-powered validation systems, instant feedback mechanisms, and gamified practice environments that eliminate time-consuming manual solution verification and reduce error-prone processes.
+
+### 4. Personalized Learning Goal (Addresses Pain Point 4: Individual Learning Adaptation Gaps)
+Achieve personalized learning adaptation that addresses individual student weaknesses and learning paces within the eight-month project delivery timeline through adaptive difficulty systems, personalized feedback pathways, and comprehensive progress tracking that enables students to identify and address their specific logical reasoning challenges effectively.
+
+---
+
+## Specific Objectives (Key Deliverables)
+
+### Functional Requirements
+
+#### Primary System Transactions
+
+**Input → Process → Output Flow:**
+
+1. **Logic Puzzle Interaction**
+   - *Input:* Student drag-and-drop actions for proof construction
+   - *Process:* Visual manipulation and arrangement of logical elements
+   - *Output:* Completed logical proof construction
+
+#### Core Educational Functions
+
+- **Drag-and-Drop Proof Construction:** Interactive interface for building logical proofs through visual manipulation
+- **Logic Puzzle Challenges:** Structured problem-solving activities that teach inference rules
+
+#### Validation Method
+
+- **Survey-Based Evaluation:** Learning effectiveness measured through pre/post surveys rather than automated validation systems
 
 ---
 
