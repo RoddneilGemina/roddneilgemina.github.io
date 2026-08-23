@@ -108,11 +108,11 @@ html[data-theme="moonlit"] {
     --border-color: rgba(255, 255, 255, 0.15);
     --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.55);
 
-    --text-primary: #0f172a;
-    --text-secondary: #1e293b;
+    --text-primary: #0f172a;   /* HIGH CONTRAST DARK TEXT */
+    --text-secondary: #1e293b; /* HIGH CONTRAST DARK TEXT */
     --text-muted: #334155;
     --accent: #38bdf8;
-    --accent-coral: #38bdf8;
+    --accent-coral: #ea580c;
     --accent-gold: #fbbf24;
     --accent-subtle: rgba(56, 189, 248, 0.15);
 }
@@ -608,14 +608,14 @@ html[data-theme="summer"] .moon-element {
     opacity: 0;
 }
 
-/* --- THEME 2: SUNSET BEACH (Pivot Angle -78deg: Sun Rotates in Arc to Left Horizon & Cross-fades to Deep Orange) --- */
+/* --- THEME 2: SUNSET BEACH (Pivot Angle -55deg: Sun Just Upper Left of Island Dune over Horizon (320, 280)) --- */
 html[data-theme="sunset"] .celestial-orbit-pivot {
-    transform: rotate(-78deg);
+    transform: rotate(-55deg);
 }
 
 html[data-theme="sunset"] .sun-element {
-    opacity: 0.98;
-    filter: drop-shadow(0 0 55px rgba(244, 81, 30, 0.95));
+    opacity: 1;
+    filter: drop-shadow(0 0 55px rgba(244, 81, 30, 0.98));
 }
 html[data-theme="sunset"] .sun-body-day {
     opacity: 0;
@@ -625,18 +625,17 @@ html[data-theme="sunset"] .sun-body-sunset {
 }
 html[data-theme="sunset"] .sun-glow-inner {
     fill: #ff7043;
-    opacity: 0.55;
+    opacity: 0.6;
     transition: fill 1.5s ease, opacity 1.5s ease;
 }
 html[data-theme="sunset"] .sun-glow-outer {
     fill: #ffab91;
-    opacity: 0.3;
+    opacity: 0.32;
     transition: fill 1.5s ease, opacity 1.5s ease;
 }
 
 html[data-theme="sunset"] .moon-element {
-    opacity: 0.7;
-    filter: drop-shadow(0 0 22px rgba(254, 215, 170, 0.65));
+    opacity: 0;
 }
 
 /* --- THEME 3: MOONLIT OCEAN (Pivot Angle -180deg: Moon Rotates up to Center Sky Position (980, 140)) --- */
@@ -650,7 +649,7 @@ html[data-theme="moonlit"] .sun-element {
 
 html[data-theme="moonlit"] .moon-element {
     opacity: 1;
-    filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.92));
+    filter: drop-shadow(0 0 45px rgba(56, 189, 248, 0.95));
 }
 
 /* FIXED PALM LEAVES ANIMATION: NO UP/DOWN TRANSLATION, ONLY SUBTLE ROTATIONAL TWIST */
@@ -1550,39 +1549,53 @@ html[data-theme="moonlit"] .nav-link.active {
 }
 
 html[data-theme="moonlit"] .hero-title {
-    color: #ffffff;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+    color: #0f172a;
+    text-shadow: none;
 }
 
 html[data-theme="moonlit"] .hero-subtitle {
-    color: #e2e8f0;
+    color: #1e293b;
 }
 
 html[data-theme="moonlit"] .hero-bio {
-    color: #cbd5e1;
+    color: #0f172a !important; /* CRISP DARK TEXT FOR MAIN DESCRIPTION */
 }
 
 html[data-theme="moonlit"] .welcome-badge {
-    background: rgba(30, 41, 59, 0.95);
-    color: #f8fafc;
-    border-color: rgba(255, 255, 255, 0.2);
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: rgba(0, 0, 0, 0.15);
 }
 
 html[data-theme="moonlit"] .btn-secondary {
-    background: rgba(30, 41, 59, 0.9);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.25);
+    background: #ffffff;
+    color: #0f172a;
+    border-color: rgba(0, 0, 0, 0.15);
 }
 
 html[data-theme="moonlit"] .btn-secondary:hover {
-    background: #1e293b;
-    color: #38bdf8;
+    background: #ffffff;
+    color: var(--accent-coral);
 }
 
 html[data-theme="moonlit"] .btn-outline {
-    background: rgba(15, 23, 42, 0.7);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.9);
+    color: #0f172a;
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+html[data-theme="moonlit"] .about-text-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="moonlit"] .about-text-card p,
+html[data-theme="moonlit"] .lead-text {
+    color: #0f172a !important; /* CRISP DARK TEXT FOR ABOUT DESCRIPTION */
+}
+
+html[data-theme="moonlit"] .stat-label {
+    color: #0f172a;
 }
 
 html[data-theme="moonlit"] .section-title {
