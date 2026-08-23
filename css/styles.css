@@ -570,7 +570,7 @@ a:hover {
     will-change: opacity;
 }
 
-/* --- THEME 1: SUNNY DAY (Sun at High Sky (980, 140), Moon Hidden) --- */
+/* --- THEME 1: SUNNY DAY (Sun at Top-Right High Sky (980, 140), Moon Below Left Horizon) --- */
 html[data-theme="summer"] .sun-element {
     transform: translate(0, 0) scale(1);
     opacity: 1;
@@ -594,14 +594,14 @@ html[data-theme="summer"] .sun-glow-outer {
 }
 
 html[data-theme="summer"] .moon-element {
-    transform: translate(-1200px, 600px) scale(0.6);
+    transform: translate(-250px, 450px) scale(0.6);
     opacity: 0;
 }
 
-/* --- THEME 2: SUNSET BEACH (Sun Rotated 20deg Counter-Clockwise to (280, 350) ON SCREEN) --- */
-/* Delta from base (980, 140) to (280, 350): translateX = -700px, translateY = +210px */
+/* --- THEME 2: SUNSET BEACH (Sun at Lower-Right Horizon (1160, 340), Moon Below Left Horizon) --- */
+/* Delta from base (980, 140) to (1160, 340): translateX = +180px, translateY = +200px */
 html[data-theme="sunset"] .sun-element {
-    transform: translate(-700px, 210px) scale(1.15);
+    transform: translate(180px, 200px) scale(1.15);
     opacity: 1;
     filter: drop-shadow(0 0 55px rgba(244, 81, 30, 0.98));
 }
@@ -623,13 +623,13 @@ html[data-theme="sunset"] .sun-glow-outer {
 }
 
 html[data-theme="sunset"] .moon-element {
-    transform: translate(-1200px, 600px) scale(0.6);
+    transform: translate(-250px, 450px) scale(0.6);
     opacity: 0;
 }
 
-/* --- THEME 3: MOONLIT OCEAN (Sun Hidden, Moon at EXACT High Sky (980, 140) - SAME PLACE AS SUN IN DAY) --- */
+/* --- THEME 3: MOONLIT OCEAN (Sun Sunk Below Right Horizon, Moon Risen from Left to Top-Left High Sky (460, 140)) --- */
 html[data-theme="moonlit"] .sun-element {
-    transform: translate(-1200px, 600px) scale(0.6);
+    transform: translate(350px, 450px) scale(0.6);
     opacity: 0;
 }
 
