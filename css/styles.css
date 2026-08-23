@@ -627,9 +627,9 @@ html[data-theme="sunset"] .moon-element {
     opacity: 0;
 }
 
-/* --- THEME 3: MOONLIT OCEAN (Sun Exits TOWARDS THE RIGHT (+600px, +300px), Moon Risen to Top-Left High Sky (460, 140)) --- */
+/* --- THEME 3: MOONLIT OCEAN (Sun Exits FAR RIGHT & FARTHER BOTTOM OUT OF SCREEN (2200, 1200), Moon Risen to Top-Left High Sky (460, 140)) --- */
 html[data-theme="moonlit"] .sun-element {
-    transform: translate(600px, 300px) scale(0.65);
+    transform: translate(1220px, 1060px) scale(0.5);
     opacity: 0;
 }
 
