@@ -598,10 +598,10 @@ html[data-theme="summer"] .moon-element {
     opacity: 0;
 }
 
-/* --- THEME 2: SUNSET BEACH (Sun at Upper-Left Horizon (360, 260) over Island Dune) --- */
-/* Delta from base (980, 140) to (360, 260): translateX = -620px, translateY = +120px */
+/* --- THEME 2: SUNSET BEACH (Sun at Opposite (Right) Side Horizon (1080, 260)) --- */
+/* Delta from base (980, 140) to (1080, 260): translateX = +100px, translateY = +120px */
 html[data-theme="sunset"] .sun-element {
-    transform: translate(-620px, 120px) scale(1.15);
+    transform: translate(100px, 120px) scale(1.15);
     opacity: 1;
     filter: drop-shadow(0 0 55px rgba(244, 81, 30, 0.98));
 }
