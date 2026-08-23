@@ -598,10 +598,10 @@ html[data-theme="summer"] .moon-element {
     opacity: 0;
 }
 
-/* --- THEME 2: SUNSET BEACH (Sun ON SCREEN at Upper-Left Horizon (360, 260), Moon Hidden) --- */
-/* Delta from (980, 140) to (360, 260): translateX = -620px, translateY = +120px */
+/* --- THEME 2: SUNSET BEACH (Sun Rotated 20deg Counter-Clockwise to (280, 350) ON SCREEN) --- */
+/* Delta from base (980, 140) to (280, 350): translateX = -700px, translateY = +210px */
 html[data-theme="sunset"] .sun-element {
-    transform: translate(-620px, 120px) scale(1.15);
+    transform: translate(-700px, 210px) scale(1.15);
     opacity: 1;
     filter: drop-shadow(0 0 55px rgba(244, 81, 30, 0.98));
 }
