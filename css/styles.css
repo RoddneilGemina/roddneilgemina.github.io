@@ -16,6 +16,7 @@
 
     --transition-fast: 0.2s ease;
     --transition-normal: 0.35s ease;
+    --transition-theme: 1.5s ease-in-out;
 }
 
 /* THEME 1: SUNNY DAY (Very Light Baby Blue Sky & Tropical Ocean) */
@@ -115,6 +116,63 @@ html[data-theme="moonlit"] {
     --accent-coral: #ea580c;
     --accent-gold: #fbbf24;
     --accent-subtle: rgba(56, 189, 248, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   GLOBAL SEAMLESS COLOR SCHEME FADE TRANSITIONS FOR ALL ASSETS & CARDS
+   -------------------------------------------------------------------------- */
+body, 
+.site-header, 
+.hero-content-card, 
+.welcome-badge, 
+.btn, 
+.quick-stats-grid, 
+.stat-card, 
+.about-text-card, 
+.highlights-box, 
+.pillar-card, 
+.skill-category-card, 
+.skill-tag, 
+.filter-controls-wrapper, 
+.filter-btn, 
+.project-card, 
+.tech-badge, 
+.timeline-content, 
+.contact-info-card, 
+.contact-form-card, 
+.method-icon, 
+.form-input, 
+.site-footer, 
+.brand-logo, 
+.nav-link, 
+.section-title, 
+.column-title, 
+.hero-title, 
+.hero-subtitle, 
+.hero-bio, 
+.stat-label, 
+.filter-label, 
+.dialog-container {
+    transition: background-color 1.5s ease-in-out, 
+                color 1.5s ease-in-out, 
+                border-color 1.5s ease-in-out, 
+                box-shadow 1.5s ease-in-out, 
+                backdrop-filter 1.5s ease-in-out,
+                -webkit-backdrop-filter 1.5s ease-in-out;
+}
+
+/* SVG STOPS & ARTWORK SEAMLESS FADE TRANSITIONS */
+svg path, 
+svg circle, 
+svg g, 
+svg rect, 
+svg stop {
+    transition: fill 1.5s ease-in-out, 
+                stroke 1.5s ease-in-out, 
+                stop-color 1.5s ease-in-out, 
+                stop-opacity 1.5s ease-in-out, 
+                opacity 1.5s ease-in-out, 
+                filter 1.5s ease-in-out;
 }
 
 /* --------------------------------------------------------------------------
@@ -301,7 +359,6 @@ a:hover {
     font-weight: 700;
     padding: 0.45rem 1rem;
     border-radius: var(--border-radius-pill);
-    transition: all var(--transition-fast);
 }
 
 .nav-link:hover, .nav-link.active {
@@ -475,7 +532,6 @@ a:hover {
     padding: 0.75rem 1.6rem;
     border-radius: var(--border-radius-pill);
     cursor: pointer;
-    transition: all var(--transition-fast);
     border: none;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
@@ -560,7 +616,7 @@ a:hover {
    6. SVG BEACH ARTWORK & CELESTIAL ORBIT TRANSITIONS (SUN & MOON)
    -------------------------------------------------------------------------- */
 .sun-element, .moon-element {
-    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.2s ease, filter 1.2s ease;
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
     will-change: transform, opacity, filter;
 }
 
@@ -585,12 +641,10 @@ html[data-theme="summer"] .sun-body-sunset {
 html[data-theme="summer"] .sun-glow-inner {
     fill: #ffe082;
     opacity: 0.35;
-    transition: fill 1.5s ease, opacity 1.5s ease;
 }
 html[data-theme="summer"] .sun-glow-outer {
     fill: #ffecb3;
     opacity: 0.18;
-    transition: fill 1.5s ease, opacity 1.5s ease;
 }
 
 html[data-theme="summer"] .moon-element {
@@ -614,12 +668,10 @@ html[data-theme="sunset"] .sun-body-sunset {
 html[data-theme="sunset"] .sun-glow-inner {
     fill: #ff7043;
     opacity: 0.6;
-    transition: fill 1.5s ease, opacity 1.5s ease;
 }
 html[data-theme="sunset"] .sun-glow-outer {
     fill: #ffab91;
     opacity: 0.32;
-    transition: fill 1.5s ease, opacity 1.5s ease;
 }
 
 html[data-theme="sunset"] .moon-element {
@@ -820,7 +872,6 @@ html[data-theme="moonlit"] .moon-element {
     border: 1px solid rgba(0, 0, 0, 0.08);
     padding: 1.4rem;
     border-radius: var(--border-radius-md);
-    transition: all var(--transition-normal);
     box-shadow: var(--shadow-card);
 }
 
@@ -898,7 +949,6 @@ html[data-theme="moonlit"] .moon-element {
     align-items: center;
     gap: 0.45rem;
     font-weight: 700;
-    transition: all var(--transition-fast);
 }
 
 .skill-tag:hover {
@@ -953,7 +1003,6 @@ html[data-theme="moonlit"] .moon-element {
     border-radius: var(--border-radius-pill);
     cursor: pointer;
     font-weight: 700;
-    transition: all var(--transition-fast);
 }
 
 .filter-btn:hover {
@@ -984,7 +1033,6 @@ html[data-theme="moonlit"] .moon-element {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: all var(--transition-normal);
     box-shadow: var(--shadow-card);
 }
 
@@ -1240,7 +1288,6 @@ html[data-theme="moonlit"] .moon-element {
     border-radius: var(--border-radius-pill);
     cursor: pointer;
     font-weight: 800;
-    transition: all var(--transition-fast);
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
@@ -1313,7 +1360,6 @@ html[data-theme="moonlit"] .moon-element {
     border-radius: var(--border-radius-sm);
     outline: none;
     font-weight: 600;
-    transition: border-color var(--transition-fast);
 }
 
 .form-input:focus {
