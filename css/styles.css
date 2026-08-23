@@ -557,19 +557,11 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   6. SVG BEACH ARTWORK & CELESTIAL CIRCULAR PIVOT ORBIT (SUN & MOON)
+   6. SVG BEACH ARTWORK & CELESTIAL ORBIT TRANSITIONS (SUN & MOON)
    -------------------------------------------------------------------------- */
-/* CELESTIAL ORBIT PIVOT GROUP: ROTATES AROUND THE HORIZON CENTER AXIS (720px 520px) */
-.celestial-orbit-pivot {
-    transform-box: fill-box;
-    transform-origin: 720px 520px;
-    transition: transform 1.8s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-}
-
 .sun-element, .moon-element {
-    transition: opacity 1.4s ease, filter 1.4s ease;
-    will-change: opacity, filter;
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.2s ease, filter 1.2s ease;
+    will-change: transform, opacity, filter;
 }
 
 /* DUAL LAYER SUN COLOR SMOOTH CROSS-FADE TRANSITION */
@@ -578,12 +570,9 @@ a:hover {
     will-change: opacity;
 }
 
-/* --- THEME 1: SUNNY DAY (Pivot Angle 0deg: Sun High Sky (980, 140), Moon Below Horizon) --- */
-html[data-theme="summer"] .celestial-orbit-pivot {
-    transform: rotate(0deg);
-}
-
+/* --- THEME 1: SUNNY DAY (Sun at High Sky (980, 140), Moon Hidden) --- */
 html[data-theme="summer"] .sun-element {
+    transform: translate(0, 0) scale(1);
     opacity: 1;
     filter: drop-shadow(0 0 32px rgba(255, 213, 79, 0.95));
 }
@@ -605,15 +594,14 @@ html[data-theme="summer"] .sun-glow-outer {
 }
 
 html[data-theme="summer"] .moon-element {
+    transform: translate(-1200px, 600px) scale(0.6);
     opacity: 0;
 }
 
-/* --- THEME 2: SUNSET BEACH (Pivot Angle -55deg: Sun Just Upper Left of Island Dune over Horizon (320, 280)) --- */
-html[data-theme="sunset"] .celestial-orbit-pivot {
-    transform: rotate(-55deg);
-}
-
+/* --- THEME 2: SUNSET BEACH (Sun ON SCREEN at Upper-Left Horizon (360, 260), Moon Hidden) --- */
+/* Delta from (980, 140) to (360, 260): translateX = -620px, translateY = +120px */
 html[data-theme="sunset"] .sun-element {
+    transform: translate(-620px, 120px) scale(1.15);
     opacity: 1;
     filter: drop-shadow(0 0 55px rgba(244, 81, 30, 0.98));
 }
@@ -635,19 +623,18 @@ html[data-theme="sunset"] .sun-glow-outer {
 }
 
 html[data-theme="sunset"] .moon-element {
+    transform: translate(-1200px, 600px) scale(0.6);
     opacity: 0;
 }
 
-/* --- THEME 3: MOONLIT OCEAN (Pivot Angle -180deg: Moon Rotates up to Center Sky Position (980, 140)) --- */
-html[data-theme="moonlit"] .celestial-orbit-pivot {
-    transform: rotate(-180deg);
-}
-
+/* --- THEME 3: MOONLIT OCEAN (Sun Hidden, Moon at EXACT High Sky (980, 140) - SAME PLACE AS SUN IN DAY) --- */
 html[data-theme="moonlit"] .sun-element {
+    transform: translate(-1200px, 600px) scale(0.6);
     opacity: 0;
 }
 
 html[data-theme="moonlit"] .moon-element {
+    transform: translate(0, 0) scale(1);
     opacity: 1;
     filter: drop-shadow(0 0 45px rgba(56, 189, 248, 0.95));
 }
