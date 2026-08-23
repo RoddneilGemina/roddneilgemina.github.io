@@ -38,7 +38,7 @@ html[data-theme="summer"] {
 
     --bg-card: rgba(255, 255, 255, 0.94);
     --bg-card-hover: #ffffff;
-    --bg-header: rgba(224, 242, 254, 0.92);
+    --bg-header: rgba(125, 211, 252, 0.92); /* Darker shade of baby blue (#7dd3fc) */
 
     --border-color: rgba(255, 255, 255, 0.85);
     --shadow-card: 0 10px 30px rgba(0, 128, 128, 0.12);
@@ -104,7 +104,7 @@ html[data-theme="moonlit"] {
 
     --bg-card: rgba(255, 255, 255, 0.95);
     --bg-card-hover: #ffffff;
-    --bg-header: rgba(2, 6, 23, 0.92);
+    --bg-header: rgba(30, 27, 75, 0.92); /* Deep Very Dark Indigo (#1e1b4b) */
 
     --border-color: rgba(255, 255, 255, 0.15);
     --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.55);
@@ -1563,7 +1563,7 @@ html[data-theme="moonlit"] .moon-element {
    15. MOONLIT THEME DIRECT-ON-DARK TEXT CONTRAST OVERRIDES
    -------------------------------------------------------------------------- */
 html[data-theme="moonlit"] .site-header {
-    background-color: rgba(2, 6, 23, 0.92);
+    background-color: rgba(30, 27, 75, 0.92); /* Deep Very Dark Indigo (#1e1b4b) */
     border-bottom-color: rgba(255, 255, 255, 0.15);
 }
 
