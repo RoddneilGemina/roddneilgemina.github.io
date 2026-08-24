@@ -809,10 +809,19 @@ html[data-theme="moonlit"] .moon-element {
 }
 
 .wave-wash-back {
-    fill: var(--water-shallow);
     transition: fill 1.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
     will-change: fill;
     animation: waveWashAshore 6s ease-in-out infinite alternate;
+}
+
+html[data-theme="summer"] .wave-wash-back {
+    fill: #0ea5e9;
+}
+html[data-theme="sunset"] .wave-wash-back {
+    fill: #f97316;
+}
+html[data-theme="moonlit"] .wave-wash-back {
+    fill: #0284c7;
 }
 
 .wave-foam-line {
