@@ -809,7 +809,9 @@ html[data-theme="moonlit"] .moon-element {
 }
 
 .wave-wash-back {
+    fill: var(--water-shallow);
     transition: fill 1.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    will-change: fill;
     animation: waveWashAshore 6s ease-in-out infinite alternate;
 }
 
