@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         p8: {
             title: 'Nexchef — Live Step Cooking & Recipe Platform',
             type: 'Culinary Web Prototype (2024)',
-            desc: 'An experimental culinary app allowing users to share signature recipes and follow live synchronized timers guiding step-by-step cooking instructions.',
+            desc: 'An experimental culinary app allowing users to share recipes and follow live synchronized timers guiding step-by-step cooking instructions.',
             highlights: [
                 'Built multi-timer tracking components for parallel recipe cooking steps.',
                 'Designed clean community recipe creation and media sharing interface.',
@@ -279,38 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------------------------
-    // 6. CONTACT FORM VALIDATION & INTERACTION
-    // ----------------------------------------------------------------------
-    const contactForm = document.getElementById('contact-form');
-    const formFeedback = document.getElementById('form-feedback');
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById('sender-name')?.value.trim();
-            const email = document.getElementById('sender-email')?.value.trim();
-            const message = document.getElementById('message-text')?.value.trim();
-
-            if (!name || !email || !message) {
-                if (formFeedback) {
-                    formFeedback.className = 'form-feedback error';
-                    formFeedback.textContent = 'Please complete all required fields (*).';
-                }
-                return;
-            }
-
-            if (formFeedback) {
-                formFeedback.className = 'form-feedback success';
-                formFeedback.textContent = `Thank you, ${name}! Your message has been sent to Roddneil.`;
-            }
-
-            contactForm.reset();
-        });
-    }
-
-    // ----------------------------------------------------------------------
-    // 7. COPY EMAIL TO CLIPBOARD
+    // 6. COPY EMAIL TO CLIPBOARD
     // ----------------------------------------------------------------------
     const copyEmailBtn = document.getElementById('copy-email-btn');
     const emailLink = document.getElementById('email-link');
@@ -331,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------------------------
-    // 8. ACTIVE NAV HIGHLIGHT ON SCROLL
+    // 7. ACTIVE NAV HIGHLIGHT ON SCROLL
     // ----------------------------------------------------------------------
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
