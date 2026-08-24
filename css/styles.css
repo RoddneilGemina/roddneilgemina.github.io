@@ -3,7 +3,61 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. COLOR PALETTES & THEMES (VERY LIGHT BABY BLUE SKY FOR SUNNY DAY)
+   0. ANIMATABLE CSS COLOR PROPERTIES (ENABLES GRADIENT FADE TRANSITIONS)
+   -------------------------------------------------------------------------- */
+@property --sky-top {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #e0f2fe;
+}
+@property --sky-bottom {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #bae6fd;
+}
+@property --sand-top {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #fef3c7;
+}
+@property --sand-bottom {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #fde68a;
+}
+@property --sand-shadow {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #d97706;
+}
+@property --water-surface {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #38bdf8;
+}
+@property --water-shallow {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #0ea5e9;
+}
+@property --water-mid {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #0284c7;
+}
+@property --water-deep {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #0369a1;
+}
+@property --water-abyss {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #075985;
+}
+
+/* --------------------------------------------------------------------------
+   1. COLOR PALETTES & THEMES
    -------------------------------------------------------------------------- */
 :root {
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -119,8 +173,23 @@ html[data-theme="moonlit"] {
 }
 
 /* --------------------------------------------------------------------------
-   GLOBAL SEAMLESS COLOR SCHEME FADE TRANSITIONS FOR ALL ASSETS & CARDS
+   GLOBAL SEAMLESS COLOR SCHEME FADE TRANSITIONS FOR ALL ASSETS & GRADIENTS
    -------------------------------------------------------------------------- */
+html, body {
+    transition: --sky-top 1.5s ease-in-out,
+                --sky-bottom 1.5s ease-in-out,
+                --water-surface 1.5s ease-in-out,
+                --water-shallow 1.5s ease-in-out,
+                --water-mid 1.5s ease-in-out,
+                --water-deep 1.5s ease-in-out,
+                --water-abyss 1.5s ease-in-out,
+                --sand-top 1.5s ease-in-out,
+                --sand-bottom 1.5s ease-in-out,
+                --sand-shadow 1.5s ease-in-out,
+                background 1.5s ease-in-out,
+                color 1.5s ease-in-out;
+}
+
 body, 
 .site-header, 
 .hero-content-card, 
