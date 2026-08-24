@@ -802,6 +802,23 @@ html[data-theme="moonlit"] .moon-element {
     100% { transform: translateX(30px); }
 }
 
+/* SAND DUNE GRADIENT STOPS INSTANT 0MS THEME TRANSITION */
+.sand-stop-1, .sand-stop-2, .sand-stop-3 {
+    transition: stop-color 1.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-theme="summer"] .sand-stop-1 { stop-color: #fef3c7; }
+html[data-theme="summer"] .sand-stop-2 { stop-color: #fde68a; }
+html[data-theme="summer"] .sand-stop-3 { stop-color: #d97706; }
+
+html[data-theme="sunset"] .sand-stop-1 { stop-color: #fef08a; }
+html[data-theme="sunset"] .sand-stop-2 { stop-color: #fde047; }
+html[data-theme="sunset"] .sand-stop-3 { stop-color: #ea580c; }
+
+html[data-theme="moonlit"] .sand-stop-1 { stop-color: #cbd5e1; }
+html[data-theme="moonlit"] .sand-stop-2 { stop-color: #94a3b8; }
+html[data-theme="moonlit"] .sand-stop-3 { stop-color: #475569; }
+
 /* SHORELINE WAVES WITH ABSOLUTELY FLAWLESS CONTINUOUS WATER MATCH */
 .shoreline-waves {
     position: relative;

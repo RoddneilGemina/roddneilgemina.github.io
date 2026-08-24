@@ -20,7 +20,7 @@
     <header class="site-header">
         <div class="container header-inner">
             <a href="#hero" class="brand-logo">
-                <svg class="brand-icon" viewBox="0 0 24 24"><path d="M12 2C13.1 2 14.5 3.5 13 6C15 4 17 4 19 6C17.5 7.5 16 8.5 13 8C14.5 10.5 14 12 12.5 14L12.5 22H11.5L11.5 14C10 12 9.5 10.5 11 8C8 8.5 6.5 7.5 5 6C7 4 9 4 11 6C9.5 3.5 10.9 2 2 2Z"/></svg>
+                <svg class="brand-icon" viewBox="0 0 24 24"><path d="M12 2C13.1 2 14.5 3.5 13 6C15 4 17 4 19 6C17.5 7.5 16 8.5 13 8C14.5 10.5 14 12 12.5 14L12.5 22H11.5L11.5 14C10 12 9.5 10.5 11 8C8 8.5 6.5 7.5 5 6C9.5 3.5 10.9 2 2 2Z"/></svg>
                 <span class="logo-text"><span class="highlight">RODDNEIL</span> GEMINA</span>
             </a>
 
@@ -70,11 +70,11 @@
                             <stop offset="40%" stop-color="#ff7043" />
                             <stop offset="100%" stop-color="#d84315" />
                         </radialGradient>
-                        <!-- Sand Linear Gradient -->
+                        <!-- Sand Linear Gradient with Explicit Classes for Instant CSS Stop Transitions -->
                         <linearGradient id="sandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="var(--sand-top)" />
-                            <stop offset="70%" stop-color="var(--sand-bottom)" />
-                            <stop offset="100%" stop-color="var(--sand-shadow)" />
+                            <stop class="sand-stop-1" offset="0%" />
+                            <stop class="sand-stop-2" offset="70%" />
+                            <stop class="sand-stop-3" offset="100%" />
                         </linearGradient>
                         <!-- Palm Leaf Gradient -->
                         <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -832,7 +832,7 @@
         <div class="container footer-inner">
             <div class="footer-left">
                 <span class="footer-brand">
-                    <svg class="ui-icon" viewBox="0 0 24 24"><path d="M12 2C13.1 2 14.5 3.5 13 6C15 4 17 4 19 6C17.5 7.5 16 8.5 13 8C14.5 10.5 14 12 12.5 14L12.5 22H11.5L11.5 14C10 12 9.5 10.5 11 8C8 8.5 6.5 7.5 5 6C7 4 9 4 11 6C9.5 3.5 10.9 2 2 2Z"/></svg>
+                    <svg class="ui-icon" viewBox="0 0 24 24"><path d="M12 2C13.1 2 14.5 3.5 13 6C15 4 17 4 19 6C17.5 7.5 16 8.5 13 8C14.5 10.5 14 12 12.5 14L12.5 22H11.5L11.5 14C10 12 9.5 10.5 11 8C8 8.5 6.5 7.5 5 6C9.5 3.5 10.9 2 2 2Z"/></svg>
                     <span>RODDNEIL GEMINA</span>
                 </span>
                 <span class="footer-copy">&copy; <span id="current-year">2026</span> Roddneil B. Gemina. All rights reserved.</span>
