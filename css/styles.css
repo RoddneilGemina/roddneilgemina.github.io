@@ -141,7 +141,7 @@ html[data-theme="sunset"] {
     --accent-subtle: rgba(249, 115, 22, 0.15);
 }
 
-/* THEME 3: MOONLIT OCEAN (Midnight Sky, Luminous Moon & Bioluminescent Cyan/Blue) */
+/* THEME 3: MOONLIT OCEAN (Midnight Sky, Dark Containers & Light Text Scheme) */
 html[data-theme="moonlit"] {
     --sky-top: #020617;
     --sky-bottom: #0f172a;
@@ -158,20 +158,22 @@ html[data-theme="moonlit"] {
     --water-deep: #0f172a;     /* Midnight Slate depth */
     --water-abyss: #020617;    /* Deep Abyssal Black-Blue */
 
-    --bg-card: rgba(255, 255, 255, 0.95);
-    --bg-card-hover: #ffffff;
-    --bg-header: rgba(30, 27, 75, 0.92); /* Deep Very Dark Indigo (#1e1b4b) */
+    /* DARK CONTAINERS & GLASS CARDS FOR MOONLIT THEME */
+    --bg-card: rgba(15, 23, 42, 0.88);          /* Deep Dark Slate Glass (#0f172a) */
+    --bg-card-hover: rgba(30, 41, 59, 0.95);     /* Dark Slate Hover (#1e293b) */
+    --bg-header: rgba(15, 23, 42, 0.92);         /* Dark Header (#0f172a) */
 
-    --border-color: rgba(255, 255, 255, 0.15);
-    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.55);
+    --border-color: rgba(255, 255, 255, 0.18);
+    --shadow-card: 0 12px 35px rgba(0, 0, 0, 0.7);
 
-    --text-primary: #0f172a;   /* HIGH CONTRAST DARK TEXT */
-    --text-secondary: #1e293b; /* HIGH CONTRAST DARK TEXT */
-    --text-muted: #334155;
+    /* LIGHT CRISP TEXT FOR MOONLIT THEME */
+    --text-primary: #f8fafc;   /* Crisp Pure Off-White */
+    --text-secondary: #e2e8f0; /* Crisp Soft Light Slate */
+    --text-muted: #94a3b8;     /* Soft Light Gray */
     --accent: #38bdf8;
-    --accent-coral: #ea580c;
+    --accent-coral: #ff7043;
     --accent-gold: #fbbf24;
-    --accent-subtle: rgba(56, 189, 248, 0.15);
+    --accent-subtle: rgba(56, 189, 248, 0.18);
 }
 
 /* --------------------------------------------------------------------------
@@ -317,7 +319,7 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   3. FLOATING UNDERWATER BUBBLES (ACTIVE ONLY WHEN FULLY UNDERWATER)
+   3. FLOATING UNDERWATER BUBBLES (DARK IN MOONLIT THEME)
    -------------------------------------------------------------------------- */
 .bubbles-container {
     position: fixed;
@@ -346,6 +348,14 @@ a:hover {
     border-radius: 50%;
     box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.6), 0 0 12px rgba(255, 255, 255, 0.25);
     animation: floatUp 11s infinite linear;
+    transition: background 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
+}
+
+/* DARK UNDERWATER BUBBLES IN MOONLIT THEME */
+html[data-theme="moonlit"] .bubble {
+    background: radial-gradient(circle at 30% 30%, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.65) 60%, rgba(2, 6, 23, 0.45));
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    box-shadow: inset 0 0 8px rgba(56, 189, 248, 0.5), 0 0 14px rgba(2, 6, 23, 0.9);
 }
 
 @keyframes floatUp {
@@ -522,7 +532,7 @@ a:hover {
 }
 
 .hero-content-card {
-    background: rgba(255, 255, 255, 0.88);
+    background: var(--bg-card);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.95);
@@ -1566,7 +1576,7 @@ html[data-theme="moonlit"] .wave-wash-back {
 .dialog-body {
     padding: 1.5rem;
     max-height: 70vh;
-    overflow-y.auto;
+    overflow-y: auto;
 }
 
 .dialog-section-heading {
@@ -1608,10 +1618,10 @@ html[data-theme="moonlit"] .wave-wash-back {
 }
 
 /* --------------------------------------------------------------------------
-   15. MOONLIT THEME DIRECT-ON-DARK TEXT CONTRAST OVERRIDES
+   15. MOONLIT THEME DARK CONTAINERS & LIGHT TEXT SCHEME
    -------------------------------------------------------------------------- */
 html[data-theme="moonlit"] .site-header {
-    background-color: rgba(30, 27, 75, 0.92); /* Deep Very Dark Indigo (#1e1b4b) */
+    background-color: rgba(15, 23, 42, 0.92);
     border-bottom-color: rgba(255, 255, 255, 0.15);
 }
 
@@ -1629,67 +1639,106 @@ html[data-theme="moonlit"] .nav-link.active {
     color: #38bdf8;
 }
 
-html[data-theme="moonlit"] .hero-title {
-    color: #0f172a;
-    text-shadow: none;
+html[data-theme="moonlit"] .hero-content-card,
+html[data-theme="moonlit"] .about-text-card,
+html[data-theme="moonlit"] .pillar-card,
+html[data-theme="moonlit"] .skill-category-card,
+html[data-theme="moonlit"] .filter-controls-wrapper,
+html[data-theme="moonlit"] .project-card,
+html[data-theme="moonlit"] .timeline-content,
+html[data-theme="moonlit"] .contact-horizontal-card {
+    background: rgba(15, 23, 42, 0.88);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #f8fafc;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
 }
 
-html[data-theme="moonlit"] .hero-subtitle {
-    color: #1e293b;
+html[data-theme="moonlit"] .hero-content-card:hover,
+html[data-theme="moonlit"] .pillar-card:hover,
+html[data-theme="moonlit"] .project-card:hover {
+    background: rgba(30, 41, 59, 0.95);
 }
 
-html[data-theme="moonlit"] .hero-bio {
-    color: #0f172a !important; /* CRISP DARK TEXT FOR MAIN DESCRIPTION */
+html[data-theme="moonlit"] .welcome-badge,
+html[data-theme="moonlit"] .quick-stats-grid,
+html[data-theme="moonlit"] .highlights-box,
+html[data-theme="moonlit"] .skill-tag,
+html[data-theme="moonlit"] .tech-badge,
+html[data-theme="moonlit"] .filter-btn,
+html[data-theme="moonlit"] .contact-method-card,
+html[data-theme="moonlit"] .social-card-btn,
+html[data-theme="moonlit"] .btn-secondary,
+html[data-theme="moonlit"] .method-icon {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #f8fafc;
 }
 
-html[data-theme="moonlit"] .welcome-badge {
-    background: #f1f5f9;
-    color: #0f172a;
-    border-color: rgba(0, 0, 0, 0.15);
-}
-
-html[data-theme="moonlit"] .btn-secondary {
-    background: #ffffff;
-    color: #0f172a;
-    border-color: rgba(0, 0, 0, 0.15);
-}
-
-html[data-theme="moonlit"] .btn-secondary:hover {
-    background: #ffffff;
-    color: var(--accent-coral);
-}
-
-html[data-theme="moonlit"] .btn-outline {
-    background: rgba(255, 255, 255, 0.9);
-    color: #0f172a;
-    border-color: rgba(0, 0, 0, 0.15);
-}
-
-html[data-theme="moonlit"] .about-text-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(0, 0, 0, 0.1);
+html[data-theme="moonlit"] .hero-title,
+html[data-theme="moonlit"] .hero-subtitle,
+html[data-theme="moonlit"] .hero-bio,
+html[data-theme="moonlit"] .stat-label,
+html[data-theme="moonlit"] .stat-value,
+html[data-theme="moonlit"] .about-text-card p,
+html[data-theme="moonlit"] .lead-text,
+html[data-theme="moonlit"] .box-title,
+html[data-theme="moonlit"] .check-list,
+html[data-theme="moonlit"] .pillar-title,
+html[data-theme="moonlit"] .pillar-desc,
+html[data-theme="moonlit"] .category-title,
+html[data-theme="moonlit"] .project-title,
+html[data-theme="moonlit"] .project-summary,
+html[data-theme="moonlit"] .item-title,
+html[data-theme="moonlit"] .item-subtitle,
+html[data-theme="moonlit"] .item-details,
+html[data-theme="moonlit"] .experience-bullets,
+html[data-theme="moonlit"] .card-heading,
+html[data-theme="moonlit"] .contact-lead,
+html[data-theme="moonlit"] .method-label,
+html[data-theme="moonlit"] .method-value,
+html[data-theme="moonlit"] .social-bar-title,
+html[data-theme="moonlit"] .filter-label {
+    color: #f8fafc !important;
 }
 
 html[data-theme="moonlit"] .about-text-card p,
-html[data-theme="moonlit"] .lead-text {
-    color: #0f172a !important; /* CRISP DARK TEXT FOR ABOUT DESCRIPTION */
+html[data-theme="moonlit"] .pillar-desc,
+html[data-theme="moonlit"] .project-summary,
+html[data-theme="moonlit"] .contact-lead,
+html[data-theme="moonlit"] .item-details {
+    color: #e2e8f0 !important;
 }
 
-html[data-theme="moonlit"] .stat-label {
-    color: #0f172a;
+html[data-theme="moonlit"] .stat-card {
+    border-right-color: rgba(255, 255, 255, 0.2);
 }
 
-html[data-theme="moonlit"] .section-title {
-    color: #ffffff;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+html[data-theme="moonlit"] .btn-secondary:hover,
+html[data-theme="moonlit"] .social-card-btn:hover,
+html[data-theme="moonlit"] .filter-btn:hover {
+    background: rgba(51, 65, 85, 0.95);
+    color: #38bdf8 !important;
+    border-color: #38bdf8;
 }
 
-html[data-theme="moonlit"] .column-title {
-    color: #ffffff;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+html[data-theme="moonlit"] .dialog-container {
+    background: rgba(15, 23, 42, 0.98);
+    color: #f8fafc;
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
-html[data-theme="moonlit"] .filter-label {
+html[data-theme="moonlit"] .dialog-header {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+html[data-theme="moonlit"] .dialog-title,
+html[data-theme="moonlit"] .dialog-text,
+html[data-theme="moonlit"] .dialog-list {
+    color: #f8fafc !important;
+}
+
+html[data-theme="moonlit"] .dialog-close-btn {
     color: #f8fafc;
 }
 
