@@ -57,7 +57,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   1. COLOR PALETTES & UNIFIED CELESTIAL-MATCHED THEME TRANSITION TIMING
+   1. COLOR PALETTES & UNIFIED INSTANT 0MS DELAY TRANSITION TIMING (1.5s linear)
    -------------------------------------------------------------------------- */
 :root {
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -71,8 +71,8 @@
     --transition-fast: 0.2s ease;
     --transition-normal: 0.35s ease;
     
-    /* UNIFIED CELESTIAL ORBIT TRANSITION BEZIER (1.5s cubic-bezier(0.4, 0, 0.2, 1)) */
-    --transition-theme: 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* UNIFIED INSTANT 0MS DELAY TRANSITION (1.5s linear) */
+    --transition-theme: 1.5s linear;
 }
 
 /* THEME 1: SUNNY DAY (Very Light Baby Blue Sky & Tropical Ocean) */
@@ -177,21 +177,21 @@ html[data-theme="moonlit"] {
 }
 
 /* --------------------------------------------------------------------------
-   GLOBAL DIRECT COLOR INTERPOLATION TRANSITIONS (MATCHING CELESTIAL ORBIT TIMING)
+   GLOBAL DIRECT COLOR INTERPOLATION TRANSITIONS (INSTANT 0MS DELAY LINEAR)
    -------------------------------------------------------------------------- */
 html, body {
-    transition: --sky-top 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                --sky-bottom 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                --water-surface 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                --water-shallow 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                --water-mid 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                --water-deep 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                --water-abyss 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                --sand-top 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                --sand-bottom 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                --sand-shadow 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                background-color 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                color 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: --sky-top 1.5s linear,
+                --sky-bottom 1.5s linear,
+                --water-surface 1.5s linear,
+                --water-shallow 1.5s linear,
+                --water-mid 1.5s linear,
+                --water-deep 1.5s linear,
+                --water-abyss 1.5s linear,
+                --sand-top 1.5s linear,
+                --sand-bottom 1.5s linear,
+                --sand-shadow 1.5s linear,
+                background-color 1.5s linear,
+                color 1.5s linear;
 }
 
 body, 
@@ -226,26 +226,26 @@ body,
 .stat-label, 
 .filter-label, 
 .dialog-container {
-    transition: background-color 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                color 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                border-color 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                box-shadow 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                backdrop-filter 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                -webkit-backdrop-filter 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 1.5s linear, 
+                color 1.5s linear, 
+                border-color 1.5s linear, 
+                box-shadow 1.5s linear, 
+                backdrop-filter 1.5s linear,
+                -webkit-backdrop-filter 1.5s linear;
 }
 
-/* SVG STOPS & ARTWORK SEAMLESS FADE TRANSITIONS MATCHING CELESTIAL TIMING */
+/* SVG STOPS & ARTWORK SEAMLESS FADE TRANSITIONS (INSTANT 0MS DELAY LINEAR) */
 svg path, 
 svg circle, 
 svg g, 
 svg rect, 
 svg stop {
-    transition: fill 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                stroke 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                stop-color 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                stop-opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                filter 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: fill 1.5s linear, 
+                stroke 1.5s linear, 
+                stop-color 1.5s linear, 
+                stop-opacity 1.5s linear, 
+                opacity 1.5s linear, 
+                filter 1.5s linear;
 }
 
 /* --------------------------------------------------------------------------
@@ -319,25 +319,20 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   3. FLOATING UNDERWATER BUBBLES (DARK IN MOONLIT THEME)
+   3. FLOATING UNDERWATER BUBBLES (RELATIVE TO WATERY DEPTHS BACKGROUND)
    -------------------------------------------------------------------------- */
 .bubbles-container {
-    position: fixed;
-    top: 0;
+    position: absolute;
+    top: 600px;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 600px);
     pointer-events: none;
     z-index: 1;
     overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-
-.bubbles-container.underwater-active {
-    opacity: 1;
-    visibility: visible;
+    /* FADE OUT OF SIGHT GRADIENT MASK UPON REACHING TOP OF WATERY DEPTHS */
+    mask-image: linear-gradient(to bottom, transparent 0px, black 140px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 140px);
 }
 
 .bubble {
@@ -348,7 +343,7 @@ a:hover {
     border-radius: 50%;
     box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.6), 0 0 12px rgba(255, 255, 255, 0.25);
     animation: floatUp 11s infinite linear;
-    transition: background 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
+    transition: background 1.5s linear, border-color 1.5s linear, box-shadow 1.5s linear;
 }
 
 /* DARK UNDERWATER BUBBLES IN MOONLIT THEME */
@@ -697,15 +692,15 @@ html[data-theme="moonlit"] .bubble {
    6. SVG BEACH ARTWORK & CELESTIAL ORBIT TRANSITIONS (SUN & MOON)
    -------------------------------------------------------------------------- */
 .sun-element, .moon-element {
-    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                filter 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 1.5s linear, 
+                opacity 1.5s linear, 
+                filter 1.5s linear;
     will-change: transform, opacity, filter;
 }
 
 /* DUAL LAYER SUN COLOR SMOOTH CROSS-FADE TRANSITION */
 .sun-body-day, .sun-body-sunset {
-    transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 1.5s linear;
     will-change: opacity;
 }
 
@@ -814,7 +809,7 @@ html[data-theme="moonlit"] .moon-element {
 
 /* SAND DUNE GRADIENT STOPS INSTANT 0MS THEME TRANSITION */
 .sand-stop-1, .sand-stop-2, .sand-stop-3 {
-    transition: stop-color 1.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: stop-color 1.5s linear !important;
 }
 
 html[data-theme="summer"] .sand-stop-1 { stop-color: #fef3c7; }
@@ -836,7 +831,7 @@ html[data-theme="moonlit"] .sand-stop-3 { stop-color: #475569; }
 }
 
 .wave-wash-back {
-    transition: fill 1.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: fill 1.5s linear !important;
     will-change: fill;
     animation: waveWashAshore 6s ease-in-out infinite alternate;
 }

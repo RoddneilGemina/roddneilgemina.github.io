@@ -4,23 +4,22 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------------------------
-    // 1. FLOATING BUBBLES ENGINE (SPAWNS ONLY WHEN FULLY UNDERWATER)
+    // 1. FLOATING BUBBLES ENGINE (RELATIVE TO WATERY DEPTHS BACKGROUND)
     // ----------------------------------------------------------------------
     const bubblesContainer = document.getElementById('bubbles-container');
-    const heroSection = document.getElementById('hero');
 
     function createBubbles() {
         if (!bubblesContainer || bubblesContainer.children.length > 0) return;
 
-        const numberOfBubbles = 30;
+        const numberOfBubbles = 35;
         for (let i = 0; i < numberOfBubbles; i++) {
             const bubble = document.createElement('div');
             bubble.className = 'bubble';
 
             const size = Math.random() * 24 + 8; // 8px to 32px
             const left = Math.random() * 96 + 2; // 2% to 98%
-            const duration = Math.random() * 9 + 7; // 7s to 16s
-            const delay = Math.random() * 10; // 0s to 10s
+            const duration = Math.random() * 10 + 8; // 8s to 18s
+            const delay = Math.random() * 12; // 0s to 12s
 
             bubble.style.width = `${size}px`;
             bubble.style.height = `${size}px`;
@@ -32,33 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function removeBubbles() {
-        if (bubblesContainer) {
-            bubblesContainer.innerHTML = '';
-        }
-    }
-
-    // INTERSECTION OBSERVER: TRIGGER BUBBLES ONLY WHEN SCREEN IS UNDER WATER (PAST HERO / ISLAND)
-    if (heroSection && bubblesContainer) {
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                // When hero/island is NOT intersecting (scrolled down underwater), activate bubbles!
-                if (!entry.isIntersecting) {
-                    bubblesContainer.classList.add('underwater-active');
-                    createBubbles();
-                } else {
-                    // When hero/island is visible again at top, deactivate bubbles & stop spawning!
-                    bubblesContainer.classList.remove('underwater-active');
-                    removeBubbles();
-                }
-            });
-        }, {
-            root: null,
-            threshold: 0.05 // Triggers as soon as island leaves or returns
-        });
-
-        heroObserver.observe(heroSection);
-    }
+    // INITIALIZE BUBBLES CONTINUOUSLY RELATIVE TO WATERY DEPTHS BACKGROUND
+    createBubbles();
 
     // ----------------------------------------------------------------------
     // 2. THEME CONTROLLER & PERSISTENCE
@@ -102,17 +76,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-            const filterValue = btn.getAttribute('data-filter');
+            const filterValue = button.getAttribute('data-filter');
 
             projectCards.forEach(card => {
-                const cardCategories = card.getAttribute('data-category').split(' ');
+                const categories = card.getAttribute('data-category').split(' ');
 
-                if (filterValue === 'all' || cardCategories.includes(filterValue)) {
+                if (filterValue === 'all' || categories.includes(filterValue)) {
                     card.classList.remove('hidden');
                 } else {
                     card.classList.add('hidden');
@@ -122,134 +96,128 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ----------------------------------------------------------------------
-    // 5. PROJECT DETAILS DIALOG / MODAL SYSTEM
+    // 5. PROJECT SPECIFICATION MODAL DIALOG
     // ----------------------------------------------------------------------
     const projectModal = document.getElementById('project-modal');
-    const modalTitle = document.getElementById('modal-project-title');
-    const modalType = document.getElementById('modal-project-type');
-    const modalDesc = document.getElementById('modal-project-desc');
-    const modalHighlights = document.getElementById('modal-project-highlights');
-    const modalTechTags = document.getElementById('modal-tech-tags');
     const closeModalBtn = document.getElementById('close-modal-btn');
     const modalCloseAction = document.getElementById('modal-close-action');
 
-    const projectDetailsData = {
+    const projectData = {
         p1: {
-            title: 'Fusion Rush: Enhancing Proficiency in Boolean Logic Algebra',
-            type: 'Scopus-Indexed Research & AI App (2025-2026)',
-            desc: 'A supplementary learning software providing AI tutoring services and gamified learning about the Rules of Inference in Discrete Mathematics. Deployed and tested by students in coordination with CIT-U CCS instructors.',
+            title: 'Fusion Rush: Gamified Boolean Logic & AI Tutoring',
+            type: 'Scopus ICETT 2026 Paper',
+            desc: 'AI tutoring software providing gamified learning on the Rules of Inference for Discrete Math. Deployed and tested by students in coordination with CIT-U instructors and accepted at the Scopus-indexed ICETT 2026 Conference.',
             highlights: [
-                'Co-authored research paper accepted in Scopus-indexed conference: International Conference on Education and Training Technologies (ICETT) 2026.',
-                'Designed adaptive learning algorithms to guide students through Discrete Math logic proofs.',
-                'Led full-stack software and AI development for the interactive gamified system.',
-                'Tested and evaluated in production classrooms at CIT-U College of Computer Studies.'
+                'Accepted paper at Scopus-indexed ICETT 2026 Conference.',
+                'Gamified step-by-step logic solver algorithm for propositional calculus.',
+                'Evaluated by Computer Science students and faculty with high usability ratings.'
             ],
-            tech: ['AI Development', 'Python', 'Scopus ICETT 2026', 'Discrete Mathematics', 'Gamification', 'Full-Stack']
+            tech: ['Python', 'AI Tutoring', 'Discrete Math', 'Scopus ICETT 2026']
         },
         p2: {
-            title: 'Bridging the Gap: Visual AI to Accurately Parse Logic Proofs',
-            type: 'National Congress Paper & Visual AI System (2026)',
-            desc: 'A system utilizing computer vision and Visual AI to scan, parse, and evaluate the validity and scoring of handwritten Discrete Mathematics logic proofs under the Rules of Inference topic.',
+            title: 'Visual AI Logic Proof Parser & Evaluator',
+            type: 'PCSC 2026 Davao Presentation',
+            desc: 'System using Visual AI to scan, parse, and evaluate validity and scoring of handwritten Discrete Math proofs. Presented at the Philippine Computing Science Congress (PCSC) 2026 in Davao.',
             highlights: [
-                'Personally presented research paper at the Philippine Computing Science Congress (PCSC) 2026 held in Davao.',
-                'Engineered OCR and Visual AI pipelines to parse structured handwritten mathematical symbols.',
-                'Implemented automated step-by-step logic rule validation algorithms.',
-                'Built end-to-end software pipeline connecting image capture with scoring feedback.'
+                'Presented at PCSC 2026 national conference in Davao.',
+                'Visual AI OCR engine trained to read handwritten logical symbols and line proofs.',
+                'Automated step validation verifying rule application correctness.'
             ],
-            tech: ['Visual AI', 'Handwriting Recognition', 'Python', 'PCSC 2026 Davao', 'Logic Verification']
+            tech: ['Visual AI', 'OCR Parsing', 'Logic Verification', 'PCSC 2026']
         },
         p3: {
             title: 'TakeIt — Event Management & Ticketing System',
-            type: 'Full-Stack Web Application (2024)',
-            desc: 'An event management and digital ticketing web system ensuring a fluid process for event creation, booking, ticket allocation, and attendee management.',
+            type: 'Web Application',
+            desc: 'An end-to-end event management and ticketing platform ensuring smooth booking workflows, ticket distribution, and event organizer dashboard management.',
             highlights: [
-                'Architected clean booking workflows for event organizers and attendees.',
-                'Engineered responsive database schemas for ticket inventory and user transactions.',
-                'Streamlined user check-in verification processes.'
+                'Interactive event discovery and ticket tier purchasing.',
+                'Organizer portal for attendance tracking and earnings metrics.',
+                'Secure session management and database transactions.'
             ],
-            tech: ['React', 'Node.js', 'JavaScript', 'Database Management', 'Full-Stack']
+            tech: ['React', 'Node.js', 'Database Design', 'Full-Stack']
         },
         p4: {
-            title: 'DishCover — Pantry Management & Waste Reduction App',
-            type: 'Pantry & Storage App (2024)',
-            desc: 'A smart pantry management application that enables users to track food storage inventory, receive expiration date warnings, and plan household meals.',
+            title: 'DishCover — Pantry & Inventory Management App',
+            type: 'Web / Mobile App',
+            desc: 'A smart pantry management app enabling users to track food item expiration dates, manage storage inventory, and minimize household food waste.',
             highlights: [
-                'Designed expiration date tracking algorithms to notify users of impending food spoilage.',
-                'Integrated inventory storage dashboards with intuitive category filtering.',
-                'Created user-friendly mobile and web UI interfaces for quick item entry.'
+                'Expiration date tracking with smart alerts.',
+                'Recipe suggestions based on available pantry items.',
+                'Clean responsive dashboard for kitchen stock.'
             ],
-            tech: ['Full-Stack', 'UI/UX Design', 'JavaScript', 'Storage Tracking']
+            tech: ['Full-Stack', 'Inventory Logic', 'UI/UX', 'JavaScript']
         },
         p5: {
-            title: 'CropConnect — Direct Produce E-Commerce for Farmers',
-            type: 'AgriTech Marketplace (2024)',
-            desc: 'A fresh goods e-commerce platform giving local farmers a direct channel to sell their produce directly to consumers without middleman markups.',
+            title: 'CropConnect — Direct Farmer Fresh Produce E-Commerce',
+            type: 'E-Commerce Platform',
+            desc: 'A fresh produce e-commerce application bridging local farmers directly with consumers, empowering agricultural communities to list and sell fresh goods transparently.',
             highlights: [
-                'Empowered local agricultural communities by providing digital storefront tools.',
-                'Implemented secure shopping cart, product cataloging, and direct farmer-to-consumer order tracking.',
-                'Built responsive web interfaces optimized for low-bandwidth mobile connections.'
+                'Direct B2C produce catalog for fresh agricultural goods.',
+                'Farmer inventory dashboard and price transparency features.',
+                'Built with Django and Python backend framework.'
             ],
-            tech: ['Django', 'Python', 'HTML5/CSS3', 'E-Commerce Logic', 'AgriTech']
+            tech: ['E-Commerce', 'Django / Python', 'Web Tech', 'AgriTech']
         },
         p6: {
-            title: 'Bomberman BattleRoyale — Java PvP Multiplayer Game',
-            type: 'Java Multiplayer Game (2024)',
-            desc: 'A real-time Java multiplayer arcade game featuring classic bomb placement mechanics coupled with a shrinking arena battle-royale PvP mode.',
+            title: 'Bomberman BattleRoyale — Java PvP Game',
+            type: 'Java Multiplayer Game',
+            desc: 'A multiplayer arcade game in Java featuring real-time socket networking, arena shrinking mechanics, and battle-royale styled player-vs-player combat.',
             highlights: [
-                'Built custom Java multi-threaded TCP/UDP socket networking for zero-lag player synchronization.',
-                'Implemented tile grid collision detection, bomb explosion radius math, and power-up drops.',
-                'Engineered Object-Oriented game loops and custom 2D graphics rendering.'
+                'Real-time socket server handling concurrent player actions.',
+                'Shrinking safe-zone grid logic and bomb explosion collision physics.',
+                'Modular OOP architecture in pure Java.'
             ],
-            tech: ['Java', 'Socket Networking', 'Object-Oriented Design', 'CodeChum Certified Java']
+            tech: ['Java', 'Socket Networking', 'OOP Architecture', 'Game Loop']
         },
         p7: {
-            title: 'E-Tanom — Academic Concept AgriTech Startup',
-            type: 'Startup Concept & Prototype (2024)',
-            desc: 'An academic concept startup platform designed to assist local farmers in adapting to modern digital agricultural trends and market expansion.',
+            title: 'E-Tanom — Academic AgriTech Platform',
+            type: 'AgriTech Startup Concept',
+            desc: 'An academic concept startup designed to assist local agricultural workers in adopting digital market trends and optimizing crop distribution channels.',
             highlights: [
-                'Researched digital market adoption barriers among regional farming communities.',
-                'Designed prototype interface workflows for crop demand forecasting.',
-                'Presented business and technical architecture concepts in academic competitions.'
+                'Market trends dashboard for seasonal crop demand.',
+                'Educational resources for local farming techniques.',
+                'High-fidelity UX wireframes and user flow mapping.'
             ],
-            tech: ['Startup Prototype', 'AgriTech', 'UI/UX Design', 'Market Analysis']
+            tech: ['Startup Prototype', 'Web Platform', 'UI Design']
         },
         p8: {
             title: 'Nexchef — Live Step Cooking & Recipe Platform',
-            type: 'Culinary Web Prototype (2024)',
-            desc: 'An experimental culinary app allowing users to share recipes and follow live synchronized timers guiding step-by-step cooking instructions.',
+            type: 'Interactive Cooking Prototype',
+            desc: 'An experimental culinary web application enabling users to share recipes and follow synchronized live step timers for precision home cooking.',
             highlights: [
-                'Built multi-timer tracking components for parallel recipe cooking steps.',
-                'Designed clean community recipe creation and media sharing interface.',
-                'Optimized web app response speed for touch screen kitchen devices.'
+                'Live step timer synchronization for multi-stage recipes.',
+                'Community recipe sharing with ingredient scaling logic.',
+                'Minimalist distraction-free cooking mode interface.'
             ],
-            tech: ['JavaScript', 'HTML5/CSS3', 'Web Timers', 'UI/UX']
+            tech: ['JavaScript', 'Web Timers', 'UX Design']
         }
     };
 
-    // Open Modal Handlers
     document.querySelectorAll('.open-modal-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const projectId = btn.getAttribute('data-project');
-            const data = projectDetailsData[projectId];
+            const data = projectData[projectId];
 
             if (data && projectModal) {
-                modalTitle.textContent = data.title;
-                modalType.textContent = data.type;
-                modalDesc.textContent = data.desc;
+                document.getElementById('modal-project-title').textContent = data.title;
+                document.getElementById('modal-project-type').textContent = data.type;
+                document.getElementById('modal-project-desc').textContent = data.desc;
 
-                modalHighlights.innerHTML = '';
+                const highlightsList = document.getElementById('modal-project-highlights');
+                highlightsList.innerHTML = '';
                 data.highlights.forEach(item => {
                     const li = document.createElement('li');
                     li.textContent = item;
-                    modalHighlights.appendChild(li);
+                    highlightsList.appendChild(li);
                 });
 
-                modalTechTags.innerHTML = '';
-                data.tech.forEach(t => {
+                const techTagsContainer = document.getElementById('modal-tech-tags');
+                techTagsContainer.innerHTML = '';
+                data.tech.forEach(tech => {
                     const span = document.createElement('span');
                     span.className = 'skill-tag';
-                    span.innerHTML = `<span class="tag-dot"></span>${t}`;
-                    modalTechTags.appendChild(span);
+                    span.innerHTML = `<span class="tag-dot"></span>${tech}`;
+                    techTagsContainer.appendChild(span);
                 });
 
                 projectModal.showModal();
@@ -257,78 +225,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const closeModal = () => {
-        if (projectModal) projectModal.close();
-    };
+    if (closeModalBtn && projectModal) {
+        closeModalBtn.addEventListener('click', () => projectModal.close());
+    }
 
-    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-    if (modalCloseAction) modalCloseAction.addEventListener('click', closeModal);
+    if (modalCloseAction && projectModal) {
+        modalCloseAction.addEventListener('click', () => projectModal.close());
+    }
 
     if (projectModal) {
         projectModal.addEventListener('click', (e) => {
-            const dialogBounds = projectModal.getBoundingClientRect();
-            if (
-                e.clientX < dialogBounds.left ||
-                e.clientX > dialogBounds.right ||
-                e.clientY < dialogBounds.top ||
-                e.clientY > dialogBounds.bottom
-            ) {
-                closeModal();
+            const rect = projectModal.getBoundingClientRect();
+            const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+            if (!isInDialog) {
+                projectModal.close();
             }
         });
     }
 
     // ----------------------------------------------------------------------
-    // 6. COPY EMAIL TO CLIPBOARD
+    // 6. EMAIL COPY TO CLIPBOARD
     // ----------------------------------------------------------------------
     const copyEmailBtn = document.getElementById('copy-email-btn');
-    const emailLink = document.getElementById('email-link');
-
-    if (copyEmailBtn && emailLink) {
+    if (copyEmailBtn) {
         copyEmailBtn.addEventListener('click', () => {
-            const emailText = emailLink.textContent.trim();
-            navigator.clipboard.writeText(emailText).then(() => {
-                const originalText = copyEmailBtn.innerHTML;
-                copyEmailBtn.innerHTML = '<span>✓ Copied!</span>';
+            const email = 'roddneilgemina@gmail.com';
+            navigator.clipboard.writeText(email).then(() => {
+                const span = copyEmailBtn.querySelector('span');
+                const originalText = span.textContent;
+                span.textContent = 'Copied!';
+                copyEmailBtn.style.backgroundColor = 'var(--accent-coral)';
+                copyEmailBtn.style.color = '#ffffff';
                 setTimeout(() => {
-                    copyEmailBtn.innerHTML = originalText;
+                    span.textContent = originalText;
+                    copyEmailBtn.style.backgroundColor = '';
+                    copyEmailBtn.style.color = '';
                 }, 2000);
             }).catch(err => {
-                console.error('Copy email failed: ', err);
+                console.error('Failed to copy email: ', err);
             });
         });
-    }
-
-    // ----------------------------------------------------------------------
-    // 7. ACTIVE NAV HIGHLIGHT ON SCROLL
-    // ----------------------------------------------------------------------
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '-20% 0px -60% 0px',
-        threshold: 0
-    };
-
-    const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const currentId = entry.target.getAttribute('id');
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => navObserver.observe(section));
-
-    const yearSpan = document.getElementById('current-year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
     }
 });
