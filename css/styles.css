@@ -3,6 +3,60 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   0. ANIMATABLE CSS COLOR PROPERTIES (DIRECT COLOR-TO-COLOR INTERPOLATION)
+   -------------------------------------------------------------------------- */
+@property --sky-top {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #e0f2fe;
+}
+@property --sky-bottom {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #bae6fd;
+}
+@property --sand-top {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #fef3c7;
+}
+@property --sand-bottom {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #fde68a;
+}
+@property --sand-shadow {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #d97706;
+}
+@property --water-surface {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #38bdf8;
+}
+@property --water-shallow {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #0ea5e9;
+}
+@property --water-mid {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #0284c7;
+}
+@property --water-deep {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #0369a1;
+}
+@property --water-abyss {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #075985;
+}
+
+/* --------------------------------------------------------------------------
    1. COLOR PALETTES & THEMES
    -------------------------------------------------------------------------- */
 :root {
@@ -119,75 +173,23 @@ html[data-theme="moonlit"] {
 }
 
 /* --------------------------------------------------------------------------
-   FULL-PAGE WATERY DEPTHS BACKGROUND FADE LAYERS (SEAMLESS 1.5s CROSS-FADE)
+   GLOBAL DIRECT COLOR INTERPOLATION TRANSITIONS (NO DARK OPACITY FLASH)
    -------------------------------------------------------------------------- */
-.theme-bg-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    will-change: opacity;
+html, body {
+    transition: --sky-top 1.5s ease-in-out,
+                --sky-bottom 1.5s ease-in-out,
+                --water-surface 1.5s ease-in-out,
+                --water-shallow 1.5s ease-in-out,
+                --water-mid 1.5s ease-in-out,
+                --water-deep 1.5s ease-in-out,
+                --water-abyss 1.5s ease-in-out,
+                --sand-top 1.5s ease-in-out,
+                --sand-bottom 1.5s ease-in-out,
+                --sand-shadow 1.5s ease-in-out,
+                background-color 1.5s ease-in-out,
+                color 1.5s ease-in-out;
 }
 
-/* SUNNY DAY WATERY DEPTHS GRADIENT */
-.theme-bg-layer.bg-summer {
-    background: linear-gradient(
-        180deg,
-        #e0f2fe 0px,
-        #bae6fd 450px,
-        #0ea5e9 600px,
-        #0284c7 1800px,
-        #0369a1 3000px,
-        #075985 100%
-    );
-}
-
-/* SUNSET BEACH WATERY DEPTHS GRADIENT */
-.theme-bg-layer.bg-sunset {
-    background: linear-gradient(
-        180deg,
-        #ffedd5 0px,
-        #fdba74 450px,
-        #f97316 600px,
-        #8b5cf6 1800px,
-        #581c87 3000px,
-        #1e1b4b 100%
-    );
-}
-
-/* MOONLIT OCEAN WATERY DEPTHS GRADIENT */
-.theme-bg-layer.bg-moonlit {
-    background: linear-gradient(
-        180deg,
-        #020617 0px,
-        #0f172a 450px,
-        #0284c7 600px,
-        #0369a1 1800px,
-        #0f172a 3000px,
-        #020617 100%
-    );
-}
-
-/* ACTIVE THEME OPACITY RULES */
-html[data-theme="summer"] .theme-bg-layer.bg-summer {
-    opacity: 1;
-}
-html[data-theme="sunset"] .theme-bg-layer.bg-sunset {
-    opacity: 1;
-}
-html[data-theme="moonlit"] .theme-bg-layer.bg-moonlit {
-    opacity: 1;
-}
-
-/* --------------------------------------------------------------------------
-   GLOBAL SEAMLESS COLOR SCHEME FADE TRANSITIONS FOR ALL ASSETS & WAVES
-   -------------------------------------------------------------------------- */
 body, 
 .site-header, 
 .hero-content-card, 
@@ -263,7 +265,17 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    background-color: #075985;
+
+    /* DIRECT COLOR-TO-COLOR CONTINUOUS GRADIENT INTERPOLATION */
+    background: linear-gradient(
+        180deg,
+        var(--sky-top) 0px,
+        var(--sky-bottom) 450px,
+        var(--water-shallow) 600px,
+        var(--water-mid) 1800px,
+        var(--water-deep) 3000px,
+        var(--water-abyss) 100%
+    );
 }
 
 a {
