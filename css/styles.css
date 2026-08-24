@@ -141,7 +141,7 @@ html[data-theme="moonlit"] {
         180deg,
         #e0f2fe 0px,
         #bae6fd 450px,
-        #0ea5e9 660px,
+        #0ea5e9 600px,
         #0284c7 1800px,
         #0369a1 3000px,
         #075985 100%
@@ -154,7 +154,7 @@ html[data-theme="moonlit"] {
         180deg,
         #ffedd5 0px,
         #fdba74 450px,
-        #f97316 660px,
+        #f97316 600px,
         #8b5cf6 1800px,
         #581c87 3000px,
         #1e1b4b 100%
@@ -167,7 +167,7 @@ html[data-theme="moonlit"] {
         180deg,
         #020617 0px,
         #0f172a 450px,
-        #0284c7 660px,
+        #0284c7 600px,
         #0369a1 1800px,
         #0f172a 3000px,
         #020617 100%
@@ -186,7 +186,7 @@ html[data-theme="moonlit"] .theme-bg-layer.bg-moonlit {
 }
 
 /* --------------------------------------------------------------------------
-   GLOBAL SEAMLESS COLOR SCHEME FADE TRANSITIONS FOR ALL ASSETS
+   GLOBAL SEAMLESS COLOR SCHEME FADE TRANSITIONS FOR ALL ASSETS & WAVES
    -------------------------------------------------------------------------- */
 body, 
 .site-header, 
@@ -793,6 +793,7 @@ html[data-theme="moonlit"] .moon-element {
 }
 
 .wave-wash-back {
+    transition: fill 1.5s ease-in-out !important;
     animation: waveWashAshore 6s ease-in-out infinite alternate;
 }
 

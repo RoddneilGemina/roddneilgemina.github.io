@@ -81,11 +81,6 @@
                             <stop offset="70%" stop-color="var(--sand-bottom)" />
                             <stop offset="100%" stop-color="var(--sand-shadow)" />
                         </linearGradient>
-                        <!-- Shoreline Wave Surface Gradient: UserSpaceOnUse exact mapping from wave crest (y=540) to depth top (y=660) -->
-                        <linearGradient id="waveSurfaceGrad" x1="0" y1="540" x2="0" y2="660" gradientUnits="userSpaceOnUse">
-                            <stop offset="0%" stop-color="var(--water-surface)" stop-opacity="0.9" />
-                            <stop offset="100%" stop-color="var(--water-shallow)" stop-opacity="1" />
-                        </linearGradient>
                         <!-- Palm Leaf Gradient -->
                         <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#a5d6a7" />
@@ -132,8 +127,8 @@
                         <path d="M 850 110 Q 870 85 900 100 Q 925 80 955 100 Q 975 120 955 135 Q 935 145 850 135 Z" fill="#ffffff" opacity="0.85" />
                     </g>
 
-                    <!-- FULL-WIDTH SANDY ISLAND DUNE (EXTENDED DOWN TO 1200 TO ELIMINATE CLIPPING) -->
-                    <path d="M 0 440 Q 380 340 900 390 Q 1220 430 1440 460 L 1440 1200 L 0 1200 Z" fill="url(#sandGrad)" />
+                    <!-- FULL-WIDTH SANDY ISLAND DUNE (EXTENDED DOWN TO 1400 TO ELIMINATE CLIPPING) -->
+                    <path d="M 0 440 Q 380 340 900 390 Q 1220 430 1440 460 L 1440 1400 L 0 1400 Z" fill="url(#sandGrad)" />
 
                     <!-- TROPICAL COCONUT PALM TREE (PROUDLY STANDING ON THE SAND DUNE) -->
                     <g class="palm-tree-group">
@@ -155,12 +150,12 @@
                         </g>
                     </g>
 
-                    <!-- ANIMATED SHORELINE WAVES (SINGLE CLEAN SHORELINE WAVE WITH WHITE FOAM LINE CREST) -->
+                    <!-- ANIMATED SHORELINE WAVES (EXTENDED DOWN TO Y=1400 WITH EXACT SYNCED COLOR FILL) -->
                     <g class="shoreline-waves">
-                        <!-- Single Clean Shoreline Wave Wash -->
-                        <path class="wave-wash-back" d="M 0 600 Q 360 540 720 570 Q 1080 605 1440 580 L 1440 1200 L 0 1200 Z" fill="url(#waveSurfaceGrad)" />
+                        <!-- Shoreline Wave Wash Body extending deep down past hero boundary -->
+                        <path class="wave-wash-back" d="M 0 580 Q 360 520 720 550 Q 1080 585 1440 560 L 1440 1400 L 0 1400 Z" fill="var(--water-shallow)" />
                         <!-- White Foam Line Crest Attached Directly to the Wave Wash -->
-                        <path class="wave-foam-line" d="M 0 595 Q 360 535 720 565 Q 1080 600 1440 575" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.95" />
+                        <path class="wave-foam-line" d="M 0 575 Q 360 515 720 545 Q 1080 580 1440 555" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.95" />
                     </g>
                 </svg>
             </div>
