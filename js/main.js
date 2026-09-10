@@ -59,31 +59,73 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainNav = document.getElementById('main-nav');
 
     if (mobileMenuToggle && mainNav) {
-        mobileMenuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('mobile-active');
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = mainNav.classList.toggle('mobile-active');
+            mobileMenuToggle.classList.toggle('active', isOpen);
+            mobileMenuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
 
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 mainNav.classList.remove('mobile-active');
+                mobileMenuToggle.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
             });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mainNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mainNav.classList.remove('mobile-active');
+                mobileMenuToggle.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            }
         });
     }
 
     // ----------------------------------------------------------------------
-    // 4. INTERACTIVE PROJECT FILTERING
+    // 4. INTERACTIVE PROJECTS OVERLAY & FILTERING
     // ----------------------------------------------------------------------
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
+    const allProjectsDialog = document.getElementById('all-projects-dialog');
+    const openAllProjectsBtn = document.getElementById('open-all-projects-btn');
+    const closeOverlayBtn = document.getElementById('close-overlay-btn');
+    const overlayCloseAction = document.getElementById('overlay-close-action');
 
-    filterButtons.forEach(button => {
+    if (openAllProjectsBtn && allProjectsDialog) {
+        openAllProjectsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            allProjectsDialog.showModal();
+        });
+    }
+
+    if (closeOverlayBtn && allProjectsDialog) {
+        closeOverlayBtn.addEventListener('click', () => allProjectsDialog.close());
+    }
+
+    if (overlayCloseAction && allProjectsDialog) {
+        overlayCloseAction.addEventListener('click', () => allProjectsDialog.close());
+    }
+
+    if (allProjectsDialog) {
+        allProjectsDialog.addEventListener('click', (e) => {
+            if (e.target === allProjectsDialog) {
+                allProjectsDialog.close();
+            }
+        });
+    }
+
+    // Category filtering inside the projects overlay
+    const overlayFilterButtons = document.querySelectorAll('#all-projects-dialog .filter-btn');
+    const overlayProjectCards = document.querySelectorAll('#all-projects-dialog .project-card');
+
+    overlayFilterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            filterButtons.forEach(btn => btn.classList.remove('active'));
+            overlayFilterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
             const filterValue = button.getAttribute('data-filter');
 
-            projectCards.forEach(card => {
+            overlayProjectCards.forEach(card => {
                 const categories = card.getAttribute('data-category').split(' ');
 
                 if (filterValue === 'all' || categories.includes(filterValue)) {
@@ -106,6 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
         p1: {
             title: 'Fusion Rush: Gamified Boolean Logic & AI Tutoring',
             type: 'Scopus ICETT 2026 Paper',
+            image: '',
+            videoUrl: '',
             desc: 'AI tutoring software providing gamified learning on the Rules of Inference for Discrete Math. Deployed and tested by students in coordination with CIT-U instructors and accepted at the Scopus-indexed ICETT 2026 Conference.',
             highlights: [
                 'Accepted paper at Scopus-indexed ICETT 2026 Conference.',
@@ -117,6 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
         p2: {
             title: 'Visual AI Logic Proof Parser & Evaluator',
             type: 'PCSC 2026 Davao Presentation',
+            image: '',
+            videoUrl: '',
             desc: 'System using Visual AI to scan, parse, and evaluate validity and scoring of handwritten Discrete Math proofs. Presented at the Philippine Computing Science Congress (PCSC) 2026 in Davao.',
             highlights: [
                 'Presented at PCSC 2026 national conference in Davao.',
@@ -128,101 +174,198 @@ document.addEventListener('DOMContentLoaded', () => {
         p3: {
             title: 'TakeIt — Event Management & Ticketing System',
             type: 'Web Application',
+            image: '',
+            videoUrl: '',
             desc: 'An end-to-end event management and ticketing platform ensuring smooth booking workflows, ticket distribution, and event organizer dashboard management.',
             highlights: [
-                'Interactive event discovery and ticket tier purchasing.',
-                'Organizer portal for attendance tracking and earnings metrics.',
-                'Secure session management and database transactions.'
+                'Complete ticketing checkout flow with digital ticket generation.',
+                'Organizer management dashboard for event metrics & attendee tracking.',
+                'Optimized relational database schema for high event concurrency.'
             ],
             tech: ['React', 'Node.js', 'Database Design', 'Full-Stack']
         },
         p4: {
             title: 'DishCover — Pantry & Inventory Management App',
             type: 'Web / Mobile App',
+            image: '',
+            videoUrl: '',
             desc: 'A smart pantry management app enabling users to track food item expiration dates, manage storage inventory, and minimize household food waste.',
             highlights: [
-                'Expiration date tracking with smart alerts.',
-                'Recipe suggestions based on available pantry items.',
-                'Clean responsive dashboard for kitchen stock.'
+                'Real-time expiration notification logic and category tracking.',
+                'Recipe suggestions based on available pantry ingredients.',
+                'Clean responsive UI for fast mobile item logging.'
             ],
             tech: ['Full-Stack', 'Inventory Logic', 'UI/UX', 'JavaScript']
         },
         p5: {
             title: 'CropConnect — Direct Farmer Fresh Produce E-Commerce',
             type: 'E-Commerce Platform',
+            image: '',
+            videoUrl: '',
             desc: 'A fresh produce e-commerce application bridging local farmers directly with consumers, empowering agricultural communities to list and sell fresh goods transparently.',
             highlights: [
-                'Direct B2C produce catalog for fresh agricultural goods.',
-                'Farmer inventory dashboard and price transparency features.',
-                'Built with Django and Python backend framework.'
+                'Direct farmer-to-consumer marketplace architecture eliminating middlemen fees.',
+                'Order processing, fresh inventory management, and price listings.',
+                'Designed to empower agricultural workers with digital tools.'
             ],
             tech: ['E-Commerce', 'Django / Python', 'Web Tech', 'AgriTech']
         },
         p6: {
             title: 'Bomberman BattleRoyale — Java PvP Game',
             type: 'Java Multiplayer Game',
+            image: '',
+            videoUrl: '',
             desc: 'A multiplayer arcade game in Java featuring real-time socket networking, arena shrinking mechanics, and battle-royale styled player-vs-player combat.',
             highlights: [
-                'Real-time socket server handling concurrent player actions.',
-                'Shrinking safe-zone grid logic and bomb explosion collision physics.',
-                'Modular OOP architecture in pure Java.'
+                'Real-time multi-threaded Java socket client/server networking.',
+                'Grid explosion collision algorithms and power-up spawn engine.',
+                'Shrinking zone logic forcing high-stakes PvP endgame action.'
             ],
             tech: ['Java', 'Socket Networking', 'OOP Architecture', 'Game Loop']
         },
         p7: {
             title: 'E-Tanom — Academic AgriTech Platform',
             type: 'AgriTech Startup Concept',
+            image: '',
+            videoUrl: '',
             desc: 'An academic concept startup designed to assist local agricultural workers in adopting digital market trends and optimizing crop distribution channels.',
             highlights: [
-                'Market trends dashboard for seasonal crop demand.',
-                'Educational resources for local farming techniques.',
-                'High-fidelity UX wireframes and user flow mapping.'
+                'AgriTech startup business model and digital platform prototype.',
+                'Market trends dashboard for seasonal crop yield planning.',
+                'User-friendly interface designed for accessible agricultural adoption.'
             ],
             tech: ['Startup Prototype', 'Web Platform', 'UI Design']
         },
         p8: {
             title: 'Nexchef — Live Step Cooking & Recipe Platform',
             type: 'Interactive Cooking Prototype',
+            image: '',
+            videoUrl: '',
             desc: 'An experimental culinary web application enabling users to share recipes and follow synchronized live step timers for precision home cooking.',
             highlights: [
-                'Live step timer synchronization for multi-stage recipes.',
-                'Community recipe sharing with ingredient scaling logic.',
-                'Minimalist distraction-free cooking mode interface.'
+                'Synchronized multi-timer execution engine for sequential cooking steps.',
+                'Interactive recipe card layout with measurement adjusters.',
+                'Community recipe publishing and rating UI.'
             ],
             tech: ['JavaScript', 'Web Timers', 'UX Design']
+        },
+        p9: {
+            title: 'The Comparison of Aerated and Non-aerated Hydroponics',
+            type: 'Agricultural Research (2021-2022)',
+            image: '',
+            videoUrl: '',
+            desc: 'A comparative research paper evaluating the growth performance of aerated vs non-aerated hydroponics setups on water spinach plants over 30 days.',
+            highlights: [
+                'Facilitated procurement, setup, and daily data collection over 30 days.',
+                'Evaluated dissolved oxygen impact on root development and leaf biomass yield.',
+                'Conducted complete statistical data analysis and conclusions.'
+            ],
+            tech: ['AgriTech Research', 'Data Collection', 'PSHS-CVC', 'Experimental Design']
         }
     };
 
-    document.querySelectorAll('.open-modal-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const projectId = btn.getAttribute('data-project');
-            const data = projectData[projectId];
+    let activeModalProject = null;
 
-            if (data && projectModal) {
-                document.getElementById('modal-project-title').textContent = data.title;
-                document.getElementById('modal-project-type').textContent = data.type;
-                document.getElementById('modal-project-desc').textContent = data.desc;
+    const modalMediaContainer = document.getElementById('modal-project-media');
+    const mediaTabBtns = document.querySelectorAll('.media-tab-btn');
 
-                const highlightsList = document.getElementById('modal-project-highlights');
-                highlightsList.innerHTML = '';
-                data.highlights.forEach(item => {
-                    const li = document.createElement('li');
-                    li.textContent = item;
-                    highlightsList.appendChild(li);
-                });
+    function renderModalMedia(tabType) {
+        if (!activeModalProject || !modalMediaContainer) return;
 
-                const techTagsContainer = document.getElementById('modal-tech-tags');
-                techTagsContainer.innerHTML = '';
-                data.tech.forEach(tech => {
-                    const span = document.createElement('span');
-                    span.className = 'skill-tag';
-                    span.innerHTML = `<span class="tag-dot"></span>${tech}`;
-                    techTagsContainer.appendChild(span);
-                });
-
-                projectModal.showModal();
+        if (tabType === 'screenshot') {
+            if (activeModalProject.image) {
+                modalMediaContainer.innerHTML = `
+                    <div class="modal-media-wrapper">
+                        <img src="${activeModalProject.image}" alt="${activeModalProject.title} Screenshot Preview" class="modal-media-img">
+                    </div>
+                `;
+            } else {
+                modalMediaContainer.innerHTML = `
+                    <div class="empty-media-box" style="min-height: 280px;">
+                        <span>Placeholder</span>
+                    </div>
+                `;
             }
+        } else if (tabType === 'video') {
+            if (activeModalProject.videoUrl) {
+                modalMediaContainer.innerHTML = `
+                    <div class="modal-media-wrapper">
+                        <video controls class="modal-media-video">
+                            <source src="${activeModalProject.videoUrl}">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                `;
+            } else {
+                modalMediaContainer.innerHTML = `
+                    <div class="empty-media-box" style="min-height: 280px;">
+                        <span>Placeholder</span>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    mediaTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            mediaTabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const mediaType = btn.getAttribute('data-media-tab');
+            renderModalMedia(mediaType);
         });
+    });
+
+    // Event delegation for opening project detail modal (.open-modal-btn)
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.open-modal-btn');
+        if (!btn) return;
+
+        const projectId = btn.getAttribute('data-project');
+        const data = projectData[projectId];
+        activeModalProject = data;
+
+        if (data && projectModal) {
+            document.getElementById('modal-project-title').textContent = data.title;
+            document.getElementById('modal-project-type').textContent = data.type;
+            document.getElementById('modal-project-desc').textContent = data.desc;
+
+            // Check if videoUrl is specified for this project
+            const mediaTabGroup = document.getElementById('modal-media-tab-group');
+            if (mediaTabGroup) {
+                if (data.videoUrl && data.videoUrl.trim() !== '') {
+                    mediaTabGroup.style.display = 'flex';
+                } else {
+                    mediaTabGroup.style.display = 'none';
+                }
+            }
+
+            // Reset tabs to screenshot
+            mediaTabBtns.forEach(b => b.classList.remove('active'));
+            const defaultTab = document.querySelector('.media-tab-btn[data-media-tab="screenshot"]');
+            if (defaultTab) defaultTab.classList.add('active');
+
+            // Render media
+            renderModalMedia('screenshot');
+
+            const highlightsList = document.getElementById('modal-project-highlights');
+            highlightsList.innerHTML = '';
+            data.highlights.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                highlightsList.appendChild(li);
+            });
+
+            const techTagsContainer = document.getElementById('modal-tech-tags');
+            techTagsContainer.innerHTML = '';
+            data.tech.forEach(tech => {
+                const span = document.createElement('span');
+                span.className = 'skill-tag';
+                span.innerHTML = `<span class="tag-dot"></span>${tech}`;
+                techTagsContainer.appendChild(span);
+            });
+
+            projectModal.showModal();
+        }
     });
 
     if (closeModalBtn && projectModal) {
@@ -235,10 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (projectModal) {
         projectModal.addEventListener('click', (e) => {
-            const rect = projectModal.getBoundingClientRect();
-            const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
-                rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
-            if (!isInDialog) {
+            if (e.target === projectModal) {
                 projectModal.close();
             }
         });
