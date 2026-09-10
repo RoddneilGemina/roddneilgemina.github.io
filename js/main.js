@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         p6: {
             title: 'Bomberman BattleRoyale — Java PvP Game',
             type: 'Java Multiplayer Game',
-            image: 'images/project-bomberman.svg',
+            image: 'images/bomberman.png',
             videoUrl: '',
             desc: 'A multiplayer arcade game in Java featuring real-time socket networking, arena shrinking mechanics, and battle-royale styled player-vs-player combat.',
             highlights: [
@@ -223,23 +223,10 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             tech: ['Java', 'Socket Networking', 'OOP Architecture', 'Game Loop']
         },
-        p7: {
-            title: 'E-Tanom — Academic AgriTech Platform',
-            type: 'AgriTech Startup Concept',
-            image: 'images/project-etanom.svg',
-            videoUrl: '',
-            desc: 'An academic concept startup designed to assist local agricultural workers in adopting digital market trends and optimizing crop distribution channels.',
-            highlights: [
-                'AgriTech startup business model and digital platform prototype.',
-                'Market trends dashboard for seasonal crop yield planning.',
-                'User-friendly interface designed for accessible agricultural adoption.'
-            ],
-            tech: ['Startup Prototype', 'Web Platform', 'UI Design']
-        },
         p8: {
             title: 'Nexchef — Live Step Cooking & Recipe Platform',
             type: 'Interactive Cooking Prototype',
-            image: 'images/project-nexchef.svg',
+            image: 'images/nexchef.png',
             videoUrl: '',
             desc: 'An experimental culinary web application enabling users to share recipes and follow synchronized live step timers for precision home cooking.',
             highlights: [
