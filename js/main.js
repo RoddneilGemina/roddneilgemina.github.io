@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Fusion Rush: Gamified Boolean Logic & AI Tutoring',
             type: 'Scopus ICETT 2026 Paper',
             image: 'images/fusionrush.jpg',
-            videoUrl: '',
+            videoUrl: 'images/fusion-rush-demo.mp4',
             desc: 'AI tutoring software providing gamified learning on the Rules of Inference for Discrete Math. Deployed and tested by students in coordination with CIT-U instructors and accepted at the Scopus-indexed ICETT 2026 Conference.',
             highlights: [
                 'Accepted paper at Scopus-indexed ICETT 2026 Conference.',

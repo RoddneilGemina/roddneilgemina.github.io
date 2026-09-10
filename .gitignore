@@ -1,5 +1,5 @@
-# Large video files (exceeds GitHub 100MB file limit)
-*.mp4
-*.mov
-*.avi
-*.mkv
+# Exclude original heavy raw video exceeding GitHub 100MB limit
+images/FusionRushDemo.mp4
+
+# Track web-optimized compressed demo video
+!images/fusion-rush-demo.mp4
