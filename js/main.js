@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         p1: {
             title: 'Fusion Rush: Gamified Boolean Logic & AI Tutoring',
             type: 'Scopus ICETT 2026 Paper',
-            image: '',
+            image: 'images/fusionrush.jpg',
             videoUrl: '',
             desc: 'AI tutoring software providing gamified learning on the Rules of Inference for Discrete Math. Deployed and tested by students in coordination with CIT-U instructors and accepted at the Scopus-indexed ICETT 2026 Conference.',
             highlights: [
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         p2: {
             title: 'Visual AI Logic Proof Parser & Evaluator',
             type: 'PCSC 2026 Davao Presentation',
-            image: '',
+            image: 'images/visualai.jpg',
             videoUrl: '',
             desc: 'System using Visual AI to scan, parse, and evaluate validity and scoring of handwritten Discrete Math proofs. Presented at the Philippine Computing Science Congress (PCSC) 2026 in Davao.',
             highlights: [
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         p3: {
             title: 'TakeIt — Event Management & Ticketing System',
             type: 'Web Application',
-            image: '',
+            image: 'images/takeit.png',
             videoUrl: '',
             desc: 'An end-to-end event management and ticketing platform ensuring smooth booking workflows, ticket distribution, and event organizer dashboard management.',
             highlights: [
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         p4: {
             title: 'DishCover — Pantry & Inventory Management App',
             type: 'Web / Mobile App',
-            image: '',
+            image: 'images/dishcover.png',
             videoUrl: '',
             desc: 'A smart pantry management app enabling users to track food item expiration dates, manage storage inventory, and minimize household food waste.',
             highlights: [
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         p5: {
             title: 'CropConnect — Direct Farmer Fresh Produce E-Commerce',
             type: 'E-Commerce Platform',
-            image: '',
+            image: 'images/cropconnect.png',
             videoUrl: '',
             desc: 'A fresh produce e-commerce application bridging local farmers directly with consumers, empowering agricultural communities to list and sell fresh goods transparently.',
             highlights: [
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         p6: {
             title: 'Bomberman BattleRoyale — Java PvP Game',
             type: 'Java Multiplayer Game',
-            image: '',
+            image: 'images/project-bomberman.svg',
             videoUrl: '',
             desc: 'A multiplayer arcade game in Java featuring real-time socket networking, arena shrinking mechanics, and battle-royale styled player-vs-player combat.',
             highlights: [
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         p7: {
             title: 'E-Tanom — Academic AgriTech Platform',
             type: 'AgriTech Startup Concept',
-            image: '',
+            image: 'images/project-etanom.svg',
             videoUrl: '',
             desc: 'An academic concept startup designed to assist local agricultural workers in adopting digital market trends and optimizing crop distribution channels.',
             highlights: [
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
         p8: {
             title: 'Nexchef — Live Step Cooking & Recipe Platform',
             type: 'Interactive Cooking Prototype',
-            image: '',
+            image: 'images/project-nexchef.svg',
             videoUrl: '',
             desc: 'An experimental culinary web application enabling users to share recipes and follow synchronized live step timers for precision home cooking.',
             highlights: [
@@ -248,19 +248,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Community recipe publishing and rating UI.'
             ],
             tech: ['JavaScript', 'Web Timers', 'UX Design']
-        },
-        p9: {
-            title: 'The Comparison of Aerated and Non-aerated Hydroponics',
-            type: 'Agricultural Research (2021-2022)',
-            image: '',
-            videoUrl: '',
-            desc: 'A comparative research paper evaluating the growth performance of aerated vs non-aerated hydroponics setups on water spinach plants over 30 days.',
-            highlights: [
-                'Facilitated procurement, setup, and daily data collection over 30 days.',
-                'Evaluated dissolved oxygen impact on root development and leaf biomass yield.',
-                'Conducted complete statistical data analysis and conclusions.'
-            ],
-            tech: ['AgriTech Research', 'Data Collection', 'PSHS-CVC', 'Experimental Design']
         }
     };
 
