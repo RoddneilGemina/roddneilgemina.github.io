@@ -1172,36 +1172,42 @@ html[data-theme="moonlit"] .wave-wash-back {
 .empty-media-box {
     width: 100%;
     height: 100%;
-    min-height: 240px;
+    min-height: 260px;
     background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: 2px dashed #cbd5e1;
     border-radius: var(--border-radius-md);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #94a3b8;
-    font-weight: 800;
-    font-size: 1.05rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.03);
+    gap: 0.6rem;
+    color: #64748b;
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.02);
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
 }
 
 .empty-media-box span {
-    background: #f8fafc;
-    padding: 0.5rem 1.25rem;
+    background: #f1f5f9;
+    padding: 0.4rem 0.9rem;
     border-radius: var(--border-radius-pill);
-    border: 1px dashed #cbd5e1;
-    color: #64748b;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 html[data-theme="moonlit"] .empty-media-box {
     background: #ffffff;
     color: #475569;
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: #cbd5e1;
 }
 
 /* --------------------------------------------------------------------------
@@ -1476,13 +1482,16 @@ html[data-theme="moonlit"] .empty-media-box {
 
 .modal-media-box {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    min-height: 260px;
     border-radius: var(--border-radius-md);
     overflow: hidden;
-    background: #0f172a;
+    background: #ffffff;
     position: relative;
     border: 1px solid rgba(0, 0, 0, 0.12);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-media-wrapper {
@@ -1949,7 +1958,7 @@ html[data-theme="moonlit"] .dialog-media-section {
     margin: auto;
     background: transparent;
     border: none;
-    max-width: 650px;
+    max-width: 880px;
     width: 92%;
     padding: 0;
     outline: none;
@@ -2015,8 +2024,22 @@ html[data-theme="moonlit"] .dialog-media-section {
 
 .dialog-body {
     padding: 1.5rem;
-    max-height: 70vh;
+    max-height: 75vh;
     overflow-y: auto;
+}
+
+.dialog-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .dialog-grid-layout {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
 }
 
 .dialog-section-heading {

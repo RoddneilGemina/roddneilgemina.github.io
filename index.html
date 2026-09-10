@@ -1118,31 +1118,38 @@
                 <button id="close-modal-btn" class="dialog-close-btn" aria-label="Close dialog">&times;</button>
             </div>
             <div class="dialog-body">
-                <!-- DEMO MEDIA SHOWCASE SECTION -->
-                <div class="dialog-media-section">
-                    <div class="dialog-media-header">
-                        <h4 class="dialog-section-heading" style="margin:0;">Project Showcase</h4>
-                        <div id="modal-media-tab-group" class="media-tab-group">
-                            <button class="media-tab-btn active" data-media-tab="screenshot">📷 Screenshot</button>
-                            <button class="media-tab-btn" data-media-tab="video">🎥 Video Demo</button>
+                <div class="dialog-grid-layout">
+                    <!-- LEFT SIDE: WHITE RECTANGULAR MEDIA PLACEHOLDER BOX -->
+                    <div class="dialog-left-col">
+                        <div class="dialog-media-section">
+                            <div class="dialog-media-header">
+                                <h4 class="dialog-section-heading" style="margin:0;">Media Showcase</h4>
+                                <div id="modal-media-tab-group" class="media-tab-group">
+                                    <button class="media-tab-btn active" data-media-tab="screenshot">📷 Screenshot</button>
+                                    <button class="media-tab-btn" data-media-tab="video">🎥 Video Demo</button>
+                                </div>
+                            </div>
+                            <div id="modal-project-media" class="modal-media-box">
+                                <!-- Dynamic Screenshot Image or Video Player Placeholder -->
+                            </div>
                         </div>
                     </div>
-                    <div id="modal-project-media" class="modal-media-box">
-                        <!-- Dynamic Screenshot Image or Video Player Placeholder -->
+
+                    <!-- RIGHT SIDE: TEXT & DETAILS -->
+                    <div class="dialog-right-col">
+                        <h4 class="dialog-section-heading">Overview</h4>
+                        <p id="modal-project-desc" class="dialog-text">Detailed description will appear here...</p>
+
+                        <h4 class="dialog-section-heading">Key Technical Highlights</h4>
+                        <ul id="modal-project-highlights" class="dialog-list">
+                            <!-- Dynamic List Items -->
+                        </ul>
+
+                        <h4 class="dialog-section-heading">Technology Stack</h4>
+                        <div id="modal-tech-tags" class="skills-tags-container">
+                            <!-- Dynamic Tags -->
+                        </div>
                     </div>
-                </div>
-
-                <h4 class="dialog-section-heading">Overview</h4>
-                <p id="modal-project-desc" class="dialog-text">Detailed description will appear here...</p>
-
-                <h4 class="dialog-section-heading">Key Technical Highlights</h4>
-                <ul id="modal-project-highlights" class="dialog-list">
-                    <!-- Dynamic List Items -->
-                </ul>
-
-                <h4 class="dialog-section-heading">Technology Stack</h4>
-                <div id="modal-tech-tags" class="skills-tags-container">
-                    <!-- Dynamic Tags -->
                 </div>
             </div>
             <div class="dialog-footer">
