@@ -699,7 +699,7 @@ a:hover {
     }
 }
 
-/* INTENSE SHINING GLINT (SLOWED DOWN TO 2.2S, CONFINED STRICTLY TO LETTERS) */
+/* INTENSE SHINING GLINT & WHITE FLASH DIRECTLY ON THE NAME LETTERS */
 .hero-name-shine {
     position: absolute;
     top: 0;
@@ -715,176 +715,80 @@ a:hover {
     line-height: inherit;
     letter-spacing: inherit;
     text-align: center;
-    background: linear-gradient(
-        105deg,
-        transparent 0%,
-        transparent 36%,
-        rgba(0, 240, 255, 0.5) 43%,
-        rgba(255, 255, 255, 0.95) 48%,
-        #ffffff 50%,
-        rgba(255, 255, 255, 0.95) 52%,
-        rgba(0, 240, 255, 0.95) 57%,
-        rgba(167, 139, 250, 0.4) 64%,
-        transparent 72%,
-        transparent 100%
-    );
-    background-size: 300% 100%;
-    background-position: -100% 0;
-    background-repeat: no-repeat;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
     pointer-events: none;
     z-index: 4;
     opacity: 0;
-    filter: drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 22px rgba(0, 240, 255, 1)) drop-shadow(0 0 38px rgba(0, 240, 255, 0.75));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(
+        115deg,
+        transparent 0%,
+        transparent 22%,
+        rgba(0, 240, 255, 0.5) 34%,
+        rgba(255, 255, 255, 0.95) 40%,
+        #ffffff 45%,
+        #ffffff 55%,
+        rgba(255, 255, 255, 0.95) 60%,
+        rgba(0, 240, 255, 0.85) 66%,
+        rgba(167, 139, 250, 0.4) 75%,
+        transparent 85%,
+        transparent 100%
+    );
+    background-size: 260% 100%;
+    background-position: -80% 0;
 }
 
 .hero-name-shine.shining {
     opacity: 1;
-    animation: intenseGlintSweep 2.2s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    animation: intenseGlintSweep 2.2s cubic-bezier(0.22, 0.8, 0.25, 1) forwards;
 }
 
 @keyframes intenseGlintSweep {
     0% {
-        background-position: -100% 0;
+        background-position: -80% 0;
+        background-size: 260% 100%;
         opacity: 0;
-    }
-    12% {
-        opacity: 1;
-    }
-    88% {
-        opacity: 1;
-    }
-    100% {
-        background-position: 200% 0;
-        opacity: 0;
-    }
-}
-
-/* OPTICAL WHITE FLASH FLARE (ON TOP OF GLINT, GROWS IN SIZE THEN SHRINKS) */
-.hero-glint-flare-track {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 0;
-    pointer-events: none;
-    z-index: 10;
-    opacity: 0;
-}
-
-.hero-glint-flare-track.flashing {
-    opacity: 1;
-}
-
-.hero-glint-flare-core {
-    position: absolute;
-    top: 0;
-    left: -5%;
-    transform: translate(-50%, -50%) scale(0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    opacity: 0;
-}
-
-.hero-glint-flare-track.flashing .hero-glint-flare-core {
-    animation: glintFlareSweep 2.2s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-}
-
-@keyframes glintFlareSweep {
-    0% {
-        left: -5%;
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.15);
+        filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px rgba(0, 240, 255, 0.6));
     }
     18% {
-        opacity: 0.9;
-        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 1;
+        /* Glint catches initial letters */
+        filter: drop-shadow(0 0 16px #ffffff) drop-shadow(0 0 35px rgba(0, 240, 255, 0.9));
     }
     48% {
+        /* WHITE FLASH ON THE NAME: GROWS IN SIZE AND RADIANCE DIRECTLY ON THE LETTERS */
+        background-size: 160% 100%;
         opacity: 1;
-        transform: translate(-50%, -50%) scale(2.6);
+        filter: 
+            drop-shadow(0 0 30px #ffffff) 
+            drop-shadow(0 0 60px #ffffff) 
+            drop-shadow(0 0 95px rgba(0, 240, 255, 1)) 
+            drop-shadow(0 0 135px rgba(0, 240, 255, 0.85));
     }
     54% {
+        /* Peak white flash bloom directly over the center of the name */
+        background-size: 160% 100%;
         opacity: 1;
-        transform: translate(-50%, -50%) scale(2.6);
+        filter: 
+            drop-shadow(0 0 30px #ffffff) 
+            drop-shadow(0 0 60px #ffffff) 
+            drop-shadow(0 0 95px rgba(0, 240, 255, 1)) 
+            drop-shadow(0 0 135px rgba(0, 240, 255, 0.85));
     }
     82% {
-        opacity: 0.9;
-        transform: translate(-50%, -50%) scale(0.9);
+        /* WHITE FLASH SHRINKS IN SIZE */
+        background-size: 260% 100%;
+        opacity: 1;
+        filter: drop-shadow(0 0 16px #ffffff) drop-shadow(0 0 35px rgba(0, 240, 255, 0.9));
     }
     100% {
-        left: 105%;
+        background-position: 180% 0;
+        background-size: 260% 100%;
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.15);
+        filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px rgba(0, 240, 255, 0.6));
     }
-}
-
-.flare-radial-burst {
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        #ffffff 0%,
-        #ffffff 22%,
-        rgba(255, 255, 255, 0.95) 38%,
-        rgba(0, 240, 255, 0.9) 55%,
-        rgba(0, 240, 255, 0.3) 75%,
-        transparent 88%
-    );
-    filter: drop-shadow(0 0 16px #ffffff) drop-shadow(0 0 32px #ffffff) drop-shadow(0 0 55px #00F0FF);
-    mix-blend-mode: screen;
-}
-
-.flare-horizontal-streak {
-    position: absolute;
-    width: 340px;
-    height: 4px;
-    border-radius: 50%;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(0, 240, 255, 0.3) 15%,
-        rgba(255, 255, 255, 0.95) 42%,
-        #ffffff 50%,
-        rgba(255, 255, 255, 0.95) 58%,
-        rgba(0, 240, 255, 0.3) 85%,
-        transparent 100%
-    );
-    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 25px #00F0FF);
-    mix-blend-mode: screen;
-}
-
-.flare-vertical-streak {
-    position: absolute;
-    width: 4px;
-    height: 85px;
-    border-radius: 50%;
-    background: linear-gradient(
-        180deg,
-        transparent 0%,
-        rgba(0, 240, 255, 0.4) 20%,
-        #ffffff 50%,
-        rgba(0, 240, 255, 0.4) 80%,
-        transparent 100%
-    );
-    filter: drop-shadow(0 0 10px #ffffff);
-    mix-blend-mode: screen;
-}
-
-.flare-sparkle-cross {
-    position: absolute;
-    width: 52px;
-    height: 52px;
-    background: radial-gradient(circle, #ffffff 45%, rgba(0, 240, 255, 0.85) 70%, transparent 80%);
-    clip-path: polygon(50% 0%, 56% 44%, 100% 50%, 56% 56%, 50% 100%, 44% 56%, 0% 50%, 44% 44%);
-    filter: drop-shadow(0 0 14px #ffffff) drop-shadow(0 0 24px #00F0FF);
-    mix-blend-mode: screen;
 }
 
 .hero-main-role {

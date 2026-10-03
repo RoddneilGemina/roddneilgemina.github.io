@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroNameAura = document.getElementById('hero-name-aura');
     const heroMainName = document.getElementById('hero-main-name');
     const heroNameShine = document.getElementById('hero-name-shine');
-    const heroGlintFlare = document.getElementById('hero-glint-flare');
     const heroMainRole = document.getElementById('hero-main-role');
     const rolePart1 = document.getElementById('role-part1');
     const roleSep = document.getElementById('role-separator');
@@ -56,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroNameContainer.style.opacity = '0';
         heroMainRole.style.opacity = '0';
 
-        // 1. Initial pitch-black pause, then name fades smoothly into the void WITH sweeping glint & optical white flash
+        // 1. Pitch-black void: UPON fading in, glint and white flash sweep strictly ON the name letters
         setTimeout(() => {
             if (introCompleted) return;
             // Name fades in
@@ -64,9 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
             heroNameContainer.style.opacity = '1';
             if (heroNameAura) heroNameAura.classList.add('active');
 
-            // Glint and white flash flare start upon fading in
+            // Glint and white flash sweep directly ON the letters of the name
             if (heroNameShine) heroNameShine.classList.add('shining');
-            if (heroGlintFlare) heroGlintFlare.classList.add('flashing');
         }, 450);
 
         // 2. Subtitle / role enters via typing animation with accurate hero colors from the start
@@ -146,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 heroMainRole.style.transform = '';
                 heroNameContainer.style.zIndex = '';
                 heroMainRole.style.zIndex = '';
-                if (heroGlintFlare) heroGlintFlare.style.display = 'none';
                 if (heroNameShine) heroNameShine.style.display = 'none';
                 document.body.classList.remove('intro-active');
                 introCurtain.style.display = 'none';
