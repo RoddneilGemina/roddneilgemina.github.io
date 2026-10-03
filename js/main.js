@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroNameAura = document.getElementById('hero-name-aura');
     const heroMainName = document.getElementById('hero-main-name');
     const heroNameShine = document.getElementById('hero-name-shine');
+    const heroGlintFlare = document.getElementById('hero-glint-flare');
     const heroMainRole = document.getElementById('hero-main-role');
     const rolePart1 = document.getElementById('role-part1');
     const roleSep = document.getElementById('role-separator');
@@ -55,22 +56,20 @@ document.addEventListener('DOMContentLoaded', () => {
         heroNameContainer.style.opacity = '0';
         heroMainRole.style.opacity = '0';
 
-        // 1. Initial pitch-black pause, then name fades smoothly into the void with subtle backlight
+        // 1. Initial pitch-black pause, then name fades smoothly into the void WITH sweeping glint & optical white flash
         setTimeout(() => {
             if (introCompleted) return;
+            // Name fades in
             heroNameContainer.style.transition = 'opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1)';
             heroNameContainer.style.opacity = '1';
             if (heroNameAura) heroNameAura.classList.add('active');
+
+            // Glint and white flash flare start upon fading in
+            if (heroNameShine) heroNameShine.classList.add('shining');
+            if (heroGlintFlare) heroGlintFlare.classList.add('flashing');
         }, 450);
 
-        // 2. Intense, majestic 2.2s glint sweeps across the letters of the name
-        setTimeout(() => {
-            if (introCompleted) return;
-            if (heroNameShine) heroNameShine.classList.add('shining');
-            playSfx('decipher');
-        }, 1100);
-
-        // 3. Subtitle / role enters via typing animation with accurate hero colors from the start
+        // 2. Subtitle / role enters via typing animation with accurate hero colors from the start
         setTimeout(() => {
             if (introCompleted) return;
             heroMainRole.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
@@ -85,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (rolePart1 && i < part1Text.length) {
                     rolePart1.textContent += part1Text[i];
                     i++;
-                    if (i % 3 === 0) playSfx('click');
                     setTimeout(typePart1, 26);
                 } else {
                     // Show separator '&' in dimmed cyan
@@ -96,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (roleAccent && j < part2Text.length) {
                             roleAccent.textContent += part2Text[j];
                             j++;
-                            if (j % 3 === 0) playSfx('click');
                             setTimeout(typePart2, 26);
                         } else {
                             // Typing complete: hide cursor smoothly
@@ -115,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             typePart1();
-        }, 2200);
+        }, 2400);
 
         function startMoveToRestingPosition() {
             if (introCompleted) return;
@@ -149,6 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 heroMainRole.style.transform = '';
                 heroNameContainer.style.zIndex = '';
                 heroMainRole.style.zIndex = '';
+                if (heroGlintFlare) heroGlintFlare.style.display = 'none';
+                if (heroNameShine) heroNameShine.style.display = 'none';
                 document.body.classList.remove('intro-active');
                 introCurtain.style.display = 'none';
             }, 1450);
