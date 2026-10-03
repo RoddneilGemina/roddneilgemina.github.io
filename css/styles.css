@@ -7,7 +7,14 @@
    - Motion: Smooth ease-in section reveals with staggered child elements & cyber glitch-decipher typing
    ========================================================================== */
 
+@property --border-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
 :root {
+    --border-angle: 0deg;
     /* Cosmic Palette */
     --color-bg: #05070c;
     --color-bg-alt: #080c16;
@@ -235,78 +242,89 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   GLASSMORPHISM & GOOGLE AI STUDIO PROMINENT BACKLIGHT + RGB BORDER UTILITIES
+   PLAIN LIQUID GLASS & SLOWLY MOVING GLOWING RGB BORDER UTILITIES
    -------------------------------------------------------------------------- */
 .glass-card {
-    /* Frosted glass base with reactive mouse cursor spotlight following */
-    background: 
-        radial-gradient(
-            420px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-            rgba(0, 240, 255, 0.18) 0%,
-            rgba(59, 130, 246, 0.14) 25%,
-            rgba(139, 92, 246, 0.09) 50%,
-            transparent 75%
-        ),
-        rgba(10, 16, 30, 0.76);
-    backdrop-filter: blur(28px) saturate(190%) contrast(105%);
-    -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
-    border: 1px solid rgba(255, 255, 255, 0.09);
+    /* Plain liquid glass in resting state: neutral, crystal-clear, zero color tint */
+    background-color: rgba(9, 13, 22, 0.72);
+    background-image: none;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 
-        inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
-        inset 0 0 24px 0 rgba(0, 240, 255, 0.02),
-        0 16px 40px -10px rgba(0, 0, 0, 0.75);
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 12px 32px -4px rgba(0, 0, 0, 0.75);
     border-radius: var(--radius-md);
-    transition: transform var(--transition-norm), box-shadow var(--transition-norm), border-color var(--transition-norm);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
     position: relative;
 }
 
+/* Glow that follows cursor on hover: APPEARS ONLY WHEN HOVERING */
 .glass-card:hover {
     transform: translateY(-4px);
+    background-image: radial-gradient(
+        360px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(0, 240, 255, 0.13) 0%,
+        rgba(59, 130, 246, 0.09) 30%,
+        rgba(139, 92, 246, 0.05) 55%,
+        transparent 75%
+    );
     box-shadow: 
-        inset 0 1px 2px 0 rgba(255, 255, 255, 0.22),
-        0 24px 50px -10px rgba(0, 0, 0, 0.85);
-    border-color: rgba(0, 240, 255, 0.45);
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 22px 48px -8px rgba(0, 0, 0, 0.85);
+    border-color: rgba(0, 240, 255, 0.35);
 }
 
 [data-theme="light"] .glass-card {
-    background: 
-        radial-gradient(
-            420px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-            rgba(59, 130, 246, 0.14) 0%,
-            rgba(139, 92, 246, 0.09) 35%,
-            transparent 70%
-        ),
-        rgba(248, 250, 252, 0.84);
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
-    border: 1px solid rgba(0, 0, 0, 0.09);
+    background-color: rgba(248, 250, 252, 0.82);
+    background-image: none;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: 
         inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
-        0 14px 35px -8px rgba(0, 0, 0, 0.08);
+        0 12px 30px -6px rgba(0, 0, 0, 0.07);
 }
 
-/* Google AI Studio Prominent Backlight & Thicker Border */
+[data-theme="light"] .glass-card:hover {
+    background-image: radial-gradient(
+        360px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(59, 130, 246, 0.12) 0%,
+        rgba(139, 92, 246, 0.07) 35%,
+        transparent 70%
+    );
+}
+
+/* Glowing moving RGB gradient border that slowly moves around the containers */
 .rgb-border {
     position: relative;
     isolation: isolate;
 }
 
-/* Thicker, prominent Google AI Studio perimeter border */
+/* The crisp 1.5px RGB gradient border that slowly moves around the perimeter */
 .rgb-border::before {
     content: '';
     position: absolute;
-    inset: -2px;
+    inset: -1.5px;
     border-radius: inherit;
-    padding: 2.2px;
-    background: var(--google-ai-gradient);
-    background-size: 250% 250%;
-    animation: rgbGlowShift 8s ease infinite;
+    padding: 1.5px;
+    background: conic-gradient(
+        from var(--border-angle, 0deg),
+        #00F0FF 0%,
+        #3B82F6 20%,
+        #8B5CF6 40%,
+        #EC4899 60%,
+        #10B981 80%,
+        #00F0FF 100%
+    );
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    animation: slowMoveBorder 16s linear infinite;
     pointer-events: none;
-    opacity: 0.78;
-    transition: opacity var(--transition-norm);
+    opacity: 0.85;
     z-index: 2;
 }
 
@@ -314,46 +332,47 @@ a:hover {
     opacity: 1;
 }
 
-/* Prominent, thicker Google AI Studio diffuse color backlight underglow */
+/* Glowing halo around the border that slowly moves in lockstep */
 .rgb-border::after {
     content: '';
     position: absolute;
-    inset: -6px;
+    inset: -2px;
     border-radius: inherit;
-    background: 
-        radial-gradient(
-            340px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-            rgba(0, 240, 255, 0.7) 0%,
-            rgba(59, 130, 246, 0.6) 28%,
-            rgba(139, 92, 246, 0.55) 55%,
-            transparent 80%
-        ),
-        var(--google-ai-gradient-glow);
-    background-size: 100% 100%, 250% 250%;
-    animation: rgbGlowShift 8s ease infinite;
-    filter: blur(24px);
-    -webkit-filter: blur(24px);
-    opacity: 0.55;
-    z-index: -1;
+    background: conic-gradient(
+        from var(--border-angle, 0deg),
+        rgba(0, 240, 255, 0.75) 0%,
+        rgba(59, 130, 246, 0.7) 20%,
+        rgba(139, 92, 246, 0.7) 40%,
+        rgba(236, 72, 153, 0.65) 60%,
+        rgba(16, 185, 129, 0.65) 80%,
+        rgba(0, 240, 255, 0.75) 100%
+    );
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    animation: slowMoveBorder 16s linear infinite;
     pointer-events: none;
-    transition: opacity var(--transition-norm), filter var(--transition-norm), transform var(--transition-norm);
+    opacity: 0.52;
+    z-index: -1;
+    transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
 .rgb-border:hover::after {
-    opacity: 0.95;
-    filter: blur(30px);
-    transform: scale(1.025);
+    opacity: 0.92;
+    filter: blur(12px);
 }
 
 [data-theme="light"] .rgb-border::after {
     opacity: 0.35;
-    filter: blur(22px);
+    filter: blur(8px);
 }
 
-@keyframes rgbGlowShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@keyframes slowMoveBorder {
+    0% {
+        --border-angle: 0deg;
+    }
+    100% {
+        --border-angle: 360deg;
+    }
 }
 
 .glass-frame {
@@ -1296,7 +1315,7 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   DUAL MOVING AUTO-SCROLL CAROUSELS FOR PROJECTS
+   DUAL MOVING AUTO-SCROLL CAROUSELS FOR PROJECTS (HIGH PERFORMANCE)
    -------------------------------------------------------------------------- */
 .projects-carousel-container {
     width: 100%;
@@ -1306,8 +1325,29 @@ a:hover {
     flex-direction: column;
     gap: 28px;
     padding: 32px 0 40px;
-    mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+    contain: layout paint;
+}
+
+/* Hardware-accelerated edge fades replacing costly mask-image */
+.projects-carousel-container::before,
+.projects-carousel-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.projects-carousel-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--color-bg) 15%, transparent 100%);
+}
+
+.projects-carousel-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--color-bg) 15%, transparent 100%);
 }
 
 .carousel-track-row {
@@ -1317,6 +1357,7 @@ a:hover {
     user-select: none;
     padding: 16px 0 20px;
     width: 100%;
+    contain: layout;
 }
 
 .carousel-track {
@@ -1325,35 +1366,37 @@ a:hover {
     flex-shrink: 0;
     width: max-content;
     will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
 }
 
 .track-marquee-left {
-    animation: marqueeScrollLeft 50s linear infinite;
+    animation: marqueeScrollLeft 52s linear infinite;
 }
 
 .track-marquee-right {
-    animation: marqueeScrollRight 65s linear infinite;
+    animation: marqueeScrollRight 66s linear infinite;
 }
 
 @keyframes marqueeScrollLeft {
     from {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
     to {
-        transform: translateX(calc(-100% - 24px));
+        transform: translate3d(calc(-50% - 12px), 0, 0);
     }
 }
 
 @keyframes marqueeScrollRight {
     from {
-        transform: translateX(calc(-100% - 24px));
+        transform: translate3d(calc(-50% - 12px), 0, 0);
     }
     to {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
 }
 
-/* CAROUSEL CARDS */
+/* CAROUSEL CARDS: Plain Liquid Glass with High Performance */
 .carousel-card {
     width: 380px;
     flex-shrink: 0;
@@ -1364,13 +1407,17 @@ a:hover {
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    contain: layout style;
     transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .carousel-card:hover {
     z-index: 15;
-    transform: translateY(-6px);
-    border-color: rgba(0, 240, 255, 0.6);
+    transform: translate3d(0, -6px, 0);
+    border-color: rgba(0, 240, 255, 0.5);
     box-shadow: 0 22px 50px -10px rgba(0, 0, 0, 0.85);
 }
 
