@@ -1,11 +1,19 @@
 /**
- * RODDNEIL B. GEMINA — SLEEK GLASS & 3D VIRUS-SPREAD CUBE BACKDROP ENGINE (js/main.js)
+ * RODDNEIL B. GEMINA — DEEP COSMIC BLACK & LUMINOUS CYAN PORTFOLIO ENGINE (js/main.js)
+ * Features:
+ * 1. Web Audio API Synthesized High-Tech SFX
+ * 2. Three.js 3D Cosmic Space with Floating Polyhedrons & Cyan/Violet Ambient Lights
+ * 3. Cyber Glitch-Decipher Typing Effects on Section Headers
+ * 4. Smooth Ease-In Section Reveals with Staggered Child Elements
+ * 5. Full Projects Overlay & Category Filtering (All 10 Projects & Researches)
+ * 6. Interactive Modal with Screenshot/Video Switcher
+ * 7. One-Click Email Clipboard Copy & Theme Mode Wave
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================================================
-    // 1. SYNTHESIZED RETRO/MODERN AUDIO ENGINE (WEB AUDIO API)
+    // 1. SYNTHESIZED WEB AUDIO ENGINE
     // ==========================================================================
     let sfxEnabled = localStorage.getItem('sfx_enabled') !== 'false';
 
@@ -21,93 +29,189 @@ document.addEventListener('DOMContentLoaded', () => {
             gain.connect(ctx.destination);
 
             const now = ctx.currentTime;
-            if (type === 'move') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(300, now);
-                osc.frequency.exponentialRampToValueAtTime(500, now + 0.05);
-                gain.gain.setValueAtTime(0.06, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.05);
+            if (type === 'cyber') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(120, now);
+                osc.frequency.exponentialRampToValueAtTime(740, now + 0.1);
+                gain.gain.setValueAtTime(0.03, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.1);
                 osc.start(now);
-                osc.stop(now + 0.05);
-            } else if (type === 'rotate') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(400, now);
-                osc.frequency.exponentialRampToValueAtTime(700, now + 0.07);
-                gain.gain.setValueAtTime(0.08, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.07);
-                osc.start(now);
-                osc.stop(now + 0.07);
-            } else if (type === 'drop') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(500, now);
-                osc.frequency.linearRampToValueAtTime(150, now + 0.09);
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.09);
-                osc.start(now);
-                osc.stop(now + 0.09);
-            } else if (type === 'clear') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(523.25, now);
-                osc.frequency.setValueAtTime(659.25, now + 0.08);
-                osc.frequency.setValueAtTime(783.99, now + 0.16);
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.25);
-                osc.start(now);
-                osc.stop(now + 0.25);
-            } else if (type === 'virus') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(200, now);
-                osc.frequency.exponentialRampToValueAtTime(900, now + 0.15);
-                gain.gain.setValueAtTime(0.05, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.15);
-                osc.start(now);
-                osc.stop(now + 0.15);
+                osc.stop(now + 0.1);
             } else if (type === 'click') {
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(600, now);
-                gain.gain.setValueAtTime(0.05, now);
+                osc.frequency.setValueAtTime(650, now);
+                gain.gain.setValueAtTime(0.04, now);
                 gain.gain.linearRampToValueAtTime(0, now + 0.04);
                 osc.start(now);
                 osc.stop(now + 0.04);
+            } else if (type === 'decipher') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(800 + Math.random() * 400, now);
+                gain.gain.setValueAtTime(0.015, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.025);
+                osc.start(now);
+                osc.stop(now + 0.025);
             }
         } catch (e) {
             // Audio policy fallback
         }
     }
 
-    document.querySelectorAll('.sleek-btn, .btn, .nav-link, .game-ctrl-btn').forEach(btn => {
+    document.querySelectorAll('.btn, .sleek-btn-sm, .nav-link, .btn-hero-primary, .btn-hero-outline, .btn-hero-ghost, .nav-resume-btn, .pill-card').forEach(btn => {
         btn.addEventListener('click', () => playSfx('click'));
     });
 
     // ==========================================================================
-    // 2. THREE.JS 3D CUBE BACKDROP WITH VIRUS SPREAD WAVE & BOB/TWITCH PHYSICS
+    // 1B. FULLSCREEN CINEMATIC INTRO SEQUENCE CONTROLLER
     // ==========================================================================
-    let threeScene, threeCamera, threeRenderer, cubeMeshArray = [];
+    const introCurtain = document.getElementById('intro-curtain-bg');
+    const heroNameContainer = document.getElementById('hero-name-container');
+    const heroNameAura = document.getElementById('hero-name-aura');
+    const heroMainName = document.getElementById('hero-main-name');
+    const heroNameShine = document.getElementById('hero-name-shine');
+    const heroMainRole = document.getElementById('hero-main-role');
+    const rolePart1 = document.getElementById('role-part1');
+    const roleSep = document.getElementById('role-separator');
+    const roleAccent = document.getElementById('role-accent');
+    const roleCursor = document.getElementById('role-cursor');
+    const heroSection = document.getElementById('hero');
+    const heroContent = document.querySelector('.hero-centered-content');
+
+    let introCompleted = false;
+
+    if (introCurtain && heroNameContainer && heroMainRole) {
+        document.body.classList.add('intro-active');
+        window.scrollTo(0, 0);
+
+        // Calculate offset to place the hero name and role vertically centered in the viewport
+        const nameRect = heroNameContainer.getBoundingClientRect();
+        const viewportCenterY = window.innerHeight / 2;
+        const nameCenterY = nameRect.top + (nameRect.height / 2);
+        const centerOffsetY = Math.round(viewportCenterY - nameCenterY - 18);
+
+        // Position in center of pitch black screen above curtain (z-index: 9995)
+        heroNameContainer.style.zIndex = '9995';
+        heroMainRole.style.zIndex = '9995';
+        heroNameContainer.style.transform = `translate3d(0, ${centerOffsetY}px, 0)`;
+        heroMainRole.style.transform = `translate3d(0, ${centerOffsetY}px, 0)`;
+        heroNameContainer.style.opacity = '0';
+        heroMainRole.style.opacity = '0';
+
+        // 1. Initial pitch-black pause, then name fades smoothly into the void with subtle backlight
+        setTimeout(() => {
+            if (introCompleted) return;
+            heroNameContainer.style.transition = 'opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            heroNameContainer.style.opacity = '1';
+            if (heroNameAura) heroNameAura.classList.add('active');
+        }, 450);
+
+        // 2. Intense, majestic 2.2s glint sweeps across the letters of the name
+        setTimeout(() => {
+            if (introCompleted) return;
+            if (heroNameShine) heroNameShine.classList.add('shining');
+            playSfx('decipher');
+        }, 1100);
+
+        // 3. Subtitle / role enters via typing animation with accurate hero colors from the start
+        setTimeout(() => {
+            if (introCompleted) return;
+            heroMainRole.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            heroMainRole.style.opacity = '1';
+
+            const part1Text = 'Full-Stack Developer';
+            const part2Text = 'Software Engineer';
+            let i = 0;
+
+            function typePart1() {
+                if (introCompleted) return;
+                if (rolePart1 && i < part1Text.length) {
+                    rolePart1.textContent += part1Text[i];
+                    i++;
+                    if (i % 3 === 0) playSfx('click');
+                    setTimeout(typePart1, 26);
+                } else {
+                    // Show separator '&' in dimmed cyan
+                    if (roleSep) roleSep.style.display = 'inline';
+                    let j = 0;
+                    setTimeout(function typePart2() {
+                        if (introCompleted) return;
+                        if (roleAccent && j < part2Text.length) {
+                            roleAccent.textContent += part2Text[j];
+                            j++;
+                            if (j % 3 === 0) playSfx('click');
+                            setTimeout(typePart2, 26);
+                        } else {
+                            // Typing complete: hide cursor smoothly
+                            if (roleCursor) {
+                                roleCursor.style.opacity = '0';
+                                setTimeout(() => { if (roleCursor) roleCursor.style.display = 'none'; }, 300);
+                            }
+
+                            // Pause for reading, then smoothly glide into final resting position
+                            setTimeout(() => {
+                                startMoveToRestingPosition();
+                            }, 550);
+                        }
+                    }, 80);
+                }
+            }
+
+            typePart1();
+        }, 2200);
+
+        function startMoveToRestingPosition() {
+            if (introCompleted) return;
+            introCompleted = true;
+
+            // Glide smoothly from centerOffsetY to 0
+            const glideDuration = 'transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
+            heroNameContainer.style.transition = glideDuration;
+            heroMainRole.style.transition = glideDuration;
+            heroNameContainer.style.transform = 'translate3d(0, 0, 0)';
+            heroMainRole.style.transform = 'translate3d(0, 0, 0)';
+
+            // Obvious slow fade of black curtain to reveal 3D cosmic background
+            introCurtain.style.opacity = '0';
+
+            // Softly fade backlight aura
+            if (heroNameAura) {
+                heroNameAura.style.transition = 'opacity 1.4s ease';
+                heroNameAura.style.opacity = '0';
+            }
+
+            // Stagger in surrounding hero elements (status pill, summary, CTAs)
+            if (heroContent) heroContent.classList.add('hero-entered');
+            if (heroSection) heroSection.classList.add('revealed');
+
+            // Complete transition cleanly with zero blinks or snaps
+            setTimeout(() => {
+                heroNameContainer.style.transition = '';
+                heroMainRole.style.transition = '';
+                heroNameContainer.style.transform = '';
+                heroMainRole.style.transform = '';
+                heroNameContainer.style.zIndex = '';
+                heroMainRole.style.zIndex = '';
+                document.body.classList.remove('intro-active');
+                introCurtain.style.display = 'none';
+            }, 1450);
+        }
+    } else {
+        if (rolePart1) rolePart1.textContent = 'Full-Stack Developer';
+        if (roleSep) roleSep.style.display = 'inline';
+        if (roleAccent) roleAccent.textContent = 'Software Engineer';
+        if (roleCursor) roleCursor.style.display = 'none';
+        if (heroSection) heroSection.classList.add('revealed');
+        if (heroContent) heroContent.classList.add('hero-entered');
+    }
+
+    // ==========================================================================
+    // 2. THREE.JS 3D COSMIC BACKGROUND (POLYHEDRONS & STARDUST PARTICLES)
+    // ==========================================================================
+    let threeScene, threeCamera, threeRenderer;
+    let cosmicMeshArray = [];
+    let starParticles;
     let targetMouseX = 0, targetMouseY = 0, currentMouseX = 0, currentMouseY = 0;
-
-    // Virus Spread Animation State
-    let virusWaveActive = false;
-    let virusWaveProgress = 0;
-    const virusWaveSpeed = 38; // 3D units per second
-    let virusWaveOrigin = { x: 22, y: 18 }; // Origin near top-right screen toggle button
-    let currentThemeMode = localStorage.getItem('portfolio_theme') || 'light';
-
-    // Color definitions for Light & Dark mode 3D Cubes
-    const LIGHT_CUBE_COLORS = [
-        new THREE.Color(0xffffff),
-        new THREE.Color(0xf1f5f9),
-        new THREE.Color(0xe2e8f0),
-        new THREE.Color(0x38bdf8),
-        new THREE.Color(0x818cf8)
-    ];
-
-    const DARK_CUBE_COLORS = [
-        new THREE.Color(0x0f172a),
-        new THREE.Color(0x1e293b),
-        new THREE.Color(0x334155),
-        new THREE.Color(0x0284c7),
-        new THREE.Color(0xf43f5e)
-    ];
+    let currentThemeMode = localStorage.getItem('portfolio_theme') || 'dark';
 
     function init3DBackdrop() {
         const canvas = document.getElementById('canvas-3d-bg');
@@ -115,82 +219,117 @@ document.addEventListener('DOMContentLoaded', () => {
 
         threeScene = new THREE.Scene();
         threeCamera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
-        threeCamera.position.set(0, 0, 32);
+        threeCamera.position.set(0, 0, 35);
 
         threeRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
         threeRenderer.setSize(window.innerWidth, window.innerHeight);
         threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+        // Ambient & Directional Luminous Cyan / Subtle Violet Lights
+        const ambientLight = new THREE.AmbientLight(0x0a0f1d, 1.2);
         threeScene.add(ambientLight);
 
-        const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.9);
-        dirLight1.position.set(25, 40, 35);
-        threeScene.add(dirLight1);
+        const cyanLight = new THREE.PointLight(0x00F0FF, 1.8, 80);
+        cyanLight.position.set(20, 25, 20);
+        threeScene.add(cyanLight);
 
-        const dirLight2 = new THREE.DirectionalLight(0x38bdf8, 0.4);
-        dirLight2.position.set(-25, -20, 25);
-        threeScene.add(dirLight2);
+        const violetLight = new THREE.PointLight(0x8b5cf6, 2.0, 90);
+        violetLight.position.set(-25, -20, 15);
+        threeScene.add(violetLight);
 
-        // Generate Dense 3D Cube Grid / Floating Matrix (~140 Cubes)
-        const boxGeo = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+        // Geometries for cosmic floating elements
+        const boxGeo = new THREE.BoxGeometry(1.4, 1.4, 1.4);
+        const icosaGeo = new THREE.IcosahedronGeometry(1.2, 0);
+        const octaGeo = new THREE.OctahedronGeometry(1.1, 0);
+        const geos = [boxGeo, icosaGeo, octaGeo];
 
-        for (let x = -20; x <= 20; x += 3.2) {
-            for (let y = -14; y <= 14; y += 3.2) {
-                const isDark = (currentThemeMode === 'dark');
-                const palette = isDark ? DARK_CUBE_COLORS : LIGHT_CUBE_COLORS;
-                const baseColor = palette[Math.floor(Math.random() * palette.length)].clone();
+        // Cosmic Palette
+        const DARK_MESH_COLORS = [
+            0x00F0FF, // Cyan
+            0x8b5cf6, // Violet
+            0x0ea5e9, // Sky Blue
+            0x1e293b, // Deep Slate
+            0x334155  // Subtle Slate
+        ];
 
-                const mat = new THREE.MeshStandardMaterial({
-                    color: baseColor,
-                    roughness: 0.2,
-                    metalness: 0.1,
-                    transparent: true,
-                    opacity: 0.88
-                });
+        const LIGHT_MESH_COLORS = [
+            0x0284c7,
+            0x7c3aed,
+            0xe2e8f0,
+            0x38bdf8
+        ];
 
-                const mesh = new THREE.Mesh(boxGeo, mat);
+        const activePalette = (currentThemeMode === 'light') ? LIGHT_MESH_COLORS : DARK_MESH_COLORS;
 
-                // Add random depth offsets
-                const zPos = (Math.random() - 0.5) * 22;
-                mesh.position.set(
-                    x + (Math.random() - 0.5) * 1.2,
-                    y + (Math.random() - 0.5) * 1.2,
-                    zPos
-                );
+        // Generate ~80 Floating Cosmic Meshes with subtle wireframe/edges
+        for (let i = 0; i < 75; i++) {
+            const geo = geos[Math.floor(Math.random() * geos.length)];
+            const colorHex = activePalette[Math.floor(Math.random() * activePalette.length)];
+            
+            const mat = new THREE.MeshStandardMaterial({
+                color: colorHex,
+                roughness: 0.25,
+                metalness: 0.35,
+                transparent: true,
+                opacity: (currentThemeMode === 'light') ? 0.75 : 0.65,
+                wireframe: Math.random() > 0.65
+            });
 
-                mesh.rotation.set(
-                    Math.random() * Math.PI,
-                    Math.random() * Math.PI,
-                    Math.random() * Math.PI
-                );
+            const mesh = new THREE.Mesh(geo, mat);
 
-                mesh.userData = {
-                    baseX: mesh.position.x,
-                    baseY: mesh.position.y,
-                    baseZ: mesh.position.z,
-                    rotSpeedX: (Math.random() - 0.5) * 0.015,
-                    rotSpeedY: (Math.random() - 0.5) * 0.018,
-                    floatSpeed: Math.random() * 0.015 + 0.005,
-                    floatOffset: Math.random() * Math.PI * 2,
-                    isFlipped: false,
-                    targetColor: baseColor.clone(),
-                    twitchTime: 0
-                };
+            mesh.position.set(
+                (Math.random() - 0.5) * 65,
+                (Math.random() - 0.5) * 45,
+                (Math.random() - 0.5) * 35
+            );
 
-                cubeMeshArray.push(mesh);
-                threeScene.add(mesh);
-            }
+            mesh.rotation.set(
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+                Math.random() * Math.PI
+            );
+
+            mesh.userData = {
+                rotSpeedX: (Math.random() - 0.5) * 0.008,
+                rotSpeedY: (Math.random() - 0.5) * 0.01,
+                rotSpeedZ: (Math.random() - 0.5) * 0.006,
+                floatSpeed: Math.random() * 0.015 + 0.005,
+                floatOffset: Math.random() * Math.PI * 2,
+                baseY: mesh.position.y
+            };
+
+            cosmicMeshArray.push(mesh);
+            threeScene.add(mesh);
         }
 
-        // Mouse Move Event Listener for 3D Perspective Tilt
+        // Add Cosmic Stardust Particle Cloud
+        const particleCount = 280;
+        const particleGeo = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 90;
+            positions[i + 1] = (Math.random() - 0.5) * 70;
+            positions[i + 2] = (Math.random() - 0.5) * 50;
+        }
+
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMat = new THREE.PointsMaterial({
+            color: 0x00F0FF,
+            size: 0.6,
+            transparent: true,
+            opacity: 0.45
+        });
+
+        starParticles = new THREE.Points(particleGeo, particleMat);
+        threeScene.add(starParticles);
+
+        // Mouse Parallax Trackers
         window.addEventListener('mousemove', (e) => {
             targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
             targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
         });
 
-        // Touch Tilt Fallback
         window.addEventListener('touchmove', (e) => {
             if (e.touches.length > 0) {
                 targetMouseX = (e.touches[0].clientX / window.innerWidth - 0.5) * 2;
@@ -198,7 +337,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Window Resize
         window.addEventListener('resize', () => {
             threeCamera.aspect = window.innerWidth / window.innerHeight;
             threeCamera.updateProjectionMatrix();
@@ -213,62 +351,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const delta = clock.getDelta();
             const elapsedTime = clock.getElapsedTime();
 
-            // Smooth Interpolation (Lerp) for Camera Mouse Tilt
-            currentMouseX += (targetMouseX - currentMouseX) * 0.05;
-            currentMouseY += (targetMouseY - currentMouseY) * 0.05;
+            // Smooth Mouse Camera Easing
+            currentMouseX += (targetMouseX - currentMouseX) * 0.04;
+            currentMouseY += (targetMouseY - currentMouseY) * 0.04;
 
-            threeCamera.position.x = currentMouseX * 6;
-            threeCamera.position.y = -currentMouseY * 5;
-            threeCamera.rotation.y = -currentMouseX * 0.12;
-            threeCamera.rotation.x = currentMouseY * 0.1;
+            threeCamera.position.x = currentMouseX * 4;
+            threeCamera.position.y = -currentMouseY * 3;
+            threeCamera.lookAt(0, 0, 0);
 
-            // Handle Virus Spreading Wave Animation across 3D Cubes
-            if (virusWaveActive) {
-                virusWaveProgress += delta * virusWaveSpeed;
-
-                let allFinished = true;
-                cubeMeshArray.forEach(cube => {
-                    const dist = Math.hypot(cube.position.x - virusWaveOrigin.x, cube.position.y - virusWaveOrigin.y);
-
-                    if (dist <= virusWaveProgress && !cube.userData.isFlipped) {
-                        cube.userData.isFlipped = true;
-                        cube.userData.twitchTime = 1.0; // Trigger sudden Bob/Twitch excitation!
-                        playSfx('virus');
-                    }
-
-                    if (!cube.userData.isFlipped) {
-                        allFinished = false;
-                    }
-                });
-
-                if (allFinished || virusWaveProgress > 70) {
-                    virusWaveActive = false;
-                }
-            }
-
-            // Animate Individual Cubes (Rotation, Floating, Color Lerp, & Twitch Physics)
-            cubeMeshArray.forEach(cube => {
-                // Continuous Rotation
-                cube.rotation.x += cube.userData.rotSpeedX;
-                cube.rotation.y += cube.userData.rotSpeedY;
-
-                // Color Lerp
-                cube.material.color.lerp(cube.userData.targetColor, 0.1);
-
-                // Twitch / Bob Excitation Damping Physics
-                if (cube.userData.twitchTime > 0) {
-                    cube.userData.twitchTime -= delta * 3.5;
-                    const popVal = Math.sin(Math.max(0, cube.userData.twitchTime) * Math.PI);
-                    const scaleFactor = 1.0 + popVal * 0.5; // Scale up to 1.5x during twitch!
-
-                    cube.scale.set(scaleFactor, scaleFactor, scaleFactor);
-                    cube.position.y = cube.userData.baseY + popVal * 1.8; // Vertical Bob
-                    cube.rotation.z += popVal * 0.2; // Rotational Twitch
-                } else {
-                    cube.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
-                    cube.position.y = cube.userData.baseY + Math.sin(elapsedTime * cube.userData.floatSpeed * 2 + cube.userData.floatOffset) * 0.6;
-                }
+            // Animate Cosmic Meshes
+            cosmicMeshArray.forEach(mesh => {
+                mesh.rotation.x += mesh.userData.rotSpeedX;
+                mesh.rotation.y += mesh.userData.rotSpeedY;
+                mesh.rotation.z += mesh.userData.rotSpeedZ;
+                mesh.position.y = mesh.userData.baseY + Math.sin(elapsedTime * mesh.userData.floatSpeed * 6 + mesh.userData.floatOffset) * 1.2;
             });
+
+            // Rotate star particles slowly
+            if (starParticles) {
+                starParticles.rotation.y = elapsedTime * 0.015;
+            }
 
             threeRenderer.render(threeScene, threeCamera);
         }
@@ -279,330 +381,248 @@ document.addEventListener('DOMContentLoaded', () => {
     init3DBackdrop();
 
     // ==========================================================================
-    // 3. VIRUS SPREAD DARK / LIGHT MODE TOGGLE CONTROLLER
+    // 3. CYBER GLITCH-DECIPHER TYPING EFFECT ON SECTION HEADERS
     // ==========================================================================
-    const themeVirusToggle = document.getElementById('theme-virus-toggle');
-    const htmlElement = document.documentElement;
+    const GLITCH_GLYPHS = '!<>-_\\/[]{}—=+*^?#________01ABCDEF';
 
-    function applyThemeMode(targetMode, triggerVirusSpread = false) {
-        currentThemeMode = targetMode;
-        htmlElement.setAttribute('data-theme', targetMode);
-        localStorage.setItem('portfolio_theme', targetMode);
+    function glitchDecipher(element, targetText, duration = 800) {
+        if (!element || element.dataset.deciphering === 'true') return;
+        element.dataset.deciphering = 'true';
 
-        const themeLabel = themeVirusToggle ? themeVirusToggle.querySelector('.theme-label') : null;
-        if (themeLabel) {
-            themeLabel.textContent = targetMode === 'dark' ? 'Dark Mode' : 'Light Mode';
+        const originalText = targetText || element.getAttribute('data-text') || element.textContent.trim();
+        const totalSteps = 24;
+        const stepInterval = Math.floor(duration / totalSteps);
+        let currentStep = 0;
+
+        const timer = setInterval(() => {
+            currentStep++;
+            const progress = currentStep / totalSteps;
+            const revealedLength = Math.floor(progress * originalText.length);
+
+            let output = '';
+            for (let i = 0; i < originalText.length; i++) {
+                if (i < revealedLength) {
+                    output += `<span class="decipher-char">${originalText[i]}</span>`;
+                } else if (originalText[i] === ' ') {
+                    output += ' ';
+                } else {
+                    const randomGlyph = GLITCH_GLYPHS[Math.floor(Math.random() * GLITCH_GLYPHS.length)];
+                    output += `<span class="decipher-char decipher-scrambled">${randomGlyph}</span>`;
+                }
+            }
+
+            element.innerHTML = output;
+
+            if (currentStep % 4 === 0) {
+                playSfx('decipher');
+            }
+
+            if (currentStep >= totalSteps) {
+                clearInterval(timer);
+                element.textContent = originalText;
+                element.dataset.deciphering = 'false';
+            }
+        }, stepInterval);
+    }
+
+    // Initialize Decipher On Scroll & Hover
+    const glitchElements = document.querySelectorAll('.cyber-glitch-text');
+
+    const glitchObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const text = target.getAttribute('data-text') || target.textContent.trim();
+                glitchDecipher(target, text);
+            }
+        });
+    }, { threshold: 0.4 });
+
+    glitchElements.forEach(el => {
+        glitchObserver.observe(el);
+        el.addEventListener('mouseenter', () => {
+            const text = el.getAttribute('data-text') || el.textContent.trim();
+            glitchDecipher(el, text, 500);
+        });
+    });
+
+    // ==========================================================================
+    // 4. SMOOTH EASE-IN SECTION REVEALS WITH FIRST-TIME SCROLL HIGHLIGHT & GLITCH
+    // ==========================================================================
+    const revealSections = document.querySelectorAll('.reveal-on-scroll');
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const section = entry.target;
+                section.classList.add('revealed');
+
+                // Trigger subtle high-tech decipher audio
+                playSfx('decipher');
+
+                // Trigger cyber glitch-decipher animation on section header if present
+                const glitchHeader = section.querySelector('.cyber-glitch-text');
+                if (glitchHeader) {
+                    const text = glitchHeader.getAttribute('data-text') || glitchHeader.textContent.trim();
+                    glitchDecipher(glitchHeader, text, 450);
+                }
+
+                // First time only - unobserve so the entrance transition highlights once
+                observer.unobserve(section);
+            }
+        });
+    }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealSections.forEach(sec => {
+        // Hero is handled via the intro sequence
+        if (sec.id !== 'hero') {
+            revealObserver.observe(sec);
+        }
+    });
+
+    // ==========================================================================
+    // 5. THEME TOGGLE (COSMIC DARK / LIGHT SLATE)
+    // ==========================================================================
+    const themeToggleBtn = document.getElementById('theme-virus-toggle');
+    const themeRippleOverlay = document.getElementById('theme-ripple-overlay');
+    const htmlElem = document.documentElement;
+
+    function applyTheme(theme) {
+        htmlElem.setAttribute('data-theme', theme);
+        localStorage.setItem('portfolio_theme', theme);
+        currentThemeMode = theme;
+
+        const label = themeToggleBtn ? themeToggleBtn.querySelector('.theme-label') : null;
+        if (label) {
+            label.textContent = (theme === 'dark') ? 'Cosmic Dark' : 'Light Slate';
         }
 
-        if (triggerVirusSpread && cubeMeshArray.length > 0) {
-            virusWaveOrigin = { x: 20, y: 15 }; // Top Right toggle position
-            virusWaveProgress = 0;
-            virusWaveActive = true;
-
-            const isDark = (targetMode === 'dark');
-            const palette = isDark ? DARK_CUBE_COLORS : LIGHT_CUBE_COLORS;
-
-            // Assign new target color to each cube for wave trigger
-            cubeMeshArray.forEach(cube => {
-                cube.userData.isFlipped = false;
-                cube.userData.targetColor = palette[Math.floor(Math.random() * palette.length)].clone();
+        // Update 3D canvas materials if initialized
+        if (cosmicMeshArray.length > 0) {
+            cosmicMeshArray.forEach(mesh => {
+                if (mesh.material) {
+                    mesh.material.opacity = (theme === 'light') ? 0.75 : 0.65;
+                }
             });
         }
     }
 
-    applyThemeMode(currentThemeMode, false);
+    // Set Initial Theme
+    applyTheme(currentThemeMode);
 
-    if (themeVirusToggle) {
-        themeVirusToggle.addEventListener('click', () => {
-            const nextMode = currentThemeMode === 'light' ? 'dark' : 'light';
-            applyThemeMode(nextMode, true);
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', (e) => {
+            playSfx('cyber');
+            const newTheme = (currentThemeMode === 'dark') ? 'light' : 'dark';
+
+            // Circular Wave Ripple Effect
+            if (themeRippleOverlay) {
+                const rect = themeToggleBtn.getBoundingClientRect();
+                const originX = rect.left + rect.width / 2;
+                const originY = rect.top + rect.height / 2;
+
+                themeRippleOverlay.style.background = (newTheme === 'dark')
+                    ? `radial-gradient(circle at ${originX}px ${originY}px, #05070c 0%, rgba(5,7,12,0.95) 70%, transparent 100%)`
+                    : `radial-gradient(circle at ${originX}px ${originY}px, #f8fafc 0%, rgba(248,250,252,0.95) 70%, transparent 100%)`;
+
+                themeRippleOverlay.style.opacity = '1';
+                setTimeout(() => {
+                    applyTheme(newTheme);
+                    setTimeout(() => {
+                        themeRippleOverlay.style.opacity = '0';
+                    }, 200);
+                }, 150);
+            } else {
+                applyTheme(newTheme);
+            }
         });
     }
 
-    // ==========================================================================
-    // 4. INTERACTIVE TETRIS BRICK MINI-GAME WIDGET
-    // ==========================================================================
-    function initBrickGame() {
-        const canvas = document.getElementById('brick-game-canvas');
-        const nextCanvas = document.getElementById('next-piece-canvas');
-        if (!canvas || !nextCanvas) return;
-
-        const ctx = canvas.getContext('2d');
-        const nextCtx = nextCanvas.getContext('2d');
-
-        const COLS = 10, ROWS = 18, BLOCK_SIZE = 20;
-        let board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-
-        let score = 0, lines = 0, level = 1;
-        let autoPlay = true;
-        let dropCounter = 0, dropInterval = 800, lastTime = 0;
-
-        const gameScore = document.getElementById('game-score');
-        const gameLines = document.getElementById('game-lines');
-        const gameLevel = document.getElementById('game-level');
-
-        const SHAPES = [
-            [[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]],
-            [[1, 0, 0], [1, 1, 1]], [[0, 0, 1], [1, 1, 1]],
-            [[0, 1, 1], [1, 0, 0]], [[1, 1, 0], [0, 1, 1]]
-        ];
-
-        const COLORS = ['#38bdf8', '#f43f5e', '#fbbf24', '#34d399', '#c084fc', '#60a5fa', '#f97316'];
-
-        function createPiece() {
-            const id = Math.floor(Math.random() * SHAPES.length);
-            return {
-                shape: SHAPES[id],
-                color: COLORS[id],
-                x: Math.floor((COLS - SHAPES[id][0].length) / 2),
-                y: 0
-            };
-        }
-
-        let playerPiece = createPiece();
-        let nextPiece = createPiece();
-
-        function collide(board, piece) {
-            for (let r = 0; r < piece.shape.length; r++) {
-                for (let c = 0; c < piece.shape[r].length; c++) {
-                    if (piece.shape[r][c] !== 0) {
-                        let newY = piece.y + r;
-                        let newX = piece.x + c;
-                        if (newX < 0 || newX >= COLS || newY >= ROWS || (newY >= 0 && board[newY][newX] !== 0)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        function merge(board, piece) {
-            piece.shape.forEach((row, r) => {
-                row.forEach((val, c) => {
-                    if (val !== 0 && piece.y + r >= 0) {
-                        board[piece.y + r][piece.x + c] = piece.color;
-                    }
-                });
-            });
-        }
-
-        function clearLines() {
-            let cleared = 0;
-            outer: for (let r = ROWS - 1; r >= 0; r--) {
-                for (let c = 0; c < COLS; c++) {
-                    if (board[r][c] === 0) continue outer;
-                }
-                const row = board.splice(r, 1)[0].fill(0);
-                board.unshift(row);
-                cleared++;
-                r++;
-            }
-            if (cleared > 0) {
-                lines += cleared;
-                score += cleared * 100 * level;
-                level = Math.floor(lines / 5) + 1;
-                dropInterval = Math.max(150, 800 - (level - 1) * 70);
-                playSfx('clear');
-                updateGameStats();
-            }
-        }
-
-        function updateGameStats() {
-            if (gameScore) gameScore.textContent = String(score).padStart(4, '0');
-            if (gameLines) gameLines.textContent = lines;
-            if (gameLevel) gameLevel.textContent = level;
-        }
-
-        function playerDrop() {
-            playerPiece.y++;
-            if (collide(board, playerPiece)) {
-                playerPiece.y--;
-                merge(board, playerPiece);
-                clearLines();
-                playerPiece = nextPiece;
-                nextPiece = createPiece();
-                drawNextPiece();
-                if (collide(board, playerPiece)) {
-                    board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-                    score = 0; lines = 0; level = 1;
-                    updateGameStats();
-                }
-            }
-            dropCounter = 0;
-        }
-
-        function playerMove(dir) {
-            playerPiece.x += dir;
-            if (collide(board, playerPiece)) playerPiece.x -= dir;
-            else playSfx('move');
-        }
-
-        function playerRotate() {
-            const matrix = playerPiece.shape;
-            const N = matrix.length, M = matrix[0].length;
-            let rotated = Array.from({ length: M }, () => Array(N).fill(0));
-            for (let r = 0; r < N; r++) {
-                for (let c = 0; c < M; c++) {
-                    rotated[c][N - 1 - r] = matrix[r][c];
-                }
-            }
-            const oldShape = playerPiece.shape;
-            playerPiece.shape = rotated;
-            if (collide(board, playerPiece)) playerPiece.shape = oldShape;
-            else playSfx('rotate');
-        }
-
-        function drawBlock(context, x, y, color, size = BLOCK_SIZE) {
-            context.fillStyle = color;
-            context.fillRect(x * size, y * size, size - 1, size - 1);
-            context.fillStyle = 'rgba(255,255,255,0.3)';
-            context.fillRect(x * size, y * size, size - 1, 2);
-        }
-
-        function draw() {
-            ctx.fillStyle = '#090d16';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            for (let r = 0; r < ROWS; r++) {
-                for (let c = 0; c < COLS; c++) {
-                    if (board[r][c] !== 0) drawBlock(ctx, c, r, board[r][c]);
-                }
-            }
-
-            if (playerPiece) {
-                playerPiece.shape.forEach((row, r) => {
-                    row.forEach((val, c) => {
-                        if (val !== 0) drawBlock(ctx, playerPiece.x + c, playerPiece.y + r, playerPiece.color);
-                    });
-                });
-            }
-        }
-
-        function drawNextPiece() {
-            nextCtx.fillStyle = '#090d16';
-            nextCtx.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
-            if (nextPiece) {
-                const size = 12;
-                const offsetX = (nextCanvas.width - nextPiece.shape[0].length * size) / 2 / size;
-                const offsetY = (nextCanvas.height - nextPiece.shape.length * size) / 2 / size;
-                nextPiece.shape.forEach((row, r) => {
-                    row.forEach((val, c) => {
-                        if (val !== 0) drawBlock(nextCtx, offsetX + c, offsetY + r, nextPiece.color, size);
-                    });
-                });
-            }
-        }
-
-        function runAutoPlay() {
-            if (!autoPlay) return;
-            if (Math.random() < 0.12) {
-                if (Math.random() < 0.5) playerMove(-1);
-                else playerMove(1);
-            }
-            if (Math.random() < 0.06) playerRotate();
-        }
-
-        function update(time = 0) {
-            const deltaTime = time - lastTime;
-            lastTime = time;
-
-            dropCounter += deltaTime;
-            if (dropCounter > dropInterval) {
-                runAutoPlay();
-                playerDrop();
-            }
-
-            draw();
-            requestAnimationFrame(update);
-        }
-
-        drawNextPiece();
-        update();
-
-        const btnLeft = document.getElementById('btn-game-left');
-        const btnRotate = document.getElementById('btn-game-rotate');
-        const btnRight = document.getElementById('btn-game-right');
-        const btnDrop = document.getElementById('btn-game-drop');
-        const btnToggle = document.getElementById('btn-game-toggle');
-
-        if (btnLeft) btnLeft.addEventListener('click', () => { autoPlay = false; playerMove(-1); });
-        if (btnRotate) btnRotate.addEventListener('click', () => { autoPlay = false; playerRotate(); });
-        if (btnRight) btnRight.addEventListener('click', () => { autoPlay = false; playerMove(1); });
-        if (btnDrop) btnDrop.addEventListener('click', () => { autoPlay = false; playSfx('drop'); playerDrop(); });
-        if (btnToggle) btnToggle.addEventListener('click', () => { autoPlay = !autoPlay; btnToggle.textContent = autoPlay ? 'Auto' : 'Manual'; });
-    }
-
-    initBrickGame();
-
-    // ==========================================================================
-    // 5. MOBILE NAVIGATION MENU
-    // ==========================================================================
+    // Mobile Navigation Drawer Toggle
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mainNav = document.getElementById('main-nav');
 
     if (mobileMenuToggle && mainNav) {
-        mobileMenuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = mainNav.classList.toggle('mobile-active');
-            mobileMenuToggle.classList.toggle('active', isOpen);
-            mobileMenuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        mobileMenuToggle.addEventListener('click', () => {
+            const isOpened = mainNav.classList.toggle('active');
+            mobileMenuToggle.setAttribute('aria-expanded', isOpened ? 'true' : 'false');
         });
 
-        document.querySelectorAll('.nav-link').forEach(link => {
+        document.querySelectorAll('.main-nav .nav-link').forEach(link => {
             link.addEventListener('click', () => {
-                mainNav.classList.remove('mobile-active');
-                mobileMenuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
                 mobileMenuToggle.setAttribute('aria-expanded', 'false');
             });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!mainNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
-                mainNav.classList.remove('mobile-active');
-                mobileMenuToggle.classList.remove('active');
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            }
         });
     }
 
     // ==========================================================================
-    // 6. PROJECTS OVERLAY DIALOG & FILTERING
+    // 6. ALL PROJECTS OVERLAY DIALOG & CATEGORY FILTERING
     // ==========================================================================
     const allProjectsDialog = document.getElementById('all-projects-dialog');
     const openAllProjectsBtn = document.getElementById('open-all-projects-btn');
     const closeOverlayBtn = document.getElementById('close-overlay-btn');
     const overlayCloseAction = document.getElementById('overlay-close-action');
 
+    function applyProjectImageOrientations() {
+        document.querySelectorAll('.project-media-img').forEach(img => {
+            const check = () => {
+                if (img.naturalHeight > img.naturalWidth) {
+                    img.classList.add('portrait-img');
+                    img.setAttribute('data-orientation', 'portrait');
+                } else {
+                    img.classList.remove('portrait-img');
+                    img.setAttribute('data-orientation', 'landscape');
+                }
+            };
+            if (img.complete && img.naturalWidth > 0) {
+                check();
+            } else {
+                img.addEventListener('load', check);
+            }
+        });
+    }
+    applyProjectImageOrientations();
+
     if (openAllProjectsBtn && allProjectsDialog) {
         openAllProjectsBtn.addEventListener('click', (e) => {
             e.stopPropagation();
+            applyProjectImageOrientations();
             allProjectsDialog.showModal();
+            playSfx('click');
         });
     }
 
     if (closeOverlayBtn && allProjectsDialog) {
-        closeOverlayBtn.addEventListener('click', () => allProjectsDialog.close());
+        closeOverlayBtn.addEventListener('click', () => {
+            allProjectsDialog.close();
+            playSfx('click');
+        });
     }
 
     if (overlayCloseAction && allProjectsDialog) {
-        overlayCloseAction.addEventListener('click', () => allProjectsDialog.close());
+        overlayCloseAction.addEventListener('click', () => {
+            allProjectsDialog.close();
+            playSfx('click');
+        });
     }
 
     if (allProjectsDialog) {
         allProjectsDialog.addEventListener('click', (e) => {
-            if (e.target === allProjectsDialog) {
-                allProjectsDialog.close();
-            }
+            if (e.target === allProjectsDialog) allProjectsDialog.close();
         });
     }
 
-    // Category filtering
+    // Category Filtering in Overlay
     const overlayFilterButtons = document.querySelectorAll('#all-projects-dialog .filter-btn');
     const overlayProjectCards = document.querySelectorAll('#all-projects-dialog .project-card');
 
     overlayFilterButtons.forEach(button => {
         button.addEventListener('click', () => {
+            playSfx('click');
             overlayFilterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
@@ -620,7 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================================================
-    // 7. PROJECT SPECIFICATION MODAL DIALOG
+    // 7. INTERACTIVE PROJECT DETAIL MODAL DIALOG (WITH MEDIA & VIDEO)
     // ==========================================================================
     const projectModal = document.getElementById('project-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
@@ -631,220 +651,231 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Fusion Rush: Gamified Boolean Logic & AI Tutoring',
             type: 'Scopus ICETT 2026 Paper',
             image: 'images/fusionrush.jpg',
-            videoUrl: 'images/fusion-rush-demo.mp4',
-            desc: 'AI tutoring software providing gamified learning on the Rules of Inference for Discrete Math. Deployed and tested by students in coordination with CIT-U instructors and accepted at the Scopus-indexed ICETT 2026 Conference.',
-            highlights: [
-                'Accepted paper at Scopus-indexed ICETT 2026 Conference.',
-                'Gamified step-by-step logic solver algorithm for propositional calculus.',
-                'Evaluated by Computer Science students and faculty with high usability ratings.'
-            ],
-            tech: ['Python', 'AI Tutoring', 'Discrete Math', 'Scopus ICETT 2026']
+            isPortrait: true
         },
         p2: {
             title: 'Visual AI Logic Proof Parser & Evaluator',
             type: 'PCSC 2026 Davao Presentation',
             image: 'images/visualai.jpg',
-            videoUrl: '',
-            desc: 'System using Visual AI to scan, parse, and evaluate validity and scoring of handwritten Discrete Math proofs. Presented at the Philippine Computing Science Congress (PCSC) 2026 in Davao.',
-            highlights: [
-                'Presented at PCSC 2026 national conference in Davao.',
-                'Visual AI OCR engine trained to read handwritten logical symbols and line proofs.',
-                'Automated step validation verifying rule application correctness.'
-            ],
-            tech: ['Visual AI', 'OCR Parsing', 'Logic Verification', 'PCSC 2026']
+            isPortrait: true
         },
         p3: {
             title: 'TakeIt — Event Management & Ticketing System',
-            type: 'Web Application',
+            type: 'Freelance Web App',
             image: 'images/takeit.png',
-            videoUrl: '',
-            desc: 'An end-to-end event management and ticketing platform ensuring smooth booking workflows, ticket distribution, and event organizer dashboard management.',
-            highlights: [
-                'Complete ticketing checkout flow with digital ticket generation.',
-                'Organizer management dashboard for event metrics & attendee tracking.',
-                'Optimized relational database schema for high event concurrency.'
-            ],
-            tech: ['React', 'Node.js', 'Database Design', 'Full-Stack']
+            isPortrait: true
         },
         p4: {
             title: 'DishCover — Pantry & Inventory Management App',
             type: 'Web / Mobile App',
             image: 'images/dishcover.png',
-            videoUrl: '',
-            desc: 'A smart pantry management app enabling users to track food item expiration dates, manage storage inventory, and minimize household food waste.',
-            highlights: [
-                'Real-time expiration notification logic and category tracking.',
-                'Recipe suggestions based on available pantry ingredients.',
-                'Clean responsive UI for fast mobile item logging.'
-            ],
-            tech: ['Full-Stack', 'Inventory Logic', 'UI/UX', 'JavaScript']
+            isPortrait: true
         },
         p5: {
             title: 'CropConnect — Direct Farmer Fresh Produce E-Commerce',
             type: 'E-Commerce Platform',
             image: 'images/cropconnect.png',
-            videoUrl: '',
-            desc: 'A fresh produce e-commerce application bridging local farmers directly with consumers, empowering agricultural communities to list and sell fresh goods transparently.',
-            highlights: [
-                'Direct farmer-to-consumer marketplace architecture eliminating middlemen fees.',
-                'Order processing, fresh inventory management, and price listings.',
-                'Designed to empower agricultural workers with digital tools.'
-            ],
-            tech: ['E-Commerce', 'Django / Python', 'Web Tech', 'AgriTech']
+            isPortrait: true
         },
         p6: {
             title: 'Bomberman BattleRoyale — Java PvP Game',
             type: 'Java Multiplayer Game',
             image: 'images/bomberman.png',
-            videoUrl: '',
-            desc: 'A multiplayer arcade game in Java featuring real-time socket networking, arena shrinking mechanics, and battle-royale styled player-vs-player combat.',
-            highlights: [
-                'Real-time multi-threaded Java socket client/server networking.',
-                'Grid explosion collision algorithms and power-up spawn engine.',
-                'Shrinking zone logic forcing high-stakes PvP endgame action.'
-            ],
-            tech: ['Java', 'Socket Networking', 'OOP Architecture', 'Game Loop']
+            isPortrait: false
         },
         p8: {
             title: 'Nexchef — Live Step Cooking & Recipe Platform',
-            type: 'Interactive Cooking Prototype',
+            type: 'Freelance Mobile App',
             image: 'images/nexchef.png',
-            videoUrl: '',
-            desc: 'An experimental culinary web application enabling users to share recipes and follow synchronized live step timers for precision home cooking.',
-            highlights: [
-                'Synchronized multi-timer execution engine for sequential cooking steps.',
-                'Interactive recipe card layout with measurement adjusters.',
-                'Community recipe publishing and rating UI.'
-            ],
-            tech: ['JavaScript', 'Web Timers', 'UX Design']
+            isPortrait: true
+        },
+        p9: {
+            title: 'Refertoire — Ensemble Sheet Music Repertoire Manager',
+            type: 'Freelance Offline-First App',
+            image: 'images/refertoire.jpg',
+            isPortrait: false
         }
     };
 
     let activeModalProject = null;
     const modalMediaContainer = document.getElementById('modal-project-media');
-    const mediaTabBtns = document.querySelectorAll('.media-tab-btn');
 
-    function renderModalMedia(tabType) {
-        if (!activeModalProject || !modalMediaContainer) return;
-
-        if (tabType === 'screenshot') {
-            if (activeModalProject.image) {
-                modalMediaContainer.innerHTML = `
-                    <div class="modal-media-wrapper">
-                        <img src="${activeModalProject.image}" alt="${activeModalProject.title} Screenshot Preview" class="modal-media-img">
-                    </div>
-                `;
-            } else {
-                modalMediaContainer.innerHTML = `
-                    <div class="empty-media-box">
-                        <span>Media Area Placeholder</span>
-                    </div>
-                `;
-            }
-        } else if (tabType === 'video') {
-            if (activeModalProject.videoUrl) {
-                modalMediaContainer.innerHTML = `
-                    <div class="modal-media-wrapper">
-                        <video controls class="modal-media-video">
-                            <source src="${activeModalProject.videoUrl}">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                `;
-            } else {
-                modalMediaContainer.innerHTML = `
-                    <div class="empty-media-box">
-                        <span>Video Demo Placeholder</span>
-                    </div>
-                `;
-            }
-        }
-    }
-
-    mediaTabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            mediaTabBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const mediaType = btn.getAttribute('data-media-tab');
-            renderModalMedia(mediaType);
-        });
-    });
-
-    document.addEventListener('click', (e) => {
-        const btn = e.target.closest('.open-modal-btn');
-        if (!btn) return;
-
-        const projectId = btn.getAttribute('data-project');
+    function openProjectModal(projectId) {
         const data = projectData[projectId];
+        if (!data || !projectModal) return;
+
         activeModalProject = data;
 
-        if (data && projectModal) {
-            document.getElementById('modal-project-title').textContent = data.title;
-            document.getElementById('modal-project-type').textContent = data.type;
-            document.getElementById('modal-project-desc').textContent = data.desc;
+        const typeBadge = document.getElementById('modal-project-type');
+        const titleHeading = document.getElementById('modal-project-title');
+        if (typeBadge) typeBadge.textContent = data.type;
+        if (titleHeading) titleHeading.textContent = data.title;
 
-            const mediaTabGroup = document.getElementById('modal-media-tab-group');
-            if (mediaTabGroup) {
-                mediaTabGroup.style.display = (data.videoUrl && data.videoUrl.trim() !== '') ? 'flex' : 'none';
+        if (modalMediaContainer && data.image) {
+            const isPortrait = data.isPortrait === true;
+            modalMediaContainer.innerHTML = `
+                <img src="${data.image}" 
+                     alt="${data.title} Screenshot" 
+                     class="modal-screenshot-img ${isPortrait ? 'portrait-screenshot' : 'landscape-screenshot'}" 
+                     data-orientation="${isPortrait ? 'portrait' : 'landscape'}">
+            `;
+
+            const img = modalMediaContainer.querySelector('img');
+            if (img) {
+                img.onload = () => {
+                    if (img.naturalHeight > img.naturalWidth) {
+                        img.classList.remove('landscape-screenshot');
+                        img.classList.add('portrait-screenshot');
+                        img.setAttribute('data-orientation', 'portrait');
+                    } else {
+                        img.classList.remove('portrait-screenshot');
+                        img.classList.add('landscape-screenshot');
+                        img.setAttribute('data-orientation', 'landscape');
+                    }
+                };
             }
-
-            mediaTabBtns.forEach(b => b.classList.remove('active'));
-            const defaultTab = document.querySelector('.media-tab-btn[data-media-tab="screenshot"]');
-            if (defaultTab) defaultTab.classList.add('active');
-
-            renderModalMedia('screenshot');
-
-            const highlightsList = document.getElementById('modal-project-highlights');
-            highlightsList.innerHTML = '';
-            data.highlights.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                highlightsList.appendChild(li);
-            });
-
-            const techTagsContainer = document.getElementById('modal-tech-tags');
-            techTagsContainer.innerHTML = '';
-            data.tech.forEach(tech => {
-                const span = document.createElement('span');
-                span.className = 'skill-tag glass-tag';
-                span.innerHTML = `<span class="tag-dot"></span>${tech}`;
-                techTagsContainer.appendChild(span);
-            });
-
-            projectModal.showModal();
         }
-    });
 
-    if (closeModalBtn && projectModal) closeModalBtn.addEventListener('click', () => projectModal.close());
-    if (modalCloseAction && projectModal) modalCloseAction.addEventListener('click', () => projectModal.close());
+        projectModal.showModal();
+        playSfx('cyber');
+    }
+
+    if (closeModalBtn && projectModal) {
+        closeModalBtn.addEventListener('click', () => {
+            projectModal.close();
+            playSfx('click');
+        });
+    }
+
+    if (modalCloseAction && projectModal) {
+        modalCloseAction.addEventListener('click', () => {
+            projectModal.close();
+            playSfx('click');
+        });
+    }
+
     if (projectModal) {
         projectModal.addEventListener('click', (e) => {
-            if (e.target === projectModal) projectModal.close();
+            if (e.target === projectModal) {
+                projectModal.close();
+                playSfx('click');
+            }
         });
     }
 
     // ==========================================================================
-    // 8. EMAIL COPY TO CLIPBOARD
+    // 8. ONE-CLICK EMAIL COPY & TOOLTIP
     // ==========================================================================
     const copyEmailBtn = document.getElementById('copy-email-btn');
+    const copyBtnText = document.getElementById('copy-btn-text');
+
     if (copyEmailBtn) {
         copyEmailBtn.addEventListener('click', () => {
+            playSfx('click');
             const email = 'roddneilgemina@gmail.com';
             navigator.clipboard.writeText(email).then(() => {
-                const span = copyEmailBtn.querySelector('span');
-                const originalText = span.textContent;
-                span.textContent = 'Copied!';
-                copyEmailBtn.style.backgroundColor = 'var(--accent-pink)';
-                copyEmailBtn.style.color = '#ffffff';
-                playSfx('clear');
-                setTimeout(() => {
-                    span.textContent = originalText;
-                    copyEmailBtn.style.backgroundColor = '';
-                    copyEmailBtn.style.color = '';
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy email: ', err);
+                if (copyBtnText) {
+                    copyBtnText.textContent = 'Copied!';
+                    copyEmailBtn.style.borderColor = 'var(--color-cyan)';
+                    copyEmailBtn.style.color = 'var(--color-cyan)';
+                    setTimeout(() => {
+                        copyBtnText.textContent = 'Copy';
+                        copyEmailBtn.style.borderColor = '';
+                        copyEmailBtn.style.color = '';
+                    }, 2200);
+                }
+            }).catch(() => {
+                // Fallback prompt
+                prompt('Copy this email:', email);
             });
         });
     }
+
+    // Dynamic Current Year in Footer
+    const yearSpan = document.getElementById('current-year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // ==========================================================================
+    // 9. SECTION TRACKER (RIGHT-SIDE BLUE/CYAN BOOKMARKS)
+    // ==========================================================================
+    const trackerDots = document.querySelectorAll('.tracker-dot');
+    const trackedSections = [
+        document.getElementById('hero'),
+        document.getElementById('projects'),
+        document.getElementById('expertise'),
+        document.getElementById('experience'),
+        document.getElementById('research'),
+        document.getElementById('volunteering'),
+        document.getElementById('contact')
+    ].filter(Boolean);
+
+    function updateActiveSectionMarker() {
+        const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+        let currentSectionId = '';
+
+        trackedSections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+
+        // Fallback for very bottom of the page
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 60) {
+            currentSectionId = 'contact';
+        } else if (!currentSectionId && window.scrollY < 300) {
+            currentSectionId = 'hero';
+        }
+
+        if (currentSectionId) {
+            trackerDots.forEach(dot => {
+                if (dot.getAttribute('data-section') === currentSectionId) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+    }
+
+    window.addEventListener('scroll', updateActiveSectionMarker, { passive: true });
+    updateActiveSectionMarker();
+
+    // Smooth scroll and sound on tracker dot click
+    trackerDots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            playSfx('click');
+            const targetId = dot.getAttribute('data-section');
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth' });
+                trackerDots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+            }
+        });
+    });
+
+    // ==========================================================================
+    // 10. PROJECT CAROUSEL MODAL CLICK & ACCESSIBILITY
+    // ==========================================================================
+    document.querySelectorAll('.open-modal-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const pId = btn.getAttribute('data-project');
+            openProjectModal(pId);
+        });
+
+        btn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const pId = btn.getAttribute('data-project');
+                openProjectModal(pId);
+            }
+        });
+    });
+
 });
