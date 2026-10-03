@@ -45,9 +45,18 @@
     --glass-border-subtle: 1px solid rgba(255, 255, 255, 0.06);
 
     --glass-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.75), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-    --glass-shadow-hover: 0 24px 50px -10px rgba(0, 240, 255, 0.18), 0 0 30px -5px rgba(139, 92, 246, 0.25), inset 0 0 0 1px rgba(0, 240, 255, 0.4);
+    --glass-shadow-hover: 0 24px 50px -10px rgba(0, 240, 255, 0.22), 0 0 35px -5px rgba(139, 92, 246, 0.3), inset 0 0 0 1px rgba(0, 240, 255, 0.45);
 
-    --rgb-gradient: linear-gradient(135deg, rgba(0, 240, 255, 0.65) 0%, rgba(139, 92, 246, 0.5) 45%, rgba(236, 72, 153, 0.4) 75%, rgba(0, 240, 255, 0.65) 100%);
+    /* Google AI Studio Signature Color Backlight Palette */
+    --google-ai-blue: #3b82f6;
+    --google-ai-indigo: #6366f1;
+    --google-ai-cyan: #00F0FF;
+    --google-ai-violet: #8b5cf6;
+    --google-ai-magenta: #d946ef;
+
+    --google-ai-gradient: linear-gradient(135deg, #00F0FF 0%, #3b82f6 28%, #8b5cf6 65%, #d946ef 100%);
+    --google-ai-gradient-glow: linear-gradient(135deg, rgba(0, 240, 255, 0.55) 0%, rgba(59, 130, 246, 0.48) 28%, rgba(139, 92, 246, 0.52) 65%, rgba(217, 70, 239, 0.42) 100%);
+    --rgb-gradient: var(--google-ai-gradient);
     --cyan-violet-gradient: linear-gradient(135deg, #00F0FF 0%, #6366f1 100%);
 
     /* Typography Families */
@@ -226,49 +235,119 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   GLASSMORPHISM & RGB GRADIENT BORDER UTILITIES
+   GLASSMORPHISM & GOOGLE AI STUDIO PROMINENT BACKLIGHT + RGB BORDER UTILITIES
    -------------------------------------------------------------------------- */
 .glass-card {
-    background: var(--color-bg-card);
-    backdrop-filter: var(--glass-blur-md);
-    -webkit-backdrop-filter: var(--glass-blur-md);
-    border: 1px solid var(--glass-border-color);
-    box-shadow: var(--glass-shadow);
+    /* Frosted glass base with reactive mouse cursor spotlight following */
+    background: 
+        radial-gradient(
+            420px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+            rgba(0, 240, 255, 0.18) 0%,
+            rgba(59, 130, 246, 0.14) 25%,
+            rgba(139, 92, 246, 0.09) 50%,
+            transparent 75%
+        ),
+        rgba(10, 16, 30, 0.76);
+    backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 0 24px 0 rgba(0, 240, 255, 0.02),
+        0 16px 40px -10px rgba(0, 0, 0, 0.75);
     border-radius: var(--radius-md);
-    transition: transform var(--transition-norm), box-shadow var(--transition-norm), border-color var(--transition-norm), background var(--transition-norm);
+    transition: transform var(--transition-norm), box-shadow var(--transition-norm), border-color var(--transition-norm);
     position: relative;
 }
 
 .glass-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--glass-shadow-hover);
-    border-color: rgba(0, 240, 255, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 
+        inset 0 1px 2px 0 rgba(255, 255, 255, 0.22),
+        0 24px 50px -10px rgba(0, 0, 0, 0.85);
+    border-color: rgba(0, 240, 255, 0.45);
 }
 
-/* RGB Gradient Border */
+[data-theme="light"] .glass-card {
+    background: 
+        radial-gradient(
+            420px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+            rgba(59, 130, 246, 0.14) 0%,
+            rgba(139, 92, 246, 0.09) 35%,
+            transparent 70%
+        ),
+        rgba(248, 250, 252, 0.84);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    box-shadow: 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
+        0 14px 35px -8px rgba(0, 0, 0, 0.08);
+}
+
+/* Google AI Studio Prominent Backlight & Thicker Border */
 .rgb-border {
     position: relative;
+    isolation: isolate;
 }
 
+/* Thicker, prominent Google AI Studio perimeter border */
 .rgb-border::before {
     content: '';
     position: absolute;
-    inset: -1px;
+    inset: -2px;
     border-radius: inherit;
-    padding: 1px;
-    background: var(--rgb-gradient);
-    background-size: 300% 300%;
+    padding: 2.2px;
+    background: var(--google-ai-gradient);
+    background-size: 250% 250%;
     animation: rgbGlowShift 8s ease infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
-    opacity: 0.65;
+    opacity: 0.78;
     transition: opacity var(--transition-norm);
+    z-index: 2;
 }
 
 .rgb-border:hover::before {
     opacity: 1;
+}
+
+/* Prominent, thicker Google AI Studio diffuse color backlight underglow */
+.rgb-border::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: inherit;
+    background: 
+        radial-gradient(
+            340px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(0, 240, 255, 0.7) 0%,
+            rgba(59, 130, 246, 0.6) 28%,
+            rgba(139, 92, 246, 0.55) 55%,
+            transparent 80%
+        ),
+        var(--google-ai-gradient-glow);
+    background-size: 100% 100%, 250% 250%;
+    animation: rgbGlowShift 8s ease infinite;
+    filter: blur(24px);
+    -webkit-filter: blur(24px);
+    opacity: 0.55;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity var(--transition-norm), filter var(--transition-norm), transform var(--transition-norm);
+}
+
+.rgb-border:hover::after {
+    opacity: 0.95;
+    filter: blur(30px);
+    transform: scale(1.025);
+}
+
+[data-theme="light"] .rgb-border::after {
+    opacity: 0.35;
+    filter: blur(22px);
 }
 
 @keyframes rgbGlowShift {
@@ -831,23 +910,40 @@ a:hover {
 }
 
 .pill-card {
-    padding: 6px 14px;
+    padding: 7px 16px;
     border-radius: var(--radius-sm);
-    background: rgba(10, 15, 28, 0.65);
-    border: 1px solid rgba(0, 240, 255, 0.2);
+    background: 
+        radial-gradient(
+            180px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+            rgba(0, 240, 255, 0.22) 0%,
+            rgba(59, 130, 246, 0.16) 35%,
+            transparent 75%
+        ),
+        rgba(10, 16, 30, 0.75);
+    border: 1.5px solid rgba(0, 240, 255, 0.28);
     font-family: var(--font-mono);
     font-size: 0.78rem;
     font-weight: 600;
     color: var(--color-cyan);
     letter-spacing: 0.02em;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.14),
+        0 4px 16px rgba(0, 0, 0, 0.5);
     transition: all var(--transition-fast);
+    position: relative;
+    cursor: default;
 }
 
 .pill-card:hover {
     border-color: var(--color-cyan);
-    box-shadow: 0 0 14px var(--color-cyan-glow);
-    transform: translateY(-1px);
+    color: #fff;
+    box-shadow: 
+        0 0 24px rgba(0, 240, 255, 0.45),
+        0 0 40px rgba(139, 92, 246, 0.3),
+        inset 0 0 14px rgba(0, 240, 255, 0.25);
+    transform: translateY(-2px);
 }
 
 /* --------------------------------------------------------------------------
@@ -954,11 +1050,20 @@ a:hover {
     letter-spacing: -0.01em;
     position: relative;
     display: inline-block;
+    white-space: pre-wrap;
+    word-break: keep-all;
 }
 
 .cyber-glitch-text .decipher-char {
     display: inline-block;
+    white-space: pre;
     transition: color 0.1s ease;
+}
+
+.cyber-glitch-text .decipher-char.decipher-space {
+    display: inline-block;
+    width: 0.35em;
+    min-width: 0.35em;
 }
 
 .cyber-glitch-text .decipher-scrambled {
@@ -1264,9 +1369,9 @@ a:hover {
 
 .carousel-card:hover {
     z-index: 15;
-    transform: translateY(-5px);
-    border-color: var(--color-cyan);
-    box-shadow: 0 12px 30px rgba(0, 240, 255, 0.25), inset 0 0 0 1px var(--color-cyan);
+    transform: translateY(-6px);
+    border-color: rgba(0, 240, 255, 0.6);
+    box-shadow: 0 22px 50px -10px rgba(0, 0, 0, 0.85);
 }
 
 .carousel-media-box {
@@ -1275,7 +1380,8 @@ a:hover {
     overflow: hidden;
     aspect-ratio: 16 / 9;
     background: #020408;
-    border: 1px solid var(--glass-border-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 8px 24px -4px rgba(0, 0, 0, 0.6);
     margin-bottom: 14px;
 }
 
@@ -2119,14 +2225,21 @@ dialog::backdrop {
     width: auto;
     max-width: 90vw;
     max-height: 90vh;
-    background: rgba(9, 14, 26, 0.96);
-    border: 1px solid rgba(0, 240, 255, 0.35);
-    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 240, 255, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    background: rgba(9, 14, 26, 0.88);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1.5px solid rgba(0, 240, 255, 0.45);
+    box-shadow: 
+        0 30px 90px rgba(0, 0, 0, 0.95), 
+        0 0 50px -10px rgba(0, 240, 255, 0.35), 
+        0 0 75px -15px rgba(139, 92, 246, 0.3), 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-lg);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     margin: auto;
+    position: relative;
 }
 
 .modal-screenshot-header {

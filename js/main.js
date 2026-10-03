@@ -13,53 +13,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================================================
-    // 1. SYNTHESIZED WEB AUDIO ENGINE
+    // 1. SOUND EFFECTS DISABLED (Per user preference)
     // ==========================================================================
-    let sfxEnabled = localStorage.getItem('sfx_enabled') !== 'false';
-
-    function playSfx(type) {
-        if (!sfxEnabled) return;
-        try {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            if (!AudioCtx) return;
-            const ctx = new AudioCtx();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-
-            const now = ctx.currentTime;
-            if (type === 'cyber') {
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(120, now);
-                osc.frequency.exponentialRampToValueAtTime(740, now + 0.1);
-                gain.gain.setValueAtTime(0.03, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.1);
-                osc.start(now);
-                osc.stop(now + 0.1);
-            } else if (type === 'click') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(650, now);
-                gain.gain.setValueAtTime(0.04, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.04);
-                osc.start(now);
-                osc.stop(now + 0.04);
-            } else if (type === 'decipher') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(800 + Math.random() * 400, now);
-                gain.gain.setValueAtTime(0.015, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.025);
-                osc.start(now);
-                osc.stop(now + 0.025);
-            }
-        } catch (e) {
-            // Audio policy fallback
-        }
+    function playSfx() {
+        // Audio permanently disabled
     }
-
-    document.querySelectorAll('.btn, .sleek-btn-sm, .nav-link, .btn-hero-primary, .btn-hero-outline, .btn-hero-ghost, .nav-resume-btn, .pill-card').forEach(btn => {
-        btn.addEventListener('click', () => playSfx('click'));
-    });
 
     // ==========================================================================
     // 1B. FULLSCREEN CINEMATIC INTRO SEQUENCE CONTROLLER
@@ -383,15 +341,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 3. CYBER GLITCH-DECIPHER TYPING EFFECT ON SECTION HEADERS
     // ==========================================================================
-    const GLITCH_GLYPHS = '!<>-_\\/[]{}—=+*^?#________01ABCDEF';
+    const GLITCH_GLYPHS = '0123456789ABCDEF$#@%&*+-/<>~!?';
 
-    function glitchDecipher(element, targetText, duration = 800) {
+    function glitchDecipher(element, targetText, duration = 650) {
         if (!element || element.dataset.deciphering === 'true') return;
         element.dataset.deciphering = 'true';
 
-        const originalText = targetText || element.getAttribute('data-text') || element.textContent.trim();
-        const totalSteps = 24;
-        const stepInterval = Math.floor(duration / totalSteps);
+        // Clean raw HTML entities if present in attributes so characters align 1:1
+        const rawText = targetText || element.getAttribute('data-text') || element.textContent;
+        const originalText = rawText.replace(/&amp;/g, '&').trim();
+        const totalSteps = 22;
+        const stepInterval = Math.max(16, Math.floor(duration / totalSteps));
         let currentStep = 0;
 
         const timer = setInterval(() => {
@@ -401,10 +361,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let output = '';
             for (let i = 0; i < originalText.length; i++) {
-                if (i < revealedLength) {
-                    output += `<span class="decipher-char">${originalText[i]}</span>`;
-                } else if (originalText[i] === ' ') {
-                    output += ' ';
+                const char = originalText[i];
+                // CRITICAL: Whitespace is ALWAYS preserved as a non-collapsing space
+                // so text never gets compressed or snaps layout during glitching
+                if (char === ' ') {
+                    output += '<span class="decipher-char decipher-space">&nbsp;</span>';
+                } else if (i < revealedLength) {
+                    output += `<span class="decipher-char">${char}</span>`;
                 } else {
                     const randomGlyph = GLITCH_GLYPHS[Math.floor(Math.random() * GLITCH_GLYPHS.length)];
                     output += `<span class="decipher-char decipher-scrambled">${randomGlyph}</span>`;
@@ -412,10 +375,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             element.innerHTML = output;
-
-            if (currentStep % 4 === 0) {
-                playSfx('decipher');
-            }
 
             if (currentStep >= totalSteps) {
                 clearInterval(timer);
@@ -445,6 +404,27 @@ document.addEventListener('DOMContentLoaded', () => {
             glitchDecipher(el, text, 500);
         });
     });
+
+    // ==========================================================================
+    // 3B. GOOGLE AI STUDIO FROSTED GLASS MOUSE-TRACKING SPOTLIGHT
+    // ==========================================================================
+    document.addEventListener('pointermove', (e) => {
+        const card = e.target.closest('.glass-card, .pill-card, .contact-horizontal-card, .modal-screenshot-container');
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+    }, { passive: true });
+
+    document.addEventListener('pointerout', (e) => {
+        const card = e.target.closest('.glass-card, .pill-card, .contact-horizontal-card, .modal-screenshot-container');
+        if (card && (!e.relatedTarget || !card.contains(e.relatedTarget))) {
+            card.style.removeProperty('--mouse-x');
+            card.style.removeProperty('--mouse-y');
+        }
+    }, { passive: true });
 
     // ==========================================================================
     // 4. SMOOTH EASE-IN SECTION REVEALS WITH FIRST-TIME SCROLL HIGHLIGHT & GLITCH
