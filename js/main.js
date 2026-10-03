@@ -631,49 +631,49 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Fusion Rush: Gamified Boolean Logic & AI Tutoring',
             type: 'Scopus ICETT 2026 Paper',
             image: 'images/fusionrush.jpg',
-            isPortrait: true
+            orientation: 'square'
         },
         p2: {
             title: 'Visual AI Logic Proof Parser & Evaluator',
             type: 'PCSC 2026 Davao Presentation',
             image: 'images/visualai.jpg',
-            isPortrait: true
+            orientation: 'square'
         },
         p3: {
             title: 'TakeIt — Event Management & Ticketing System',
             type: 'Freelance Web App',
             image: 'images/takeit.png',
-            isPortrait: true
+            orientation: 'portrait'
         },
         p4: {
             title: 'DishCover — Pantry & Inventory Management App',
             type: 'Web / Mobile App',
             image: 'images/dishcover.png',
-            isPortrait: true
+            orientation: 'portrait'
         },
         p5: {
             title: 'CropConnect — Direct Farmer Fresh Produce E-Commerce',
             type: 'E-Commerce Platform',
             image: 'images/cropconnect.png',
-            isPortrait: true
+            orientation: 'portrait'
         },
         p6: {
             title: 'Bomberman BattleRoyale — Java PvP Game',
             type: 'Java Multiplayer Game',
             image: 'images/bomberman.png',
-            isPortrait: false
+            orientation: 'square'
         },
         p8: {
             title: 'Nexchef — Live Step Cooking & Recipe Platform',
             type: 'Freelance Mobile App',
             image: 'images/nexchef.png',
-            isPortrait: true
+            orientation: 'portrait'
         },
         p9: {
             title: 'Refertoire — Ensemble Sheet Music Repertoire Manager',
             type: 'Freelance Offline-First App',
             image: 'images/refertoire.jpg',
-            isPortrait: false
+            orientation: 'landscape'
         }
     };
 
@@ -686,38 +686,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
         activeModalProject = data;
 
+        const modalContainer = projectModal.querySelector('.modal-screenshot-container');
+        const initialOrient = data.orientation || 'portrait';
+        if (modalContainer) {
+            modalContainer.setAttribute('data-orientation', initialOrient);
+        }
+
         const typeBadge = document.getElementById('modal-project-type');
         const titleHeading = document.getElementById('modal-project-title');
         if (typeBadge) typeBadge.textContent = data.type;
         if (titleHeading) titleHeading.textContent = data.title;
 
         if (modalMediaContainer && data.image) {
-            const isPortrait = data.isPortrait === true;
             modalMediaContainer.innerHTML = `
                 <img src="${data.image}" 
                      alt="${data.title} Screenshot" 
-                     class="modal-screenshot-img ${isPortrait ? 'portrait-screenshot' : 'landscape-screenshot'}" 
-                     data-orientation="${isPortrait ? 'portrait' : 'landscape'}">
+                     class="modal-screenshot-img ${initialOrient}-screenshot" 
+                     data-orientation="${initialOrient}">
             `;
 
             const img = modalMediaContainer.querySelector('img');
             if (img) {
-                img.onload = () => {
-                    if (img.naturalHeight > img.naturalWidth) {
-                        img.classList.remove('landscape-screenshot');
-                        img.classList.add('portrait-screenshot');
-                        img.setAttribute('data-orientation', 'portrait');
+                const applyOrientation = () => {
+                    const ratio = img.naturalWidth / img.naturalHeight;
+                    let orient = 'landscape';
+                    if (ratio < 0.78) {
+                        orient = 'portrait';
+                    } else if (ratio >= 0.78 && ratio <= 1.18) {
+                        orient = 'square';
                     } else {
-                        img.classList.remove('portrait-screenshot');
-                        img.classList.add('landscape-screenshot');
-                        img.setAttribute('data-orientation', 'landscape');
+                        orient = 'landscape';
+                    }
+                    img.className = `modal-screenshot-img ${orient}-screenshot`;
+                    img.setAttribute('data-orientation', orient);
+                    if (modalContainer) {
+                        modalContainer.setAttribute('data-orientation', orient);
                     }
                 };
+
+                if (img.complete && img.naturalWidth > 0) {
+                    applyOrientation();
+                } else {
+                    img.onload = applyOrientation;
+                }
             }
         }
 
-        projectModal.showModal();
-        playSfx('cyber');
+        if (!projectModal.open) {
+            projectModal.showModal();
+        }
     }
 
     if (closeModalBtn && projectModal) {
@@ -842,18 +859,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 10. PROJECT CAROUSEL MODAL CLICK & ACCESSIBILITY
     // ==========================================================================
-    document.querySelectorAll('.open-modal-btn').forEach(btn => {
+    document.querySelectorAll('.open-modal-btn, #overlay-projects-grid .project-card').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
-            const pId = btn.getAttribute('data-project');
-            openProjectModal(pId);
+            const pId = btn.getAttribute('data-project') || btn.getAttribute('data-project-id');
+            if (pId) openProjectModal(pId);
         });
 
         btn.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                const pId = btn.getAttribute('data-project');
-                openProjectModal(pId);
+                const pId = btn.getAttribute('data-project') || btn.getAttribute('data-project-id');
+                if (pId) openProjectModal(pId);
             }
         });
     });
