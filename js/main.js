@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const introCurtain = document.getElementById('intro-curtain-bg');
     const heroNameContainer = document.getElementById('hero-name-container');
     const heroNameAura = document.getElementById('hero-name-aura');
-    const heroMlbbRunner = document.getElementById('hero-mlbb-runner');
+    const heroMetallicGlint = document.getElementById('hero-metallic-glint');
     const heroMainRole = document.getElementById('hero-main-role');
     const rolePart1 = document.getElementById('role-part1');
     const roleSep = document.getElementById('role-separator');
@@ -49,27 +49,29 @@ document.addEventListener('DOMContentLoaded', () => {
         // Position in center of pitch black screen above curtain (z-index: 9995)
         heroNameContainer.style.zIndex = '9995';
         heroMainRole.style.zIndex = '9995';
-        heroNameContainer.style.transform = `translate3d(0, ${centerOffsetY}px, 0)`;
+        heroNameContainer.style.transformOrigin = 'center center';
+        heroNameContainer.style.transform = `translate3d(0, ${centerOffsetY}px, 0) scale(0.88)`;
         heroMainRole.style.transform = `translate3d(0, ${centerOffsetY}px, 0)`;
         heroNameContainer.style.opacity = '0';
         heroMainRole.style.opacity = '0';
 
-        // 1. Pitch-black void: Name fades in, then Mobile Legends style glint & flare sweeps across
+        // 1. Pitch-black void: Name fades and grows, then metallic reflection glint slides across
         setTimeout(() => {
             if (introCompleted) return;
-            // Name fades in crisply
-            heroNameContainer.style.transition = 'opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1)';
+            // Name fades in and grows smoothly
+            heroNameContainer.style.transition = 'opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1), transform 1.25s cubic-bezier(0.16, 1, 0.3, 1)';
             heroNameContainer.style.opacity = '1';
+            heroNameContainer.style.transform = `translate3d(0, ${centerOffsetY}px, 0) scale(1)`;
             if (heroNameAura) heroNameAura.classList.add('active');
 
-            // Trigger Mobile Legends Bang Bang (MLBB) unified glint & optical flare
+            // Trigger metallic reflection glint sliding across the letters as the name expands
             setTimeout(() => {
                 if (introCompleted) return;
-                if (heroMlbbRunner) heroMlbbRunner.classList.add('active');
-            }, 120);
-        }, 380);
+                if (heroMetallicGlint) heroMetallicGlint.classList.add('sliding');
+            }, 450);
+        }, 320);
 
-        // 2. Subtitle / role enters via typing animation as the flare finishes its sweep
+        // 2. Subtitle / role enters via typing animation as the metallic glint finishes its sweep
         setTimeout(() => {
             if (introCompleted) return;
             heroMainRole.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
@@ -112,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             typePart1();
-        }, 1950);
+        }, 2050);
 
         function startMoveToRestingPosition() {
             if (introCompleted) return;
@@ -122,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const glideDuration = 'transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
             heroNameContainer.style.transition = glideDuration;
             heroMainRole.style.transition = glideDuration;
-            heroNameContainer.style.transform = 'translate3d(0, 0, 0)';
+            heroNameContainer.style.transform = 'translate3d(0, 0, 0) scale(1)';
             heroMainRole.style.transform = 'translate3d(0, 0, 0)';
 
             // Obvious slow fade of black curtain to reveal 3D cosmic background
@@ -146,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 heroMainRole.style.transform = '';
                 heroNameContainer.style.zIndex = '';
                 heroMainRole.style.zIndex = '';
-                if (heroMlbbRunner) heroMlbbRunner.style.display = 'none';
+                if (heroMetallicGlint) heroMetallicGlint.style.display = 'none';
                 document.body.classList.remove('intro-active');
                 introCurtain.style.display = 'none';
             }, 1450);

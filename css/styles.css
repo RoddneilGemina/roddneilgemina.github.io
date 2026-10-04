@@ -707,149 +707,66 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   MOBILE LEGENDS: BANG BANG (MLBB) STYLE UNIFIED GLINT & OPTICAL FLARE
-   Fast, punchy, electric sweep across the name typography (1.15s)
+   METALLIC REFLECTION GLINT (SLIDING ACROSS THE LETTERS)
+   Pure, sleek chrome specular shine sliding smoothly across typography
    -------------------------------------------------------------------------- */
-.hero-mlbb-runner {
+.hero-metallic-glint {
     position: absolute;
-    top: 50%;
-    left: -4%;
-    transform: translate(-50%, -50%) scale(0.2);
-    width: 0;
-    height: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-align: center;
+    white-space: nowrap;
     pointer-events: none;
-    z-index: 6;
-    mix-blend-mode: screen;
+    z-index: 3;
     opacity: 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 280px 100%;
+    background-position: -280px 0;
+    background-image: linear-gradient(
+        110deg,
+        transparent 0%,
+        transparent 20%,
+        rgba(255, 255, 255, 0.15) 32%,
+        rgba(255, 255, 255, 0.8) 44%,
+        #ffffff 50%,
+        rgba(255, 255, 255, 0.8) 56%,
+        rgba(255, 255, 255, 0.15) 68%,
+        transparent 80%,
+        transparent 100%
+    );
 }
 
-.hero-mlbb-runner.active {
-    animation: mlbbGlintSweep 1.35s ease-in-out forwards;
+.hero-metallic-glint.sliding {
+    opacity: 1;
+    animation: metallicGlintSlide 1.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-@keyframes mlbbGlintSweep {
+@keyframes metallicGlintSlide {
     0% {
-        left: -3%;
-        transform: translate(-50%, -50%) scale(0.25);
-        opacity: 0;
+        background-position: -280px 0;
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
     }
-    12% {
-        /* Starts off small as it catches the initial letter */
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(0.45);
-    }
-    60% {
-        /* Smoothly growing as it sweeps across the name */
-        transform: translate(-50%, -50%) scale(1.6);
-        opacity: 1;
-    }
-    85% {
-        /* Surging large near the end of the name */
-        left: 88%;
-        transform: translate(-50%, -50%) scale(2.8);
-        opacity: 1;
-    }
-    91% {
-        /* Climax blazing flash right at the end of the name */
-        left: 93%;
-        transform: translate(-50%, -50%) scale(3.3);
-        opacity: 1;
-    }
-    97% {
-        /* Finally shrinking */
-        left: 99%;
-        transform: translate(-50%, -50%) scale(0.85);
-        opacity: 0.8;
+    50% {
+        filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
     }
     100% {
-        left: 104%;
-        transform: translate(-50%, -50%) scale(0.1);
+        background-position: calc(100% + 280px) 0;
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
         opacity: 0;
     }
-}
-
-/* Vertical light beam cutting directly through typography */
-.mlbb-light-beam {
-    position: absolute;
-    width: 36px;
-    height: 150px;
-    border-radius: 50%;
-    background: linear-gradient(
-        180deg,
-        transparent 0%,
-        rgba(0, 240, 255, 0.3) 15%,
-        rgba(255, 255, 255, 0.95) 45%,
-        #ffffff 50%,
-        rgba(255, 255, 255, 0.95) 55%,
-        rgba(0, 240, 255, 0.3) 85%,
-        transparent 100%
-    );
-    filter: blur(2px) drop-shadow(0 0 10px #00F0FF);
-}
-
-/* Soft celestial aura */
-.mlbb-flare-halo {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(0, 240, 255, 0.65) 30%,
-        rgba(167, 139, 250, 0.25) 55%,
-        transparent 75%
-    );
-    filter: blur(8px);
-}
-
-/* Blinding hot white core nucleus */
-.mlbb-flare-core {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        #ffffff 0%,
-        #ffffff 45%,
-        rgba(255, 255, 255, 0.95) 65%,
-        rgba(0, 240, 255, 0.85) 85%,
-        transparent 100%
-    );
-    box-shadow: 0 0 18px #ffffff, 0 0 35px #00F0FF, 0 0 50px rgba(0, 240, 255, 0.8);
-}
-
-/* Signature horizontal anamorphic laser streak */
-.mlbb-flare-streak {
-    position: absolute;
-    width: 280px;
-    height: 4px;
-    border-radius: 9999px;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(0, 240, 255, 0.2) 15%,
-        rgba(255, 255, 255, 0.95) 45%,
-        #ffffff 50%,
-        rgba(255, 255, 255, 0.95) 55%,
-        rgba(0, 240, 255, 0.2) 85%,
-        transparent 100%
-    );
-    filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 24px #00F0FF);
-}
-
-/* 4-point diamond star cross */
-.mlbb-flare-sparkle {
-    position: absolute;
-    width: 46px;
-    height: 46px;
-    background: radial-gradient(circle, #ffffff 45%, rgba(0, 240, 255, 0.85) 75%, transparent 85%);
-    clip-path: polygon(50% 0%, 54% 44%, 100% 50%, 54% 56%, 50% 100%, 46% 56%, 0% 50%, 46% 44%);
-    filter: drop-shadow(0 0 14px #ffffff) drop-shadow(0 0 26px #00F0FF);
 }
 
 .hero-main-role {
