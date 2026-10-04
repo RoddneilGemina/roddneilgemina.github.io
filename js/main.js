@@ -42,16 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Calculate offset to place the hero name and role vertically centered in the viewport
         const nameRect = heroNameContainer.getBoundingClientRect();
+        const roleRect = heroMainRole.getBoundingClientRect();
         const viewportCenterY = window.innerHeight / 2;
         const nameCenterY = nameRect.top + (nameRect.height / 2);
         const centerOffsetY = Math.round(viewportCenterY - nameCenterY - 18);
+        const roleIntroOffsetY = Math.round(centerOffsetY - (roleRect.top - (nameRect.bottom + 16)));
 
         // Position in center of pitch black screen above curtain (z-index: 9995)
         heroNameContainer.style.zIndex = '9995';
         heroMainRole.style.zIndex = '9995';
         heroNameContainer.style.transformOrigin = 'center center';
         heroNameContainer.style.transform = `translate3d(0, ${centerOffsetY}px, 0) scale(0.88)`;
-        heroMainRole.style.transform = `translate3d(0, ${centerOffsetY}px, 0)`;
+        heroMainRole.style.transform = `translate3d(0, ${roleIntroOffsetY}px, 0)`;
         heroNameContainer.style.opacity = '0';
         heroMainRole.style.opacity = '0';
 
