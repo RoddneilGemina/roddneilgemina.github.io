@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroNameAura = document.getElementById('hero-name-aura');
     const heroMainName = document.getElementById('hero-main-name');
     const heroNameShine = document.getElementById('hero-name-shine');
+    const heroGlareFlash = document.getElementById('hero-glare-flash');
     const heroMainRole = document.getElementById('hero-main-role');
     const rolePart1 = document.getElementById('role-part1');
     const roleSep = document.getElementById('role-separator');
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroNameContainer.style.opacity = '0';
         heroMainRole.style.opacity = '0';
 
-        // 1. Pitch-black void: UPON fading in, glint and white flash sweep strictly ON the name letters
+        // 1. Pitch-black void: UPON fading in, slower glint and growing/shrinking glare flash sweep strictly ON the name
         setTimeout(() => {
             if (introCompleted) return;
             // Name fades in
@@ -63,11 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
             heroNameContainer.style.opacity = '1';
             if (heroNameAura) heroNameAura.classList.add('active');
 
-            // Glint and white flash sweep directly ON the letters of the name
+            // Glint and glare flash sweep directly ON the letters of the name
             if (heroNameShine) heroNameShine.classList.add('shining');
+            if (heroGlareFlash) heroGlareFlash.classList.add('active');
         }, 450);
 
-        // 2. Subtitle / role enters via typing animation with accurate hero colors from the start
+        // 2. Subtitle / role enters via typing animation as glint reaches end
         setTimeout(() => {
             if (introCompleted) return;
             heroMainRole.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
@@ -110,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             typePart1();
-        }, 2400);
+        }, 3550);
 
         function startMoveToRestingPosition() {
             if (introCompleted) return;
@@ -145,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 heroNameContainer.style.zIndex = '';
                 heroMainRole.style.zIndex = '';
                 if (heroNameShine) heroNameShine.style.display = 'none';
+                if (heroGlareFlash) heroGlareFlash.style.display = 'none';
                 document.body.classList.remove('intro-active');
                 introCurtain.style.display = 'none';
             }, 1450);

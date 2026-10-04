@@ -556,7 +556,7 @@ a:hover {
 }
 
 .hero-centered-content {
-    max-width: 920px;
+    max-width: 1040px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -621,7 +621,7 @@ a:hover {
 .hero-name-container {
     position: relative;
     display: inline-block;
-    max-width: 920px;
+    max-width: 1040px;
     width: 100%;
     margin: 0 auto 16px auto;
     text-align: center;
@@ -652,13 +652,20 @@ a:hover {
 .hero-main-name {
     position: relative;
     font-family: var(--font-heading);
-    font-size: 5.2rem;
+    font-size: clamp(2.8rem, 5.2vw, 4.75rem);
     font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.035em;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
     margin: 0;
     text-align: center;
     z-index: 2;
+}
+
+.hero-name-wrapper {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 /* Gradient text with reduced, refined crisp glow */
@@ -699,7 +706,7 @@ a:hover {
     }
 }
 
-/* INTENSE SHINING GLINT & WHITE FLASH DIRECTLY ON THE NAME LETTERS */
+/* INTENSE SHINING GLINT DIRECTLY ON THE NAME LETTERS (SLOWER 3.0s) */
 .hero-name-shine {
     position: absolute;
     top: 0;
@@ -742,7 +749,7 @@ a:hover {
 
 .hero-name-shine.shining {
     opacity: 1;
-    animation: intenseGlintSweep 2.2s cubic-bezier(0.22, 0.8, 0.25, 1) forwards;
+    animation: intenseGlintSweep 3.2s cubic-bezier(0.35, 0, 0.25, 1) forwards;
 }
 
 @keyframes intenseGlintSweep {
@@ -752,36 +759,34 @@ a:hover {
         opacity: 0;
         filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px rgba(0, 240, 255, 0.6));
     }
-    18% {
+    10% {
         opacity: 1;
-        /* Glint catches initial letters */
-        filter: drop-shadow(0 0 16px #ffffff) drop-shadow(0 0 35px rgba(0, 240, 255, 0.9));
+        filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px rgba(0, 240, 255, 0.7));
     }
-    48% {
-        /* WHITE FLASH ON THE NAME: GROWS IN SIZE AND RADIANCE DIRECTLY ON THE LETTERS */
-        background-size: 160% 100%;
+    35% {
+        opacity: 1;
+        filter: drop-shadow(0 0 16px #ffffff) drop-shadow(0 0 32px rgba(0, 240, 255, 0.8));
+    }
+    60% {
+        background-size: 200% 100%;
+        opacity: 1;
+        filter: drop-shadow(0 0 24px #ffffff) drop-shadow(0 0 50px rgba(0, 240, 255, 0.85));
+    }
+    90% {
+        /* Peak shine bloom near the end of the name */
+        background-size: 140% 100%;
         opacity: 1;
         filter: 
-            drop-shadow(0 0 30px #ffffff) 
-            drop-shadow(0 0 60px #ffffff) 
-            drop-shadow(0 0 95px rgba(0, 240, 255, 1)) 
-            drop-shadow(0 0 135px rgba(0, 240, 255, 0.85));
+            drop-shadow(0 0 35px #ffffff) 
+            drop-shadow(0 0 70px #ffffff) 
+            drop-shadow(0 0 110px #00F0FF) 
+            drop-shadow(0 0 150px rgba(0, 240, 255, 0.95));
     }
-    54% {
-        /* Peak white flash bloom directly over the center of the name */
-        background-size: 160% 100%;
-        opacity: 1;
-        filter: 
-            drop-shadow(0 0 30px #ffffff) 
-            drop-shadow(0 0 60px #ffffff) 
-            drop-shadow(0 0 95px rgba(0, 240, 255, 1)) 
-            drop-shadow(0 0 135px rgba(0, 240, 255, 0.85));
-    }
-    82% {
-        /* WHITE FLASH SHRINKS IN SIZE */
-        background-size: 260% 100%;
-        opacity: 1;
-        filter: drop-shadow(0 0 16px #ffffff) drop-shadow(0 0 35px rgba(0, 240, 255, 0.9));
+    96% {
+        /* Shrinks down */
+        background-size: 220% 100%;
+        opacity: 0.85;
+        filter: drop-shadow(0 0 12px #ffffff) drop-shadow(0 0 24px rgba(0, 240, 255, 0.7));
     }
     100% {
         background-position: 180% 0;
@@ -789,6 +794,110 @@ a:hover {
         opacity: 0;
         filter: drop-shadow(0 0 6px #ffffff) drop-shadow(0 0 14px rgba(0, 240, 255, 0.6));
     }
+}
+
+/* OPTICAL GLARE FLASH THAT MOVES WITH THE GLINT (STARTS SMALL, GROWS BIG UNTIL THE END, THEN SHRINKS) */
+.hero-glare-flash {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%) scale(0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 5;
+    mix-blend-mode: screen;
+    opacity: 0;
+}
+
+.hero-glare-flash.active {
+    animation: glareFlashSweep 3.2s cubic-bezier(0.35, 0, 0.25, 1) forwards;
+}
+
+@keyframes glareFlashSweep {
+    0% {
+        left: -1%;
+        transform: translate(-50%, -50%) scale(0.25);
+        opacity: 0;
+    }
+    10% {
+        /* Starts off small */
+        left: 10%;
+        transform: translate(-50%, -50%) scale(0.45);
+        opacity: 1;
+    }
+    35% {
+        /* Growing bigger along first name */
+        left: 35%;
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 1;
+    }
+    60% {
+        /* Continuing to expand */
+        left: 60%;
+        transform: translate(-50%, -50%) scale(1.75);
+        opacity: 1;
+    }
+    82% {
+        /* Growing large towards the end */
+        left: 82%;
+        transform: translate(-50%, -50%) scale(2.6);
+        opacity: 1;
+    }
+    90% {
+        /* Peak big glare flash near the end of the name */
+        left: 92%;
+        transform: translate(-50%, -50%) scale(3.3);
+        opacity: 1;
+    }
+    96% {
+        /* Finally shrinking */
+        left: 98%;
+        transform: translate(-50%, -50%) scale(1.0);
+        opacity: 0.8;
+    }
+    100% {
+        left: 103%;
+        transform: translate(-50%, -50%) scale(0.15);
+        opacity: 0;
+    }
+}
+
+.glare-halo {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(0, 240, 255, 0.4) 45%, rgba(167, 139, 250, 0.15) 70%, transparent 85%);
+    filter: blur(8px);
+}
+
+.glare-core {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0%, #ffffff 35%, rgba(255, 255, 255, 0.95) 55%, rgba(0, 240, 255, 0.7) 75%, transparent 100%);
+    filter: drop-shadow(0 0 14px #ffffff) drop-shadow(0 0 28px rgba(0, 240, 255, 0.9));
+}
+
+.glare-horizontal-beam {
+    position: absolute;
+    width: 170px;
+    height: 3px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 240, 255, 0.35) 20%, #ffffff 50%, rgba(0, 240, 255, 0.35) 80%, transparent 100%);
+    filter: drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 18px #00F0FF);
+}
+
+.glare-sparkle {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: radial-gradient(circle, #ffffff 40%, rgba(0, 240, 255, 0.85) 70%, transparent 80%);
+    clip-path: polygon(50% 0%, 55% 45%, 100% 50%, 55% 55%, 50% 100%, 45% 55%, 0% 50%, 45% 45%);
+    filter: drop-shadow(0 0 10px #ffffff);
 }
 
 .hero-main-role {
