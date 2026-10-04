@@ -426,38 +426,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     // ==========================================================================
-    // 3B. INTERACTIVE 3D PERSPECTIVE TILT EFFECT FOR STEADY CARDS
+    // 3C. SCATTERED CARDS SPREAD ON SCROLL (SKILLS & TECH STACKS FIELD EXPANSION)
     // ==========================================================================
-    const tiltSteadyCards = document.querySelectorAll('.skills-steady-card');
-    tiltSteadyCards.forEach(card => {
-        let isHovered = false;
-
-        card.addEventListener('mouseenter', () => {
-            isHovered = true;
-            card.style.transition = 'transform 0.15s ease-out, border-color 0.25s ease, box-shadow 0.25s ease';
+    const skillCategoryGroups = document.querySelectorAll('.skills-category-group');
+    if (skillCategoryGroups.length > 0) {
+        const spreadObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-spread');
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
         });
 
-        card.addEventListener('mousemove', (e) => {
-            if (!isHovered) return;
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            // Pitch & roll calculation with subtle, sleek 3D depth
-            const rotateX = ((centerY - y) / centerY) * 4.5;
-            const rotateY = ((x - centerX) / centerX) * 4.5;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+        skillCategoryGroups.forEach(group => {
+            spreadObserver.observe(group);
+            // If already in view on page load (e.g. reload or anchor link)
+            const rect = group.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                group.classList.add('is-spread');
+            }
         });
-
-        card.addEventListener('mouseleave', () => {
-            isHovered = false;
-            card.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease';
-            card.style.transform = '';
-        });
-    });
+    }
 
     // ==========================================================================
     // 4. SMOOTH EASE-UP FADE-IN SECTION REVEALS (FIRST-TIME SCROLL HIGHLIGHT)
