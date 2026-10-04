@@ -25,9 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const introCurtain = document.getElementById('intro-curtain-bg');
     const heroNameContainer = document.getElementById('hero-name-container');
     const heroNameAura = document.getElementById('hero-name-aura');
-    const heroMainName = document.getElementById('hero-main-name');
-    const heroNameShine = document.getElementById('hero-name-shine');
-    const heroGlareFlash = document.getElementById('hero-glare-flash');
+    const heroMlbbRunner = document.getElementById('hero-mlbb-runner');
     const heroMainRole = document.getElementById('hero-main-role');
     const rolePart1 = document.getElementById('role-part1');
     const roleSep = document.getElementById('role-separator');
@@ -56,20 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
         heroNameContainer.style.opacity = '0';
         heroMainRole.style.opacity = '0';
 
-        // 1. Pitch-black void: UPON fading in, slower glint and growing/shrinking glare flash sweep strictly ON the name
+        // 1. Pitch-black void: Name fades in, then Mobile Legends style glint & flare sweeps across
         setTimeout(() => {
             if (introCompleted) return;
-            // Name fades in
-            heroNameContainer.style.transition = 'opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            // Name fades in crisply
+            heroNameContainer.style.transition = 'opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1)';
             heroNameContainer.style.opacity = '1';
             if (heroNameAura) heroNameAura.classList.add('active');
 
-            // Glint and glare flash sweep directly ON the letters of the name
-            if (heroNameShine) heroNameShine.classList.add('shining');
-            if (heroGlareFlash) heroGlareFlash.classList.add('active');
-        }, 450);
+            // Trigger Mobile Legends Bang Bang (MLBB) unified glint & optical flare
+            setTimeout(() => {
+                if (introCompleted) return;
+                if (heroMlbbRunner) heroMlbbRunner.classList.add('active');
+            }, 120);
+        }, 380);
 
-        // 2. Subtitle / role enters via typing animation as glint reaches end
+        // 2. Subtitle / role enters via typing animation as the flare finishes its sweep
         setTimeout(() => {
             if (introCompleted) return;
             heroMainRole.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             typePart1();
-        }, 3550);
+        }, 1950);
 
         function startMoveToRestingPosition() {
             if (introCompleted) return;
@@ -146,8 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 heroMainRole.style.transform = '';
                 heroNameContainer.style.zIndex = '';
                 heroMainRole.style.zIndex = '';
-                if (heroNameShine) heroNameShine.style.display = 'none';
-                if (heroGlareFlash) heroGlareFlash.style.display = 'none';
+                if (heroMlbbRunner) heroMlbbRunner.style.display = 'none';
                 document.body.classList.remove('intro-active');
                 introCurtain.style.display = 'none';
             }, 1450);
