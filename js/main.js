@@ -164,6 +164,140 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
+    // 1C. HERO PORTRAIT 3D MOUSE TILT CONTROLLER
+    // ==========================================================================
+    const portraitContainer = document.getElementById('hero-portrait-container');
+    const heroSecElem = document.getElementById('hero');
+
+    if (portraitContainer) {
+        let currentRotX = 0;
+        let currentRotY = 0;
+        let currentScale = 1;
+        let targetRotX = 0;
+        let targetRotY = 0;
+        let targetScale = 1;
+        let isDirectlyHovering = false;
+        let tiltRafId = null;
+
+        function updatePortraitTiltPhysics() {
+            const lerpFactor = isDirectlyHovering ? 0.14 : 0.08;
+            currentRotX += (targetRotX - currentRotX) * lerpFactor;
+            currentRotY += (targetRotY - currentRotY) * lerpFactor;
+            currentScale += (targetScale - currentScale) * lerpFactor;
+
+            portraitContainer.style.transform = `perspective(1000px) rotateX(${currentRotX.toFixed(2)}deg) rotateY(${currentRotY.toFixed(2)}deg) scale3d(${currentScale.toFixed(3)}, ${currentScale.toFixed(3)}, ${currentScale.toFixed(3)})`;
+
+            const diff = Math.abs(targetRotX - currentRotX) + Math.abs(targetRotY - currentRotY) + Math.abs(targetScale - currentScale);
+            if (diff > 0.005 || isDirectlyHovering) {
+                tiltRafId = requestAnimationFrame(updatePortraitTiltPhysics);
+            } else {
+                tiltRafId = null;
+                if (!isDirectlyHovering) {
+                    portraitContainer.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                }
+            }
+        }
+
+        function triggerTiltFrame() {
+            if (!tiltRafId) {
+                tiltRafId = requestAnimationFrame(updatePortraitTiltPhysics);
+            }
+        }
+
+        // Direct hover on portrait: high-amplitude 3D tilt
+        portraitContainer.addEventListener('mouseenter', () => {
+            if (document.body.classList.contains('intro-active')) return;
+            isDirectlyHovering = true;
+            targetScale = 1.05;
+            triggerTiltFrame();
+        });
+
+        portraitContainer.addEventListener('mousemove', (e) => {
+            if (document.body.classList.contains('intro-active')) return;
+            isDirectlyHovering = true;
+            const rect = portraitContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const normX = (e.clientX - centerX) / (rect.width / 2);
+            const normY = (e.clientY - centerY) / (rect.height / 2);
+
+            const maxTilt = 20;
+            targetRotX = Math.max(-maxTilt, Math.min(maxTilt, -normY * maxTilt));
+            targetRotY = Math.max(-maxTilt, Math.min(maxTilt, normX * maxTilt));
+            targetScale = 1.05;
+
+            triggerTiltFrame();
+        });
+
+        portraitContainer.addEventListener('mouseleave', () => {
+            isDirectlyHovering = false;
+            targetRotX = 0;
+            targetRotY = 0;
+            targetScale = 1;
+            triggerTiltFrame();
+        });
+
+        // Ambient mouse parallax tracking across the hero section
+        if (heroSecElem) {
+            heroSecElem.addEventListener('mousemove', (e) => {
+                if (document.body.classList.contains('intro-active') || isDirectlyHovering) return;
+                const rect = portraitContainer.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                const deltaX = (e.clientX - centerX) / (window.innerWidth / 2);
+                const deltaY = (e.clientY - centerY) / (window.innerHeight / 2);
+
+                const maxAmbientTilt = 7;
+                targetRotX = Math.max(-maxAmbientTilt, Math.min(maxAmbientTilt, -deltaY * maxAmbientTilt));
+                targetRotY = Math.max(-maxAmbientTilt, Math.min(maxAmbientTilt, deltaX * maxAmbientTilt));
+                targetScale = 1.0;
+
+                triggerTiltFrame();
+            });
+
+            heroSecElem.addEventListener('mouseleave', () => {
+                if (isDirectlyHovering) return;
+                targetRotX = 0;
+                targetRotY = 0;
+                targetScale = 1;
+                triggerTiltFrame();
+            });
+        }
+
+        // Mobile touch support
+        portraitContainer.addEventListener('touchmove', (e) => {
+            if (document.body.classList.contains('intro-active')) return;
+            if (e.touches && e.touches.length > 0) {
+                isDirectlyHovering = true;
+                const touch = e.touches[0];
+                const rect = portraitContainer.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                const normX = (touch.clientX - centerX) / (rect.width / 2);
+                const normY = (touch.clientY - centerY) / (rect.height / 2);
+
+                const maxTilt = 15;
+                targetRotX = Math.max(-maxTilt, Math.min(maxTilt, -normY * maxTilt));
+                targetRotY = Math.max(-maxTilt, Math.min(maxTilt, normX * maxTilt));
+                targetScale = 1.03;
+
+                triggerTiltFrame();
+            }
+        }, { passive: true });
+
+        portraitContainer.addEventListener('touchend', () => {
+            isDirectlyHovering = false;
+            targetRotX = 0;
+            targetRotY = 0;
+            targetScale = 1;
+            triggerTiltFrame();
+        });
+    }
+
+    // ==========================================================================
     // 2. THREE.JS 3D COSMIC BACKGROUND (POLYHEDRONS & STARDUST PARTICLES)
     // ==========================================================================
     let threeScene, threeCamera, threeRenderer;
