@@ -656,54 +656,224 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Fusion Rush: Gamified Boolean Logic & AI Tutoring',
             type: 'Scopus ICETT 2026 Paper',
             image: 'images/fusionrush.jpg',
-            orientation: 'square'
+            orientation: 'square',
+            oneLiner: 'Gamified discrete math AI tutoring platform accepted at Scopus-indexed ICETT 2026.',
+            problem: 'Students struggle with abstract inference rules and formal proof derivation in Discrete Mathematics, leading to steep learning curves and high disengagement in fundamental computing courses.',
+            goal: 'Provide an adaptive, gamified AI tutor that reinforces logical deduction through interactive levels, instant rule feedback, and intelligent hint generation.',
+            contributions: 'Lead Researcher, Algorithm Architect & Full-Stack Developer',
+            techStack: ['Python', 'FastAPI', 'AI Reasoning Engine', 'Discrete Math Parser', 'Web Frontend'],
+            links: [
+                { label: 'Conference Acceptance', url: 'https://icett.org/' }
+            ]
         },
         p2: {
             title: 'Visual AI Logic Proof Parser & Evaluator',
             type: 'PCSC 2026 Davao Presentation',
             image: 'images/visualai.jpg',
-            orientation: 'square'
+            orientation: 'square',
+            oneLiner: 'Computer vision model scanning and scoring handwritten discrete math proofs.',
+            problem: 'Manual verification and grading of student handwritten discrete math proofs is time-consuming, prone to human inconsistency, and provides delayed feedback.',
+            goal: 'Deliver a high-accuracy visual parsing pipeline using OCR and AST-based logical rule verification to scan, evaluate, and provide step-by-step scoring of handwritten proofs.',
+            contributions: 'Lead Computer Vision Researcher & Presenter (PCSC 2026, Davao City)',
+            techStack: ['Python', 'OpenCV', 'PyTorch', 'OCR Engine', 'AST Parser', 'Flask'],
+            links: [
+                { label: 'PCSC 2026 Congress', url: 'https://csp.org.ph/pcsc2026' }
+            ]
         },
-        p3: {
-            title: 'TakeIt — Event Management & Ticketing System',
-            type: 'Freelance Web App',
-            image: 'images/takeit.png',
-            orientation: 'portrait'
+        p_lupus: {
+            title: 'Lupus Lens: Multimodal SLE AI Screening',
+            type: 'ACM / Scopus ICMHI 2026 Paper',
+            image: 'images/1_dashboard.png',
+            orientation: 'landscape',
+            oneLiner: 'Clinical decision-support interface for Systemic Lupus Erythematosus (SLE) screening via Swin-SNN fusion.',
+            problem: 'Clinicians face significant challenges detecting Systemic Lupus Erythematosus (SLE) early due to heterogeneous systemic presentations, while conventional diagnostic workflows struggle to synthesize ocular retinal pathology and high-dimensional transcriptomic profiles.',
+            goal: 'Synthesize retinal fundus imaging with transcriptomic gene expression through a Swin Transformer & Spiking Neural Network (Swin-SNN) cross-modal fusion model, providing transparent Grad-CAM attention heatmaps and quantified risk scoring.',
+            contributions: 'Co-Author & Full-Stack Systems Developer (ACM ICMHI 2026, Kyoto, Japan)',
+            techStack: ['React 19', 'TypeScript', 'Tailwind CSS v4', 'Zustand', 'Recharts', 'Gradio Client', 'Supabase'],
+            links: [
+                { label: 'GitHub Repository', url: 'https://github.com/moltmalt/lupus-lens' },
+                { label: 'Live Clinical Web App', url: 'https://lupus-lens-two.vercel.app' }
+            ]
         },
-        p4: {
-            title: 'DishCover — Pantry & Inventory Management App',
-            type: 'Web / Mobile App',
-            image: 'images/dishcover.png',
-            orientation: 'portrait'
+        p_pixcell: {
+            title: 'PixCell: Real-Time Diagnostic Workspace',
+            type: 'Medical AI Platform',
+            image: 'images/2026-08-29 20.09.21 pixcell-ai.vercel.app 78296ef1a987.png',
+            orientation: 'landscape',
+            oneLiner: 'Real-time diagnostic collaboration platform for clinicians integrating YOLOv8 and LLM reporting.',
+            problem: 'Medical specialists and diagnostic labs struggle with fragmented collaboration tools, delayed peer reviews, and manual drafting of repetitive pathology reports.',
+            goal: 'Build an ultra-fast collaborative medical canvas with real-time YOLOv8 automated cell detection, multi-physician presence, and automated LLM-generated clinical summaries.',
+            contributions: 'Full-Stack Lead & AI Integration Architect',
+            techStack: ['Next.js', 'FastAPI', 'YOLOv8', 'Supabase', 'PostgreSQL', 'Python'],
+            links: [
+                { label: 'GitHub Repository', url: 'https://github.com/simon-escano/pixcell' }
+            ]
         },
-        p5: {
-            title: 'CropConnect — Direct Farmer Fresh Produce E-Commerce',
-            type: 'E-Commerce Platform',
-            image: 'images/cropconnect.png',
-            orientation: 'portrait'
+        p_stemi: {
+            title: 'STEMIFlow: Emergency Cardiac Triage',
+            type: 'Cardiac Emergency Care',
+            image: 'images/1_home_page.png',
+            orientation: 'landscape',
+            oneLiner: 'Prehospital STEMI triage and referral orchestration platform with real-time risk scoring and cath lab pre-alerts.',
+            problem: 'Prehospital emergency responders and cardiac care teams face critical delays and fragmented coordination during acute STEMI events, leading to prolonged door-to-balloon times and suboptimal patient outcomes.',
+            goal: 'Deliver an automated emergency dispatch and triage orchestrator calculating TIMI risk scores, identifying optimal percutaneous coronary intervention (PCI) centers with live traffic routing, and triggering cath lab pre-activation alerts.',
+            contributions: 'Lead Systems Architect & Full-Stack Developer',
+            techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Leaflet GIS', 'Supabase', 'Vercel'],
+            links: [
+                { label: 'GitHub Repository', url: 'https://github.com/moltmalt/STEMIFlow' },
+                { label: 'Live Emergency System', url: 'https://stemiflow.vercel.app/' }
+            ]
         },
-        p6: {
-            title: 'Bomberman BattleRoyale — Java PvP Game',
-            type: 'Java Multiplayer Game',
-            image: 'images/bomberman.png',
-            orientation: 'square'
+        p_kaagapai: {
+            title: 'KaagapAI: Rural Health Unit Platform',
+            type: 'Offline-First HealthTech',
+            image: 'images/2_triage_case.png',
+            orientation: 'landscape',
+            oneLiner: 'Offline-first clinical decision-support and supply chain orchestration for Barangay Health Workers.',
+            problem: 'Barangay Health Workers (BHWs) and Rural Health Units (RHUs) in underserved Philippine communities face critical challenges with paper-bound records, manual triage errors, delayed emergency hospital handoffs, and unexpected medicine stockouts.',
+            goal: 'Architect an offline-first PWA with multi-lingual voice triage, automated emergency hospital referral handoffs, and predictive medical inventory consumption models.',
+            contributions: 'Lead Full-Stack Architect & Systems Developer',
+            techStack: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Radix UI', 'Lucide React', 'Supabase'],
+            links: [
+                { label: 'GitHub Repository', url: 'https://github.com/moltmalt/KaagapAI' },
+                { label: 'Live Clinical Web App', url: 'https://kaagapai.vercel.app' }
+            ]
         },
-        p8: {
-            title: 'Nexchef — Live Step Cooking & Recipe Platform',
-            type: 'Freelance Mobile App',
-            image: 'images/nexchef.png',
-            orientation: 'portrait'
+        p_trellis: {
+            title: 'Trellis: Knowledge Concept Mapping',
+            type: 'Document Intelligence',
+            image: 'images/1_canvas_overview.png',
+            orientation: 'landscape',
+            oneLiner: 'Interactive concept mapping and document intelligence engine turning unstructured text into force-directed network graphs.',
+            problem: 'Researchers and knowledge workers struggle to assimilate multi-hundred page technical manuals, research compendiums, and complex documentation without losing contextual cross-references.',
+            goal: 'Build an ultra-fast document intelligence platform using Rust (Axum) and Angular 18 that extracts semantic entities, clusters related concepts, and renders fluid force-directed relationship graphs.',
+            contributions: 'Solo Systems Architect & Full-Stack Developer',
+            techStack: ['Rust', 'Axum', 'Angular 18', 'TypeScript', 'async-graphql', 'vis-network', 'PostgreSQL 16', 'Docker'],
+            links: [
+                { label: 'Live Application', url: 'https://trellis-dev.vercel.app' }
+            ]
         },
         p9: {
-            title: 'Refertoire — Ensemble Sheet Music Repertoire Manager',
+            title: 'Refertoire — Sheet Music Repertoire Manager',
             type: 'Freelance Offline-First App',
             image: 'images/refertoire.jpg',
-            orientation: 'landscape'
+            orientation: 'landscape',
+            oneLiner: 'Keep your ensemble’s entire sheet music repertoire synced, organized, and available 100% offline.',
+            problem: 'Choral ensembles and orchestras frequently perform in remote acoustic venues lacking dependable Wi-Fi, leaving musicians stranded when digital music sheets fail to download.',
+            goal: 'Provide a resilient offline-first PWA with IndexedDB local caching, instant search across gigabytes of scores, and Bluetooth foot-pedal page turning support.',
+            contributions: 'Lead Full-Stack Engineer & Audio Tech Architect',
+            techStack: ['Offline-First', 'PWA', 'IndexedDB', 'Service Workers', 'Vanilla JS', 'Tailwind']
+        },
+        p8: {
+            title: 'Nexchef — Live Cooking & Recipe Platform',
+            type: 'Freelance Mobile App',
+            image: 'images/nexchef.png',
+            orientation: 'portrait',
+            oneLiner: 'Mobile app allowing users to share recipes and record live steps with synchronized timers.',
+            problem: 'Home cooks struggle to juggle multiple recipe timers while following written instructions with messy hands, leading to overcooked food and frustrating culinary workflows.',
+            goal: 'Design an intuitive mobile culinary interface featuring concurrent recipe step timers, audio milestone alerts, and interactive community recipe fork trees.',
+            contributions: 'Mobile Architect & UI/UX Lead',
+            techStack: ['Mobile App', 'Live Timers', 'UI/UX Design', 'React Native / Mobile UI']
+        },
+        p3: {
+            title: 'TakeIt: Event Management & Ticketing',
+            type: 'Freelance Web App',
+            image: 'images/takeit.png',
+            orientation: 'portrait',
+            oneLiner: 'End-to-end event management and ticketing platform ensuring smooth booking workflows.',
+            problem: 'Local event organizers face high intermediary ticketing commission fees and clunky manual badge validation at entry gates.',
+            goal: 'Deliver a scalable direct-to-consumer ticketing web application featuring instant cryptographic QR ticket generation, real-time ticket scanning, and financial reporting.',
+            contributions: 'Full-Stack Developer',
+            techStack: ['React', 'Node.js', 'Express', 'SQL', 'QR Verification', 'REST API']
+        },
+        p4: {
+            title: 'DishCover: Smart Pantry & Food Tracker',
+            type: 'Pantry & Inventory App',
+            image: 'images/dishcover.png',
+            orientation: 'portrait',
+            oneLiner: 'Smart pantry management app enabling users to track expiration dates and prevent food waste.',
+            problem: 'Households waste hundreds of dollars each month throwing away expired groceries due to poor visibility into pantry inventory.',
+            goal: 'Create an intelligent grocery inventory app tracking shelf-life dates, sending automated push notifications before expiration, and recommending recipes based on available ingredients.',
+            contributions: 'Full-Stack Developer & UI Designer',
+            techStack: ['JavaScript', 'HTML5', 'CSS3', 'Local Storage', 'Notification APIs']
+        },
+        p5: {
+            title: 'CropConnect: Direct Farmer Fresh Produce',
+            type: 'AgriTech Marketplace',
+            image: 'images/cropconnect.png',
+            orientation: 'portrait',
+            oneLiner: 'Fresh produce e-commerce app connecting farmers directly to consumers with fair pricing.',
+            problem: 'Agricultural smallholders lose substantial margins to multi-layered middlemen while consumers face inflated prices for non-fresh produce.',
+            goal: 'Architect a transparent direct-to-consumer marketplace with automated logistics scheduling, farm gate pricing transparency, and produce quality verification.',
+            contributions: 'Backend Lead & Full-Stack Developer',
+            techStack: ['Django', 'Python', 'PostgreSQL', 'Tailwind CSS', 'REST APIs']
+        },
+        p_teknotes: {
+            title: 'TekNotes: Community Academic Platform',
+            type: 'Collaborative Workspace',
+            image: 'images/1a84682f-afc3-47c8-88c7-8bb4639b41cf.jpeg',
+            orientation: 'landscape',
+            oneLiner: 'Community-driven note sharing app built with Django, leveraging WebSockets and Redis.',
+            problem: 'University students frequently lack a centralized, searchable repository for high-quality lecture notes, study guides, and peer review materials.',
+            goal: 'Develop a high-performance academic collaboration hub with real-time peer discussion channels, markdown rich-text editing, and Redis-cached fast document indexing.',
+            contributions: 'Full-Stack Developer & QA Engineer',
+            techStack: ['Django', 'PostgreSQL', 'Redis', 'WebSockets', 'Tailwind CSS']
+        },
+        p6: {
+            title: 'Bomberman BattleRoyale: Java PvP',
+            type: 'Java Multiplayer Game',
+            image: 'images/bomberman.png',
+            orientation: 'square',
+            oneLiner: 'Real-time multiplayer arcade game in Java featuring multi-threaded sockets and shrinking battle zones.',
+            problem: 'Engineering network games with concurrent client loops often encounters thread contention, desynchronized entity state, and packet stutter under jittery network conditions.',
+            goal: 'Demonstrate fundamental multithreaded systems programming and object-oriented design patterns by building a low-latency TCP/UDP client-server game with predictive arena shrinking and collision physics.',
+            contributions: 'Game Architect & Network Engineer',
+            techStack: ['Java', 'Multithreading', 'Sockets (TCP/UDP)', 'Swing', 'OOP Design Patterns']
+        },
+        p_fasaar: {
+            title: 'Fasaar: Multiplayer Game Engine',
+            type: '2.5D Multiplayer Arena',
+            image: 'images/442706920_832106975441812_7649371869780998775_n.png',
+            orientation: 'landscape',
+            oneLiner: '2.5D multiplayer game built with LibGDX and Java featuring KryoNet network synchronization.',
+            problem: 'Synchronizing high-frequency projectile trajectories and player states in fast-paced 2.5D arenas without visual stuttering or server overhead.',
+            goal: 'Build a modular game client and headless authoritative server using LibGDX and KryoNet serialization, demonstrating decoupled rendering and packet compression.',
+            contributions: 'Game Architect & QA Engineer',
+            techStack: ['Java', 'LibGDX', 'KryoNet', 'MySQL', 'Gradle']
         }
     };
 
     let activeModalProject = null;
     const modalMediaContainer = document.getElementById('modal-project-media');
+    const modalCaseStudyContainer = document.getElementById('modal-case-study');
+    const tabBtnPreview = document.getElementById('tab-btn-preview');
+    const tabBtnCaseStudy = document.getElementById('tab-btn-casestudy');
+
+    function switchModalTab(tabName) {
+        if (!modalMediaContainer || !modalCaseStudyContainer) return;
+        if (tabName === 'preview') {
+            modalMediaContainer.classList.add('active');
+            modalMediaContainer.style.display = 'flex';
+            modalCaseStudyContainer.classList.remove('active');
+            modalCaseStudyContainer.style.display = 'none';
+            if (tabBtnPreview) tabBtnPreview.classList.add('active');
+            if (tabBtnCaseStudy) tabBtnCaseStudy.classList.remove('active');
+        } else {
+            modalMediaContainer.classList.remove('active');
+            modalMediaContainer.style.display = 'none';
+            modalCaseStudyContainer.classList.add('active');
+            modalCaseStudyContainer.style.display = 'block';
+            if (tabBtnPreview) tabBtnPreview.classList.remove('active');
+            if (tabBtnCaseStudy) tabBtnCaseStudy.classList.add('active');
+        }
+    }
+
+    if (tabBtnPreview) {
+        tabBtnPreview.addEventListener('click', () => switchModalTab('preview'));
+    }
+    if (tabBtnCaseStudy) {
+        tabBtnCaseStudy.addEventListener('click', () => switchModalTab('casestudy'));
+    }
 
     function openProjectModal(projectId) {
         const data = projectData[projectId];
@@ -722,6 +892,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeBadge) typeBadge.textContent = data.type;
         if (titleHeading) titleHeading.textContent = data.title;
 
+        // Populate Screenshot Preview Tab
         if (modalMediaContainer && data.image) {
             modalMediaContainer.innerHTML = `
                 <img src="${data.image}" 
@@ -756,6 +927,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+
+        // Populate Architectural Case Study Tab
+        if (modalCaseStudyContainer) {
+            modalCaseStudyContainer.innerHTML = `
+                <div class="case-study-block">
+                    <span class="case-study-label">
+                        <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        Problem Statement
+                    </span>
+                    <p class="case-study-text">${data.problem || data.oneLiner}</p>
+                </div>
+
+                <div class="case-study-block">
+                    <span class="case-study-label">
+                        <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+                        Engineering Objective &amp; Architecture
+                    </span>
+                    <p class="case-study-text">${data.goal || data.oneLiner}</p>
+                </div>
+
+                <div class="case-study-block">
+                    <span class="case-study-label">
+                        <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9z"/></svg>
+                        Core Technologies &amp; Tooling
+                    </span>
+                    <div class="case-study-tech-pills">
+                        ${(data.techStack || []).map(t => `<span class="tech-badge">${t}</span>`).join('')}
+                    </div>
+                </div>
+
+                <div class="case-study-block">
+                    <span class="case-study-label">
+                        <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        Engineering Role &amp; Contributions
+                    </span>
+                    <p class="case-study-text">${data.contributions || 'Lead Systems Architect & Full-Stack Developer'}</p>
+                </div>
+
+                ${(data.links && data.links.length > 0) ? `
+                <div class="case-study-actions">
+                    ${data.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener noreferrer" class="btn-hero-primary" style="padding: 6px 16px; font-size: 0.8rem;"><span>${l.label} ↗</span></a>`).join('')}
+                </div>` : ''}
+            `;
+        }
+
+        // Reset to preview tab on open
+        switchModalTab('preview');
 
         if (!projectModal.open) {
             projectModal.showModal();
@@ -807,7 +1025,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }, 2200);
                 }
             }).catch(() => {
-                // Fallback prompt
                 prompt('Copy this email:', email);
             });
         });
@@ -827,6 +1044,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('hero'),
         document.getElementById('projects'),
         document.getElementById('expertise'),
+        document.getElementById('philosophy'),
         document.getElementById('experience'),
         document.getElementById('research'),
         document.getElementById('volunteering'),

@@ -2777,4 +2777,343 @@ dialog[open] .modal-screenshot-container {
     .volunteering-grid {
         grid-template-columns: 1fr;
     }
+    .philosophy-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .honors-grid {
+        grid-template-columns: 1fr !important;
+    }
 }
+
+/* --------------------------------------------------------------------------
+   ENGINEERING PHILOSOPHY & PRINCIPLES BENTO GRID
+   -------------------------------------------------------------------------- */
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 36px;
+    width: 100%;
+}
+
+.philosophy-bento-card {
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    background: rgba(8, 14, 28, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    box-shadow: 0 12px 36px -6px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform var(--transition-norm), border-color var(--transition-fast), box-shadow var(--transition-norm);
+    position: relative;
+    overflow: hidden;
+}
+
+.philosophy-bento-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+    opacity: 0.3;
+    transition: opacity var(--transition-fast);
+}
+
+.philosophy-bento-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 240, 255, 0.65);
+    box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.9), 0 0 28px rgba(0, 240, 255, 0.25);
+}
+
+.philosophy-bento-card:hover::before {
+    opacity: 1;
+}
+
+.bento-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.bento-icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    color: var(--color-cyan);
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.18);
+}
+
+.bento-icon-box.violet {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.35);
+    color: var(--color-violet);
+    box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
+}
+
+.bento-icon-box.emerald {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #10B981;
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.2);
+}
+
+.bento-icon-box.amber {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.35);
+    color: #F59E0B;
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.2);
+}
+
+.bento-icon-box svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+.bento-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.bento-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.bento-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.bento-tag-chip {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+}
+
+.philosophy-bento-card:hover .bento-tag-chip {
+    background: rgba(0, 240, 255, 0.08);
+    border-color: rgba(0, 240, 255, 0.25);
+    color: var(--color-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   HONORS & NATIONAL/INTERNATIONAL COMPETITIONS
+   -------------------------------------------------------------------------- */
+.honors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 36px;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .honors-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.honor-award-card {
+    padding: 22px;
+    border-radius: var(--radius-md);
+    background: rgba(8, 14, 28, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 240, 255, 0.18);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.honor-award-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 240, 255, 0.55);
+    box-shadow: 0 14px 34px -6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.honor-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.honor-badge-pill {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.honor-badge-champion {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.45);
+    color: #FBBF24;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+}
+
+.honor-badge-first {
+    background: rgba(0, 240, 255, 0.12);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    color: var(--color-cyan);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
+}
+
+.honor-badge-scopus {
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.45);
+    color: var(--color-violet);
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+}
+
+.honor-year {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-muted);
+}
+
+.honor-award-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.35;
+    margin-bottom: 8px;
+}
+
+.honor-award-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-bottom: 14px;
+    flex: 1;
+}
+
+.honor-award-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   CASE STUDY MODAL TAB INTERFACE & ARCHITECTURE BREAKDOWN
+   -------------------------------------------------------------------------- */
+.modal-tabs-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(4, 7, 14, 0.85);
+    border-bottom: 1px solid var(--glass-border-color);
+}
+
+.modal-tab-btn {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.modal-tab-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.modal-tab-btn.active {
+    background: rgba(0, 240, 255, 0.1);
+    border-color: rgba(0, 240, 255, 0.35);
+    color: var(--color-cyan);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
+}
+
+.modal-case-study-body {
+    padding: 24px 28px;
+    max-height: 72vh;
+    overflow-y: auto;
+    color: var(--text-secondary);
+    display: none;
+}
+
+.modal-case-study-body.active {
+    display: block;
+}
+
+.case-study-block {
+    margin-bottom: 22px;
+}
+
+.case-study-label {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--color-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.case-study-text {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--text-primary);
+}
+
+.case-study-tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.case-study-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--glass-border-color);
+}
+
