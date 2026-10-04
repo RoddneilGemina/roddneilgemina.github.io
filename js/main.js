@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroNameContainer.style.opacity = '0';
         heroMainRole.style.opacity = '0';
 
-        // 1. Pitch-black void: Name fades and grows, then metallic reflection glint slides across
+        // 1. Pitch-black void: Name fades and grows
         setTimeout(() => {
             if (introCompleted) return;
             // Name fades in and grows smoothly
@@ -64,57 +64,56 @@ document.addEventListener('DOMContentLoaded', () => {
             heroNameContainer.style.transform = `translate3d(0, ${centerOffsetY}px, 0) scale(1)`;
             if (heroNameAura) heroNameAura.classList.add('active');
 
-            // Trigger metallic reflection glint sliding across the letters as the name expands
+            // 2. Metallic glint and typing of role/subtitle go together in tandem
             setTimeout(() => {
                 if (introCompleted) return;
+
+                // Trigger metallic reflection glint sliding across the name
                 if (heroMetallicGlint) heroMetallicGlint.classList.add('sliding');
+
+                // Simultaneously begin typing the role / subtitle
+                heroMainRole.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+                heroMainRole.style.opacity = '1';
+
+                const part1Text = 'Full-Stack Developer';
+                const part2Text = 'Software Engineer';
+                let i = 0;
+
+                function typePart1() {
+                    if (introCompleted) return;
+                    if (rolePart1 && i < part1Text.length) {
+                        rolePart1.textContent += part1Text[i];
+                        i++;
+                        setTimeout(typePart1, 26);
+                    } else {
+                        // Show separator '&' in dimmed cyan
+                        if (roleSep) roleSep.style.display = 'inline';
+                        let j = 0;
+                        setTimeout(function typePart2() {
+                            if (introCompleted) return;
+                            if (roleAccent && j < part2Text.length) {
+                                roleAccent.textContent += part2Text[j];
+                                j++;
+                                setTimeout(typePart2, 26);
+                            } else {
+                                // Typing complete: hide cursor smoothly
+                                if (roleCursor) {
+                                    roleCursor.style.opacity = '0';
+                                    setTimeout(() => { if (roleCursor) roleCursor.style.display = 'none'; }, 300);
+                                }
+
+                                // Pause for reading, then smoothly glide into final resting position
+                                setTimeout(() => {
+                                    startMoveToRestingPosition();
+                                }, 650);
+                            }
+                        }, 70);
+                    }
+                }
+
+                typePart1();
             }, 450);
         }, 320);
-
-        // 2. Subtitle / role enters via typing animation as the metallic glint finishes its sweep
-        setTimeout(() => {
-            if (introCompleted) return;
-            heroMainRole.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-            heroMainRole.style.opacity = '1';
-
-            const part1Text = 'Full-Stack Developer';
-            const part2Text = 'Software Engineer';
-            let i = 0;
-
-            function typePart1() {
-                if (introCompleted) return;
-                if (rolePart1 && i < part1Text.length) {
-                    rolePart1.textContent += part1Text[i];
-                    i++;
-                    setTimeout(typePart1, 26);
-                } else {
-                    // Show separator '&' in dimmed cyan
-                    if (roleSep) roleSep.style.display = 'inline';
-                    let j = 0;
-                    setTimeout(function typePart2() {
-                        if (introCompleted) return;
-                        if (roleAccent && j < part2Text.length) {
-                            roleAccent.textContent += part2Text[j];
-                            j++;
-                            setTimeout(typePart2, 26);
-                        } else {
-                            // Typing complete: hide cursor smoothly
-                            if (roleCursor) {
-                                roleCursor.style.opacity = '0';
-                                setTimeout(() => { if (roleCursor) roleCursor.style.display = 'none'; }, 300);
-                            }
-
-                            // Pause for reading, then smoothly glide into final resting position
-                            setTimeout(() => {
-                                startMoveToRestingPosition();
-                            }, 550);
-                        }
-                    }, 80);
-                }
-            }
-
-            typePart1();
-        }, 2050);
 
         function startMoveToRestingPosition() {
             if (introCompleted) return;
