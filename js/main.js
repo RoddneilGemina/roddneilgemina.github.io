@@ -680,79 +680,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 { label: 'PCSC 2026 Congress', url: 'https://csp.org.ph/pcsc2026' }
             ]
         },
-        p_lupus: {
-            title: 'Lupus Lens: Multimodal SLE AI Screening',
-            type: 'ACM / Scopus ICMHI 2026 Paper',
-            image: 'images/1_dashboard.png',
-            orientation: 'landscape',
-            oneLiner: 'Clinical decision-support interface for Systemic Lupus Erythematosus (SLE) screening via Swin-SNN fusion.',
-            problem: 'Clinicians face significant challenges detecting Systemic Lupus Erythematosus (SLE) early due to heterogeneous systemic presentations, while conventional diagnostic workflows struggle to synthesize ocular retinal pathology and high-dimensional transcriptomic profiles.',
-            goal: 'Synthesize retinal fundus imaging with transcriptomic gene expression through a Swin Transformer & Spiking Neural Network (Swin-SNN) cross-modal fusion model, providing transparent Grad-CAM attention heatmaps and quantified risk scoring.',
-            contributions: 'Co-Author & Full-Stack Systems Developer (ACM ICMHI 2026, Kyoto, Japan)',
-            techStack: ['React 19', 'TypeScript', 'Tailwind CSS v4', 'Zustand', 'Recharts', 'Gradio Client', 'Supabase'],
-            links: [
-                { label: 'GitHub Repository', url: 'https://github.com/moltmalt/lupus-lens' },
-                { label: 'Live Clinical Web App', url: 'https://lupus-lens-two.vercel.app' }
-            ]
-        },
-        p_pixcell: {
-            title: 'PixCell: Real-Time Diagnostic Workspace',
-            type: 'Medical AI Platform',
-            image: 'images/2026-08-29 20.09.21 pixcell-ai.vercel.app 78296ef1a987.png',
-            orientation: 'landscape',
-            oneLiner: 'Real-time diagnostic collaboration platform for clinicians integrating YOLOv8 and LLM reporting.',
-            problem: 'Medical specialists and diagnostic labs struggle with fragmented collaboration tools, delayed peer reviews, and manual drafting of repetitive pathology reports.',
-            goal: 'Build an ultra-fast collaborative medical canvas with real-time YOLOv8 automated cell detection, multi-physician presence, and automated LLM-generated clinical summaries.',
-            contributions: 'Full-Stack Lead & AI Integration Architect',
-            techStack: ['Next.js', 'FastAPI', 'YOLOv8', 'Supabase', 'PostgreSQL', 'Python'],
-            links: [
-                { label: 'GitHub Repository', url: 'https://github.com/simon-escano/pixcell' }
-            ]
-        },
-        p_stemi: {
-            title: 'STEMIFlow: Emergency Cardiac Triage',
-            type: 'Cardiac Emergency Care',
-            image: 'images/1_home_page.png',
-            orientation: 'landscape',
-            oneLiner: 'Prehospital STEMI triage and referral orchestration platform with real-time risk scoring and cath lab pre-alerts.',
-            problem: 'Prehospital emergency responders and cardiac care teams face critical delays and fragmented coordination during acute STEMI events, leading to prolonged door-to-balloon times and suboptimal patient outcomes.',
-            goal: 'Deliver an automated emergency dispatch and triage orchestrator calculating TIMI risk scores, identifying optimal percutaneous coronary intervention (PCI) centers with live traffic routing, and triggering cath lab pre-activation alerts.',
-            contributions: 'Lead Systems Architect & Full-Stack Developer',
-            techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Leaflet GIS', 'Supabase', 'Vercel'],
-            links: [
-                { label: 'GitHub Repository', url: 'https://github.com/moltmalt/STEMIFlow' },
-                { label: 'Live Emergency System', url: 'https://stemiflow.vercel.app/' }
-            ]
-        },
-        p_kaagapai: {
-            title: 'KaagapAI: Rural Health Unit Platform',
-            type: 'Offline-First HealthTech',
-            image: 'images/2_triage_case.png',
-            orientation: 'landscape',
-            oneLiner: 'Offline-first clinical decision-support and supply chain orchestration for Barangay Health Workers.',
-            problem: 'Barangay Health Workers (BHWs) and Rural Health Units (RHUs) in underserved Philippine communities face critical challenges with paper-bound records, manual triage errors, delayed emergency hospital handoffs, and unexpected medicine stockouts.',
-            goal: 'Architect an offline-first PWA with multi-lingual voice triage, automated emergency hospital referral handoffs, and predictive medical inventory consumption models.',
-            contributions: 'Lead Full-Stack Architect & Systems Developer',
-            techStack: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Radix UI', 'Lucide React', 'Supabase'],
-            links: [
-                { label: 'GitHub Repository', url: 'https://github.com/moltmalt/KaagapAI' },
-                { label: 'Live Clinical Web App', url: 'https://kaagapai.vercel.app' }
-            ]
-        },
-        p_trellis: {
-            title: 'Trellis: Knowledge Concept Mapping',
-            type: 'Document Intelligence',
-            image: 'images/1_canvas_overview.png',
-            orientation: 'landscape',
-            oneLiner: 'Interactive concept mapping and document intelligence engine turning unstructured text into force-directed network graphs.',
-            problem: 'Researchers and knowledge workers struggle to assimilate multi-hundred page technical manuals, research compendiums, and complex documentation without losing contextual cross-references.',
-            goal: 'Build an ultra-fast document intelligence platform using Rust (Axum) and Angular 18 that extracts semantic entities, clusters related concepts, and renders fluid force-directed relationship graphs.',
-            contributions: 'Solo Systems Architect & Full-Stack Developer',
-            techStack: ['Rust', 'Axum', 'Angular 18', 'TypeScript', 'async-graphql', 'vis-network', 'PostgreSQL 16', 'Docker'],
-            links: [
-                { label: 'Live Application', url: 'https://trellis-dev.vercel.app' }
-            ]
-        },
         p9: {
             title: 'Refertoire — Sheet Music Repertoire Manager',
             type: 'Freelance Offline-First App',
@@ -808,17 +735,6 @@ document.addEventListener('DOMContentLoaded', () => {
             contributions: 'Backend Lead & Full-Stack Developer',
             techStack: ['Django', 'Python', 'PostgreSQL', 'Tailwind CSS', 'REST APIs']
         },
-        p_teknotes: {
-            title: 'TekNotes: Community Academic Platform',
-            type: 'Collaborative Workspace',
-            image: 'images/1a84682f-afc3-47c8-88c7-8bb4639b41cf.jpeg',
-            orientation: 'landscape',
-            oneLiner: 'Community-driven note sharing app built with Django, leveraging WebSockets and Redis.',
-            problem: 'University students frequently lack a centralized, searchable repository for high-quality lecture notes, study guides, and peer review materials.',
-            goal: 'Develop a high-performance academic collaboration hub with real-time peer discussion channels, markdown rich-text editing, and Redis-cached fast document indexing.',
-            contributions: 'Full-Stack Developer & QA Engineer',
-            techStack: ['Django', 'PostgreSQL', 'Redis', 'WebSockets', 'Tailwind CSS']
-        },
         p6: {
             title: 'Bomberman BattleRoyale: Java PvP',
             type: 'Java Multiplayer Game',
@@ -829,17 +745,6 @@ document.addEventListener('DOMContentLoaded', () => {
             goal: 'Demonstrate fundamental multithreaded systems programming and object-oriented design patterns by building a low-latency TCP/UDP client-server game with predictive arena shrinking and collision physics.',
             contributions: 'Game Architect & Network Engineer',
             techStack: ['Java', 'Multithreading', 'Sockets (TCP/UDP)', 'Swing', 'OOP Design Patterns']
-        },
-        p_fasaar: {
-            title: 'Fasaar: Multiplayer Game Engine',
-            type: '2.5D Multiplayer Arena',
-            image: 'images/442706920_832106975441812_7649371869780998775_n.png',
-            orientation: 'landscape',
-            oneLiner: '2.5D multiplayer game built with LibGDX and Java featuring KryoNet network synchronization.',
-            problem: 'Synchronizing high-frequency projectile trajectories and player states in fast-paced 2.5D arenas without visual stuttering or server overhead.',
-            goal: 'Build a modular game client and headless authoritative server using LibGDX and KryoNet serialization, demonstrating decoupled rendering and packet compression.',
-            contributions: 'Game Architect & QA Engineer',
-            techStack: ['Java', 'LibGDX', 'KryoNet', 'MySQL', 'Gradle']
         }
     };
 
