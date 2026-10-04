@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (rolePart1 && i < part1Text.length) {
                         rolePart1.textContent += part1Text[i];
                         i++;
-                        setTimeout(typePart1, 26);
+                        setTimeout(typePart1, 35);
                     } else {
                         // Show separator '&' in dimmed cyan
                         if (roleSep) roleSep.style.display = 'inline';
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (roleAccent && j < part2Text.length) {
                                 roleAccent.textContent += part2Text[j];
                                 j++;
-                                setTimeout(typePart2, 26);
+                                setTimeout(typePart2, 35);
                             } else {
                                 // Typing complete: hide cursor smoothly
                                 if (roleCursor) {
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     startMoveToRestingPosition();
                                 }, 650);
                             }
-                        }, 70);
+                        }, 100);
                     }
                 }
 
@@ -426,15 +426,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     // ==========================================================================
-    // 3B. INTERACTIVE 3D PERSPECTIVE TILT EFFECT FOR ALL CAROUSEL CARDS
+    // 3B. INTERACTIVE 3D PERSPECTIVE TILT EFFECT FOR STEADY CARDS
     // ==========================================================================
-    const tiltCarouselCards = document.querySelectorAll('.carousel-card, .tech-stack-carousel-card');
-    tiltCarouselCards.forEach(card => {
+    const tiltSteadyCards = document.querySelectorAll('.skills-steady-card');
+    tiltSteadyCards.forEach(card => {
         let isHovered = false;
 
         card.addEventListener('mouseenter', () => {
             isHovered = true;
-            card.style.transition = 'transform 0.12s ease-out, border-color 0.25s ease, box-shadow 0.25s ease';
+            card.style.transition = 'transform 0.15s ease-out, border-color 0.25s ease, box-shadow 0.25s ease';
         });
 
         card.addEventListener('mousemove', (e) => {
@@ -446,10 +446,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const centerY = rect.height / 2;
 
             // Pitch & roll calculation with subtle, sleek 3D depth
-            const rotateX = ((centerY - y) / centerY) * 7.5;
-            const rotateY = ((x - centerX) / centerX) * 7.5;
+            const rotateX = ((centerY - y) / centerY) * 4.5;
+            const rotateY = ((x - centerX) / centerX) * 4.5;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translate3d(0, -6px, 12px) scale3d(1.02, 1.02, 1.02)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
         });
 
         card.addEventListener('mouseleave', () => {
