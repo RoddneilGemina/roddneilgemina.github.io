@@ -427,7 +427,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     // ==========================================================================
-    // 4. SMOOTH EASE-IN SECTION REVEALS WITH FIRST-TIME SCROLL HIGHLIGHT & GLITCH
+    // 3B. INTERACTIVE 3D PERSPECTIVE TILT EFFECT FOR ALL CAROUSEL CARDS
+    // ==========================================================================
+    const tiltCarouselCards = document.querySelectorAll('.carousel-card, .tech-stack-carousel-card');
+    tiltCarouselCards.forEach(card => {
+        let isHovered = false;
+
+        card.addEventListener('mouseenter', () => {
+            isHovered = true;
+            card.style.transition = 'transform 0.12s ease-out, border-color 0.25s ease, box-shadow 0.25s ease';
+        });
+
+        card.addEventListener('mousemove', (e) => {
+            if (!isHovered) return;
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            // Pitch & roll calculation with subtle, sleek 3D depth
+            const rotateX = ((centerY - y) / centerY) * 7.5;
+            const rotateY = ((x - centerX) / centerX) * 7.5;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translate3d(0, -6px, 12px) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            isHovered = false;
+            card.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease';
+            card.style.transform = '';
+        });
+    });
+
+    // ==========================================================================
+    // 4. SMOOTH EASE-UP FADE-IN SECTION REVEALS (FIRST-TIME SCROLL HIGHLIGHT)
     // ==========================================================================
     const revealSections = document.querySelectorAll('.reveal-on-scroll');
 
@@ -452,8 +486,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        threshold: 0.12,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.08,
+        rootMargin: '0px 0px -50px 0px'
     });
 
     revealSections.forEach(sec => {
