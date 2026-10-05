@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 1B. FULLSCREEN CINEMATIC INTRO SEQUENCE CONTROLLER
+    // 1B. CINEMATIC INTRO & HERO CONTROLLER
     // ==========================================================================
     const introCurtain = document.getElementById('intro-curtain-bg');
     const heroNameContainer = document.getElementById('hero-name-container');
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const roleAccent = document.getElementById('role-accent');
     const roleCursor = document.getElementById('role-cursor');
     const heroSection = document.getElementById('hero');
-    const heroContent = document.querySelector('.hero-centered-content');
+    const heroContent = document.querySelector('.hero-split-grid') || document.querySelector('.hero-container');
 
     let introCompleted = false;
 
@@ -40,43 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('intro-active');
         window.scrollTo(0, 0);
 
-        // Calculate offset to place the hero name and role vertically centered in the viewport
-        const nameRect = heroNameContainer.getBoundingClientRect();
-        const roleRect = heroMainRole.getBoundingClientRect();
-        const viewportCenterY = window.innerHeight / 2;
-        const nameCenterY = nameRect.top + (nameRect.height / 2);
-        const centerOffsetY = Math.round(viewportCenterY - nameCenterY - 18);
-        const roleIntroOffsetY = Math.round(centerOffsetY - (roleRect.top - (nameRect.bottom + 16)));
-
-        // Position in center of pitch black screen above curtain (z-index: 9995)
-        heroNameContainer.style.zIndex = '9995';
-        heroMainRole.style.zIndex = '9995';
-        heroNameContainer.style.transformOrigin = 'center center';
-        heroNameContainer.style.transform = `translate3d(0, ${centerOffsetY}px, 0) scale(0.88)`;
-        heroMainRole.style.transform = `translate3d(0, ${roleIntroOffsetY}px, 0)`;
-        heroNameContainer.style.opacity = '0';
-        heroMainRole.style.opacity = '0';
-
-        // 1. Pitch-black void: Name fades and grows
+        // Softly fade black curtain to reveal the cosmic 2-column hero
         setTimeout(() => {
-            if (introCompleted) return;
-            // Name fades in and grows smoothly
-            heroNameContainer.style.transition = 'opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1), transform 1.25s cubic-bezier(0.16, 1, 0.3, 1)';
-            heroNameContainer.style.opacity = '1';
-            heroNameContainer.style.transform = `translate3d(0, ${centerOffsetY}px, 0) scale(1)`;
+            if (introCurtain) introCurtain.style.opacity = '0';
+            if (heroContent) heroContent.classList.add('hero-entered');
+            if (heroSection) heroSection.classList.add('revealed');
             if (heroNameAura) heroNameAura.classList.add('active');
 
-            // 2. Metallic glint and typing of role/subtitle go together in tandem
+            // Trigger metallic chrome reflection glint across name
             setTimeout(() => {
-                if (introCompleted) return;
-
-                // Trigger metallic reflection glint sliding across the name
                 if (heroMetallicGlint) heroMetallicGlint.classList.add('sliding');
+            }, 300);
 
-                // Simultaneously begin typing the role / subtitle
-                heroMainRole.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-                heroMainRole.style.opacity = '1';
-
+            // Simultaneously type the job role inside the portrait overlay
+            setTimeout(() => {
                 const part1Text = 'Full-Stack Developer';
                 const part2Text = 'Software Engineer';
                 let i = 0;
@@ -88,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         i++;
                         setTimeout(typePart1, 35);
                     } else {
-                        // Show separator '&' in dimmed cyan
                         if (roleSep) roleSep.style.display = 'inline';
                         let j = 0;
                         setTimeout(function typePart2() {
@@ -98,62 +74,28 @@ document.addEventListener('DOMContentLoaded', () => {
                                 j++;
                                 setTimeout(typePart2, 35);
                             } else {
-                                // Typing complete: hide cursor smoothly
+                                introCompleted = true;
                                 if (roleCursor) {
                                     roleCursor.style.opacity = '0';
                                     setTimeout(() => { if (roleCursor) roleCursor.style.display = 'none'; }, 300);
                                 }
-
-                                // Pause for reading, then smoothly glide into final resting position
-                                setTimeout(() => {
-                                    startMoveToRestingPosition();
-                                }, 650);
                             }
-                        }, 100);
+                        }, 90);
                     }
                 }
 
                 typePart1();
-            }, 450);
-        }, 320);
+            }, 250);
 
-        function startMoveToRestingPosition() {
-            if (introCompleted) return;
-            introCompleted = true;
-
-            // Glide smoothly from centerOffsetY to 0
-            const glideDuration = 'transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)';
-            heroNameContainer.style.transition = glideDuration;
-            heroMainRole.style.transition = glideDuration;
-            heroNameContainer.style.transform = 'translate3d(0, 0, 0) scale(1)';
-            heroMainRole.style.transform = 'translate3d(0, 0, 0)';
-
-            // Obvious slow fade of black curtain to reveal 3D cosmic background
-            introCurtain.style.opacity = '0';
-
-            // Softly fade backlight aura
-            if (heroNameAura) {
-                heroNameAura.style.transition = 'opacity 1.4s ease';
-                heroNameAura.style.opacity = '0';
-            }
-
-            // Stagger in surrounding hero elements (status pill, summary, CTAs)
-            if (heroContent) heroContent.classList.add('hero-entered');
-            if (heroSection) heroSection.classList.add('revealed');
-
-            // Complete transition cleanly with zero blinks or snaps
+            // Complete intro transition cleanly
             setTimeout(() => {
-                heroNameContainer.style.transition = '';
-                heroMainRole.style.transition = '';
-                heroNameContainer.style.transform = '';
-                heroMainRole.style.transform = '';
-                heroNameContainer.style.zIndex = '';
-                heroMainRole.style.zIndex = '';
-                if (heroMetallicGlint) heroMetallicGlint.style.display = 'none';
+                introCompleted = true;
                 document.body.classList.remove('intro-active');
-                introCurtain.style.display = 'none';
-            }, 1450);
-        }
+                if (introCurtain) introCurtain.style.display = 'none';
+                if (heroMetallicGlint) heroMetallicGlint.style.display = 'none';
+            }, 2400);
+
+        }, 150);
     } else {
         if (rolePart1) rolePart1.textContent = 'Full-Stack Developer';
         if (roleSep) roleSep.style.display = 'inline';
