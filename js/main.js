@@ -486,6 +486,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3B. GOOGLE AI STUDIO FROSTED GLASS MOUSE-TRACKING SPOTLIGHT
     // ==========================================================================
     document.addEventListener('pointermove', (e) => {
+        // Performance optimization: skip moving carousel cards to prevent layout thrashing
+        if (e.target.closest('.carousel-card')) return;
+
         const card = e.target.closest('.glass-card, .pill-card, .contact-horizontal-card, .modal-screenshot-container');
         if (!card) return;
         const rect = card.getBoundingClientRect();
@@ -504,30 +507,95 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     // ==========================================================================
-    // 3C. SCATTERED CARDS SPREAD ON SCROLL (SKILLS & TECH STACKS FIELD EXPANSION)
+    // 3C. INTERACTIVE TECH STACK LOGO GRID WITH GLIDING HIGHLIGHT BOX & FILTER TABS
     // ==========================================================================
-    const skillCategoryGroups = document.querySelectorAll('.skills-category-group');
-    if (skillCategoryGroups.length > 0) {
-        const spreadObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-spread');
-                }
+    function initStackHighlightBox() {
+        const gridWrapper = document.getElementById('stack-grid-wrapper');
+        const highlightBox = document.getElementById('stack-highlight-box');
+        const stackCards = document.querySelectorAll('.stack-logo-card');
+        const filterTabs = document.querySelectorAll('.stack-filter-tab');
+
+        if (!gridWrapper || !highlightBox || stackCards.length === 0) return;
+
+        let activeCard = null;
+        let isHovered = false;
+
+        function updateHighlightPosition(card) {
+            if (!card || card.classList.contains('is-hidden')) {
+                highlightBox.classList.remove('is-active');
+                return;
+            }
+            const wrapperRect = gridWrapper.getBoundingClientRect();
+            const cardRect = card.getBoundingClientRect();
+
+            const cardLeft = cardRect.left - wrapperRect.left;
+            const cardTop = cardRect.top - wrapperRect.top;
+            const cardWidth = cardRect.width;
+            const cardHeight = cardRect.height;
+
+            highlightBox.style.width = `${cardWidth}px`;
+            highlightBox.style.height = `${cardHeight}px`;
+            highlightBox.style.transform = `translate3d(${cardLeft}px, ${cardTop}px, 0)`;
+            highlightBox.classList.add('is-active');
+        }
+
+        stackCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                isHovered = true;
+                activeCard = card;
+                updateHighlightPosition(card);
             });
-        }, {
-            threshold: 0.12,
-            rootMargin: '0px 0px -40px 0px'
+
+            card.addEventListener('focus', () => {
+                isHovered = true;
+                activeCard = card;
+                updateHighlightPosition(card);
+            });
         });
 
-        skillCategoryGroups.forEach(group => {
-            spreadObserver.observe(group);
-            // If already in view on page load (e.g. reload or anchor link)
-            const rect = group.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                group.classList.add('is-spread');
+        gridWrapper.addEventListener('mouseleave', () => {
+            isHovered = false;
+            activeCard = null;
+            highlightBox.classList.remove('is-active');
+        });
+
+        // Recalculate if window resizes or zoom changes
+        window.addEventListener('resize', () => {
+            if (isHovered && activeCard) {
+                updateHighlightPosition(activeCard);
             }
+        }, { passive: true });
+
+        // Category Filter Tabs
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const filter = tab.getAttribute('data-filter');
+
+                filterTabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+
+                // Hide highlight box during transition
+                highlightBox.classList.remove('is-active');
+                activeCard = null;
+                isHovered = false;
+
+                stackCards.forEach(card => {
+                    const cat = card.getAttribute('data-category');
+                    if (filter === 'all' || cat === filter) {
+                        card.classList.remove('is-hidden');
+                    } else {
+                        card.classList.add('is-hidden');
+                    }
+                });
+            });
         });
     }
+
+    initStackHighlightBox();
 
     // ==========================================================================
     // 4. SMOOTH EASE-UP FADE-IN SECTION REVEALS (FIRST-TIME SCROLL HIGHLIGHT)
