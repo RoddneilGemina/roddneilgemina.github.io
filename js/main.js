@@ -507,66 +507,76 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     // ==========================================================================
-    // 3C. INTERACTIVE TECH STACK LOGO GRID WITH GLIDING HIGHLIGHT BOX & FILTER TABS
+    // 3C. INTERACTIVE TECH STACK LOGO MATRIX WITH GLIDING HIGHLIGHT BOX
     // ==========================================================================
     function initStackHighlightBox() {
         const gridWrapper = document.getElementById('stack-grid-wrapper');
         const highlightBox = document.getElementById('stack-highlight-box');
-        const stackCards = document.querySelectorAll('.stack-logo-card');
+        const stackCells = document.querySelectorAll('.stack-square-cell, .stack-logo-card');
         const filterTabs = document.querySelectorAll('.stack-filter-tab');
+        const activeLabel = document.getElementById('stack-active-label');
 
-        if (!gridWrapper || !highlightBox || stackCards.length === 0) return;
+        if (!gridWrapper || !highlightBox || stackCells.length === 0) return;
 
-        let activeCard = null;
+        let activeCell = null;
         let isHovered = false;
 
-        function updateHighlightPosition(card) {
-            if (!card || card.classList.contains('is-hidden')) {
+        function updateHighlightPosition(cell) {
+            if (!cell || cell.classList.contains('is-dimmed') || cell.classList.contains('is-hidden')) {
                 highlightBox.classList.remove('is-active');
+                if (activeLabel) activeLabel.textContent = 'HOVER ANY TECHNOLOGY';
                 return;
             }
             const wrapperRect = gridWrapper.getBoundingClientRect();
-            const cardRect = card.getBoundingClientRect();
+            const cellRect = cell.getBoundingClientRect();
 
-            const cardLeft = cardRect.left - wrapperRect.left;
-            const cardTop = cardRect.top - wrapperRect.top;
-            const cardWidth = cardRect.width;
-            const cardHeight = cardRect.height;
+            const cellLeft = cellRect.left - wrapperRect.left;
+            const cellTop = cellRect.top - wrapperRect.top;
+            const cellWidth = cellRect.width;
+            const cellHeight = cellRect.height;
 
-            highlightBox.style.width = `${cardWidth}px`;
-            highlightBox.style.height = `${cardHeight}px`;
-            highlightBox.style.transform = `translate3d(${cardLeft}px, ${cardTop}px, 0)`;
+            highlightBox.style.width = `${cellWidth}px`;
+            highlightBox.style.height = `${cellHeight}px`;
+            highlightBox.style.transform = `translate3d(${cellLeft}px, ${cellTop}px, 0)`;
             highlightBox.classList.add('is-active');
+
+            const techName = cell.getAttribute('data-name') || cell.getAttribute('aria-label');
+            if (activeLabel && techName) {
+                activeLabel.textContent = techName.toUpperCase();
+            }
         }
 
-        stackCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
+        stackCells.forEach(cell => {
+            cell.addEventListener('mouseenter', () => {
                 isHovered = true;
-                activeCard = card;
-                updateHighlightPosition(card);
+                activeCell = cell;
+                updateHighlightPosition(cell);
             });
 
-            card.addEventListener('focus', () => {
+            cell.addEventListener('focus', () => {
                 isHovered = true;
-                activeCard = card;
-                updateHighlightPosition(card);
+                activeCell = cell;
+                updateHighlightPosition(cell);
             });
         });
 
         gridWrapper.addEventListener('mouseleave', () => {
             isHovered = false;
-            activeCard = null;
+            activeCell = null;
             highlightBox.classList.remove('is-active');
+            if (activeLabel) {
+                activeLabel.textContent = 'HOVER ANY TECHNOLOGY';
+            }
         });
 
         // Recalculate if window resizes or zoom changes
         window.addEventListener('resize', () => {
-            if (isHovered && activeCard) {
-                updateHighlightPosition(activeCard);
+            if (isHovered && activeCell) {
+                updateHighlightPosition(activeCell);
             }
         }, { passive: true });
 
-        // Category Filter Tabs
+        // Category Filter Tabs (dims non-matching cells so grid dividing lines remain intact)
         filterTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 const filter = tab.getAttribute('data-filter');
@@ -580,15 +590,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Hide highlight box during transition
                 highlightBox.classList.remove('is-active');
-                activeCard = null;
+                activeCell = null;
                 isHovered = false;
+                if (activeLabel) activeLabel.textContent = 'HOVER ANY TECHNOLOGY';
 
-                stackCards.forEach(card => {
-                    const cat = card.getAttribute('data-category');
+                stackCells.forEach(cell => {
+                    const cat = cell.getAttribute('data-category');
                     if (filter === 'all' || cat === filter) {
-                        card.classList.remove('is-hidden');
+                        cell.classList.remove('is-dimmed');
                     } else {
-                        card.classList.add('is-hidden');
+                        cell.classList.add('is-dimmed');
                     }
                 });
             });
