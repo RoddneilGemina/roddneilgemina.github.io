@@ -20,10 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 1B. CINEMATIC INTRO & HERO CONTROLLER
+    // 1B. FULLSCREEN CINEMATIC INTRO SEQUENCE CONTROLLER
     // ==========================================================================
     const introCurtain = document.getElementById('intro-curtain-bg');
     const heroNameContainer = document.getElementById('hero-name-container');
+    const heroNameWrapper = document.getElementById('hero-name-wrapper');
     const heroNameAura = document.getElementById('hero-name-aura');
     const heroMetallicGlint = document.getElementById('hero-metallic-glint');
     const heroMainRole = document.getElementById('hero-main-role');
@@ -33,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const roleCursor = document.getElementById('role-cursor');
     const heroSection = document.getElementById('hero');
     const heroContent = document.querySelector('.hero-split-grid') || document.querySelector('.hero-container');
+    const portraitLineEmitter = document.getElementById('portrait-line-emitter');
+    const portraitRoleDrawer = document.getElementById('portrait-role-drawer');
 
     let introCompleted = false;
 
@@ -40,30 +43,66 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('intro-active');
         window.scrollTo(0, 0);
 
-        // Softly fade black curtain to reveal the cosmic 2-column hero
+        // Pre-fill text momentarily to compute precise rendered bounding box dimensions
+        const part1Text = 'Full-Stack Developer';
+        const part2Text = 'Software Engineer';
+        if (rolePart1) rolePart1.textContent = part1Text;
+        if (roleSep) roleSep.style.display = 'inline';
+        if (roleAccent) roleAccent.textContent = part2Text;
+
+        const viewportCenterX = window.innerWidth / 2;
+        const viewportCenterY = window.innerHeight / 2;
+
+        const nameTargetEl = heroNameWrapper || heroNameContainer;
+        const nameRect = nameTargetEl.getBoundingClientRect();
+        const roleRect = heroMainRole.getBoundingClientRect();
+
+        const nameTargetX = Math.round(viewportCenterX - (nameRect.left + nameRect.width / 2));
+        const nameTargetY = Math.round((viewportCenterY - 32) - (nameRect.top + nameRect.height / 2));
+
+        const roleTargetX = Math.round(viewportCenterX - (roleRect.left + roleRect.width / 2));
+        const roleTargetY = Math.round((viewportCenterY + 30) - (roleRect.top + roleRect.height / 2));
+
+        // Clear text before starting cinematic entrance
+        if (rolePart1) rolePart1.textContent = '';
+        if (roleSep) roleSep.style.display = 'none';
+        if (roleAccent) roleAccent.textContent = '';
+
+        // Position initial elements in the center of pitch-black screen
+        heroNameContainer.style.zIndex = '9998';
+        heroMainRole.style.zIndex = '9998';
+        heroNameContainer.style.transformOrigin = 'center center';
+        heroNameContainer.style.transform = `translate3d(${nameTargetX}px, ${nameTargetY}px, 0) scale(0.88)`;
+        heroMainRole.style.transform = `translate3d(${roleTargetX}px, ${roleTargetY}px, 0)`;
+        heroNameContainer.style.opacity = '0';
+        heroMainRole.style.opacity = '0';
+
+        // 1. Pitch-black void: Name fades in and grows smoothly
         setTimeout(() => {
-            if (introCurtain) introCurtain.style.opacity = '0';
-            if (heroContent) heroContent.classList.add('hero-entered');
-            if (heroSection) heroSection.classList.add('revealed');
+            if (introCompleted) return;
+            heroNameContainer.style.transition = 'opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1), transform 1.25s cubic-bezier(0.16, 1, 0.3, 1)';
+            heroNameContainer.style.opacity = '1';
+            heroNameContainer.style.transform = `translate3d(${nameTargetX}px, ${nameTargetY}px, 0) scale(1)`;
             if (heroNameAura) heroNameAura.classList.add('active');
 
-            // Trigger metallic chrome reflection glint across name
+            // 2. Metallic glint and typing of role in tandem
             setTimeout(() => {
+                if (introCompleted) return;
+
+                // Specular reflection glint sliding across typography
                 if (heroMetallicGlint) heroMetallicGlint.classList.add('sliding');
-            }, 300);
 
-            // Simultaneously type the job role inside the portrait overlay
-            setTimeout(() => {
-                const part1Text = 'Full-Stack Developer';
-                const part2Text = 'Software Engineer';
+                // Simultaneously begin typing role
+                heroMainRole.style.transition = 'opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+                heroMainRole.style.opacity = '1';
+
                 let i = 0;
-
                 function typePart1() {
                     if (introCompleted) return;
                     if (rolePart1 && i < part1Text.length) {
                         rolePart1.textContent += part1Text[i];
                         i++;
-                        setTimeout(typePart1, 35);
+                        setTimeout(typePart1, 26);
                     } else {
                         if (roleSep) roleSep.style.display = 'inline';
                         let j = 0;
@@ -72,35 +111,79 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (roleAccent && j < part2Text.length) {
                                 roleAccent.textContent += part2Text[j];
                                 j++;
-                                setTimeout(typePart2, 35);
+                                setTimeout(typePart2, 26);
                             } else {
-                                introCompleted = true;
+                                // Typing complete: hide cursor smoothly
                                 if (roleCursor) {
                                     roleCursor.style.opacity = '0';
-                                    setTimeout(() => { if (roleCursor) roleCursor.style.display = 'none'; }, 300);
+                                    setTimeout(() => { if (roleCursor) roleCursor.style.display = 'none'; }, 280);
                                 }
+
+                                // 3. Pause for reading, then smoothly glide to resting position on the LEFT side
+                                setTimeout(() => {
+                                    startMoveToLeftColumn();
+                                }, 550);
                             }
-                        }, 90);
+                        }, 70);
                     }
                 }
 
                 typePart1();
-            }, 250);
+            }, 450);
+        }, 320);
 
-            // Complete intro transition cleanly
+        function startMoveToLeftColumn() {
+            if (introCompleted) return;
+
+            // Smooth glide from center to left column resting position
+            const glideDuration = 'transform 1.35s cubic-bezier(0.16, 1, 0.3, 1)';
+            heroNameContainer.style.transition = glideDuration;
+            heroMainRole.style.transition = glideDuration;
+            heroNameContainer.style.transform = 'translate3d(0, 0, 0) scale(1)';
+            heroMainRole.style.transform = 'translate3d(0, 0, 0)';
+
+            // Curtain dissolves revealing background
+            if (introCurtain) introCurtain.style.opacity = '0';
+
+            // Softly fade backlight aura
+            if (heroNameAura) {
+                heroNameAura.style.transition = 'opacity 1.4s ease';
+                heroNameAura.style.opacity = '0';
+            }
+
+            // Stagger in surrounding hero elements on the left & right
+            if (heroContent) heroContent.classList.add('hero-entered');
+            if (heroSection) heroSection.classList.add('revealed');
+
+            // 4. Picture's OWN INTRO: As left side settles, laser line draws across picture and role unfolds!
+            setTimeout(() => {
+                if (portraitLineEmitter) portraitLineEmitter.classList.add('line-ignited');
+                setTimeout(() => {
+                    if (portraitRoleDrawer) portraitRoleDrawer.classList.add('drawer-open');
+                }, 350);
+            }, 600);
+
+            // Clean up intro transition styles
             setTimeout(() => {
                 introCompleted = true;
+                heroNameContainer.style.transition = '';
+                heroMainRole.style.transition = '';
+                heroNameContainer.style.transform = '';
+                heroMainRole.style.transform = '';
+                heroNameContainer.style.zIndex = '';
+                heroMainRole.style.zIndex = '';
+                if (heroMetallicGlint) heroMetallicGlint.style.display = 'none';
                 document.body.classList.remove('intro-active');
                 if (introCurtain) introCurtain.style.display = 'none';
-                if (heroMetallicGlint) heroMetallicGlint.style.display = 'none';
-            }, 2400);
-
-        }, 150);
+            }, 1450);
+        }
     } else {
         if (rolePart1) rolePart1.textContent = 'Full-Stack Developer';
         if (roleSep) roleSep.style.display = 'inline';
         if (roleAccent) roleAccent.textContent = 'Software Engineer';
         if (roleCursor) roleCursor.style.display = 'none';
+        if (portraitLineEmitter) portraitLineEmitter.classList.add('line-ignited');
+        if (portraitRoleDrawer) portraitRoleDrawer.classList.add('drawer-open');
         if (heroSection) heroSection.classList.add('revealed');
         if (heroContent) heroContent.classList.add('hero-entered');
     }
@@ -240,180 +323,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 2. THREE.JS 3D COSMIC BACKGROUND (POLYHEDRONS & STARDUST PARTICLES)
+    // 2. REACT BITS SCANNER WEBGL BACKGROUND (HERO SECTION)
     // ==========================================================================
-    let threeScene, threeCamera, threeRenderer;
-    let cosmicMeshArray = [];
-    let starParticles;
-    let targetMouseX = 0, targetMouseY = 0, currentMouseX = 0, currentMouseY = 0;
+    let scannerInstance = null;
     let currentThemeMode = localStorage.getItem('portfolio_theme') || 'dark';
 
-    function init3DBackdrop() {
-        const canvas = document.getElementById('canvas-3d-bg');
-        if (!canvas || typeof THREE === 'undefined') return;
+    function initScannerBackground() {
+        const scannerContainer = document.getElementById('hero-scanner-container');
+        if (!scannerContainer || typeof Scanner === 'undefined') return;
 
-        threeScene = new THREE.Scene();
-        threeCamera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
-        threeCamera.position.set(0, 0, 35);
-
-        threeRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-        threeRenderer.setSize(window.innerWidth, window.innerHeight);
-        threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-        // Ambient & Directional Luminous Cyan / Subtle Violet Lights
-        const ambientLight = new THREE.AmbientLight(0x0a0f1d, 1.2);
-        threeScene.add(ambientLight);
-
-        const cyanLight = new THREE.PointLight(0x00F0FF, 1.8, 80);
-        cyanLight.position.set(20, 25, 20);
-        threeScene.add(cyanLight);
-
-        const violetLight = new THREE.PointLight(0x8b5cf6, 2.0, 90);
-        violetLight.position.set(-25, -20, 15);
-        threeScene.add(violetLight);
-
-        // Geometries for cosmic floating elements
-        const boxGeo = new THREE.BoxGeometry(1.4, 1.4, 1.4);
-        const icosaGeo = new THREE.IcosahedronGeometry(1.2, 0);
-        const octaGeo = new THREE.OctahedronGeometry(1.1, 0);
-        const geos = [boxGeo, icosaGeo, octaGeo];
-
-        // Cosmic Palette
-        const DARK_MESH_COLORS = [
-            0x00F0FF, // Cyan
-            0x8b5cf6, // Violet
-            0x0ea5e9, // Sky Blue
-            0x1e293b, // Deep Slate
-            0x334155  // Subtle Slate
-        ];
-
-        const LIGHT_MESH_COLORS = [
-            0x0284c7,
-            0x7c3aed,
-            0xe2e8f0,
-            0x38bdf8
-        ];
-
-        const activePalette = (currentThemeMode === 'light') ? LIGHT_MESH_COLORS : DARK_MESH_COLORS;
-
-        // Generate ~80 Floating Cosmic Meshes with subtle wireframe/edges
-        for (let i = 0; i < 75; i++) {
-            const geo = geos[Math.floor(Math.random() * geos.length)];
-            const colorHex = activePalette[Math.floor(Math.random() * activePalette.length)];
-            
-            const mat = new THREE.MeshStandardMaterial({
-                color: colorHex,
-                roughness: 0.25,
-                metalness: 0.35,
-                transparent: true,
-                opacity: (currentThemeMode === 'light') ? 0.75 : 0.65,
-                wireframe: Math.random() > 0.65
-            });
-
-            const mesh = new THREE.Mesh(geo, mat);
-
-            mesh.position.set(
-                (Math.random() - 0.5) * 65,
-                (Math.random() - 0.5) * 45,
-                (Math.random() - 0.5) * 35
-            );
-
-            mesh.rotation.set(
-                Math.random() * Math.PI,
-                Math.random() * Math.PI,
-                Math.random() * Math.PI
-            );
-
-            mesh.userData = {
-                rotSpeedX: (Math.random() - 0.5) * 0.008,
-                rotSpeedY: (Math.random() - 0.5) * 0.01,
-                rotSpeedZ: (Math.random() - 0.5) * 0.006,
-                floatSpeed: Math.random() * 0.015 + 0.005,
-                floatOffset: Math.random() * Math.PI * 2,
-                baseY: mesh.position.y
-            };
-
-            cosmicMeshArray.push(mesh);
-            threeScene.add(mesh);
-        }
-
-        // Add Cosmic Stardust Particle Cloud
-        const particleCount = 280;
-        const particleGeo = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-
-        for (let i = 0; i < particleCount * 3; i += 3) {
-            positions[i] = (Math.random() - 0.5) * 90;
-            positions[i + 1] = (Math.random() - 0.5) * 70;
-            positions[i + 2] = (Math.random() - 0.5) * 50;
-        }
-
-        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particleMat = new THREE.PointsMaterial({
-            color: 0x00F0FF,
-            size: 0.6,
-            transparent: true,
-            opacity: 0.45
+        // Props specified from React Bits <Scanner /> component
+        scannerInstance = Scanner.init(scannerContainer, {
+            color1: '#5227FF',
+            color2: '#FF9FFC',
+            color3: '#FFFFFF',
+            speed: 0.5,
+            sweepSpeed: 0.25,
+            sweepWidth: 1.6,
+            sweepFalloff: 6,
+            scale: 1.5,
+            frequency: 2,
+            ripple: 0.22,
+            bandDensity: 11,
+            lineSharpness: 5.5,
+            glow: 0.22,
+            scanDirection: 'vertical',
+            colorSpread: 0.7,
+            brightness: 1.0,
+            contrast: 1.15,
+            softness: 1.4,
+            vignette: 0.45,
+            scanline: true,
+            grain: true,
+            grainIntensity: 0.05,
+            opacity: 1.0,
+            mouseInteraction: true,
+            mouseRadius: 0.5,
+            mouseStrength: 0.5
         });
-
-        starParticles = new THREE.Points(particleGeo, particleMat);
-        threeScene.add(starParticles);
-
-        // Mouse Parallax Trackers
-        window.addEventListener('mousemove', (e) => {
-            targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-            targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-        });
-
-        window.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 0) {
-                targetMouseX = (e.touches[0].clientX / window.innerWidth - 0.5) * 2;
-                targetMouseY = (e.touches[0].clientY / window.innerHeight - 0.5) * 2;
-            }
-        });
-
-        window.addEventListener('resize', () => {
-            threeCamera.aspect = window.innerWidth / window.innerHeight;
-            threeCamera.updateProjectionMatrix();
-            threeRenderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // Animation Loop
-        let clock = new THREE.Clock();
-
-        function animate() {
-            requestAnimationFrame(animate);
-            const delta = clock.getDelta();
-            const elapsedTime = clock.getElapsedTime();
-
-            // Smooth Mouse Camera Easing
-            currentMouseX += (targetMouseX - currentMouseX) * 0.04;
-            currentMouseY += (targetMouseY - currentMouseY) * 0.04;
-
-            threeCamera.position.x = currentMouseX * 4;
-            threeCamera.position.y = -currentMouseY * 3;
-            threeCamera.lookAt(0, 0, 0);
-
-            // Animate Cosmic Meshes
-            cosmicMeshArray.forEach(mesh => {
-                mesh.rotation.x += mesh.userData.rotSpeedX;
-                mesh.rotation.y += mesh.userData.rotSpeedY;
-                mesh.rotation.z += mesh.userData.rotSpeedZ;
-                mesh.position.y = mesh.userData.baseY + Math.sin(elapsedTime * mesh.userData.floatSpeed * 6 + mesh.userData.floatOffset) * 1.2;
-            });
-
-            // Rotate star particles slowly
-            if (starParticles) {
-                starParticles.rotation.y = elapsedTime * 0.015;
-            }
-
-            threeRenderer.render(threeScene, threeCamera);
-        }
-
-        animate();
     }
 
-    init3DBackdrop();
+    initScannerBackground();
 
     // ==========================================================================
     // 3. CYBER GLITCH-DECIPHER TYPING EFFECT ON SECTION HEADERS
@@ -507,26 +457,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     // ==========================================================================
-    // 3C. INTERACTIVE TECH STACK LOGO MATRIX WITH GLIDING HIGHLIGHT BOX
+    // 3C. INTERACTIVE TECH STACK LOGO MATRIX WITH IN-BOX 10-BAR FILLING ANIMATION
     // ==========================================================================
     function initStackHighlightBox() {
         const gridWrapper = document.getElementById('stack-grid-wrapper');
         const highlightBox = document.getElementById('stack-highlight-box');
-        const stackCells = document.querySelectorAll('.stack-square-cell, .stack-logo-card');
+        const stackCells = document.querySelectorAll('.stack-square-cell');
         const filterTabs = document.querySelectorAll('.stack-filter-tab');
-        const activeLabel = document.getElementById('stack-active-label');
 
         if (!gridWrapper || !highlightBox || stackCells.length === 0) return;
 
         let activeCell = null;
         let isHovered = false;
+        let activeBarTimers = [];
+
+        function clearBarTimers() {
+            activeBarTimers.forEach(t => clearTimeout(t));
+            activeBarTimers = [];
+        }
+
+        function resetCellMeter(cell) {
+            if (!cell) return;
+            cell.classList.remove('is-hovered');
+            const segments = cell.querySelectorAll('.level-bar-segment');
+            segments.forEach(seg => seg.classList.remove('is-filled'));
+            const levelEl = cell.querySelector('.stack-cell-level');
+            const target = cell.getAttribute('data-level') || '8';
+            if (levelEl) {
+                levelEl.textContent = `Level ${target}/10`;
+            }
+        }
+
+        function animateCellMeter(cell) {
+            clearBarTimers();
+
+            const segments = cell.querySelectorAll('.level-bar-segment');
+            const levelEl = cell.querySelector('.stack-cell-level');
+            const target = Math.max(1, Math.min(10, parseInt(cell.getAttribute('data-level'), 10) || 8));
+
+            // Reset segments in this cell
+            segments.forEach(seg => seg.classList.remove('is-filled'));
+            if (levelEl) levelEl.textContent = 'Level 0/10';
+
+            // Sequential progressive bar-by-bar fill from bottom to top
+            for (let i = 0; i < target; i++) {
+                const timer = setTimeout(() => {
+                    if (segments[i]) {
+                        segments[i].classList.add('is-filled');
+                    }
+                    if (levelEl) {
+                        levelEl.textContent = `Level ${i + 1}/10`;
+                    }
+                }, i * 26); // 26ms stagger = 260ms for 10 bars
+                activeBarTimers.push(timer);
+            }
+        }
 
         function updateHighlightPosition(cell) {
             if (!cell || cell.classList.contains('is-dimmed') || cell.classList.contains('is-hidden')) {
                 highlightBox.classList.remove('is-active');
-                if (activeLabel) activeLabel.textContent = 'HOVER ANY TECHNOLOGY';
+                if (activeCell) resetCellMeter(activeCell);
+                clearBarTimers();
                 return;
             }
+
+            if (activeCell && activeCell !== cell) {
+                resetCellMeter(activeCell);
+            }
+
+            activeCell = cell;
+            cell.classList.add('is-hovered');
+
             const wrapperRect = gridWrapper.getBoundingClientRect();
             const cellRect = cell.getBoundingClientRect();
 
@@ -540,33 +541,29 @@ document.addEventListener('DOMContentLoaded', () => {
             highlightBox.style.transform = `translate3d(${cellLeft}px, ${cellTop}px, 0)`;
             highlightBox.classList.add('is-active');
 
-            const techName = cell.getAttribute('data-name') || cell.getAttribute('aria-label');
-            if (activeLabel && techName) {
-                activeLabel.textContent = techName.toUpperCase();
-            }
+            animateCellMeter(cell);
         }
 
         stackCells.forEach(cell => {
             cell.addEventListener('mouseenter', () => {
                 isHovered = true;
-                activeCell = cell;
                 updateHighlightPosition(cell);
             });
 
             cell.addEventListener('focus', () => {
                 isHovered = true;
-                activeCell = cell;
                 updateHighlightPosition(cell);
             });
         });
 
         gridWrapper.addEventListener('mouseleave', () => {
             isHovered = false;
-            activeCell = null;
             highlightBox.classList.remove('is-active');
-            if (activeLabel) {
-                activeLabel.textContent = 'HOVER ANY TECHNOLOGY';
+            if (activeCell) {
+                resetCellMeter(activeCell);
+                activeCell = null;
             }
+            clearBarTimers();
         });
 
         // Recalculate if window resizes or zoom changes
@@ -590,9 +587,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Hide highlight box during transition
                 highlightBox.classList.remove('is-active');
+                if (activeCell) resetCellMeter(activeCell);
                 activeCell = null;
                 isHovered = false;
-                if (activeLabel) activeLabel.textContent = 'HOVER ANY TECHNOLOGY';
+                clearBarTimers();
 
                 stackCells.forEach(cell => {
                     const cat = cell.getAttribute('data-category');
@@ -662,13 +660,21 @@ document.addEventListener('DOMContentLoaded', () => {
             label.textContent = (theme === 'dark') ? 'Cosmic Dark' : 'Light Slate';
         }
 
-        // Update 3D canvas materials if initialized
-        if (cosmicMeshArray.length > 0) {
-            cosmicMeshArray.forEach(mesh => {
-                if (mesh.material) {
-                    mesh.material.opacity = (theme === 'light') ? 0.75 : 0.65;
-                }
-            });
+        // Update Scanner settings if initialized
+        if (scannerInstance) {
+            if (theme === 'light') {
+                scannerInstance.setProps({
+                    opacity: 0.85,
+                    contrast: 1.25,
+                    brightness: 0.95
+                });
+            } else {
+                scannerInstance.setProps({
+                    opacity: 1.0,
+                    contrast: 1.15,
+                    brightness: 1.0
+                });
+            }
         }
     }
 
@@ -1126,18 +1132,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Fallback for very bottom of the page
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 60) {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 80) {
             currentSectionId = 'contact';
         } else if (!currentSectionId && window.scrollY < 300) {
             currentSectionId = 'hero';
         }
 
         if (currentSectionId) {
+            document.documentElement.setAttribute('data-active-section', currentSectionId);
+
             trackerDots.forEach(dot => {
                 if (dot.getAttribute('data-section') === currentSectionId) {
                     dot.classList.add('active');
                 } else {
                     dot.classList.remove('active');
+                }
+            });
+
+            // Sync main navigation active links
+            const navLinks = document.querySelectorAll('.main-nav .nav-link');
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === '#' + currentSectionId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
                 }
             });
         }
@@ -1154,6 +1173,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = dot.getAttribute('data-section');
             const targetEl = document.getElementById(targetId);
             if (targetEl) {
+                document.documentElement.setAttribute('data-active-section', targetId);
                 targetEl.scrollIntoView({ behavior: 'smooth' });
                 trackerDots.forEach(d => d.classList.remove('active'));
                 dot.classList.add('active');

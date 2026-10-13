@@ -4,23 +4,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roddneil B. Gemina | Software Engineer &amp; CS Scholar Portfolio</title>
     <meta name="description" content="Portfolio of Roddneil B. Gemina, Computer Science Scholar from CIT-U. SRE Intern at Opswerks, QA Analyst at DXForm, and AI Researcher.">
-    <link rel="stylesheet" href="css/styles.css?v=9.1">
+    <link rel="stylesheet" href="css/styles.css?v=9.3">
     
     <!-- Google Fonts: Syne (Display), Plus Jakarta Sans (Body), JetBrains Mono (Badges & Code) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;family=Syne:wght@700;800&amp;display=swap" rel="stylesheet">
     
-    <!-- Three.js for 3D Cosmic Background -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- React Bits Scanner WebGL Background -->
+    <script src="js/scanner.js"></script>
 </head>
 <body>
 
     <!-- FULLSCREEN CINEMATIC INTRO BLACK CURTAIN OVERLAY -->
     <div id="intro-curtain-bg" class="intro-curtain-bg" aria-label="Intro Curtain"></div>
 
-    <!-- THREE.JS 3D COSMIC CANVAS BACKGROUND -->
-    <canvas id="canvas-3d-bg" class="canvas-3d-bg" width="1920" height="945" style="width: 1920px; height: 945px;"></canvas>
 
     <!-- CIRCULAR RIPPLE OVERLAY FOR THEME WAVE -->
     <div id="theme-ripple-overlay" class="theme-ripple-overlay"></div>
@@ -58,40 +56,39 @@
     <!-- RIGHT-SIDE SECTION TRACKER (NUMBERED BLUE/CYAN BOOKMARKS) -->
     <nav class="section-tracker" id="section-tracker" aria-label="Section bookmarks">
         <div class="tracker-rail">
-            <a href="#hero" class="tracker-dot active" data-section="hero" aria-label="Intro Section">
-                <span class="tracker-num">1</span>
+            <a href="#hero" class="tracker-dot active" data-section="hero" data-theme-accent="hero" aria-label="Intro Section">
+                <span class="tracker-num">00</span>
                 <span class="tracker-label">Intro</span>
             </a>
-            <a href="#projects" class="tracker-dot" data-section="projects" aria-label="Projects Section">
-                <span class="tracker-num">2</span>
+            <a href="#projects" class="tracker-dot" data-section="projects" data-theme-accent="projects" aria-label="Projects Section">
+                <span class="tracker-num">01</span>
                 <span class="tracker-label">Projects</span>
             </a>
-            <a href="#expertise" class="tracker-dot" data-section="expertise" aria-label="Skills &amp; Stacks Section">
-                <span class="tracker-num">3</span>
+            <a href="#expertise" class="tracker-dot" data-section="expertise" data-theme-accent="expertise" aria-label="Skills &amp; Stacks Section">
+                <span class="tracker-num">02</span>
                 <span class="tracker-label">Skills &amp; Stacks</span>
             </a>
-            <a href="#philosophy" class="tracker-dot" data-section="philosophy" aria-label="Philosophy Section">
-                <span class="tracker-num">4</span>
+            <a href="#philosophy" class="tracker-dot" data-section="philosophy" data-theme-accent="philosophy" aria-label="Philosophy Section">
+                <span class="tracker-num">03</span>
                 <span class="tracker-label">Philosophy</span>
             </a>
-            <a href="#experience" class="tracker-dot" data-section="experience" aria-label="Experience Section">
-                <span class="tracker-num">5</span>
+            <a href="#experience" class="tracker-dot" data-section="experience" data-theme-accent="experience" aria-label="Experience Section">
+                <span class="tracker-num">04</span>
                 <span class="tracker-label">Experience</span>
             </a>
-            <a href="#research" class="tracker-dot" data-section="research" aria-label="Research &amp; Certifications Section">
-                <span class="tracker-num">6</span>
+            <a href="#research" class="tracker-dot" data-section="research" data-theme-accent="research" aria-label="Research &amp; Certifications Section">
+                <span class="tracker-num">05</span>
                 <span class="tracker-label">Research &amp; Certs</span>
             </a>
-            <a href="#volunteering" class="tracker-dot" data-section="volunteering" aria-label="Leadership Section">
-                <span class="tracker-num">7</span>
+            <a href="#volunteering" class="tracker-dot" data-section="volunteering" data-theme-accent="volunteering" aria-label="Leadership Section">
+                <span class="tracker-num">06</span>
                 <span class="tracker-label">Leadership</span>
             </a>
-            <a href="#contact" class="tracker-dot" data-section="contact" aria-label="Contact Section">
-                <span class="tracker-num">8</span>
+            <a href="#contact" class="tracker-dot" data-section="contact" data-theme-accent="contact" aria-label="Contact Section">
+                <span class="tracker-num">07</span>
                 <span class="tracker-label">Contact</span>
             </a>
         </div>
-    </nav>
     </nav>
 
     <main id="main-content">
@@ -99,8 +96,11 @@
         <!-- HERO SECTION (CENTERED IMPACT SHOWCASE) -->
         <!-- HERO SECTION (SPLIT 2-COLUMN SHOWCASE) -->
         <section id="hero" class="section hero-section reveal-on-scroll">
+            <!-- REACT BITS SCANNER 3D BACKGROUND -->
+            <div id="hero-scanner-container" class="scanner-container hero-scanner-container" aria-hidden="true"></div>
+
             <div class="container hero-container">
-                <div class="hero-split-grid hero-entered">
+                <div class="hero-split-grid">
                     
                     <!-- LEFT COLUMN: IDENTITY, SUMMARY, CTAS & ACADEMICS -->
                     <div class="hero-left-col">
@@ -113,6 +113,13 @@
                                 </span>
                             </h1>
                         </div>
+
+                        <h2 class="hero-main-role" id="hero-main-role">
+                            <span class="role-part1" id="role-part1"></span>
+                            <span class="role-separator" id="role-separator" style="display: none;">&amp;</span>
+                            <span class="role-accent" id="role-accent"></span>
+                            <span class="role-cursor" id="role-cursor">_</span>
+                        </h2>
 
                         <p class="hero-clean-summary">
                             Specializing in scalable web systems, cloud architecture, and intelligent AI applications. Crafting modern full-stack platforms with resilient backend infrastructure, high-fidelity interfaces, and automated telemetry.
@@ -160,12 +167,14 @@
                                     
                                     <!-- OVERLAY OF JOB ROLE AT BOTTOM PART OF IMAGE -->
                                     <div class="portrait-role-overlay" id="portrait-role-overlay">
-                                        <h2 class="hero-main-role" id="hero-main-role">
-                                            <span class="role-part1" id="role-part1"></span>
-                                            <span class="role-separator" id="role-separator" style="display: none;">&amp;</span>
-                                            <span class="role-accent" id="role-accent"></span>
-                                            <span class="role-cursor" id="role-cursor">_</span>
-                                        </h2>
+                                        <div class="portrait-line-emitter" id="portrait-line-emitter" aria-hidden="true"></div>
+                                        <div class="portrait-role-drawer" id="portrait-role-drawer">
+                                            <div class="portrait-role-badge">
+                                                <span class="portrait-role-title">Software Engineer</span>
+                                                <span class="portrait-role-sep" aria-hidden="true">&bull;</span>
+                                                <span class="portrait-role-accent">CS Scholar</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -196,14 +205,21 @@
         <!-- SECTION: FEATURED PROJECTS -->
         <section id="projects" class="section projects-section reveal-on-scroll">
             <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title cyber-glitch-text" data-text="Featured Projects" data-deciphering="false">Featured Projects</h2>
+                <div class="section-header projects-header-flex">
+                    <div class="section-title-wrap">
+                        <span class="section-tech-tag">// 01. REPOSITORY</span>
+                        <h2 class="section-title cyber-glitch-text" data-text="Featured Projects" data-deciphering="false">Featured Projects</h2>
+                    </div>
                     <div class="section-divider"></div>
+                    <button id="open-all-projects-btn" class="btn-hero-primary projects-header-cta" aria-label="See all projects and researches">
+                        <span>See All Projects &amp; Researches &rarr;</span>
+                    </button>
                 </div>
             </div>
 
             <!-- DUAL MOVING AUTO-SCROLL CAROUSELS -->
-            <div class="projects-carousel-container carousel-tilt-wrapper">
+            <div class="projects-carousel-container">
+                <div class="carousel-tilt-wrapper">
                                       <!-- ROW 1: LEFT-MOVING MARQUEE (Seamless Double-Buffered Stream) -->
                     <div class="carousel-track-row" aria-label="Row 1 moving left">
                         <div class="carousel-track track-marquee-left">
@@ -980,17 +996,7 @@
                             </div>
 
                         </div>
-                    </div>              </div>
                     </div>
-
-                </div>
-
-            <!-- SEE MORE PROJECTS CTA BUTTON -->
-            <div class="container">
-                <div class="see-more-projects-wrapper">
-                    <button id="open-all-projects-btn" class="btn-hero-primary" style="margin: 0 auto;">
-                        <span>See All Projects &amp; Researches →</span>
-                    </button>
                 </div>
             </div>
         </section>
@@ -999,7 +1005,10 @@
         <section id="expertise" class="section expertise-section reveal-on-scroll">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title cyber-glitch-text" data-text="Skills & Stacks" data-deciphering="false">Skills &amp; Stacks</h2>
+                    <div class="section-title-wrap">
+                        <span class="section-tech-tag">// 02. CAPABILITIES</span>
+                        <h2 class="section-title cyber-glitch-text" data-text="Skills & Stacks" data-deciphering="false">Skills &amp; Stacks</h2>
+                    </div>
                     <div class="section-divider"></div>
                 </div>
 
@@ -1031,12 +1040,6 @@
 
                 <!-- INTERACTIVE LOGO GRID WITH DIVIDING LINES & SMOOTH TRANSFERRING HIGHLIGHT BOX -->
                 <div class="stack-matrix-wrapper" id="stack-matrix-wrapper">
-                    <div class="stack-matrix-status-bar">
-                        <span class="status-cyber-dot"></span>
-                        <span class="status-label-prefix">STACK //</span>
-                        <span class="status-label-name" id="stack-active-label">HOVER ANY TECHNOLOGY</span>
-                    </div>
-
                     <div class="stack-grid-wrapper" id="stack-grid-wrapper">
                         <!-- Smooth Gliding Highlight Box covering the hovered square cell -->
                         <div class="stack-highlight-box" id="stack-highlight-box" aria-hidden="true">
@@ -1048,219 +1051,633 @@
 
                         <div class="stack-matrix-grid" id="stack-matrix-grid">
 
-                        <div class="stack-square-cell" data-category="languages" data-name="C" tabindex="0" role="button" aria-label="C" title="C">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#659AD2" d="M117.5 35.2L68.8 7.1c-2.9-1.7-6.8-1.7-9.7 0L10.5 35.2c-3 1.7-4.8 5-4.8 8.5v56.6c0 3.5 1.8 6.7 4.8 8.5l48.6 28.1c2.9 1.7 6.8 1.7 9.7 0l48.6-28.1c3-1.7 4.8-5 4.8-8.5V43.7c.1-3.5-1.7-6.8-4.7-8.5z"/>
-                                        <path fill="#00599C" d="M117.5 35.2L64 66.1V4.8c1.7.2 3.4.9 4.8 1.8l48.7 28.6z"/>
-                                        <path fill="#FFFFFF" d="M64 97.4c-18.4 0-33.4-15-33.4-33.4S45.6 30.6 64 30.6c11.5 0 21.6 5.8 27.6 14.8l-12.8 7.4c-3.3-4.7-8.7-7.8-14.8-7.8-10.4 0-18.9 8.5-18.9 18.9s8.5 18.9 18.9 18.9c6.1 0 11.5-3.1 14.8-7.8l12.8 7.4c-6 9-16.1 14.8-27.6 14.8z"/>
-                                    </svg>
+                        <!-- C -->
+                        <div class="stack-square-cell" data-category="languages" data-name="C" data-level="8" tabindex="0" role="button" aria-label="C" title="C">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">C</div>
+                            <div class="stack-cell-logo">
+                                
+<svg viewBox="0 0 256 288" xmlns="http://www.w3.org/2000/svg" class="stack-svg" aria-hidden="true">
+	<g>
+		<path d="M255.987,85.672 C255.985,80.829 254.95,76.55 252.858,72.878 C250.803,69.266 247.724,66.24 243.596,63.846 C209.515,44.176 175.401,24.566 141.332,4.876 C132.147,-0.431 123.241,-0.238 114.124,5.146 C100.559,13.154 32.643,52.102 12.405,63.835 C4.071,68.665 0.015,76.056 0.013,85.663 C0,125.221 0.013,164.777 0,204.336 C0.002,209.072 0.993,213.268 2.993,216.886 C5.049,220.606 8.17,223.716 12.394,226.164 C32.633,237.897 100.558,276.842 114.12,284.852 C123.241,290.239 132.147,290.431 141.335,285.122 C175.405,265.431 209.521,245.822 243.607,226.152 C247.831,223.705 250.952,220.593 253.008,216.876 C255.005,213.258 255.998,209.062 256,204.325 C256,204.325 256,125.231 255.987,85.672" fill="#A9B9CB"></path>
+		<path d="M141.101,5.134 C131.931,-0.16 123.04,0.033 113.938,5.403 C100.395,13.39 32.59,52.237 12.385,63.94 C4.064,68.757 0.015,76.129 0.013,85.711 C0,125.166 0.013,164.62 0,204.076 C0.002,208.8 0.991,212.985 2.988,216.593 C5.041,220.304 8.157,223.406 12.374,225.847 C17.003,228.528 24.133,232.635 32.533,237.467 L219.625,50.375 C193.447,35.301 167.262,20.239 141.101,5.134" fill="#7F8B99"></path>
+		<path d="M154.456,126.968 L194.295,127.249 C194.295,110.65 177.493,70 129.322,70 C98.631,70 57.371,89.512 57.371,145.61 C57.371,201.707 97.818,220 129.322,220 C180.339,220 192.532,184.698 192.532,164.748 L154.525,162.575 C154.525,162.575 155.542,185.65 129.119,185.65 C104.729,185.65 100.659,155.772 100.659,145.61 C100.659,130.163 106.152,105.366 129.119,105.366 C152.087,105.366 154.456,126.968 154.456,126.968" fill="#FFFFFF"></path>
+	</g>
+</svg>
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="languages" data-name="C++" tabindex="0" role="button" aria-label="C++" title="C++">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#00599C" d="M117.5 35.2L68.8 7.1c-2.9-1.7-6.8-1.7-9.7 0L10.5 35.2c-3 1.7-4.8 5-4.8 8.5v56.6c0 3.5 1.8 6.7 4.8 8.5l48.6 28.1c2.9 1.7 6.8 1.7 9.7 0l48.6-28.1c3-1.7 4.8-5 4.8-8.5V43.7c.1-3.5-1.7-6.8-4.7-8.5z"/>
-                                        <path fill="#004482" d="M117.5 35.2L64 66.1V4.8c1.7.2 3.4.9 4.8 1.8l48.7 28.6z"/>
-                                        <path fill="#FFFFFF" d="M52 90c-14.4 0-26-11.6-26-26s11.6-26 26-26c9 0 16.9 4.6 21.6 11.5l-9.9 5.8C61.1 51.6 56.9 49.3 52 49.3c-8.1 0-14.7 6.6-14.7 14.7S43.9 78.7 52 78.7c4.8 0 9.1-2.4 11.7-6l9.9 5.8C68.9 85.4 61 90 52 90zm31.3-31.5h-5.4v11h5.4v5.4h11v-5.4h5.4v-11h-5.4v-5.4h-11v5.4zm20 0h-5.4v11h5.4v5.4h11v-5.4h5.4v-11h-5.4v-5.4h-11v5.4z"/>
-                                    </svg>
+                        <!-- C++ -->
+                        <div class="stack-square-cell" data-category="languages" data-name="C++" data-level="8" tabindex="0" role="button" aria-label="C++" title="C++">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">C++</div>
+                            <div class="stack-cell-logo">
+                                <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" class="stack-svg" aria-hidden="true">
+  <path fill="#00599c" d="M118.766 95.82c.89-1.543 1.441-3.28 1.441-4.843V36.78c0-1.558-.55-3.297-1.441-4.84l-55.32 31.94Zm0 0"/>
+  <path fill="#004482" d="m68.36 126.586 46.933-27.094c1.352-.781 2.582-2.129 3.473-3.672l-55.32-31.94L8.12 95.82c.89 1.543 2.121 2.89 3.473 3.672l46.933 27.094c2.703 1.562 7.13 1.562 9.832 0Zm0 0"/>
+  <path fill="#659ad2" d="M118.766 31.941c-.891-1.546-2.121-2.894-3.473-3.671L68.359 1.172c-2.703-1.563-7.129-1.563-9.832 0L11.594 28.27C8.89 29.828 6.68 33.66 6.68 36.78v54.196c0 1.562.55 3.3 1.441 4.843L63.445 63.88Zm0 0"/>
+  <path fill="#fff" d="M63.445 26.035c-20.867 0-37.843 16.977-37.843 37.844s16.976 37.844 37.843 37.844c13.465 0 26.024-7.247 32.77-18.91L79.84 73.335c-3.38 5.84-9.66 9.465-16.395 9.465-10.433 0-18.922-8.488-18.922-18.922 0-10.434 8.49-18.922 18.922-18.922 6.73 0 13.017 3.629 16.39 9.465l16.38-9.477c-6.75-11.664-19.305-18.91-32.77-18.91zM92.88 57.57v4.207h-4.207v4.203h4.207v4.207h4.203V65.98h4.203v-4.203h-4.203V57.57H92.88zm15.766 0v4.207h-4.204v4.203h4.204v4.207h4.207V65.98h4.203v-4.203h-4.203V57.57h-4.207z"/>
+</svg>
+
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="languages" data-name="C#" tabindex="0" role="button" aria-label="C#" title="C#">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#9B4F96" d="M117.5 35.2L68.8 7.1c-2.9-1.7-6.8-1.7-9.7 0L10.5 35.2c-3 1.7-4.8 5-4.8 8.5v56.6c0 3.5 1.8 6.7 4.8 8.5l48.6 28.1c2.9 1.7 6.8 1.7 9.7 0l48.6-28.1c3-1.7 4.8-5 4.8-8.5V43.7c.1-3.5-1.7-6.8-4.7-8.5z"/>
-                                        <path fill="#693665" d="M117.5 35.2L64 66.1V4.8c1.7.2 3.4.9 4.8 1.8l48.7 28.6z"/>
-                                        <path fill="#FFFFFF" d="M52 90c-14.4 0-26-11.6-26-26s11.6-26 26-26c9 0 16.9 4.6 21.6 11.5l-9.9 5.8C61.1 51.6 56.9 49.3 52 49.3c-8.1 0-14.7 6.6-14.7 14.7S43.9 78.7 52 78.7c4.8 0 9.1-2.4 11.7-6l9.9 5.8C68.9 85.4 61 90 52 90zm29-37h4.8v6.5h-4.8v9h5v6.5h-5v8.5h-6.8v-8.5h-7.2v8.5h-6.7v-8.5h-4.8V68.5h4.8v-9h-4.8v-6.5h4.8v-8.5h6.7v8.5h7.2v-8.5H81v8.5zm-6.8 6.5h-7.2v9h7.2v-9z"/>
-                                    </svg>
+                        <!-- C# -->
+                        <div class="stack-square-cell" data-category="languages" data-name="C#" data-level="8" tabindex="0" role="button" aria-label="C#" title="C#">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">C#</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="stack-svg" aria-hidden="true"><path fill="#9B4F96" d="M115.4 30.7L67.1 2.9c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.4 1 3.5l106.8-62c-.6-1.2-1.5-2.1-2.4-2.7z"/><path fill="#68217A" d="M10.7 95.3c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4V36.1c0-.9-.1-1.9-.6-2.8l-106.6 62z"/><path fill="#fff" d="M85.3 76.1C81.1 83.5 73.1 88.5 64 88.5c-13.5 0-24.5-11-24.5-24.5s11-24.5 24.5-24.5c9.1 0 17.1 5 21.3 12.5l13-7.5c-6.8-11.9-19.6-20-34.3-20-21.8 0-39.5 17.7-39.5 39.5s17.7 39.5 39.5 39.5c14.6 0 27.4-8 34.2-19.8l-12.9-7.6zM97 66.2l.9-4.3h-4.2v-4.7h5.1L100 51h4.9l-1.2 6.1h3.8l1.2-6.1h4.8l-1.2 6.1h2.4v4.7h-3.3l-.9 4.3h4.2v4.7h-5.1l-1.2 6h-4.9l1.2-6h-3.8l-1.2 6h-4.8l1.2-6h-2.4v-4.7H97zm4.8 0h3.8l.9-4.3h-3.8l-.9 4.3z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="languages" data-name="Java" tabindex="0" role="button" aria-label="Java" title="Java">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#5382A1" d="M46.7 94.6s-5.6 3.3 4 4.7c11.6 1.7 17.6 1.6 30.5-.8 0 0 4.1 2.6 9.8 4.8-34.9 14.8-68.5-2.8-44.3-8.7zm-2.8-15.4s-6.3 4.2 3.6 5.4c12.1 1.4 22.8 1.7 39.8-1.5 0 0 2.9 2 7.1 3.5-35.3 11.1-70.3.3-50.5-7.4z"/>
-                                        <path fill="#E76F00" d="M69.6 42.6c5.7 6.6-1.5 12.6-1.5 12.6s14.6-7.5 7.8-16.7c-6.4-8.8-12.2-13.2 16.4-28.5-31.5 8.1-29.4 25.1-22.7 32.6zm22.4 39.6c6.2-7.1.9-10.7-3.9-10-4.8.7-7 2.2-7 2.2s2.5-.7 5.1-.3c2.7.4 4.4 1.8 1.4 4.7-7.2 7-23.7 10.9-46.7 1.8 0 0 11.2 5.1 28.1 4.7 15.6-.4 18.9-1.2 23.1-3.1z"/>
-                                        <path fill="#5382A1" d="M90.8 107.8c-24.8 7.3-57.1 7.8-77.9.6 0 0 5.4 3.9 19.3 5.4 18.5 2.1 42.5 1.5 58.6-6z"/>
-                                    </svg>
+                        <!-- Java -->
+                        <div class="stack-square-cell" data-category="languages" data-name="Java" data-level="9" tabindex="0" role="button" aria-label="Java" title="Java">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Java</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="10 0 108 128" class="stack-svg" aria-hidden="true"><path fill="#0074BD" d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z"/><path fill="#EA2D2E" d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z"/><path fill="#0074BD" d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z"/><path fill="#EA2D2E" d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z"/><path fill="#0074BD" d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 9/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="languages" data-name="Python" tabindex="0" role="button" aria-label="Python" title="Python">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#3776AB" d="M63.6 6.8c-18.4 0-29.3 8.3-29.3 24.3v13.6h29.8v4.2H20.4C8.9 48.9 0 57.5 0 71.9c0 14.3 8 22.8 20.4 22.8h7.4v-11.8c0-12.8 10.6-23.8 23.8-23.8h29.5v-4.2H51.6V26.8c0-8.9 7.6-15.8 16.5-15.8h17.9V6.8H63.6zm-11 9.5c2.9 0 5.3 2.4 5.3 5.3s-2.4 5.3-5.3 5.3-5.3-2.4-5.3-5.3 2.4-5.3 5.3-5.3z"/>
-                                        <path fill="#FFD43B" d="M64.4 121.2c18.4 0 29.3-8.3 29.3-24.3V83.3H63.9v-4.2h43.7c11.5 0 20.4-8.6 20.4-23 0-14.3-8-22.8-20.4-22.8h-7.4v11.8c0 12.8-10.6 23.8-23.8 23.8H46.9v4.2h29.5v28.1c0 8.9-7.6 15.8-16.5 15.8H42v4.2h22.4zm11-9.5c-2.9 0-5.3-2.4-5.3-5.3s2.4-5.3 5.3-5.3 5.3 2.4 5.3 5.3-2.4 5.3-5.3 5.3z"/>
-                                    </svg>
+                        <!-- Python -->
+                        <div class="stack-square-cell" data-category="languages" data-name="Python" data-level="9" tabindex="0" role="button" aria-label="Python" title="Python">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Python</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="10 8 108 112" class="stack-svg" aria-hidden="true"><linearGradient id="python-original-a" gradientUnits="userSpaceOnUse" x1="70.252" y1="1237.476" x2="170.659" y2="1151.089" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)"><stop offset="0" stop-color="#5A9FD4"/><stop offset="1" stop-color="#306998"/></linearGradient><linearGradient id="python-original-b" gradientUnits="userSpaceOnUse" x1="209.474" y1="1098.811" x2="173.62" y2="1149.537" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)"><stop offset="0" stop-color="#FFD43B"/><stop offset="1" stop-color="#FFE873"/></linearGradient><path fill="url(#python-original-a)" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z" transform="translate(0 10.26)"/><path fill="url(#python-original-b)" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z" transform="translate(0 10.26)"/><radialGradient id="python-original-c" cx="1825.678" cy="444.45" r="26.743" gradientTransform="matrix(0 -.24 -1.055 0 532.979 557.576)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#B8B8B8" stop-opacity=".498"/><stop offset="1" stop-color="#7F7F7F" stop-opacity="0"/></radialGradient><path opacity=".444" fill="url(#python-original-c)" d="M97.309 119.597c0 3.543-14.816 6.416-33.091 6.416-18.276 0-33.092-2.873-33.092-6.416 0-3.544 14.815-6.417 33.092-6.417 18.275 0 33.091 2.872 33.091 6.417z"/></svg>
+
+                            </div>
+                            <div class="stack-cell-level">Level 9/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="languages" data-name="TypeScript" tabindex="0" role="button" aria-label="TypeScript" title="TypeScript">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#3178C6" d="M0 0h128v128H0z"/>
-                                        <path fill="#FFFFFF" d="M67.7 58.7H47.1v48.4H33.8V58.7H13.2V47.5h54.5v11.2zm52.2 13.9c0 8.8-4.7 15.6-13.6 19.3-6.4 2.7-14.4 3.7-22.4 3.1v-11.4c6.3.7 13.1.5 17.5-1.5 4.3-1.9 6.2-4.9 6.2-8.5 0-4.6-3.1-7.6-11.2-11.3-11.2-5-16.8-10.4-16.8-19.4 0-8.5 5.5-15.1 14.9-18.4 6.3-2.2 13.7-2.7 20.6-1.7l-1.3 11c-5.2-.8-11.3-.7-15.2.8-4.1 1.6-6 4.3-6 7.6 0 4.1 2.9 6.9 10.7 10.5 10.9 4.9 16.6 10.6 16.6 19.9z"/>
-                                    </svg>
+                        <!-- TypeScript -->
+                        <div class="stack-square-cell" data-category="languages" data-name="TypeScript" data-level="9" tabindex="0" role="button" aria-label="TypeScript" title="TypeScript">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">TypeScript</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="stack-svg" aria-hidden="true"><rect width="128" height="128" rx="16" fill="#007acc"/><path fill="#ffffff" d="M102.23 58.91a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1 23 23 0 01-12.72-6.63c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H56.66v46.23H45.15V69.26H28.88v-5a49.19 49.19 0 01.12-5.17C29.08 59 39 59 51 59h21.83z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 9/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="languages" data-name="JavaScript" tabindex="0" role="button" aria-label="JavaScript" title="JavaScript">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#F7DF1E" d="M0 0h128v128H0z"/>
-                                        <path fill="#000000" d="M67.3 102.7c3.2 5.3 7.8 9.3 15.8 9.3 6.6 0 10.9-3.3 10.9-7.8 0-5.4-4.3-7.4-11.7-10.6l-4-1.7c-11.6-5-19.3-11.3-19.3-24.6 0-12.3 9.4-21.6 24.3-21.6 10.5 0 18.1 3.7 23.7 13.9l-11.3 7.2c-2.5-4.4-5.3-6.2-11-6.2-5.1 0-8.9 3.2-8.9 7.2 0 4.9 3.6 6.8 10.4 9.7l4 1.7c13.7 5.8 21 11.9 21 25.7 0 14.7-11.5 22.6-26.6 22.6-14.7 0-23.7-7-28.7-17.6l11.4-7zm-40.8.6c2.4 4.3 4.5 7.9 10.2 7.9 5.2 0 8.5-2.1 8.5-10.2V46.7h14.3v54.7c0 15.7-9.3 22.8-22.9 22.8-12.3 0-19.5-6.4-23.2-15.6l13.1-5.3z"/>
-                                    </svg>
+                        <!-- JavaScript -->
+                        <div class="stack-square-cell" data-category="languages" data-name="JavaScript" data-level="10" tabindex="0" role="button" aria-label="JavaScript" title="JavaScript">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">JavaScript</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="stack-svg" aria-hidden="true"><rect width="128" height="128" rx="16" fill="#F0DB4F"/><path fill="#323330" d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 10/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="languages" data-name="PHP" tabindex="0" role="button" aria-label="PHP" title="PHP">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <ellipse fill="#777BB4" cx="64" cy="64" rx="60" ry="36"/>
-                                        <path fill="#FFFFFF" d="M37.8 77.2h-7.6l7.8-26.4h14.1c6.5 0 10.8 3.5 9.7 10.2-1.3 7.8-7.7 11.2-14.7 11.2h-6.8l-2.5 5zm7.3-10.3h4.6c4.6 0 7.8-1.5 8.6-6.1.6-3.8-1.7-5.5-6-5.5h-5.1l-2.1 11.6zm22.4 15.3l7.8-26.4h7.6l-3.3 11.2h9.7c6.5 0 9.8 3.3 8.7 10.2-1.3 7.8-7.7 11.2-14.7 11.2h-15.8zm14.8-10.3h4.6c4.6 0 7.8-1.5 8.6-6.1.6-3.8-1.7-5.5-6-5.5h-5.1l-2.1 11.6zm20.8 15.3h-7.6l7.8-26.4h14.1c6.5 0 10.8 3.5 9.7 10.2-1.3 7.8-7.7 11.2-14.7 11.2h-6.8l-2.5 5zm7.3-10.3h4.6c4.6 0 7.8-1.5 8.6-6.1.6-3.8-1.7-5.5-6-5.5h-5.1l-2.1 11.6z"/>
-                                    </svg>
+                        <!-- PHP -->
+                        <div class="stack-square-cell" data-category="languages" data-name="PHP" data-level="7" tabindex="0" role="button" aria-label="PHP" title="PHP">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">PHP</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="stack-svg" aria-hidden="true"><path fill="url(#a)" d="M0 64c0 18.593 28.654 33.667 64 33.667 35.346 0 64-15.074 64-33.667 0-18.593-28.655-33.667-64-33.667C28.654 30.333 0 45.407 0 64Z"/><path fill="#777bb3" d="M64 95.167c33.965 0 61.5-13.955 61.5-31.167 0-17.214-27.535-31.167-61.5-31.167S2.5 46.786 2.5 64c0 17.212 27.535 31.167 61.5 31.167Z"/><path d="M34.772 67.864c2.793 0 4.877-.515 6.196-1.53 1.306-1.006 2.207-2.747 2.68-5.175.44-2.27.272-3.854-.5-4.71-.788-.874-2.493-1.317-5.067-1.317h-4.464l-2.473 12.732zM20.173 83.547a.694.694 0 0 1-.68-.828l6.557-33.738a.695.695 0 0 1 .68-.561h14.134c4.442 0 7.748 1.206 9.827 3.585 2.088 2.39 2.734 5.734 1.917 9.935-.333 1.711-.905 3.3-1.7 4.724a15.818 15.818 0 0 1-3.128 3.92c-1.531 1.432-3.264 2.472-5.147 3.083-1.852.604-4.232.91-7.07.91h-5.724l-1.634 8.408a.695.695 0 0 1-.682.562z"/><path fill="#fff" d="M34.19 55.826h3.891c3.107 0 4.186.682 4.553 1.089.607.674.723 2.097.331 4.112-.439 2.257-1.253 3.858-2.42 4.756-1.194.92-3.138 1.386-5.773 1.386h-2.786l2.205-11.342zm6.674-8.1H26.731a1.39 1.39 0 0 0-1.364 1.123L18.81 82.588a1.39 1.39 0 0 0 1.363 1.653h7.35a1.39 1.39 0 0 0 1.363-1.124l1.525-7.846h5.151c2.912 0 5.364-.318 7.287-.944 1.977-.642 3.796-1.731 5.406-3.237a16.522 16.522 0 0 0 3.259-4.087c.831-1.487 1.429-3.147 1.775-4.931.86-4.423.161-7.964-2.076-10.524-2.216-2.537-5.698-3.823-10.349-3.823zM30.301 68.557h4.471c2.963 0 5.17-.557 6.62-1.675 1.451-1.116 2.428-2.98 2.938-5.591.485-2.508.264-4.277-.665-5.308-.931-1.03-2.791-1.546-5.584-1.546h-5.036l-2.743 14.12m10.563-19.445c4.252 0 7.353 1.117 9.303 3.348 1.95 2.232 2.536 5.347 1.76 9.346-.322 1.648-.863 3.154-1.625 4.518-.764 1.366-1.76 2.614-2.991 3.747-1.468 1.373-3.097 2.352-4.892 2.935-1.794.584-4.08.875-6.857.875h-6.296l-1.743 8.97h-7.35l6.558-33.739h14.133"/><path d="M69.459 74.577a.694.694 0 0 1-.682-.827l2.9-14.928c.277-1.42.209-2.438-.19-2.87-.245-.263-.979-.704-3.15-.704h-5.256l-3.646 18.768a.695.695 0 0 1-.683.56h-7.29a.695.695 0 0 1-.683-.826l6.558-33.739a.695.695 0 0 1 .682-.561h7.29a.695.695 0 0 1 .683.826L64.41 48.42h5.653c4.307 0 7.227.758 8.928 2.321 1.733 1.593 2.275 4.14 1.608 7.573l-3.051 15.702a.695.695 0 0 1-.682.56h-7.407z"/><path fill="#fff" d="M65.31 38.755h-7.291a1.39 1.39 0 0 0-1.364 1.124l-6.557 33.738a1.39 1.39 0 0 0 1.363 1.654h7.291a1.39 1.39 0 0 0 1.364-1.124l3.537-18.205h4.682c2.168 0 2.624.463 2.641.484.132.14.305.795.019 2.264l-2.9 14.927a1.39 1.39 0 0 0 1.364 1.654h7.408a1.39 1.39 0 0 0 1.363-1.124l3.051-15.7c.715-3.686.103-6.45-1.82-8.217-1.836-1.686-4.91-2.505-9.398-2.505h-4.81l1.421-7.315a1.39 1.39 0 0 0-1.364-1.655zm0 1.39-1.743 8.968h6.496c4.087 0 6.907.714 8.457 2.14 1.553 1.426 2.017 3.735 1.398 6.93l-3.052 15.699h-7.407l2.901-14.928c.33-1.698.208-2.856-.365-3.474-.573-.617-1.793-.926-3.658-.926h-5.829l-3.756 19.327H51.46l6.558-33.739h7.292z"/><path d="M92.136 67.864c2.793 0 4.878-.515 6.198-1.53 1.304-1.006 2.206-2.747 2.679-5.175.44-2.27.273-3.854-.5-4.71-.788-.874-2.493-1.317-5.067-1.317h-4.463l-2.475 12.732zM77.54 83.547a.694.694 0 0 1-.682-.828l6.557-33.738a.695.695 0 0 1 .682-.561H98.23c4.442 0 7.748 1.206 9.826 3.585 2.089 2.39 2.734 5.734 1.917 9.935a15.878 15.878 0 0 1-1.699 4.724 15.838 15.838 0 0 1-3.128 3.92c-1.53 1.432-3.265 2.472-5.147 3.083-1.852.604-4.232.91-7.071.91h-5.723l-1.633 8.408a.695.695 0 0 1-.683.562z"/><path fill="#fff" d="M91.555 55.826h3.891c3.107 0 4.186.682 4.552 1.089.61.674.724 2.097.333 4.112-.44 2.257-1.254 3.858-2.421 4.756-1.195.92-3.139 1.386-5.773 1.386h-2.786l2.204-11.342zm6.674-8.1H84.096a1.39 1.39 0 0 0-1.363 1.123l-6.558 33.739a1.39 1.39 0 0 0 1.364 1.653h7.35a1.39 1.39 0 0 0 1.363-1.124l1.525-7.846h5.15c2.911 0 5.364-.318 7.286-.944 1.978-.642 3.797-1.731 5.408-3.238a16.52 16.52 0 0 0 3.258-4.086c.832-1.487 1.428-3.147 1.775-4.931.86-4.423.162-7.964-2.076-10.524-2.216-2.537-5.697-3.823-10.35-3.823zM87.666 68.557h4.47c2.964 0 5.17-.557 6.622-1.675 1.45-1.116 2.428-2.98 2.936-5.591.487-2.508.266-4.277-.665-5.308-.93-1.03-2.791-1.546-5.583-1.546h-5.035Zm10.563-19.445c4.251 0 7.354 1.117 9.303 3.348 1.95 2.232 2.537 5.347 1.759 9.346-.32 1.648-.862 3.154-1.624 4.518-.763 1.366-1.76 2.614-2.992 3.747-1.467 1.373-3.097 2.352-4.892 2.935-1.793.584-4.078.875-6.856.875h-6.295l-1.745 8.97h-7.35l6.558-33.739h14.133"/><defs><radialGradient id="a" cx="0" cy="0" r="1" gradientTransform="matrix(84.04136 0 0 84.04136 38.426 42.169)" gradientUnits="userSpaceOnUse"><stop stop-color="#AEB2D5"/><stop offset=".3" stop-color="#AEB2D5"/><stop offset=".75" stop-color="#484C89"/><stop offset="1" stop-color="#484C89"/></radialGradient></defs></svg>
+
+
+                            </div>
+                            <div class="stack-cell-level">Level 7/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="frameworks" data-name="React.js" tabindex="0" role="button" aria-label="React.js" title="React.js">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <ellipse fill="none" stroke="#00D8FF" stroke-width="4.5" cx="64" cy="64" rx="48" ry="18"/>
-                                        <ellipse fill="none" stroke="#00D8FF" stroke-width="4.5" cx="64" cy="64" rx="48" ry="18" transform="rotate(60 64 64)"/>
-                                        <ellipse fill="none" stroke="#00D8FF" stroke-width="4.5" cx="64" cy="64" rx="48" ry="18" transform="rotate(120 64 64)"/>
-                                        <circle fill="#00D8FF" cx="64" cy="64" r="8"/>
-                                    </svg>
+                        <!-- React.js -->
+                        <div class="stack-square-cell" data-category="frameworks" data-name="React.js" data-level="10" tabindex="0" role="button" aria-label="React.js" title="React.js">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">React.js</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="stack-svg" aria-hidden="true"><g fill="#61DAFB"><circle cx="64" cy="64" r="11.4"/><path d="M107.3 45.2c-2.2-.8-4.5-1.6-6.9-2.3.6-2.4 1.1-4.8 1.5-7.1 2.1-13.2-.2-22.5-6.6-26.1-1.9-1.1-4-1.6-6.4-1.6-7 0-15.9 5.2-24.9 13.9-9-8.7-17.9-13.9-24.9-13.9-2.4 0-4.5.5-6.4 1.6-6.4 3.7-8.7 13-6.6 26.1.4 2.3.9 4.7 1.5 7.1-2.4.7-4.7 1.4-6.9 2.3C8.2 50 1.4 56.6 1.4 64s6.9 14 19.3 18.8c2.2.8 4.5 1.6 6.9 2.3-.6 2.4-1.1 4.8-1.5 7.1-2.1 13.2.2 22.5 6.6 26.1 1.9 1.1 4 1.6 6.4 1.6 7.1 0 16-5.2 24.9-13.9 9 8.7 17.9 13.9 24.9 13.9 2.4 0 4.5-.5 6.4-1.6 6.4-3.7 8.7-13 6.6-26.1-.4-2.3-.9-4.7-1.5-7.1 2.4-.7 4.7-1.4 6.9-2.3 12.5-4.8 19.3-11.4 19.3-18.8s-6.8-14-19.3-18.8zM92.5 14.7c4.1 2.4 5.5 9.8 3.8 20.3-.3 2.1-.8 4.3-1.4 6.6-5.2-1.2-10.7-2-16.5-2.5-3.4-4.8-6.9-9.1-10.4-13 7.4-7.3 14.9-12.3 21-12.3 1.3 0 2.5.3 3.5.9zM81.3 74c-1.8 3.2-3.9 6.4-6.1 9.6-3.7.3-7.4.4-11.2.4-3.9 0-7.6-.1-11.2-.4-2.2-3.2-4.2-6.4-6-9.6-1.9-3.3-3.7-6.7-5.3-10 1.6-3.3 3.4-6.7 5.3-10 1.8-3.2 3.9-6.4 6.1-9.6 3.7-.3 7.4-.4 11.2-.4 3.9 0 7.6.1 11.2.4 2.2 3.2 4.2 6.4 6 9.6 1.9 3.3 3.7 6.7 5.3 10-1.7 3.3-3.4 6.6-5.3 10zm8.3-3.3c1.5 3.5 2.7 6.9 3.8 10.3-3.4.8-7 1.4-10.8 1.9 1.2-1.9 2.5-3.9 3.6-6 1.2-2.1 2.3-4.2 3.4-6.2zM64 97.8c-2.4-2.6-4.7-5.4-6.9-8.3 2.3.1 4.6.2 6.9.2 2.3 0 4.6-.1 6.9-.2-2.2 2.9-4.5 5.7-6.9 8.3zm-18.6-15c-3.8-.5-7.4-1.1-10.8-1.9 1.1-3.3 2.3-6.8 3.8-10.3 1.1 2 2.2 4.1 3.4 6.1 1.2 2.2 2.4 4.1 3.6 6.1zm-7-25.5c-1.5-3.5-2.7-6.9-3.8-10.3 3.4-.8 7-1.4 10.8-1.9-1.2 1.9-2.5 3.9-3.6 6-1.2 2.1-2.3 4.2-3.4 6.2zM64 30.2c2.4 2.6 4.7 5.4 6.9 8.3-2.3-.1-4.6-.2-6.9-.2-2.3 0-4.6.1-6.9.2 2.2-2.9 4.5-5.7 6.9-8.3zm22.2 21l-3.6-6c3.8.5 7.4 1.1 10.8 1.9-1.1 3.3-2.3 6.8-3.8 10.3-1.1-2.1-2.2-4.2-3.4-6.2zM31.7 35c-1.7-10.5-.3-17.9 3.8-20.3 1-.6 2.2-.9 3.5-.9 6 0 13.5 4.9 21 12.3-3.5 3.8-7 8.2-10.4 13-5.8.5-11.3 1.4-16.5 2.5-.6-2.3-1-4.5-1.4-6.6zM7 64c0-4.7 5.7-9.7 15.7-13.4 2-.8 4.2-1.5 6.4-2.1 1.6 5 3.6 10.3 6 15.6-2.4 5.3-4.5 10.5-6 15.5C15.3 75.6 7 69.6 7 64zm28.5 49.3c-4.1-2.4-5.5-9.8-3.8-20.3.3-2.1.8-4.3 1.4-6.6 5.2 1.2 10.7 2 16.5 2.5 3.4 4.8 6.9 9.1 10.4 13-7.4 7.3-14.9 12.3-21 12.3-1.3 0-2.5-.3-3.5-.9zM96.3 93c1.7 10.5.3 17.9-3.8 20.3-1 .6-2.2.9-3.5.9-6 0-13.5-4.9-21-12.3 3.5-3.8 7-8.2 10.4-13 5.8-.5 11.3-1.4 16.5-2.5.6 2.3 1 4.5 1.4 6.6zm9-15.6c-2 .8-4.2 1.5-6.4 2.1-1.6-5-3.6-10.3-6-15.6 2.4-5.3 4.5-10.5 6-15.5 13.8 4 22.1 10 22.1 15.6 0 4.7-5.8 9.7-15.7 13.4z"/></g></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 10/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="frameworks" data-name="Next.js" tabindex="0" role="button" aria-label="Next.js" title="Next.js">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <circle cx="64" cy="64" r="62" fill="#000000" stroke="#333333" stroke-width="2"/>
-                                        <path d="M89.5 94.5L46.8 39.2H38V88.8H46.5V50.8L83.8 98.8c1.9-1.2 3.8-2.6 5.7-4.3z" fill="#FFFFFF"/>
-                                        <path d="M81.5 39.2H89.5V74.8H81.5z" fill="url(#nextG)"/>
-                                        <defs>
-                                            <linearGradient id="nextG" x1="85.5" y1="39.2" x2="85.5" y2="74.8" gradientUnits="userSpaceOnUse">
-                                                <stop stop-color="#FFFFFF"/>
-                                                <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
+                        <!-- Next.js -->
+                        <div class="stack-square-cell" data-category="frameworks" data-name="Next.js" data-level="9" tabindex="0" role="button" aria-label="Next.js" title="Next.js">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Next.js</div>
+                            <div class="stack-cell-logo">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="stack-svg" fill="#FFFFFF" aria-hidden="true"><path d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 9/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="frameworks" data-name="Node.js" tabindex="0" role="button" aria-label="Node.js" title="Node.js">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#539E43" d="M64 4.5l52 30v60l-52 30-52-30v-60l52-30z"/>
-                                        <path fill="#FFFFFF" d="M64 24.5c-21.8 0-35.5 11.4-35.5 27.5 0 18.2 14.3 23.3 27.5 26.2 13.2 2.9 17.5 5.5 17.5 11.2 0 6.2-5.4 10.3-14.5 10.3-10.2 0-16.8-4.7-19.8-12.8l-10.2 5.5c4.7 13.5 16.5 20.3 30 20.3 19.8 0 35.5-10.6 35.5-27.5 0-17.5-13.8-23.2-27.8-26.2-12.5-2.7-17.2-5.2-17.2-11.2 0-5.8 4.7-9.5 14.5-9.5 9.2 0 14.8 3.8 17.8 10.5l10.2-5.5C81.8 29.8 73.5 24.5 64 24.5z"/>
-                                    </svg>
+                        <!-- Node.js -->
+                        <div class="stack-square-cell" data-category="frameworks" data-name="Node.js" data-level="9" tabindex="0" role="button" aria-label="Node.js" title="Node.js">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Node.js</div>
+                            <div class="stack-cell-logo">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="stack-svg" fill="#5FA04E" aria-hidden="true"><path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 9/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="frameworks" data-name="Express.js" tabindex="0" role="button" aria-label="Express.js" title="Express.js">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <rect width="128" height="128" rx="24" fill="#1C1F26"/>
-                                        <path fill="#FFFFFF" d="M28 85l18-42h13l18 42H64l-4-10H38l-4 10H28zm14-19h14l-7-18-7 18zm43-23h12v42H85V43zm20 18h11v24h-11V61zm0-18h11v11h-11V43z"/>
-                                    </svg>
+                        <!-- Express.js -->
+                        <div class="stack-square-cell" data-category="frameworks" data-name="Express.js" data-level="9" tabindex="0" role="button" aria-label="Express.js" title="Express.js">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Express.js</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="stack-svg" aria-hidden="true"><path fill="#FFFFFF" d="M126.67 98.44c-4.56 1.16-7.38.05-9.91-3.75-5.68-8.51-11.95-16.63-18-24.9-.78-1.07-1.59-2.12-2.6-3.45C89 76 81.85 85.2 75.14 94.77c-2.4 3.42-4.92 4.91-9.4 3.7l26.92-36.13L67.6 29.71c4.31-.84 7.29-.41 9.93 3.45 5.83 8.52 12.26 16.63 18.67 25.21 6.45-8.55 12.8-16.67 18.8-25.11 2.41-3.42 5-4.72 9.33-3.46-3.28 4.35-6.49 8.63-9.72 12.88-4.36 5.73-8.64 11.53-13.16 17.14-1.61 2-1.35 3.3.09 5.19C109.9 76 118.16 87.1 126.67 98.44zM1.33 61.74c.72-3.61 1.2-7.29 2.2-10.83 6-21.43 30.6-30.34 47.5-17.06C60.93 41.64 63.39 52.62 62.9 65H7.1c-.84 22.21 15.15 35.62 35.53 28.78 7.15-2.4 11.36-8 13.47-15 1.07-3.51 2.84-4.06 6.14-3.06-1.69 8.76-5.52 16.08-13.52 20.66-12 6.86-29.13 4.64-38.14-4.89C5.26 85.89 3 78.92 2 71.39c-.15-1.2-.46-2.38-.7-3.57q.03-3.04.03-6.08zm5.87-1.49h50.43c-.33-16.06-10.33-27.47-24-27.57-15-.12-25.78 11.02-26.43 27.57z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 9/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="frameworks" data-name="Django" tabindex="0" role="button" aria-label="Django" title="Django">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <rect width="128" height="128" rx="24" fill="#092E20"/>
-                                        <path fill="#44B78B" d="M60.5 28h13.2v45.2c-5.2.7-10.4 1-13.2 1V28zm-15.6 22.8c4.3 0 7.8.8 10.3 2.1l-2.6 10.3c-2.1-1-4.7-1.6-7.3-1.6-5.8 0-9.2 3.6-9.2 9.8 0 6.2 3.1 9.5 8.7 9.5 2.1 0 4.1-.4 5.9-1.2v10.6c-2.4.9-5.7 1.4-9.3 1.4-13 0-20.7-7.7-20.7-20.5.1-13 8.3-20.4 24.2-20.4zm50.8 1.4v30.5c0 7.7-1.6 13.5-4.7 17.5-3.3 4.2-8.3 6.3-15.2 6.3-3.6 0-7.3-.6-9.8-1.5l2.6-10.5c2 1 4.6 1.4 7.2 1.4 6.8 0 9.7-4.4 9.7-13.6v-30h10.2z"/>
-                                    </svg>
+                        <!-- Django -->
+                        <div class="stack-square-cell" data-category="frameworks" data-name="Django" data-level="8" tabindex="0" role="button" aria-label="Django" title="Django">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Django</div>
+                            <div class="stack-cell-logo">
+                                <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" class="stack-svg" aria-hidden="true">
+    <rect fill="#0C4B33" x="0" y="0" width="256" height="256" rx="36"/>
+    <path d="M186.377 94.198v66.226c0 22.819-1.67 33.763-6.678 43.225-4.639 9.092-10.762 14.841-23.376 21.15l-26.529-12.616c12.615-5.936 18.737-11.129 22.632-19.109 4.082-8.162 5.382-17.624 5.382-42.482V94.198h28.569zM140.928 50.079v132.238c-14.655 2.783-25.415 3.896-37.102 3.896-34.877 0-53.057-15.767-53.057-46.007 0-29.126 19.294-48.047 49.16-48.047 4.638 0 8.163.37 12.43 1.483V50.079h28.569zM102.713 115.16c-14.47 0-22.819 8.905-22.819 24.487 0 15.213 7.978 23.561 22.634 23.561 3.152 0 5.75-.185 9.831-.741v-45.824c-3.339-1.112-6.121-1.483-9.646-1.483zM186.377 50.231v29.311h-28.568V50.231h28.568z" fill="#FFFFFF"/>
+</svg>
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="frameworks" data-name="Three.js" tabindex="0" role="button" aria-label="Three.js" title="Three.js">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#000000" stroke="#00F0FF" stroke-width="4" d="M64 12l52 90H12L64 12z"/>
-                                        <path fill="none" stroke="#FFFFFF" stroke-width="3" d="M64 12L38 102M64 12l26 90M12 102l78-45M116 102L38 57"/>
-                                    </svg>
+                        <!-- Three.js -->
+                        <div class="stack-square-cell" data-category="frameworks" data-name="Three.js" data-level="8" tabindex="0" role="button" aria-label="Three.js" title="Three.js">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Three.js</div>
+                            <div class="stack-cell-logo">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="stack-svg" fill="#FFFFFF" aria-hidden="true"><path d="M.38 0a.268.268 0 0 0-.256.332l2.894 11.716a.268.268 0 0 0 .01.04l2.89 11.708a.268.268 0 0 0 .447.128L23.802 7.15a.268.268 0 0 0-.112-.45l-5.784-1.667a.268.268 0 0 0-.123-.035L6.38 1.715a.268.268 0 0 0-.144-.04L.456.01A.268.268 0 0 0 .38 0zm.374.654L5.71 2.08 1.99 5.664zM6.61 2.34l4.864 1.4-3.65 3.515zm-.522.12l1.217 4.926-4.877-1.4zm6.28 1.538l4.878 1.404-3.662 3.53zm-.52.13l1.208 4.9-4.853-1.392zm6.3 1.534l4.947 1.424-3.715 3.574zm-.524.12l1.215 4.926-4.876-1.398zm-15.432.696l4.964 1.424-3.726 3.586zM8.047 8.15l4.877 1.4-3.66 3.527zm-.518.137l1.236 5.017-4.963-1.432zm6.274 1.535l4.965 1.425-3.73 3.586zm-.52.127l1.235 5.012-4.958-1.43zm-9.63 2.438l4.873 1.406-3.656 3.523zm5.854 1.687l4.863 1.403-3.648 3.51zm-.54.04l1.214 4.927-4.875-1.4zm-3.896 4.02l5.037 1.442-3.782 3.638z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="cloud" data-name="AWS Cloud" tabindex="0" role="button" aria-label="AWS Cloud" title="AWS Cloud">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <rect width="128" height="128" rx="24" fill="#232F3E"/>
-                                        <path fill="#FF9900" d="M35 52l6 14c.6 1.4 1.8 1.4 2.8 0l6-14h7l-10 22c-1.4 3-3.6 4.5-6.8 4.5-3.2 0-5.4-1.5-6.8-4.5L24 52h11zm28 0h9l4 17 4-17h9l-7 26h-9l-4-17-4 17h-9l-7-26h8l4 17zm33 22c2.4 0 4.8-.8 6.5-2.2v-4.5c-1.6 1.3-3.7 2-5.6 2-3.2 0-5.1-1.6-5.1-4.2 0-2.3 1.6-3.7 4.9-4.3l5.8-1.1v-2.2c0-3.3-2.2-4.9-6-4.9-2.3 0-4.6.6-6.4 1.8l-1.8-4.2c2.6-1.5 5.7-2.3 8.9-2.3 6.9 0 11.2 3.5 11.2 10.3v15.7h-6.2v-2.3c-2 1.9-4.8 2.9-7.8 2.9-4.8 0-8.2-2.8-8.2-7.4 0-4.9 3.8-7.7 9.8-7.7h6.2v-1.1c0-2-1.4-3.1-3.8-3.1-2 0-4 .6-5.6 1.6l-1.6-4.2zm6.5-9.8l-4.5.9c-2.7.5-4 1.7-4 3.7 0 2.2 1.7 3.5 4 3.5 2.6 0 4.5-1.5 4.5-3.8v-4.3z"/>
-                                        <path fill="#FF9900" d="M28 88.5c18.5 11 44.5 11 68 0 1.2-.6 2.6.5 1.7 1.6-12 14-48 18-71.4 0-.8-.6.2-2.1 1.7-1.6z"/>
-                                    </svg>
+                        <!-- AWS Cloud -->
+                        <div class="stack-square-cell" data-category="cloud" data-name="AWS Cloud" data-level="8" tabindex="0" role="button" aria-label="AWS Cloud" title="AWS Cloud">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">AWS Cloud</div>
+                            <div class="stack-cell-logo">
+                                <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" class="stack-svg" aria-hidden="true">
+	<path fill="#FFFFFF" d="M36.379 53.64c0 1.56.168 2.825.465 3.75.336.926.758 1.938 1.347 3.032.207.336.293.672.293.969 0 .418-.254.84-.8 1.261l-2.653 1.77c-.379.25-.758.379-1.093.379-.422 0-.844-.211-1.266-.59a13.28 13.28 0 0 1-1.516-1.98 34.153 34.153 0 0 1-1.304-2.485c-3.282 3.875-7.41 5.813-12.38 5.813-3.535 0-6.355-1.012-8.421-3.032-2.063-2.023-3.114-4.718-3.114-8.086 0-3.578 1.262-6.484 3.833-8.671 2.566-2.192 5.976-3.286 10.316-3.286 1.43 0 2.902.125 4.46.336 1.56.211 3.161.547 4.845.926v-3.074c0-3.2-.676-5.43-1.98-6.734C26.061 32.633 23.788 32 20.546 32c-1.473 0-2.988.168-4.547.547a33.416 33.416 0 0 0-4.547 1.433c-.676.293-1.18.461-1.473.547-.296.082-.507.125-.675.125-.59 0-.883-.422-.883-1.304v-2.063c0-.676.082-1.18.293-1.476.21-.293.59-.586 1.18-.883 1.472-.758 3.242-1.39 5.304-1.895 2.063-.547 4.254-.8 6.57-.8 5.008 0 8.672 1.136 11.032 3.41 2.316 2.273 3.492 5.726 3.492 10.359v13.64Zm-17.094 6.403c1.387 0 2.82-.254 4.336-.758 1.516-.508 2.863-1.433 4-2.695.672-.8 1.18-1.684 1.43-2.695.254-1.012.422-2.23.422-3.665v-1.765a34.401 34.401 0 0 0-3.871-.719 31.816 31.816 0 0 0-3.961-.25c-2.82 0-4.883.547-6.274 1.684-1.387 1.136-2.062 2.734-2.062 4.84 0 1.98.504 3.453 1.558 4.464 1.012 1.051 2.485 1.559 4.422 1.559Zm33.809 4.547c-.758 0-1.262-.125-1.598-.422-.34-.254-.633-.84-.887-1.64L40.715 29.98c-.25-.843-.38-1.39-.38-1.687 0-.672.337-1.05 1.013-1.05h4.125c.8 0 1.347.124 1.644.421.336.25.59.84.84 1.64l7.074 27.876 6.57-27.875c.208-.84.462-1.39.797-1.64.34-.255.93-.423 1.688-.423h3.367c.8 0 1.348.125 1.684.422.336.25.633.84.8 1.64l6.653 28.212 7.285-28.211c.25-.84.547-1.39.84-1.64.336-.255.887-.423 1.644-.423h3.914c.676 0 1.055.336 1.055 1.051 0 .21-.043.422-.086.676-.043.254-.125.59-.293 1.05L80.801 62.57c-.254.84-.547 1.387-.887 1.64-.336.255-.883.423-1.598.423h-3.62c-.801 0-1.348-.13-1.684-.422-.34-.297-.633-.844-.801-1.684l-6.527-27.16-6.485 27.117c-.21.844-.46 1.391-.8 1.684-.337.297-.926.422-1.684.422Zm54.105 1.137c-2.187 0-4.379-.254-6.484-.758-2.106-.504-3.746-1.055-4.84-1.684-.676-.379-1.137-.8-1.305-1.18a2.919 2.919 0 0 1-.254-1.18v-2.148c0-.882.336-1.304.97-1.304.25 0 .503.043.757.129.25.082.629.25 1.05.418a23.102 23.102 0 0 0 4.634 1.476c1.683.336 3.324.504 5.011.504 2.653 0 4.715-.465 6.145-1.39 1.433-.926 2.191-2.274 2.191-4 0-1.18-.379-2.145-1.136-2.946-.758-.8-2.192-1.516-4.254-2.191l-6.106-1.895c-3.074-.969-5.348-2.398-6.734-4.293-1.39-1.855-2.106-3.918-2.106-6.105 0-1.77.38-3.328 1.137-4.676a10.829 10.829 0 0 1 3.031-3.453c1.262-.965 2.696-1.684 4.38-2.188 1.683-.504 3.452-.715 5.304-.715.926 0 1.894.043 2.82.168.969.125 1.852.293 2.738.461.84.211 1.641.422 2.399.676.758.254 1.348.504 1.77.758.59.336 1.011.672 1.261 1.05.254.34.379.802.379 1.391v1.98c0 .884-.336 1.348-.969 1.348-.336 0-.883-.171-1.597-.507-2.403-1.094-5.098-1.641-8.086-1.641-2.399 0-4.293.379-5.598 1.18-1.309.797-1.98 2.02-1.98 3.746 0 1.18.421 2.191 1.261 2.988.844.8 2.403 1.602 4.633 2.316l5.98 1.895c3.032.969 5.22 2.316 6.524 4.043 1.305 1.727 1.938 3.707 1.938 5.895 0 1.812-.38 3.453-1.094 4.882-.758 1.434-1.77 2.696-3.074 3.707-1.305 1.051-2.864 1.809-4.672 2.36-1.895.586-3.875.883-6.024.883Zm0 0"/>
+	<path fill="#f90" d="M118 73.348c-4.432.063-9.664 1.052-13.621 3.832-1.223.883-1.012 2.062.336 1.894 4.508-.547 14.44-1.726 16.21.547 1.77 2.23-1.976 11.62-3.663 15.79-.504 1.26.59 1.769 1.726.8 7.41-6.231 9.348-19.242 7.832-21.137-.757-.925-4.388-1.79-8.82-1.726zM1.63 75.859c-.927.116-1.347 1.236-.368 2.121 16.508 14.902 38.359 23.872 62.613 23.872 17.305 0 37.43-5.43 51.281-15.66 2.273-1.688.297-4.254-2.02-3.204-15.534 6.57-32.421 9.77-47.788 9.77-22.778 0-44.8-6.273-62.653-16.633-.39-.231-.755-.304-1.064-.266z"/>
+</svg>
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="cloud" data-name="Docker" tabindex="0" role="button" aria-label="Docker" title="Docker">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#2496ED" d="M124.5 61.2c-2.3-.9-9.5-1.5-14.7 2.4-4.8-3.6-11.8-3.9-15.6-2.5C92 48.7 80 40 66 40c-2.4 0-4.7.3-7 .8V33H45v13h-4V33H27v13h-4V33H9v27.2C3.8 62.5 0 67.8 0 74c0 18.2 17.5 33 46 33 34.6 0 59.8-19.4 67.2-41.2 5.5.3 11-1.2 14-4.6-1-.5-2-.3-2.7 0zM39 44h10v10H39V44zm-14 0h10v10H25V44zm-14 0h10v10H11V44zm28 14h10v10H39V58zm-14 0h10v10H25V58zm-14 0h10v10H11V58zm42-14h10v10H53V44zm0 14h10v10H53V58zm14 0h10v10H67V58z"/>
-                                    </svg>
+                        <!-- Docker -->
+                        <div class="stack-square-cell" data-category="cloud" data-name="Docker" data-level="9" tabindex="0" role="button" aria-label="Docker" title="Docker">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Docker</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 24 128 84" class="stack-svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" fill="#3A4D54" d="M73.8 50.8h11.3v11.5h5.7c2.6 0 5.3-.5 7.8-1.3 1.2-.4 2.6-1 3.8-1.7-1.6-2.1-2.4-4.7-2.6-7.3-.3-3.5.4-8.1 2.8-10.8l1.2-1.4 1.4 1.1c3.6 2.9 6.5 6.8 7.1 11.4 4.3-1.3 9.3-1 13.1 1.2l1.5.9-.8 1.6c-3.2 6.2-9.9 8.2-16.4 7.8-9.8 24.3-31 35.8-56.8 35.8-13.3 0-25.5-5-32.5-16.8l-.1-.2-1-2.1c-2.4-5.2-3.1-10.9-2.6-16.6l.2-1.7h9.6V50.8h11.3V39.6h22.5V28.3h13.5v22.5z"/><path fill="#00AADA" d="M110.4 55.1c.8-5.9-3.6-10.5-6.4-12.7-3.1 3.6-3.6 13.2 1.3 17.2-2.8 2.4-8.5 4.7-14.5 4.7H18.6c-.6 6.2.5 11.9 3 16.8l.8 1.5c.5.9 1.1 1.7 1.7 2.6 3 .2 5.7.3 8.2.2 4.9-.1 8.9-.7 12-1.7.5-.2.9.1 1.1.5.2.5-.1.9-.5 1.1-.4.1-.8.3-1.3.4-2.4.7-5 1.1-8.3 1.3h-.6c-1.3.1-2.7.1-4.2.1-1.6 0-3.1 0-4.9-.1 6 6.8 15.4 10.8 27.2 10.8 25 0 46.2-11.1 55.5-35.9 6.7.7 13.1-1 16-6.7-4.5-2.7-10.5-1.8-13.9-.1z"/><path fill="#28B8EB" d="M110.4 55.1c.8-5.9-3.6-10.5-6.4-12.7-3.1 3.6-3.6 13.2 1.3 17.2-2.8 2.4-8.5 4.7-14.5 4.7h-68c-.3 9.5 3.2 16.7 9.5 21 4.9-.1 8.9-.7 12-1.7.5-.2.9.1 1.1.5.2.5-.1.9-.5 1.1-.4.1-.8.3-1.3.4-2.4.7-5.2 1.2-8.5 1.4l-.1-.1c8.5 4.4 20.8 4.3 35-1.1 15.8-6.1 30.6-17.7 40.9-30.9-.2.1-.4.1-.5.2z"/><path fill="#028BB8" d="M18.7 71.8c.4 3.3 1.4 6.4 2.9 9.3l.8 1.5c.5.9 1.1 1.7 1.7 2.6 3 .2 5.7.3 8.2.2 4.9-.1 8.9-.7 12-1.7.5-.2.9.1 1.1.5.2.5-.1.9-.5 1.1-.4.1-.8.3-1.3.4-2.4.7-5.2 1.2-8.5 1.4h-.4c-1.3.1-2.7.1-4.1.1-1.6 0-3.2 0-4.9-.1 6 6.8 15.5 10.8 27.3 10.8 21.4 0 40-8.1 50.8-26H18.7v-.1z"/><path fill="#019BC6" d="M23.5 71.8c1.3 5.8 4.3 10.4 8.8 13.5 4.9-.1 8.9-.7 12-1.7.5-.2.9.1 1.1.5.2.5-.1.9-.5 1.1-.4.1-.8.3-1.3.4-2.4.7-5.2 1.2-8.6 1.4 8.5 4.4 20.8 4.3 34.9-1.1 8.5-3.3 16.8-8.2 24.2-14.1H23.5z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#00ACD3" d="M28.4 52.7h9.8v9.8h-9.8v-9.8zm.8.8h.8v8.1h-.8v-8.1zm1.4 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm3-12h9.8v9.8h-9.8v-9.8zm.9.8h.8v8.1h-.8v-8.1zm1.4 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.4 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#23C2EE" d="M39.6 52.7h9.8v9.8h-9.8v-9.8zm.9.8h.8v8.1h-.8v-8.1zm1.4 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.4 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#00ACD3" d="M50.9 52.7h9.8v9.8h-9.8v-9.8zm.8.8h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.4 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#23C2EE" d="M50.9 41.5h9.8v9.8h-9.8v-9.8zm.8.8h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.4 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm3.1 10.4H72v9.8h-9.8v-9.8zm.8.8h.8v8.1H63v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.4 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#00ACD3" d="M62.2 41.5H72v9.8h-9.8v-9.8zm.8.8h.8v8.1H63v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.4 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#23C2EE" d="M62.2 30.2H72V40h-9.8v-9.8zm.8.8h.8v8.1H63V31zm1.5 0h.8v8.1h-.8V31zm1.4 0h.8v8.1h-.8V31zm1.5 0h.8v8.1h-.8V31zm1.5 0h.8v8.1h-.8V31zm1.5 0h.8v8.1h-.8V31z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#00ACD3" d="M73.5 52.7h9.8v9.8h-9.8v-9.8zm.8.8h.8v8.1h-.8v-8.1zm1.4 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1zm1.5 0h.8v8.1h-.8v-8.1z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#D4EEF1" d="M48.8 78.3c1.5 0 2.7 1.2 2.7 2.7 0 1.5-1.2 2.7-2.7 2.7-1.5 0-2.7-1.2-2.7-2.7 0-1.5 1.2-2.7 2.7-2.7"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#3A4D54" d="M48.8 79.1c.2 0 .5 0 .7.1-.2.1-.4.4-.4.7 0 .4.4.8.8.8.3 0 .6-.2.7-.4.1.2.1.5.1.7 0 1.1-.9 1.9-1.9 1.9-1.1 0-1.9-.9-1.9-1.9 0-1 .8-1.9 1.9-1.9M1.1 72.8h125.4c-2.7-.7-8.6-1.6-7.7-5.2-5 5.7-16.9 4-20 1.2-3.4 4.9-23 3-24.3-.8-4.2 5-17.3 5-21.5 0-1.4 3.8-21 5.7-24.3.8-3 2.8-15 4.5-20-1.2 1.1 3.5-4.9 4.5-7.6 5.2"/><path fill="#BFDBE0" d="M56 97.8c-6.7-3.2-10.3-7.5-12.4-12.2-2.5.7-5.5 1.2-8.9 1.4-1.3.1-2.7.1-4.1.1-1.7 0-3.4 0-5.2-.1 6 6 13.6 10.7 27.5 10.8H56z"/><path fill="#D4EEF1" d="M46.1 89.9c-.9-1.3-1.8-2.8-2.5-4.3-2.5.7-5.5 1.2-8.9 1.4 2.3 1.2 5.7 2.4 11.4 2.9z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 9/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="cloud" data-name="Kubernetes" tabindex="0" role="button" aria-label="Kubernetes" title="Kubernetes">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#326CE5" d="M64 8l48.5 28v56L64 120 15.5 92V36L64 8z"/>
-                                        <path fill="#FFFFFF" d="M64 24a40 40 0 100 80 40 40 0 000-80zm0 12a28 28 0 110 56 28 28 0 010-56zm-4 8v12h8V44h-8zm-18.4 8.6l-5.7 5.7 8.5 8.5 5.7-5.7-8.5-8.5zm36.8 0l-8.5 8.5 5.7 5.7 8.5-8.5-5.7-5.7zM40 68v8h12v-8H40zm36 0v8h12v-8H76zm-26.9 14.6l-8.5 8.5 5.7 5.7 8.5-8.5-5.7-5.7zm29.8 0l-5.7 5.7 8.5 8.5 5.7-5.7-8.5-8.5z"/>
-                                    </svg>
+                        <!-- Kubernetes -->
+                        <div class="stack-square-cell" data-category="cloud" data-name="Kubernetes" data-level="7" tabindex="0" role="button" aria-label="Kubernetes" title="Kubernetes">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Kubernetes</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="stack-svg" aria-hidden="true"><path fill="#326ce5" d="M63.556 1.911a8.51 8.44 0 0 0-3.26.826L15.794 24a8.51 8.44 0 0 0-4.603 5.725L.214 77.484a8.51 8.44 0 0 0 1.154 6.47 8.51 8.44 0 0 0 .485.673l30.799 38.297a8.51 8.44 0 0 0 6.654 3.175l49.393-.011a8.51 8.44 0 0 0 6.654-3.17l30.79-38.303a8.51 8.44 0 0 0 1.644-7.14l-10.996-47.76a8.51 8.44 0 0 0-4.604-5.727L67.681 2.738a8.51 8.44 0 0 0-4.125-.827Zm.44 16.252c1.47 0 2.664 1.327 2.664 2.961 0 .232.014.544.006.758-.034.943-.24 1.662-.364 2.531-.224 1.858-.417 3.4-.3 4.832.105.717.522 1 .869 1.332a63.624 63.624 0 0 0 .062 1.19c8.468.751 16.335 4.625 22.112 10.682l1.011-.723c.343.021 1.1.124 1.618-.176 1.19-.802 2.276-1.915 3.59-3.25.601-.638 1.044-1.245 1.76-1.861.162-.14.409-.328.59-.473 1.278-1.018 3.057-.912 3.974.238.917 1.15.622 2.908-.655 3.928-.18.145-.416.346-.588.473-.758.56-1.456.846-2.212 1.29-1.593.984-2.913 1.8-3.961 2.784-.494.53-.457 1.03-.5 1.508-.148.136-.67.598-.946.848a34.478 34.478 0 0 1 4.99 11.537 34.398 34.398 0 0 1 .56 12.435l1.073.313c.194.274.592.94 1.15 1.156 1.372.431 2.914.59 4.776.785.875.073 1.628.03 2.555.205.222.042.545.13.773.182 1.57.379 2.578 1.822 2.254 3.244-.324 1.422-1.857 2.286-3.437 1.946l-.04-.006c-.016-.004-.033-.012-.05-.016-.221-.048-.497-.098-.69-.148-.91-.245-1.57-.61-2.388-.922-1.763-.632-3.224-1.16-4.647-1.366-.72-.058-1.09.287-1.49.551a39.835 39.835 0 0 0-1.139-.199c-2.552 8.02-7.985 14.966-15.353 19.317.127.306.342.958.443 1.074-.17.449-.421.88-.205 1.572.517 1.34 1.354 2.652 2.363 4.229.488.728.988 1.288 1.428 2.122.105.2.244.507.346.717.685 1.465.183 3.151-1.131 3.785-1.326.639-2.974-.037-3.684-1.51-.1-.208-.244-.485-.33-.683-.377-.864-.507-1.604-.773-2.44-.604-1.772-1.102-3.24-1.827-4.48-.406-.6-.903-.676-1.359-.824-.085-.146-.4-.724-.57-1.024a34.56 34.56 0 0 1-4.57 1.377 34.413 34.413 0 0 1-20.01-1.44l-.604 1.09c-.449.12-.882.244-1.148.561-.97 1.157-1.356 3.016-2.061 4.786-.265.836-.393 1.577-.77 2.441-.086.196-.229.468-.33.676v.008l-.006.006c-.71 1.468-2.352 2.139-3.675 1.502-1.315-.633-1.818-2.32-1.133-3.785.102-.211.236-.517.342-.717.44-.834.94-1.398 1.427-2.127 1.008-1.578 1.895-2.994 2.413-4.334.13-.446-.063-1.057-.237-1.508l.483-1.159c-7.09-4.2-12.688-10.897-15.36-19.181l-1.162.199c-.31-.174-.937-.586-1.531-.539-1.422.206-2.88.733-4.643 1.365-.82.314-1.48.672-2.39.916-.193.052-.47.105-.69.154-.017.004-.034.014-.05.018l-.04.004c-1.58.341-3.112-.523-3.437-1.945-.325-1.422.684-2.865 2.254-3.245l.039-.011.021-.006c.224-.052.51-.125.713-.164.927-.175 1.68-.132 2.555-.205 1.862-.195 3.405-.354 4.775-.785.434-.18.85-.775 1.145-1.155l1.115-.326c-1.25-8.655.864-17.15 5.434-24.027l-.852-.762c-.055-.333-.127-1.101-.537-1.537-1.047-.983-2.366-1.8-3.959-2.783-.756-.445-1.449-.733-2.209-1.293-.16-.12-.376-.3-.55-.444l-.042-.027c-1.278-1.019-1.571-2.778-.654-3.928.516-.647 1.304-.967 2.123-.94a3.168 3.168 0 0 1 1.854.702c.182.143.431.333.593.473.715.614 1.15 1.221 1.752 1.859 1.314 1.334 2.4 2.442 3.592 3.244.626.364 1.107.218 1.582.154.153.113.667.483.961.684a34.262 34.262 0 0 1 17.404-9.943 34.663 34.663 0 0 1 4.815-.74l.062-1.128c.355-.344.753-.837.866-1.377.116-1.43-.073-2.974-.297-4.832-.124-.869-.329-1.588-.364-2.53-.007-.194.004-.462.006-.684 0-.025-.006-.05-.006-.075 0-1.634 1.193-2.959 2.663-2.959zm-3.334 20.66a28.076 28.076 0 0 0-2.84.489 27.438 27.438 0 0 0-13.215 7.201l11.457 8.121.021-.011a2.334 2.334 0 0 0 1.383.449 2.348 2.348 0 0 0 2.346-2.248l.057-.028zm6.675 0 .791 13.95.012.006a2.35 2.35 0 0 0 3.733 1.793l.04.017 11.383-8.07a27.668 27.668 0 0 0-15.959-7.695ZM40.452 51.73a27.432 27.432 0 0 0-3.892 17.365l13.408-3.87.012-.046a2.348 2.348 0 0 0 1.217-.803 2.345 2.345 0 0 0-.295-3.232l.01-.057zm47.014.008-10.402 9.308.006.03a2.329 2.329 0 0 0-.746 1.246 2.35 2.35 0 0 0 1.668 2.789l.011.056L91.48 69.05a27.703 27.703 0 0 0-.58-8.931 27.774 27.774 0 0 0-3.434-8.381ZM61.853 61.81l-2.67 3.324.957 4.153 3.857 1.857 3.848-1.85.957-4.154-2.664-3.33zm13.736 11.395a2.333 2.333 0 0 0-.898.232 2.351 2.351 0 0 0-1.139 3.045l-.017.023L78.92 89.51a27.466 27.466 0 0 0 11.102-13.95l-13.871-2.344-.021.028a2.276 2.276 0 0 0-.542-.04zm-23.293.056a2.378 2.378 0 0 0-.46.04l-.024-.028-13.75 2.332a27.58 27.58 0 0 0 11.07 13.854l5.326-12.873-.039-.053a2.326 2.326 0 0 0 .131-1.446 2.349 2.349 0 0 0-2.254-1.826zm11.616 5.64a2.351 2.351 0 0 0-1.987 1.241h-.012l-6.761 12.225a27.542 27.542 0 0 0 15.031.773 28.056 28.056 0 0 0 2.71-.756l-6.78-12.248h-.051a2.337 2.337 0 0 0-1.053-1.002 2.32 2.32 0 0 0-1.097-.232z"/></svg>
+
+                            </div>
+                            <div class="stack-cell-level">Level 7/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="cloud" data-name="Linux Sysadmin" tabindex="0" role="button" aria-label="Linux Sysadmin" title="Linux Sysadmin">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <rect width="128" height="128" rx="24" fill="#0D1117"/>
-                                        <path fill="#00F0FF" d="M24 38l28 26-28 26v-12l15-14-15-14V38zm36 44h44v10H60V82z"/>
-                                    </svg>
+                        <!-- Linux Sysadmin -->
+                        <div class="stack-square-cell" data-category="cloud" data-name="Linux Sysadmin" data-level="8" tabindex="0" role="button" aria-label="Linux Sysadmin" title="Linux Sysadmin">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Linux Sysadmin</div>
+                            <div class="stack-cell-logo">
+                                
+<svg viewBox="15 15 226 265" xmlns="http://www.w3.org/2000/svg" class="stack-svg" aria-hidden="true">
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="6.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+        </filter>
+        <linearGradient x1="48.5477412%" y1="115.276174%" x2="51.0473804%" y2="41.3637237%" id="linearGradient-2">
+            <stop stop-color="#FFEED7" offset="0%"></stop>
+            <stop stop-color="#BDBFC2" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="54.4065463%" y1="2.40410545%" x2="46.1753957%" y2="90.5422349%" id="linearGradient-3">
+            <stop stop-color="#FFFFFF" stop-opacity="0.8" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="51.859653%" y1="88.2477484%" x2="47.9469396%" y2="9.74782136%" id="linearGradient-4">
+            <stop stop-color="#FFEED7" offset="0%"></stop>
+            <stop stop-color="#BDBFC2" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="49.9251097%" y1="85.4900173%" x2="49.9236843%" y2="13.8109272%" id="linearGradient-5">
+            <stop stop-color="#FFEED7" offset="0%"></stop>
+            <stop stop-color="#BDBFC2" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="53.9014071%" y1="3.10177585%" x2="45.9555354%" y2="93.8949571%" id="linearGradient-6">
+            <stop stop-color="#FFFFFF" stop-opacity="0.65" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="45.5928761%" y1="5.47459052%" x2="54.811359%" y2="93.5235162%" id="linearGradient-7">
+            <stop stop-color="#FFFFFF" stop-opacity="0.65" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="49.9844987%" y1="89.8452442%" x2="49.9844987%" y2="40.6316864%" id="linearGradient-8">
+            <stop stop-color="#FFEED7" offset="0%"></stop>
+            <stop stop-color="#BDBFC2" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="53.5047131%" y1="99.97524%" x2="42.7455968%" y2="23.5451715%" id="linearGradient-9">
+            <stop stop-color="#FFEED7" offset="0%"></stop>
+            <stop stop-color="#BDBFC2" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="49.8413363%" y1="13.2289558%" x2="50.2412612%" y2="94.6729694%" id="linearGradient-10">
+            <stop stop-color="#FFFFFF" stop-opacity="0.8" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="49.9272298%" y1="37.3270337%" x2="50.7270446%" y2="92.7824735%" id="linearGradient-11">
+            <stop stop-color="#FFFFFF" stop-opacity="0.65" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="49.8755597%" y1="2.29900584%" x2="49.8755597%" y2="81.203617%" id="linearGradient-12">
+            <stop stop-color="#FFFFFF" stop-opacity="0.65" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="49.8334391%" y1="2.27189065%" x2="49.8240398%" y2="71.7989617%" id="linearGradient-13">
+            <stop stop-color="#FFFFFF" stop-opacity="0.65" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="53.4670683%" y1="48.9213861%" x2="38.9488708%" y2="98.0999776%" id="linearGradient-14">
+            <stop stop-color="#FFA63F" offset="0%"></stop>
+            <stop stop-color="#FFFF00" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="52.3731508%" y1="143.008909%" x2="47.57909%" y2="-64.6215389%" id="linearGradient-15">
+            <stop stop-color="#FFEED7" offset="0%"></stop>
+            <stop stop-color="#BDBFC2" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="30.580815%" y1="34.0241079%" x2="65.8867024%" y2="89.175349%" id="linearGradient-16">
+            <stop stop-color="#FFA63F" offset="0%"></stop>
+            <stop stop-color="#FFFF00" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="59.5715091%" y1="-17.2155207%" x2="48.3608522%" y2="66.1184465%" id="linearGradient-17">
+            <stop stop-color="#FFFFFF" stop-opacity="0.65" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="47.7689553%" y1="1.56481301%" x2="51.3733028%" y2="104.312856%" id="linearGradient-18">
+            <stop stop-color="#FFFFFF" stop-opacity="0.65" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="43.5495626%" y1="4.5334861%" x2="57.1143288%" y2="92.8267174%" id="linearGradient-19">
+            <stop stop-color="#FFFFFF" stop-opacity="0.65" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="49.7328042%" y1="17.6085216%" x2="50.5582487%" y2="99.3854667%" id="linearGradient-20">
+            <stop stop-color="#FFA63F" offset="0%"></stop>
+            <stop stop-color="#FFFF00" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50.1697217%" y1="2.89048531%" x2="49.6802359%" y2="94.1704279%" id="linearGradient-21">
+            <stop stop-color="#FFFFFF" stop-opacity="0.65" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g fill="none">
+        <g transform="translate(10.000000, 0.000000)">
+            <path d="M235.125423,249.358628 C235.125423,266.714271 182.507524,280.855905 117.584567,280.855905 C52.6616093,280.855905 0.0437105058,266.806099 0.0437105058,249.358628 L0.0437105058,249.358628 C0.0437105058,232.002986 52.6616093,217.861352 117.584567,217.861352 C182.507524,217.861352 235.033594,232.002986 235.125423,249.358628 L235.125423,249.358628 L235.125423,249.358628 Z" fill="#000" fill-opacity="0.2" filter="url(#filter-1)"></path>
+            <path d="M53.2125821,215.473804 C41.8258117,199.128278 39.6219206,145.867578 66.160442,113.084699 C79.2919595,97.3819748 82.6896249,86.4543483 83.6997416,71.6699125 C84.434372,54.8652433 71.8538272,4.81855066 119.237485,1.05357012 C167.263944,-2.80323922 164.600909,44.5804184 164.325423,69.6496791 C164.141765,90.7703016 179.844489,102.799874 190.680286,119.329056 C210.607135,149.632558 208.954216,201.791313 186.915306,230.074582 C158.999353,265.428667 135.123866,250.093259 119.237485,251.378862 C89.4849556,253.123609 88.4748389,268.918162 53.2125821,215.473804 L53.2125821,215.473804 Z" fill="#000000"></path>
+            <path d="M169.10052,122.451235 C177.365111,130.073025 198.76122,164.141508 164.876395,185.445788 C152.938652,192.88392 175.528535,221.167189 186.364333,207.484699 C205.556551,182.874582 193.343321,143.571858 181.772893,129.522053 C174.059275,119.604543 162.121532,115.747734 169.10052,122.451235 L169.10052,122.451235 Z" fill="url(#linearGradient-2)"></path>
+            <path d="M166.8048,117.859796 C180.395461,128.879251 205.097407,167.447344 169.008691,192.608434 C157.162777,200.413881 179.477174,225.115827 192.057718,212.535282 C235.676395,168.641119 190.955773,118.227111 175.528535,100.871469 C161.754216,85.719718 149.540987,104.360963 166.8048,117.859796 L166.8048,117.859796 Z" stroke="#000000" stroke-width="0.9773" fill="#000000"></path>
+            <path d="M147.245267,25.0208853 C146.786123,37.60143 132.919975,48.5290565 116.298963,49.5391732 C99.6779518,50.54929 86.638263,40.9990954 87.097407,28.4185507 L87.097407,28.4185507 C87.556551,15.8380059 101.422699,4.91037946 118.043711,3.90026272 C134.664722,2.98197479 147.704411,12.4403405 147.245267,25.0208853 L147.245267,25.0208853 L147.245267,25.0208853 Z" fill="url(#linearGradient-3)"></path>
+            <path d="M107.483399,54.9570721 C107.942543,63.1298347 104.085734,70.0169942 98.7596638,70.2924806 C93.4335938,70.567967 88.7503253,64.2317802 88.2911813,56.0590176 L88.2911813,56.0590176 C87.8320374,47.8862549 91.6888467,40.9990954 97.0149167,40.723609 C102.340987,40.4481226 107.024255,46.7843094 107.483399,54.9570721 L107.483399,54.9570721 L107.483399,54.9570721 Z" fill="url(#linearGradient-4)"></path>
+            <path d="M117.125423,55.5998736 C117.30908,65.0582394 123.461609,72.5882005 130.807913,72.4045429 C138.154216,72.2208853 143.93943,64.4154378 143.755773,54.8652433 L143.755773,54.8652433 C143.572115,45.4068775 137.419586,37.8769164 130.073282,38.060574 C122.726979,38.2442316 116.849936,46.1415079 117.125423,55.5998736 L117.125423,55.5998736 L117.125423,55.5998736 Z" fill="url(#linearGradient-5)"></path>
+            <path d="M123.186123,57.7119359 C123.094294,62.9461771 125.6655,67.1703016 129.063166,67.1703016 C132.369002,67.1703016 135.215695,62.9461771 135.307524,57.8037647 L135.307524,57.8037647 C135.399353,52.5695234 132.828146,48.3453989 129.430481,48.3453989 C126.032816,48.3453989 123.277952,52.5695234 123.186123,57.7119359 L123.186123,57.7119359 L123.186123,57.7119359 Z" fill="#000000"></path>
+            <path d="M101.973672,57.8037647 C102.432816,62.119718 100.779897,65.7928697 98.3923486,66.1601849 C96.0048,66.4356713 93.7090802,63.2216635 93.2499362,58.9057102 L93.2499362,58.9057102 C92.7907922,54.5897569 94.4437105,50.9166051 96.8312591,50.54929 C99.2188078,50.2738036 101.514528,53.4878114 101.973672,57.8037647 L101.973672,57.8037647 L101.973672,57.8037647 Z" fill="#000000"></path>
+            <path d="M124.563555,54.7734145 C124.288068,57.7119359 125.6655,60.0994845 127.593905,60.2831421 C129.52231,60.4667997 131.358886,58.1710798 131.634372,55.3243872 L131.634372,55.3243872 C131.909858,52.3858658 130.532426,49.9983172 128.604022,49.8146596 C126.675617,49.631002 124.839041,51.9267219 124.563555,54.7734145 L124.563555,54.7734145 L124.563555,54.7734145 Z" fill="url(#linearGradient-6)"></path>
+            <path d="M99.9534381,55.5080448 C100.228925,57.8955935 99.2188078,60.0076557 97.7495471,60.1913133 C96.2802864,60.3749709 94.9028545,58.538395 94.6273681,56.0590176 L94.6273681,56.0590176 C94.3518817,53.6714689 95.3619984,51.5594067 96.8312591,51.3757491 C98.3005198,51.1920915 99.6779518,53.1204962 99.9534381,55.5080448 L99.9534381,55.5080448 L99.9534381,55.5080448 Z" fill="url(#linearGradient-7)"></path>
+            <path d="M71.0273681,145.68392 C77.5472125,130.899485 91.4133603,104.911936 91.6888467,84.80143 C91.6888467,68.8232199 139.531648,64.9664106 143.388458,80.9446207 C147.245267,96.9228308 156.979119,120.798317 163.223477,132.368745 C169.467835,143.847344 187.558107,180.487033 168.274061,212.443453 C150.918419,240.726722 98.3005198,263.132948 70.2009089,208.586644 C60.6507144,189.669913 62.3954615,166.25357 71.0273681,145.68392 L71.0273681,145.68392 Z" fill="url(#linearGradient-8)"></path>
+            <path d="M65.1503253,134.664465 C59.5487689,145.224776 47.9783409,172.957072 76.2616093,188.108823 C106.65694,204.270691 106.565111,237.420885 70.0172514,221.626333 C36.5915704,207.39287 51.3760062,149.724387 60.7425432,135.950068 C66.8032436,126.308045 75.986123,114.46213 65.1503253,134.664465 L65.1503253,134.664465 Z" fill="url(#linearGradient-9)"></path>
+            <path d="M69.9254226,122.726722 C61.0180296,137.235671 39.7137494,171.395983 68.2725043,189.210769 C106.65694,212.810769 95.8211424,236.31894 60.7425432,215.106488 C11.3386521,185.537617 54.7736716,125.848901 74.5168623,103.07536 C97.1067455,77.5469553 78.8328156,107.758628 69.9254226,122.726722 L69.9254226,122.726722 Z" stroke="#000000" stroke-width="1.25" fill="#000000"></path>
+            <path d="M156.428146,151.285477 C156.428146,167.447344 140.90908,188.384309 114.27873,188.200652 C86.8219206,188.384309 75.1596638,167.447344 75.1596638,151.285477 C75.1596638,135.123609 93.341765,121.992092 115.747991,121.992092 C138.246045,122.08392 156.428146,135.123609 156.428146,151.285477 L156.428146,151.285477 Z" fill="url(#linearGradient-10)"></path>
+            <path d="M141.919197,100.504154 C141.643711,117.216994 130.716084,121.165632 116.941765,121.165632 C103.167446,121.165632 93.1581074,118.686255 91.9643331,100.504154 C91.9643331,89.1173833 103.167446,82.5057102 116.941765,82.5057102 C130.716084,82.4138814 141.919197,89.0255546 141.919197,100.504154 L141.919197,100.504154 Z" fill="url(#linearGradient-11)"></path>
+            <path d="M58.6304809,126.216216 C67.6297027,112.533726 86.638263,91.504932 62.2118039,129.154737 C42.3767844,160.19287 54.8655004,180.119718 61.293516,185.629446 C79.8429323,202.158628 79.1083019,213.269913 64.5075237,204.546177 C33.1939051,185.904932 39.7137494,154.499485 58.6304809,126.216216 L58.6304809,126.216216 Z" fill="url(#linearGradient-12)"></path>
+            <path d="M188.935539,131.817772 C181.130092,115.747734 156.336318,74.9757491 190.129314,122.359407 C220.89196,165.243453 199.312193,195.087811 195.455384,198.026333 C191.598574,200.964854 178.650714,206.933726 182.415695,196.557072 C186.272504,186.180418 205.372893,166.529056 188.935539,131.817772 L188.935539,131.817772 Z" fill="url(#linearGradient-13)"></path>
+            <path d="M51.8351502,258.541508 C31.2655004,247.613881 1.42114241,260.65357 12.2569401,231.084699 C14.4608311,224.381197 9.0429323,214.280029 12.5324265,207.760185 C16.6647222,199.77108 25.5721152,201.515827 30.8981852,196.189757 C36.1324265,190.680029 39.438263,181.129835 49.263944,182.599095 C58.9977961,184.068356 65.5176405,196.006099 72.3129712,210.698706 C77.3635549,221.167189 95.1783409,235.951625 93.9845665,247.70571 C92.5153058,265.704154 72.0374848,269.101819 51.8351502,258.541508 L51.8351502,258.541508 Z" stroke="#E68C3F" stroke-width="6.25" fill="url(#linearGradient-14)"></path>
+            <path d="M201.607913,189.11894 C198.485734,194.995983 185.446045,204.454348 176.72231,201.974971 C167.906746,199.587422 163.866279,186.180418 165.611026,175.987422 C167.263944,164.600652 176.72231,163.95785 188.660053,169.651235 C201.516084,175.987422 205.372893,181.313492 201.607913,189.11894 L201.607913,189.11894 Z" fill="url(#linearGradient-15)"></path>
+            <path d="M194.445267,253.490924 C209.505189,235.216994 243.022699,238.981975 220.432816,213.912714 C215.657718,208.494815 217.126979,196.924387 211.249936,191.965632 C204.362777,185.904932 196.740987,190.863687 189.761998,187.741508 C182.78301,184.343842 175.436707,177.823998 166.896629,182.415438 C158.356551,187.098706 157.438263,199.220107 156.611804,215.198317 C155.877174,226.676916 145.408691,245.869134 151.010247,256.429446 C159.091181,272.774971 180.119975,270.57108 194.445267,253.490924 L194.445267,253.490924 Z" stroke="#E68C3F" stroke-width="6.2507" fill="url(#linearGradient-16)"></path>
+            <path d="M187.925423,229.064465 C211.249936,194.628667 193.894294,194.904154 188.017251,192.241119 C182.140209,189.486255 175.987679,184.068356 169.10052,187.833337 C162.21336,191.690146 161.846045,201.607656 161.662388,214.647344 C161.386901,224.013881 153.581454,239.716605 158.264722,248.440341 C163.958107,258.633337 177.732426,243.848901 187.925423,229.064465 L187.925423,229.064465 Z" fill="url(#linearGradient-17)"></path>
+            <path d="M47.0600529,234.02322 C12.1651113,211.433337 28.5106366,203.719718 33.7448778,200.138395 C40.0810646,195.546955 40.1728934,186.731391 47.9783409,187.55785 C55.7837883,188.384309 60.375228,198.026333 65.6094693,209.964076 C69.4662786,218.504154 82.8732825,229.890924 81.8631658,239.716605 C80.5775626,251.287033 62.1199751,243.665243 47.0600529,234.02322 L47.0600529,234.02322 Z" fill="url(#linearGradient-18)"></path>
+            <path d="M199.587679,188.843453 C196.832816,193.618551 185.629703,201.148512 178.19157,199.128278 C170.569781,197.199874 167.080286,186.455905 168.641376,178.374971 C170.018808,169.192092 178.19157,168.732948 188.476395,173.324387 C199.404022,178.283142 202.801687,182.507267 199.587679,188.843453 L199.587679,188.843453 Z" fill="#000000"></path>
+            <path d="M192.057718,186.180418 C190.312971,189.486255 182.966668,194.720496 177.824255,193.343064 C172.681843,191.965632 170.110637,184.5275 170.937096,178.925944 C171.671726,172.589757 177.181454,172.222442 184.160442,175.344621 C191.690403,178.834115 194.077952,181.772636 192.057718,186.180418 L192.057718,186.180418 Z" fill="url(#linearGradient-19)"></path>
+            <path d="M97.1067455,66.3438425 C100.779897,62.9461771 109.68729,52.5695234 126.583788,63.4053211 C129.705967,65.4255546 132.277174,65.6092121 138.246045,68.1804184 C150.275617,73.1391732 144.582232,85.0769164 131.726201,89.1173833 C126.216473,90.8621304 121.257718,97.5656324 111.340209,96.9228308 C102.800131,96.4636868 100.59624,90.8621304 95.3619984,87.8317802 C86.0872903,82.597539 84.7098584,75.5267219 89.760442,71.7617413 C94.8110257,67.9967608 96.7394304,66.6193289 97.1067455,66.3438425 L97.1067455,66.3438425 Z" stroke="#E68C3F" stroke-width="3.75" fill="url(#linearGradient-20)"></path>
+            <path d="M138.429703,75.9858658 C133.379119,76.2613522 122.451493,87.1889787 110.972893,87.1889787 C99.4942942,87.1889787 92.6071346,76.5368386 90.8623875,76.5368386" stroke="#E68C3F" stroke-width="2.5"></path>
+            <path d="M102.800131,65.4255546 C104.636707,63.7726363 110.421921,59.2730254 118.043711,63.8644651 C119.696629,64.782753 121.349547,65.7928697 123.737096,67.1703016 C128.604022,70.0169942 126.216473,74.14929 120.33943,76.7204962 C117.676395,77.8224417 113.268613,80.2099904 109.962777,80.0263328 C106.289625,79.6590176 103.810247,77.2714689 101.422699,75.7103795 C96.9230879,72.7718581 97.1985743,70.2924806 99.3106366,68.364076 C100.871726,66.8948153 102.616473,65.5173833 102.800131,65.4255546 L102.800131,65.4255546 Z" fill="url(#linearGradient-21)"></path>
+        </g>
+    </g>
+</svg>
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="cloud" data-name="Nginx" tabindex="0" role="button" aria-label="Nginx" title="Nginx">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#009639" d="M64 8l52 30v60l-52 30-52-30v-60l52-30z"/>
-                                        <path fill="#FFFFFF" d="M42 42h11.2l23.6 32.5V42H86v44H74.8L51.2 53.5V86H42V42z"/>
-                                    </svg>
+                        <!-- Nginx -->
+                        <div class="stack-square-cell" data-category="cloud" data-name="Nginx" data-level="8" tabindex="0" role="button" aria-label="Nginx" title="Nginx">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Nginx</div>
+                            <div class="stack-cell-logo">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="stack-svg" aria-hidden="true">
+    <path fill="#009639" d="M12 0L1.605 6v12L12 24l10.395-6V6L12 0z"/>
+    <path fill="#FFFFFF" d="M18 16.59c0 .705-.646 1.29-1.529 1.29-.631 0-1.351-.255-1.801-.81l-6-7.141v6.66c0 .721-.57 1.29-1.274 1.29H7.32c-.721 0-1.29-.6-1.29-1.29V7.41c0-.705.63-1.29 1.5-1.29.646 0 1.38.255 1.83.81l5.97 7.141V7.41c0-.721.6-1.29 1.29-1.29h.075c.72 0 1.29.6 1.29 1.29v9.18H18z"/>
+</svg>
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="cloud" data-name="CI/CD Actions" tabindex="0" role="button" aria-label="CI/CD Actions" title="CI/CD Actions">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <rect width="128" height="128" rx="24" fill="#181717"/>
-                                        <path fill="#2088FF" d="M78 28a18 18 0 00-15.6 9H44a18 18 0 100 16h18.4A18 18 0 0078 62a18 18 0 0015.6-9H104V43H93.6A18 18 0 0078 28zm0 10a8 8 0 110 16 8 8 0 010-16zM32 45a8 8 0 110 16 8 8 0 010-16zm46 35a18 18 0 00-15.6 9H44a18 18 0 100 16h18.4A18 18 0 0078 114a18 18 0 0015.6-9H104V95H93.6A18 18 0 0078 80zm0 10a8 8 0 110 16 8 8 0 010-16z"/>
-                                    </svg>
+                        <!-- CI/CD Actions -->
+                        <div class="stack-square-cell" data-category="cloud" data-name="CI/CD Actions" data-level="8" tabindex="0" role="button" aria-label="CI/CD Actions" title="CI/CD Actions">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">CI/CD Actions</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="stack-svg" aria-hidden="true"><path fill="#2088ff" d="M26.666 0C11.97 0 0 11.97 0 26.666c0 12.87 9.181 23.651 21.334 26.13v37.87c0 11.77 9.68 21.334 21.332 21.334h.195c1.302 9.023 9.1 16 18.473 16C71.612 128 80 119.612 80 109.334s-8.388-18.668-18.666-18.668c-9.372 0-17.17 6.977-18.473 16h-.195c-8.737 0-16-7.152-16-16V63.779a18.514 18.514 0 0 0 13.24 5.555h2.955c1.303 9.023 9.1 16 18.473 16 9.372 0 17.169-6.977 18.47-16h11.057c1.303 9.023 9.1 16 18.473 16 10.278 0 18.666-8.39 18.666-18.668C128 56.388 119.612 48 109.334 48c-9.373 0-17.171 6.977-18.473 16H79.805c-1.301-9.023-9.098-16-18.471-16s-17.171 6.977-18.473 16h-2.955c-6.433 0-11.793-4.589-12.988-10.672 14.58-.136 26.416-12.05 26.416-26.662C53.334 11.97 41.362 0 26.666 0zm0 5.334A21.292 21.292 0 0 1 48 26.666 21.294 21.294 0 0 1 26.666 48 21.292 21.292 0 0 1 5.334 26.666 21.29 21.29 0 0 1 26.666 5.334zm-5.215 7.541C18.67 12.889 16 15.123 16 18.166v17.043c0 4.043 4.709 6.663 8.145 4.533l13.634-8.455c3.257-2.02 3.274-7.002.032-9.045l-13.635-8.59a5.024 5.024 0 0 0-2.725-.777zm-.117 5.291 13.635 8.588-13.635 8.455V18.166zm40 35.168a13.29 13.29 0 0 1 13.332 13.332A13.293 13.293 0 0 1 61.334 80 13.294 13.294 0 0 1 48 66.666a13.293 13.293 0 0 1 13.334-13.332zm48 0a13.29 13.29 0 0 1 13.332 13.332A13.293 13.293 0 0 1 109.334 80 13.294 13.294 0 0 1 96 66.666a13.293 13.293 0 0 1 13.334-13.332zm-42.568 6.951a2.667 2.667 0 0 0-1.887.78l-6.3 6.294-2.093-2.084a2.667 2.667 0 0 0-3.771.006 2.667 2.667 0 0 0 .008 3.772l3.974 3.96a2.667 2.667 0 0 0 3.766-.001l8.185-8.174a2.667 2.667 0 0 0 .002-3.772 2.667 2.667 0 0 0-1.884-.78zm48 0a2.667 2.667 0 0 0-1.887.78l-6.3 6.294-2.093-2.084a2.667 2.667 0 0 0-3.771.006 2.667 2.667 0 0 0 .008 3.772l3.974 3.96a2.667 2.667 0 0 0 3.766-.001l8.185-8.174a2.667 2.667 0 0 0 .002-3.772 2.667 2.667 0 0 0-1.884-.78zM61.334 96a13.293 13.293 0 0 1 13.332 13.334 13.29 13.29 0 0 1-13.332 13.332A13.293 13.293 0 0 1 48 109.334 13.294 13.294 0 0 1 61.334 96zM56 105.334c-2.193 0-4 1.807-4 4 0 2.195 1.808 4 4 4s4-1.805 4-4c0-2.193-1.807-4-4-4zm10.666 0c-2.193 0-4 1.807-4 4 0 2.195 1.808 4 4 4s4-1.805 4-4c0-2.193-1.807-4-4-4zM56 108c.75 0 1.334.585 1.334 1.334 0 .753-.583 1.332-1.334 1.332-.75 0-1.334-.58-1.334-1.332 0-.75.585-1.334 1.334-1.334zm10.666 0c.75 0 1.334.585 1.334 1.334 0 .753-.583 1.332-1.334 1.332-.75 0-1.332-.58-1.332-1.332 0-.75.583-1.334 1.332-1.334z"/><path fill="#79b8ff" d="M109.334 90.666c-9.383 0-17.188 6.993-18.477 16.031a2.667 2.667 0 0 0-.265-.011l-2.7.09a2.667 2.667 0 0 0-2.578 2.751 2.667 2.667 0 0 0 2.752 2.578l2.7-.087a2.667 2.667 0 0 0 .097-.006C92.17 121.029 99.965 128 109.334 128c10.278 0 18.666-8.388 18.666-18.666s-8.388-18.668-18.666-18.668zm0 5.334a13.293 13.293 0 0 1 13.332 13.334 13.29 13.29 0 0 1-13.332 13.332A13.293 13.293 0 0 1 96 109.334 13.294 13.294 0 0 1 109.334 96z"/></svg>
+
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="databases" data-name="PostgreSQL" tabindex="0" role="button" aria-label="PostgreSQL" title="PostgreSQL">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <path fill="#336791" d="M64 12c-28.7 0-52 23.3-52 52 0 28.7 23.3 52 52 52 28.7 0 52-23.3 52-52 0-28.7-23.3-52-52-52z"/>
-                                        <path fill="#FFFFFF" d="M79 38c-5.2-1.5-12.2-2-17.5-1.5-16.5 1.5-23.5 12-23.5 22.5 0 9.5 4.8 17.5 14 20.5v16.5h8.5V79.8c8.5 1.2 16.5-2.8 20.5-8.8 4.5-6.8 5-16.5-2-23zm-17 34c-7.5 0-13-5.5-13-13.5s5.5-13.5 13-13.5c7.5 0 13 5.5 13 13.5s-5.5 13.5-13 13.5z"/>
-                                    </svg>
+                        <!-- PostgreSQL -->
+                        <div class="stack-square-cell" data-category="databases" data-name="PostgreSQL" data-level="9" tabindex="0" role="button" aria-label="PostgreSQL" title="PostgreSQL">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">PostgreSQL</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="stack-svg" aria-hidden="true"><path d="M93.809 92.112c.785-6.533.55-7.492 5.416-6.433l1.235.108c3.742.17 8.637-.602 11.513-1.938 6.191-2.873 9.861-7.668 3.758-6.409-13.924 2.873-14.881-1.842-14.881-1.842 14.703-21.815 20.849-49.508 15.543-56.287-14.47-18.489-39.517-9.746-39.936-9.52l-.134.025c-2.751-.571-5.83-.912-9.289-.968-6.301-.104-11.082 1.652-14.709 4.402 0 0-44.683-18.409-42.604 23.151.442 8.841 12.672 66.898 27.26 49.362 5.332-6.412 10.484-11.834 10.484-11.834 2.558 1.699 5.622 2.567 8.834 2.255l.249-.212c-.078.796-.044 1.575.099 2.497-3.757 4.199-2.653 4.936-10.166 6.482-7.602 1.566-3.136 4.355-.221 5.084 3.535.884 11.712 2.136 17.238-5.598l-.22.882c1.474 1.18 1.375 8.477 1.583 13.69.209 5.214.558 10.079 1.621 12.948 1.063 2.868 2.317 10.256 12.191 8.14 8.252-1.764 14.561-4.309 15.136-27.985"/><path d="M75.458 125.256c-4.367 0-7.211-1.689-8.938-3.32-2.607-2.46-3.641-5.629-4.259-7.522l-.267-.79c-1.244-3.358-1.666-8.193-1.916-14.419-.038-.935-.064-1.898-.093-2.919-.021-.747-.047-1.684-.085-2.664a18.8 18.8 0 01-4.962 1.568c-3.079.526-6.389.356-9.84-.507-2.435-.609-4.965-1.871-6.407-3.82-4.203 3.681-8.212 3.182-10.396 2.453-3.853-1.285-7.301-4.896-10.542-11.037-2.309-4.375-4.542-10.075-6.638-16.943-3.65-11.96-5.969-24.557-6.175-28.693C4.292 23.698 7.777 14.44 15.296 9.129 27.157.751 45.128 5.678 51.68 7.915c4.402-2.653 9.581-3.944 15.433-3.851 3.143.051 6.136.327 8.916.823 2.9-.912 8.628-2.221 15.185-2.139 12.081.144 22.092 4.852 28.949 13.615 4.894 6.252 2.474 19.381.597 26.651-2.642 10.226-7.271 21.102-12.957 30.57 1.544.011 3.781-.174 6.961-.831 6.274-1.295 8.109 2.069 8.607 3.575 1.995 6.042-6.677 10.608-9.382 11.864-3.466 1.609-9.117 2.589-13.745 2.377l-.202-.013-1.216-.107-.12 1.014-.116.991c-.311 11.999-2.025 19.598-5.552 24.619-3.697 5.264-8.835 6.739-13.361 7.709-1.544.33-2.947.474-4.219.474zm-9.19-43.671c2.819 2.256 3.066 6.501 3.287 14.434.028.99.054 1.927.089 2.802.106 2.65.355 8.855 1.327 11.477.137.371.26.747.39 1.146 1.083 3.316 1.626 4.979 6.309 3.978 3.931-.843 5.952-1.599 7.534-3.851 2.299-3.274 3.585-9.86 3.821-19.575l4.783.116-4.75-.57.14-1.186c.455-3.91.783-6.734 3.396-8.602 2.097-1.498 4.486-1.353 6.389-1.01-2.091-1.58-2.669-3.433-2.823-4.193l-.399-1.965 1.121-1.663c6.457-9.58 11.781-21.354 14.609-32.304 2.906-11.251 2.02-17.226 1.134-18.356-11.729-14.987-32.068-8.799-34.192-8.097l-.359.194-1.8.335-.922-.191c-2.542-.528-5.366-.82-8.393-.869-4.756-.08-8.593 1.044-11.739 3.431l-2.183 1.655-2.533-1.043c-5.412-2.213-21.308-6.662-29.696-.721-4.656 3.298-6.777 9.76-6.305 19.207.156 3.119 2.275 14.926 5.771 26.377 4.831 15.825 9.221 21.082 11.054 21.693.32.108 1.15-.537 1.976-1.529a270.708 270.708 0 0110.694-12.07l2.77-2.915 3.349 2.225c1.35.897 2.839 1.406 4.368 1.502l7.987-6.812-1.157 11.808c-.026.265-.039.626.065 1.296l.348 2.238-1.51 1.688-.174.196 4.388 2.025 1.836-2.301z"/><path fill="#336791" d="M115.731 77.44c-13.925 2.873-14.882-1.842-14.882-1.842 14.703-21.816 20.849-49.51 15.545-56.287C101.924.823 76.875 9.566 76.457 9.793l-.135.024c-2.751-.571-5.83-.911-9.291-.967-6.301-.103-11.08 1.652-14.707 4.402 0 0-44.684-18.408-42.606 23.151.442 8.842 12.672 66.899 27.26 49.363 5.332-6.412 10.483-11.834 10.483-11.834 2.559 1.699 5.622 2.567 8.833 2.255l.25-.212c-.078.796-.042 1.575.1 2.497-3.758 4.199-2.654 4.936-10.167 6.482-7.602 1.566-3.136 4.355-.22 5.084 3.534.884 11.712 2.136 17.237-5.598l-.221.882c1.473 1.18 2.507 7.672 2.334 13.557-.174 5.885-.29 9.926.871 13.082 1.16 3.156 2.316 10.256 12.192 8.14 8.252-1.768 12.528-6.351 13.124-13.995.422-5.435 1.377-4.631 1.438-9.49l.767-2.3c.884-7.367.14-9.743 5.225-8.638l1.235.108c3.742.17 8.639-.602 11.514-1.938 6.19-2.871 9.861-7.667 3.758-6.408z"/><path fill="#fff" d="M75.957 122.307c-8.232 0-10.84-6.519-11.907-9.185-1.562-3.907-1.899-19.069-1.551-31.503a1.59 1.59 0 011.64-1.55 1.594 1.594 0 011.55 1.639c-.401 14.341.168 27.337 1.324 30.229 1.804 4.509 4.54 8.453 12.275 6.796 7.343-1.575 10.093-4.359 11.318-11.46.94-5.449 2.799-20.951 3.028-24.01a1.593 1.593 0 011.71-1.472 1.597 1.597 0 011.472 1.71c-.239 3.185-2.089 18.657-3.065 24.315-1.446 8.387-5.185 12.191-13.794 14.037-1.463.313-2.792.453-4 .454zM31.321 90.466a6.71 6.71 0 01-2.116-.35c-5.347-1.784-10.44-10.492-15.138-25.885-3.576-11.717-5.842-23.947-6.041-27.922-.589-11.784 2.445-20.121 9.02-24.778 13.007-9.216 34.888-.44 35.813-.062a1.596 1.596 0 01-1.207 2.955c-.211-.086-21.193-8.492-32.768-.285-5.622 3.986-8.203 11.392-7.672 22.011.167 3.349 2.284 15.285 5.906 27.149 4.194 13.742 8.967 22.413 13.096 23.79.648.216 2.62.873 5.439-2.517A245.272 245.272 0 0145.88 73.046a1.596 1.596 0 012.304 2.208c-.048.05-4.847 5.067-10.077 11.359-2.477 2.979-4.851 3.853-6.786 3.853zm69.429-13.445a1.596 1.596 0 01-1.322-2.487c14.863-22.055 20.08-48.704 15.612-54.414-5.624-7.186-13.565-10.939-23.604-11.156-7.433-.16-13.341 1.738-14.307 2.069l-.243.099c-.971.305-1.716-.227-1.997-.849a1.6 1.6 0 01.631-2.025c.046-.027.192-.089.429-.176l-.021.006.021-.007c1.641-.601 7.639-2.4 15.068-2.315 11.108.118 20.284 4.401 26.534 12.388 2.957 3.779 2.964 12.485.019 23.887-3.002 11.625-8.651 24.118-15.497 34.277-.306.457-.81.703-1.323.703zm.76 10.21c-2.538 0-4.813-.358-6.175-1.174-1.4-.839-1.667-1.979-1.702-2.584-.382-6.71 3.32-7.878 5.208-8.411-.263-.398-.637-.866-1.024-1.349-1.101-1.376-2.609-3.26-3.771-6.078-.182-.44-.752-1.463-1.412-2.648-3.579-6.418-11.026-19.773-6.242-26.612 2.214-3.165 6.623-4.411 13.119-3.716C97.6 28.837 88.5 10.625 66.907 10.271c-6.494-.108-11.82 1.889-15.822 5.93-8.96 9.049-8.636 25.422-8.631 25.586a1.595 1.595 0 11-3.19.084c-.02-.727-.354-17.909 9.554-27.916C53.455 9.272 59.559 6.96 66.96 7.081c13.814.227 22.706 7.25 27.732 13.101 5.479 6.377 8.165 13.411 8.386 15.759.165 1.746-1.088 2.095-1.341 2.147l-.576.013c-6.375-1.021-10.465-.312-12.156 2.104-3.639 5.201 3.406 17.834 6.414 23.229.768 1.376 1.322 2.371 1.576 2.985.988 2.396 2.277 4.006 3.312 5.3.911 1.138 1.7 2.125 1.982 3.283.131.23 1.99 2.98 13.021.703 2.765-.57 4.423-.083 4.93 1.45.997 3.015-4.597 6.532-7.694 7.97-2.775 1.29-7.204 2.106-11.036 2.106zm-4.696-4.021c.35.353 2.101.962 5.727.806 3.224-.138 6.624-.839 8.664-1.786 2.609-1.212 4.351-2.567 5.253-3.492l-.5.092c-7.053 1.456-12.042 1.262-14.828-.577a6.162 6.162 0 01-.54-.401c-.302.119-.581.197-.78.253-1.58.443-3.214.902-2.996 5.105zm-45.562 8.915c-1.752 0-3.596-.239-5.479-.71-1.951-.488-5.24-1.957-5.19-4.37.057-2.707 3.994-3.519 5.476-3.824 5.354-1.103 5.703-1.545 7.376-3.67.488-.619 1.095-1.39 1.923-2.314 1.229-1.376 2.572-2.073 3.992-2.073.989 0 1.8.335 2.336.558 1.708.708 3.133 2.42 3.719 4.467.529 1.847.276 3.625-.71 5.006-3.237 4.533-7.886 6.93-13.443 6.93zm-7.222-4.943c.481.372 1.445.869 2.518 1.137 1.631.408 3.213.615 4.705.615 4.546 0 8.196-1.882 10.847-5.594.553-.774.387-1.757.239-2.274-.31-1.083-1.08-2.068-1.873-2.397-.43-.178-.787-.314-1.115-.314-.176 0-.712 0-1.614 1.009a41.146 41.146 0 00-1.794 2.162c-2.084 2.646-3.039 3.544-9.239 4.821-1.513.31-2.289.626-2.674.835zm12.269-7.36a1.596 1.596 0 01-1.575-1.354 8.218 8.218 0 01-.08-.799c-4.064-.076-7.985-1.82-10.962-4.926-3.764-3.927-5.477-9.368-4.699-14.927.845-6.037.529-11.366.359-14.229-.047-.796-.081-1.371-.079-1.769.003-.505.013-1.844 4.489-4.113 1.592-.807 4.784-2.215 8.271-2.576 5.777-.597 9.585 1.976 10.725 7.246 3.077 14.228.244 20.521-1.825 25.117-.385.856-.749 1.664-1.04 2.447l-.257.69c-1.093 2.931-2.038 5.463-1.748 7.354a1.595 1.595 0 01-1.335 1.819l-.244.02zM42.464 42.26l.062 1.139c.176 2.974.504 8.508-.384 14.86-.641 4.585.759 9.06 3.843 12.276 2.437 2.542 5.644 3.945 8.94 3.945h.068c.369-1.555.982-3.197 1.642-4.966l.255-.686c.329-.884.714-1.74 1.122-2.646 1.991-4.424 4.47-9.931 1.615-23.132-.565-2.615-1.936-4.128-4.189-4.627-4.628-1.022-11.525 2.459-12.974 3.837zm9.63-.677c-.08.564 1.033 2.07 2.485 2.271 1.449.203 2.689-.975 2.768-1.539.079-.564-1.033-1.186-2.485-1.388-1.451-.202-2.691.092-2.768.656zm2.818 2.826l-.407-.028c-.9-.125-1.81-.692-2.433-1.518-.219-.29-.576-.852-.505-1.354.101-.736.999-1.177 2.4-1.177.313 0 .639.023.967.069.766.106 1.477.327 2.002.62.91.508.977 1.075.936 1.368-.112.813-1.405 2.02-2.96 2.02zm-2.289-2.732c.045.348.907 1.496 2.029 1.651l.261.018c1.036 0 1.81-.815 1.901-1.082-.096-.182-.762-.634-2.025-.81a5.823 5.823 0 00-.821-.059c-.812 0-1.243.183-1.345.282zm43.605-1.245c.079.564-1.033 2.07-2.484 2.272-1.45.202-2.691-.975-2.771-1.539-.076-.564 1.036-1.187 2.486-1.388 1.45-.203 2.689.092 2.769.655zm-2.819 2.56c-1.396 0-2.601-1.086-2.7-1.791-.115-.846 1.278-1.489 2.712-1.688.316-.044.629-.066.93-.066 1.238 0 2.058.363 2.14.949.053.379-.238.964-.739 1.492-.331.347-1.026.948-1.973 1.079l-.37.025zm.943-3.013c-.276 0-.564.021-.856.061-1.441.201-2.301.779-2.259 1.089.048.341.968 1.332 2.173 1.332l.297-.021c.787-.109 1.378-.623 1.66-.919.443-.465.619-.903.598-1.052-.028-.198-.56-.49-1.613-.49zm3.965 32.843a1.594 1.594 0 01-1.324-2.483c3.398-5.075 2.776-10.25 2.175-15.255-.257-2.132-.521-4.337-.453-6.453.07-2.177.347-3.973.614-5.71.317-2.058.617-4.002.493-6.31a1.595 1.595 0 113.186-.172c.142 2.638-.197 4.838-.525 6.967-.253 1.643-.515 3.342-.578 5.327-.061 1.874.178 3.864.431 5.97.64 5.322 1.365 11.354-2.691 17.411a1.596 1.596 0 01-1.328.708z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 9/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="databases" data-name="MySQL" tabindex="0" role="button" aria-label="MySQL" title="MySQL">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <rect width="128" height="128" rx="24" fill="#00758F"/>
-                                        <path fill="#F29111" d="M96 74c-4.8 6.5-13.8 10-23.5 8.5-5.2-.8-10.2-3.5-14.5-7.5-6-5.5-11-13-15-21-2.5-5-5-10.5-8-15.5-1-1.8-2.5-3.5-4.5-4.5 5.5 2.5 10.5 7 14.5 12 5.5 7 10 15 15.5 21.5 4 4.5 8.8 7.5 14 8.5 8.5 1.5 16-2.5 19.5-8 1.5-2.2 2-3.8 2-4z"/>
-                                        <path fill="#FFFFFF" d="M34 68c0 4.5-3.5 8-8 8s-8-3.5-8-8 3.5-8 8-8 8 3.5 8 8zm68 0c0 4.5-3.5 8-8 8s-8-3.5-8-8 3.5-8 8-8 8 3.5 8 8z"/>
-                                    </svg>
+                        <!-- MySQL -->
+                        <div class="stack-square-cell" data-category="databases" data-name="MySQL" data-level="9" tabindex="0" role="button" aria-label="MySQL" title="MySQL">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">MySQL</div>
+                            <div class="stack-cell-logo">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="stack-svg" fill="#00A3C4" aria-hidden="true"><path d="M16.405 5.501c-.115 0-.193.014-.274.033v.013h.014c.054.104.146.18.214.273.054.107.1.214.154.32l.014-.015c.094-.066.14-.172.14-.333-.04-.047-.046-.094-.08-.14-.04-.067-.126-.1-.18-.153zM5.77 18.695h-.927a50.854 50.854 0 00-.27-4.41h-.008l-1.41 4.41H2.45l-1.4-4.41h-.01a72.892 72.892 0 00-.195 4.41H0c.055-1.966.192-3.81.41-5.53h1.15l1.335 4.064h.008l1.347-4.064h1.095c.242 2.015.384 3.86.428 5.53zm4.017-4.08c-.378 2.045-.876 3.533-1.492 4.46-.482.716-1.01 1.073-1.583 1.073-.153 0-.34-.046-.566-.138v-.494c.11.017.24.026.386.026.268 0 .483-.075.647-.222.197-.18.295-.382.295-.605 0-.155-.077-.47-.23-.944L6.23 14.615h.91l.727 2.36c.164.536.233.91.205 1.123.4-1.064.678-2.227.835-3.483zm12.325 4.08h-2.63v-5.53h.885v4.85h1.745zm-3.32.135l-1.016-.5c.09-.076.177-.158.255-.25.433-.506.648-1.258.648-2.253 0-1.83-.718-2.746-2.155-2.746-.704 0-1.254.232-1.65.697-.43.508-.646 1.256-.646 2.245 0 .972.19 1.686.574 2.14.35.41.877.615 1.583.615.264 0 .506-.033.725-.098l1.325.772.36-.622zM15.5 17.588c-.225-.36-.337-.94-.337-1.736 0-1.393.424-2.09 1.27-2.09.443 0 .77.167.977.5.224.362.336.936.336 1.723 0 1.404-.424 2.108-1.27 2.108-.445 0-.77-.167-.978-.5zm-1.658-.425c0 .47-.172.856-.516 1.156-.344.3-.803.45-1.384.45-.543 0-1.064-.172-1.573-.515l.237-.476c.438.22.833.328 1.19.328.332 0 .593-.073.783-.22a.754.754 0 00.3-.615c0-.33-.23-.61-.648-.845-.388-.213-1.163-.657-1.163-.657-.422-.307-.632-.636-.632-1.177 0-.45.157-.81.47-1.085.315-.278.72-.415 1.22-.415.512 0 .98.136 1.4.41l-.213.476a2.726 2.726 0 00-1.064-.23c-.283 0-.502.068-.654.206a.685.685 0 00-.248.524c0 .328.234.61.666.85.393.215 1.187.67 1.187.67.433.305.648.63.648 1.168zm9.382-5.852c-.535-.014-.95.04-1.297.188-.1.04-.26.04-.274.167.055.053.063.14.11.214.08.134.218.313.346.407.14.11.28.216.427.31.26.16.555.255.81.416.145.094.293.213.44.313.073.05.12.14.214.172v-.02c-.046-.06-.06-.147-.105-.214-.067-.067-.134-.127-.2-.193a3.223 3.223 0 00-.695-.675c-.214-.146-.682-.35-.77-.595l-.013-.014c.146-.013.32-.066.46-.106.227-.06.435-.047.67-.106.106-.027.213-.06.32-.094v-.06c-.12-.12-.21-.283-.334-.395a8.867 8.867 0 00-1.104-.823c-.21-.134-.476-.22-.697-.334-.08-.04-.214-.06-.26-.127-.12-.146-.19-.34-.275-.514a17.69 17.69 0 01-.547-1.163c-.12-.262-.193-.523-.34-.763-.69-1.137-1.437-1.826-2.586-2.5-.247-.14-.543-.2-.856-.274-.167-.008-.334-.02-.5-.027-.11-.047-.216-.174-.31-.235-.38-.24-1.364-.76-1.644-.072-.18.434.267.862.422 1.082.115.153.26.328.34.5.047.116.06.235.107.356.106.294.207.622.347.897.073.14.153.287.247.413.054.073.146.107.167.227-.094.136-.1.334-.154.5-.24.757-.146 1.693.194 2.25.107.166.362.534.703.393.3-.12.234-.5.32-.835.02-.08.007-.133.048-.187v.015c.094.188.188.367.274.555.206.328.566.668.867.895.16.12.287.328.487.402v-.02h-.015c-.043-.058-.1-.086-.154-.133a3.445 3.445 0 01-.35-.4 8.76 8.76 0 01-.747-1.218c-.11-.21-.202-.436-.29-.643-.04-.08-.04-.2-.107-.24-.1.146-.247.273-.32.453-.127.288-.14.642-.188 1.01-.027.007-.014 0-.027.014-.214-.052-.287-.274-.367-.46-.2-.475-.233-1.238-.06-1.785.047-.14.247-.582.167-.716-.042-.127-.174-.2-.247-.303a2.478 2.478 0 01-.24-.427c-.16-.374-.24-.788-.414-1.162-.08-.173-.22-.354-.334-.513-.127-.18-.267-.307-.368-.52-.033-.073-.08-.194-.027-.274.014-.054.042-.075.094-.09.088-.072.335.022.422.062.247.1.455.194.662.334.094.066.195.193.315.226h.14c.214.047.455.014.655.073.355.114.675.28.962.46a5.953 5.953 0 012.085 2.286c.08.154.115.295.188.455.14.33.313.663.455.982.14.315.275.636.476.897.1.14.502.213.682.286.133.06.34.115.46.188.23.14.454.3.67.454.11.076.443.243.463.378z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 9/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="databases" data-name="Redis" tabindex="0" role="button" aria-label="Redis" title="Redis">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <rect width="128" height="128" rx="24" fill="#1B1F24"/>
-                                        <path fill="#DC382D" d="M64 24L22 45l42 21 42-21-42-21zm-40 32l38 19v26L24 82V56zm42 19l38-19v26L66 101V75z"/>
-                                        <circle cx="64" cy="45" r="4" fill="#FFFFFF"/>
-                                    </svg>
+                        <!-- Redis -->
+                        <div class="stack-square-cell" data-category="databases" data-name="Redis" data-level="8" tabindex="0" role="button" aria-label="Redis" title="Redis">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">Redis</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="stack-svg" aria-hidden="true"><path fill="#A41E11" d="M121.8 93.1c-6.7 3.5-41.4 17.7-48.8 21.6-7.4 3.9-11.5 3.8-17.3 1S13 98.1 6.3 94.9c-3.3-1.6-5-2.9-5-4.2V78s48-10.5 55.8-13.2c7.8-2.8 10.4-2.9 17-.5s46.1 9.5 52.6 11.9v12.5c0 1.3-1.5 2.7-4.9 4.4z"/><path fill="#D82C20" d="M121.8 80.5C115.1 84 80.4 98.2 73 102.1c-7.4 3.9-11.5 3.8-17.3 1-5.8-2.8-42.7-17.7-49.4-20.9C-.3 79-.5 76.8 6 74.3c6.5-2.6 43.2-17 51-19.7 7.8-2.8 10.4-2.9 17-.5s41.1 16.1 47.6 18.5c6.7 2.4 6.9 4.4.2 7.9z"/><path fill="#A41E11" d="M121.8 72.5C115.1 76 80.4 90.2 73 94.1c-7.4 3.8-11.5 3.8-17.3 1C49.9 92.3 13 77.4 6.3 74.2c-3.3-1.6-5-2.9-5-4.2V57.3s48-10.5 55.8-13.2c7.8-2.8 10.4-2.9 17-.5s46.1 9.5 52.6 11.9V68c0 1.3-1.5 2.7-4.9 4.5z"/><path fill="#D82C20" d="M121.8 59.8c-6.7 3.5-41.4 17.7-48.8 21.6-7.4 3.8-11.5 3.8-17.3 1C49.9 79.6 13 64.7 6.3 61.5s-6.8-5.4-.3-7.9c6.5-2.6 43.2-17 51-19.7 7.8-2.8 10.4-2.9 17-.5s41.1 16.1 47.6 18.5c6.7 2.4 6.9 4.4.2 7.9z"/><path fill="#A41E11" d="M121.8 51c-6.7 3.5-41.4 17.7-48.8 21.6-7.4 3.8-11.5 3.8-17.3 1C49.9 70.9 13 56 6.3 52.8c-3.3-1.6-5.1-2.9-5.1-4.2V35.9s48-10.5 55.8-13.2c7.8-2.8 10.4-2.9 17-.5s46.1 9.5 52.6 11.9v12.5c.1 1.3-1.4 2.6-4.8 4.4z"/><path fill="#D82C20" d="M121.8 38.3C115.1 41.8 80.4 56 73 59.9c-7.4 3.8-11.5 3.8-17.3 1S13 43.3 6.3 40.1s-6.8-5.4-.3-7.9c6.5-2.6 43.2-17 51-19.7 7.8-2.8 10.4-2.9 17-.5s41.1 16.1 47.6 18.5c6.7 2.4 6.9 4.4.2 7.8z"/><path fill="#fff" d="M80.4 26.1l-10.8 1.2-2.5 5.8-3.9-6.5-12.5-1.1 9.3-3.4-2.8-5.2 8.8 3.4 8.2-2.7L72 23zM66.5 54.5l-20.3-8.4 29.1-4.4z"/><ellipse fill="#fff" cx="38.4" cy="35.4" rx="15.5" ry="6"/><path fill="#7A0C00" d="M93.3 27.7l17.2 6.8-17.2 6.8z"/><path fill="#AD2115" d="M74.3 35.3l19-7.6v13.6l-1.9.8z"/></svg>
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
-                        <div class="stack-square-cell" data-category="databases" data-name="AI &amp; Vision" tabindex="0" role="button" aria-label="AI &amp; Vision" title="AI &amp; Vision">
-                            <div class="stack-cell-logo">
-                                <svg viewBox="0 0 128 128" class="stack-svg" aria-hidden="true">
-                                        <rect width="128" height="128" rx="24" fill="#0C101C"/>
-                                        <path fill="#8B5CF6" d="M64 22l36 21v42L64 106 28 85V43l36-21z"/>
-                                        <circle cx="64" cy="64" r="16" fill="#00F0FF"/>
-                                        <circle cx="64" cy="22" r="7" fill="#FFFFFF"/>
-                                        <circle cx="100" cy="43" r="7" fill="#FFFFFF"/>
-                                        <circle cx="100" cy="85" r="7" fill="#FFFFFF"/>
-                                        <circle cx="64" cy="106" r="7" fill="#FFFFFF"/>
-                                        <circle cx="28" cy="85" r="7" fill="#FFFFFF"/>
-                                        <circle cx="28" cy="43" r="7" fill="#FFFFFF"/>
-                                    </svg>
+                        <!-- PyTorch / AI -->
+                        <div class="stack-square-cell" data-category="databases" data-name="PyTorch / AI" data-level="8" tabindex="0" role="button" aria-label="PyTorch / AI" title="PyTorch / AI">
+                            <div class="cell-level-meter" aria-hidden="true">
+                                <span class="level-bar-segment" data-bar="1"></span>
+                                <span class="level-bar-segment" data-bar="2"></span>
+                                <span class="level-bar-segment" data-bar="3"></span>
+                                <span class="level-bar-segment" data-bar="4"></span>
+                                <span class="level-bar-segment" data-bar="5"></span>
+                                <span class="level-bar-segment" data-bar="6"></span>
+                                <span class="level-bar-segment" data-bar="7"></span>
+                                <span class="level-bar-segment" data-bar="8"></span>
+                                <span class="level-bar-segment" data-bar="9"></span>
+                                <span class="level-bar-segment" data-bar="10"></span>
                             </div>
+                            <div class="stack-cell-name">PyTorch / AI</div>
+                            <div class="stack-cell-logo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="10 0 108 128" class="stack-svg" aria-hidden="true"><path fill="#EE4C2C" d="M100.1 38.3l-9.2 9.2c15.1 15.1 15.1 39.4 0 54.3-15.1 15.1-39.4 15.1-54.3 0-15.1-15.1-15.1-39.4 0-54.3l24-24 3.4-3.4V2L27.8 38.2C7.7 58.3 7.7 90.8 27.8 111s52.6 20.1 72.4 0c20.1-20.2 20.1-52.5-.1-72.7z"/><circle fill="#EE4C2C" transform="rotate(-88.939 82.069 29.398) scale(.99997)" cx="82.1" cy="29.4" r="6.7"/></svg>
+
+                            </div>
+                            <div class="stack-cell-level">Level 8/10</div>
                         </div>
                         </div>
                     </div>
@@ -1272,97 +1689,206 @@
         <section id="philosophy" class="section philosophy-section reveal-on-scroll">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title cyber-glitch-text" data-text="Engineering Philosophy" data-deciphering="false">Engineering Philosophy</h2>
+                    <div class="section-title-wrap">
+                        <span class="section-tech-tag">// 03. PRINCIPLES</span>
+                        <h2 class="section-title cyber-glitch-text" data-text="Engineering Philosophy" data-deciphering="false">Engineering Philosophy</h2>
+                    </div>
                     <div class="section-divider"></div>
                 </div>
 
-                <div class="philosophy-grid">
+                <div class="philosophy-bento-grid">
                     
-                    <!-- PILLAR 1: DESIGN & INTERACTION -->
-                    <div class="philosophy-bento-card glass-card rgb-border">
-                        <div>
+                    <!-- PILLAR 01: RESILIENCE & FAULT TOLERANCE (SPAN 7) -->
+                    <div class="philosophy-bento-card bento-span-7 glass-card rgb-border">
+                        <div class="bento-inner-content">
                             <div class="bento-header">
-                                <span class="bento-icon-box">
-                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                                </span>
-                                <span class="sleek-badge">Pillar 01</span>
+                                <div class="bento-header-left">
+                                    <span class="bento-icon-box amber">
+                                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                                    </span>
+                                    <div class="bento-pill-group">
+                                        <span class="sleek-badge">Pillar 01</span>
+                                        <span class="bento-status-badge">
+                                            <span class="bento-status-dot pulse-emerald"></span>
+                                            <span>Fault Tolerant</span>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 class="bento-title">Design &amp; Interaction</h3>
+                            <h3 class="bento-title">Resilience &amp; Defensive Architecture</h3>
                             <p class="bento-desc">
-                                Clean typography and balanced spacing paired with fluid 60fps animations and instant click feedback. If an application stutters during interaction or layout shifts upon load, it immediately feels unpolished.
+                                Production software should never crash from intermittent network drops or corrupt edge telemetry. I build defensive boundaries on both ends: strict type parsing, circuit breaker timeouts, safe local cache fallbacks, and zero unhandled rejections.
                             </p>
+
+                            <!-- ARCHITECTURAL TELEMETRY HUD -->
+                            <div class="bento-telemetry-hud">
+                                <div class="telemetry-hud-header">
+                                    <span class="hud-term-prompt">$</span>
+                                    <span class="hud-term-title">system.telemetry.diagnostics</span>
+                                    <span class="hud-live-tag">LIVE</span>
+                                </div>
+                                <div class="telemetry-hud-body">
+                                    <div class="hud-metric-row">
+                                        <span class="hud-label">Circuit Breaker:</span>
+                                        <span class="hud-value hud-cyan">ARMED [0 Panics]</span>
+                                    </div>
+                                    <div class="hud-metric-row">
+                                        <span class="hud-label">Offline Fallback:</span>
+                                        <span class="hud-value hud-emerald">IndexedDB / SW Cache Active</span>
+                                    </div>
+                                    <div class="hud-metric-row">
+                                        <span class="hud-label">Input Validation:</span>
+                                        <span class="hud-value hud-purple">Strict Zod / Type-Guarded</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="bento-tags-list">
-                            <span class="bento-tag-chip">Intentional Layouts</span>
-                            <span class="bento-tag-chip">60fps Transitions</span>
-                            <span class="bento-tag-chip">Instant UI Feedback</span>
-                            <span class="bento-tag-chip">Clean Typography</span>
+                            <span class="bento-tag-chip">Strict Type Guarding</span>
+                            <span class="bento-tag-chip">Defensive Fallbacks</span>
+                            <span class="bento-tag-chip">Offline Sync Engine</span>
+                            <span class="bento-tag-chip">Zero Uncaught Panics</span>
                         </div>
                     </div>
 
-                    <!-- PILLAR 2: RESILIENCE & ROBUSTNESS -->
-                    <div class="philosophy-bento-card glass-card rgb-border">
-                        <div>
+                    <!-- PILLAR 02: DESIGN & TACTILE PHYSICS (SPAN 5) -->
+                    <div class="philosophy-bento-card bento-span-5 glass-card rgb-border">
+                        <div class="bento-inner-content">
                             <div class="bento-header">
-                                <span class="bento-icon-box amber">
-                                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-                                </span>
-                                <span class="sleek-badge">Pillar 02</span>
+                                <div class="bento-header-left">
+                                    <span class="bento-icon-box">
+                                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                                    </span>
+                                    <span class="sleek-badge">Pillar 02</span>
+                                </div>
                             </div>
-                            <h3 class="bento-title">Resilience &amp; Robustness</h3>
+                            <h3 class="bento-title">Tactile Physics &amp; 60fps Motion</h3>
                             <p class="bento-desc">
-                                Software should never crash when internet drops or unexpected telemetry arrives. Validate inputs on both ends, catch boundary cases early, and make systems fail safely into defensive fallback states.
+                                Clean typography, balanced visual density, and hardware-accelerated transforms. Motion is purposeful feedback: sub-100ms tactile response, fluid spring easing, and strict zero cumulative layout shift (CLS).
                             </p>
+
+                            <!-- PERF METRIC METERS -->
+                            <div class="bento-perf-meter-card">
+                                <div class="perf-metric-item">
+                                    <span class="perf-num hud-cyan">60 FPS</span>
+                                    <span class="perf-label">Frame Budget</span>
+                                </div>
+                                <div class="perf-sep" aria-hidden="true"></div>
+                                <div class="perf-metric-item">
+                                    <span class="perf-num hud-emerald">0.00</span>
+                                    <span class="perf-label">CLS Shift</span>
+                                </div>
+                                <div class="perf-sep" aria-hidden="true"></div>
+                                <div class="perf-metric-item">
+                                    <span class="perf-num hud-purple">&lt;50ms</span>
+                                    <span class="perf-label">Input Latency</span>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="bento-tags-list">
-                            <span class="bento-tag-chip">Strict Type Checking</span>
-                            <span class="bento-tag-chip">Input Sanitization</span>
-                            <span class="bento-tag-chip">Safe Fallback States</span>
-                            <span class="bento-tag-chip">Offline Handling</span>
+                            <span class="bento-tag-chip">Hardware Transforms</span>
+                            <span class="bento-tag-chip">Spring Physics</span>
+                            <span class="bento-tag-chip">Zero Layout Shift</span>
+                            <span class="bento-tag-chip">Sub-100ms Response</span>
                         </div>
                     </div>
 
-                    <!-- PILLAR 3: SECURITY WITHOUT FRICTION -->
-                    <div class="philosophy-bento-card glass-card rgb-border">
-                        <div>
+                    <!-- PILLAR 03: SIMPLICITY & ZERO BLOAT (SPAN 5) -->
+                    <div class="philosophy-bento-card bento-span-5 glass-card rgb-border">
+                        <div class="bento-inner-content">
                             <div class="bento-header">
-                                <span class="bento-icon-box emerald">
-                                    <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                                </span>
-                                <span class="sleek-badge">Pillar 03</span>
-                            </div>
-                            <h3 class="bento-title">Security Without Friction</h3>
-                            <p class="bento-desc">
-                                Protect user confidentiality without turning workflows into an obstacle course. Authentication, bot defense, rate limiting, and parameterized database queries must execute silently in the background.
-                            </p>
-                        </div>
-                        <div class="bento-tags-list">
-                            <span class="bento-tag-chip">Clean Auth Flows</span>
-                            <span class="bento-tag-chip">Automated Bot Defense</span>
-                            <span class="bento-tag-chip">Sanitized Queries</span>
-                            <span class="bento-tag-chip">Least Privilege Access</span>
-                        </div>
-                    </div>
-
-                    <!-- PILLAR 4: SIMPLICITY & ZERO BLOAT -->
-                    <div class="philosophy-bento-card glass-card rgb-border">
-                        <div>
-                            <div class="bento-header">
-                                <span class="bento-icon-box violet">
-                                    <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
-                                </span>
-                                <span class="sleek-badge">Pillar 04</span>
+                                <div class="bento-header-left">
+                                    <span class="bento-icon-box violet">
+                                        <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
+                                    </span>
+                                    <span class="sleek-badge">Pillar 03</span>
+                                </div>
                             </div>
                             <h3 class="bento-title">Simplicity &amp; Zero Bloat</h3>
                             <p class="bento-desc">
-                                Never install bulky third-party dependencies or architect convoluted abstractions when straightforward solutions exist. Keep codebases lean, readable, strictly typed, and easy to maintain.
+                                Resist dependency inflation. Straightforward native Web APIs, clean composition patterns, and strict TypeScript produce auditable, performant software that lasts without breaking across version updates.
                             </p>
+
+                            <!-- BUNDLE PROFILE STRIP -->
+                            <div class="bento-perf-meter-card">
+                                <div class="perf-metric-item">
+                                    <span class="perf-num hud-emerald">0</span>
+                                    <span class="perf-label">Bloat Packages</span>
+                                </div>
+                                <div class="perf-sep" aria-hidden="true"></div>
+                                <div class="perf-metric-item">
+                                    <span class="perf-num hud-cyan">100%</span>
+                                    <span class="perf-label">Native Web APIs</span>
+                                </div>
+                                <div class="perf-sep" aria-hidden="true"></div>
+                                <div class="perf-metric-item">
+                                    <span class="perf-num hud-purple">Strict</span>
+                                    <span class="perf-label">Type Safety</span>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="bento-tags-list">
-                            <span class="bento-tag-chip">Strict TypeScript</span>
-                            <span class="bento-tag-chip">Straightforward APIs</span>
-                            <span class="bento-tag-chip">Modular Structure</span>
                             <span class="bento-tag-chip">Zero Bloat</span>
+                            <span class="bento-tag-chip">Strict TypeScript</span>
+                            <span class="bento-tag-chip">Native Web APIs</span>
+                            <span class="bento-tag-chip">Modular Codebases</span>
+                        </div>
+                    </div>
+
+                    <!-- PILLAR 04: SILENT DEFENSE IN DEPTH (SPAN 7) -->
+                    <div class="philosophy-bento-card bento-span-7 glass-card rgb-border">
+                        <div class="bento-inner-content">
+                            <div class="bento-header">
+                                <div class="bento-header-left">
+                                    <span class="bento-icon-box emerald">
+                                        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                    </span>
+                                    <div class="bento-pill-group">
+                                        <span class="sleek-badge">Pillar 04</span>
+                                        <span class="bento-status-badge">
+                                            <span class="bento-status-dot pulse-cyan"></span>
+                                            <span>Zero Trust RBAC</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="bento-title">Silent Defense in Depth</h3>
+                            <p class="bento-desc">
+                                Security shouldn't make workflows sluggish. Authentication verification, automated token rotation, silent bot prevention, parameterized queries, and hardened headers execute seamlessly in the background without user friction.
+                            </p>
+
+                            <!-- SECURITY PROTOCOLS HUD -->
+                            <div class="bento-telemetry-hud">
+                                <div class="telemetry-hud-header">
+                                    <span class="hud-term-prompt">$</span>
+                                    <span class="hud-term-title">security.defense.protocol</span>
+                                    <span class="hud-live-tag">SECURE</span>
+                                </div>
+                                <div class="telemetry-hud-body">
+                                    <div class="hud-metric-row">
+                                        <span class="hud-label">SQL Injection:</span>
+                                        <span class="hud-value hud-emerald">100% Parameterized Statements</span>
+                                    </div>
+                                    <div class="hud-metric-row">
+                                        <span class="hud-label">Token Scope:</span>
+                                        <span class="hud-value hud-cyan">Least-Privilege RBAC &amp; HttpOnly</span>
+                                    </div>
+                                    <div class="hud-metric-row">
+                                        <span class="hud-label">Rate Limiter:</span>
+                                        <span class="hud-value hud-purple">Token Bucket Sliding Window</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bento-tags-list">
+                            <span class="bento-tag-chip">Parameterized SQL</span>
+                            <span class="bento-tag-chip">Automated Bot Defense</span>
+                            <span class="bento-tag-chip">Clean Auth Flows</span>
+                            <span class="bento-tag-chip">Least-Privilege RBAC</span>
                         </div>
                     </div>
 
@@ -1374,7 +1900,10 @@
         <section id="experience" class="section experience-section reveal-on-scroll">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title cyber-glitch-text" data-text="Experience" data-deciphering="false">Experience</h2>
+                    <div class="section-title-wrap">
+                        <span class="section-tech-tag">// 04. TIMELINE</span>
+                        <h2 class="section-title cyber-glitch-text" data-text="Experience" data-deciphering="false">Experience &amp; Education</h2>
+                    </div>
                     <div class="section-divider"></div>
                 </div>
 
@@ -1383,31 +1912,54 @@
                     <!-- WORK EXPERIENCE -->
                     <div class="timeline-column">
                         <h3 class="column-title">
+                            <span class="column-title-dot" aria-hidden="true"></span>
                             <span>Professional Industry Roles</span>
                         </h3>
                         
                         <div class="timeline-item glass-card rgb-border">
                             <div class="timeline-header">
-                                <h4 class="item-title">SRE Intern</h4>
+                                <h4 class="item-title">Site Reliability Engineer Intern</h4>
                                 <span class="sleek-badge">2026</span>
                             </div>
-                            <div class="item-subtitle">Opswerks • Cebu City</div>
+                            <div class="timeline-meta-row">
+                                <span class="item-subtitle">Opswerks • Cebu City</span>
+                                <span class="item-role-tag">SRE / Cloud Systems</span>
+                            </div>
                             <ul class="experience-bullets">
-                                <li>Finished Internship Program at Opswerks executing Site Reliability Engineering (SRE) operations.</li>
-                                <li>Worked with Linux, AWS, Kubernetes, Docker &amp; Containers, and monitoring stacks.</li>
+                                <li>Completed intensive SRE internship automating cloud operations, container orchestration, and continuous deployment workflows.</li>
+                                <li>Operated with Linux system administration, Dockerized container lifecycles, and Kubernetes workload deployments.</li>
+                                <li>Monitored infrastructure telemetry, system health, and service availability across distributed cloud stacks.</li>
                             </ul>
+                            <div class="timeline-tech-pills-row">
+                                <span class="timeline-tech-pill">Linux</span>
+                                <span class="timeline-tech-pill">Kubernetes</span>
+                                <span class="timeline-tech-pill">Docker</span>
+                                <span class="timeline-tech-pill">AWS</span>
+                                <span class="timeline-tech-pill">Telemetry</span>
+                                <span class="timeline-tech-pill">CI/CD</span>
+                            </div>
                         </div>
 
                         <div class="timeline-item glass-card rgb-border">
                             <div class="timeline-header">
-                                <h4 class="item-title">QA Analyst</h4>
+                                <h4 class="item-title">QA Analyst &amp; Full-Stack</h4>
                                 <span class="sleek-badge">2025</span>
                             </div>
-                            <div class="item-subtitle">DXForm Technologies • Cebu City</div>
+                            <div class="timeline-meta-row">
+                                <span class="item-subtitle">DXForm Technologies • Cebu City</span>
+                                <span class="item-role-tag">QA &amp; Web Systems</span>
+                            </div>
                             <ul class="experience-bullets">
-                                <li>Executed QA and Full-Stack tasks as a Quality Assurance Analyst.</li>
-                                <li>Helped testing, bug tracking, and fixing across 4 client company projects.</li>
+                                <li>Executed end-to-end quality assurance, regression test suites, and bug verification across 4 enterprise client web applications.</li>
+                                <li>Authored comprehensive bug reports, triaged edge-case anomalies, and developed full-stack frontend/backend fixes in rapid agile sprints.</li>
                             </ul>
+                            <div class="timeline-tech-pills-row">
+                                <span class="timeline-tech-pill">QA Automation</span>
+                                <span class="timeline-tech-pill">Full-Stack</span>
+                                <span class="timeline-tech-pill">Bug Triage</span>
+                                <span class="timeline-tech-pill">Regression Testing</span>
+                                <span class="timeline-tech-pill">REST APIs</span>
+                            </div>
                         </div>
 
                     </div>
@@ -1415,7 +1967,8 @@
                     <!-- ACADEMIC & LEADERSHIP -->
                     <div class="timeline-column">
                         <h3 class="column-title">
-                            <span>Education &amp; Leadership</span>
+                            <span class="column-title-dot" aria-hidden="true"></span>
+                            <span>Education &amp; Distinctions</span>
                         </h3>
                         
                         <div class="timeline-item glass-card rgb-border">
@@ -1423,22 +1976,42 @@
                                 <h4 class="item-title">B.S. Computer Science</h4>
                                 <span class="sleek-badge">2022 — 2026</span>
                             </div>
-                            <div class="item-subtitle">Cebu Institute of Technology – University</div>
+                            <div class="timeline-meta-row">
+                                <span class="item-subtitle">Cebu Institute of Technology – University</span>
+                                <span class="item-role-tag">CS Scholar</span>
+                            </div>
                             <div class="timeline-details">
-                                <p><strong>Leadership:</strong> Bass 2 &amp; Presidential Officer-in-Charge of Koro Teknoy Chorale.</p>
-                                <p><strong>Key Certifications:</strong> PhilNITS FE Passer (Apr 2025), Level 3 TOPCIT, AWS Academy Cloud Foundations &amp; Architecting, CodeChum C &amp; Java.</p>
+                                <p><strong>Academic Standing:</strong> CS Scholar maintaining consistent Dean's Lister honors across all academic years.</p>
+                                <p><strong>Leadership:</strong> Bass 2 &amp; Presidential Officer-in-Charge of Koro Teknoy Chorale, directing executive operations and rehearsals.</p>
+                                <p><strong>Credentials:</strong> PhilNITS FE Passer (ITPEC Japan), Level 3 TOPCIT, AWS Academy Cloud Foundations &amp; Architecting.</p>
+                            </div>
+                            <div class="timeline-tech-pills-row">
+                                <span class="timeline-tech-pill">CS Scholar</span>
+                                <span class="timeline-tech-pill">Dean's Lister</span>
+                                <span class="timeline-tech-pill">PhilNITS FE</span>
+                                <span class="timeline-tech-pill">TOPCIT L3</span>
+                                <span class="timeline-tech-pill">Chorale OIC</span>
                             </div>
                         </div>
 
                         <div class="timeline-item glass-card rgb-border">
                             <div class="timeline-header">
-                                <h4 class="item-title">STEM Strand (Secondary)</h4>
+                                <h4 class="item-title">STEM Specialized Secondary</h4>
                                 <span class="sleek-badge">2016 — 2022</span>
                             </div>
-                            <div class="item-subtitle">Philippine Science High School – Central Visayas Campus</div>
+                            <div class="timeline-meta-row">
+                                <span class="item-subtitle">Philippine Science High School – Central Visayas</span>
+                                <span class="item-role-tag">DOST Scholar</span>
+                            </div>
                             <div class="timeline-details">
-                                <p><strong>Academic Distinctions:</strong> Graduated with Academic Honors and Dean's Lister placement.</p>
-                                <p><strong>Extracurricular:</strong> Red Hot Pawns Member (competitive chess team for 2 years).</p>
+                                <p><strong>Academic Distinctions:</strong> Graduated with Academic Honors and Dean's Lister honors from the country's premier specialized government STEM scholarship high school.</p>
+                                <p><strong>Varsity Athletics:</strong> Red Hot Pawns Member (competitive collegiate chess squad for 2 years).</p>
+                            </div>
+                            <div class="timeline-tech-pills-row">
+                                <span class="timeline-tech-pill">DOST Scholar</span>
+                                <span class="timeline-tech-pill">Academic Honors</span>
+                                <span class="timeline-tech-pill">STEM Honors</span>
+                                <span class="timeline-tech-pill">Varsity Chess</span>
                             </div>
                         </div>
 
@@ -1452,134 +2025,167 @@
         <section id="research" class="section research-section reveal-on-scroll">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title cyber-glitch-text" data-text="Research & Certifications" data-deciphering="false">Research &amp; Certifications</h2>
+                    <div class="section-title-wrap">
+                        <span class="section-tech-tag">// 05. ACADEMIA</span>
+                        <h2 class="section-title cyber-glitch-text" data-text="Research & Certifications" data-deciphering="false">Research &amp; Certifications</h2>
+                    </div>
                     <div class="section-divider"></div>
                 </div>
 
-                <!-- RESEARCH PAPERS -->
+                <!-- RESEARCH PAPERS SPOTLIGHT -->
                 <div class="research-grid stagger-parent">
                     
-                    <div class="research-card glass-card rgb-border stagger-child" style="--child-idx: 0;">
-                        <div>
+                    <!-- RESEARCH 1: FUSION RUSH -->
+                    <div class="research-card glass-card rgb-border stagger-child open-modal-btn" data-project="p1" tabindex="0" role="button" aria-label="Inspect Fusion Rush Research" style="--child-idx: 0;">
+                        <div class="research-card-content">
                             <div class="research-badge-row">
-                                <span class="sleek-badge">Scopus Indexed</span>
-                                <span class="project-date">2026</span>
+                                <span class="sleek-badge research-scopus-pill">Scopus Indexed • ICETT '26</span>
+                                <span class="project-date">2025 — 2026</span>
                             </div>
-                            <h3 class="research-title">Fusion Rush: Gamified Boolean Logic via AI</h3>
+                            <h3 class="research-title">Fusion Rush: Enhancing Proficiency in Boolean Logic Algebra through Gamification</h3>
+                            <div class="research-authors-strip">
+                                <span>P.M.G. Bascuq, <strong>R.B. Gemina</strong>, B.X. Mendoza, Engr. R. Laviste, Prof. C. Arellano</span>
+                            </div>
                             <p class="research-desc">
-                                Adaptive learning app for boolean rules &amp; logic aiding Discrete Math students. Paper accepted at Scopus-indexed <strong>ICETT 2026 Conference</strong>.
+                                Peer-reviewed conference paper accepted at Scopus-indexed <strong>ICETT 2026</strong>. Architected an adaptive educational AI tutor transforming complex discrete mathematics logic proofs into gamified cognitive mechanics with verifiable student mastery lift.
                             </p>
+                            <div class="research-tech-row">
+                                <span class="timeline-tech-pill">Python</span>
+                                <span class="timeline-tech-pill">Discrete Mathematics</span>
+                                <span class="timeline-tech-pill">AI Tutoring</span>
+                                <span class="timeline-tech-pill">Scopus Indexed</span>
+                            </div>
                         </div>
                         <div class="research-meta-box">
-                            <div class="research-location">Cebu City • Researcher &amp; AI Dev</div>
-                            <div class="research-venue">ICETT 2026 (Scopus Indexed)</div>
+                            <div class="research-location-wrap">
+                                <div class="research-location">Cebu City • Lead Researcher &amp; AI Developer</div>
+                                <div class="research-venue">ICETT 2026 (International Conference on Educational &amp; Information Tech)</div>
+                            </div>
+                            <div class="research-action-row">
+                                <span class="sleek-btn-sm research-inspect-btn"><span>Inspect Full Methodology</span> →</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="research-card glass-card rgb-border stagger-child" style="--child-idx: 1;">
-                        <div>
+                    <!-- RESEARCH 2: VISUAL AI PROOF PARSER -->
+                    <div class="research-card glass-card rgb-border stagger-child open-modal-btn" data-project="p2" tabindex="0" role="button" aria-label="Inspect Visual AI Proof Parser Research" style="--child-idx: 1;">
+                        <div class="research-card-content">
                             <div class="research-badge-row">
-                                <span class="sleek-badge">PCSC 2026 Presenter</span>
+                                <span class="sleek-badge research-pcsc-pill">PCSC 2026 Presenter • Davao City</span>
                                 <span class="project-date">2026</span>
                             </div>
-                            <h3 class="research-title">Visual AI Logic Proof Parser &amp; Evaluator</h3>
+                            <h3 class="research-title">Visual AI Logic Proof Parser: Parsing Structured Handwritten Discrete Math Proofs</h3>
+                            <div class="research-authors-strip">
+                                <span>P.M.G. Bascuq, <strong>R.B. Gemina</strong>, B.X. Mendoza, Prof. C. Arellano</span>
+                            </div>
                             <p class="research-desc">
-                                System scanning, parsing, and scoring handwritten Discrete Math inference proofs. <strong>Personally presented at PCSC 2026 in Davao</strong>.
+                                Computer vision research accepted and <strong>personally presented at the Philippine Computing Science Congress (PCSC 2026) in Davao City</strong>. Built an OCR parsing pipeline evaluating multi-step handwritten discrete math inference proofs.
                             </p>
+                            <div class="research-tech-row">
+                                <span class="timeline-tech-pill">Computer Vision</span>
+                                <span class="timeline-tech-pill">OCR Engine</span>
+                                <span class="timeline-tech-pill">Discrete Math</span>
+                                <span class="timeline-tech-pill">PCSC '26 National Congress</span>
+                            </div>
                         </div>
                         <div class="research-meta-box">
-                            <div class="research-location">Davao City • Researcher &amp; Presenter</div>
-                            <div class="research-venue">Philippine Computing Science Congress</div>
+                            <div class="research-location-wrap">
+                                <div class="research-location">Davao City • In-Person Congress Presenter</div>
+                                <div class="research-venue">Philippine Computing Science Congress (PCSC 2026)</div>
+                            </div>
+                            <div class="research-action-row">
+                                <span class="sleek-btn-sm research-inspect-btn"><span>Inspect Full Methodology</span> →</span>
+                            </div>
                         </div>
                     </div>
 
                 </div>
 
                 <!-- VERIFIED DISTINCTIONS & CERTIFICATIONS -->
-                <div style="margin-top: 48px;">
-                    <div style="text-align: center; margin-bottom: 24px;">
-                        <span class="sleek-badge" style="font-size: 0.82rem; padding: 6px 16px;">Verified Distinctions &amp; Credentials</span>
+                <div class="verified-credentials-container">
+                    <div class="credentials-section-header">
+                        <span class="sleek-badge credentials-title-badge">Verified Distinctions &amp; Professional Credentials</span>
                     </div>
 
                     <div class="honors-grid">
                         
                         <div class="honor-award-card glass-card rgb-border">
-                            <div>
+                            <div class="honor-card-content">
                                 <div class="honor-header-row">
-                                    <span class="honor-badge-pill honor-badge-champion">Certified</span>
+                                    <span class="honor-badge-pill honor-badge-first">National Standard</span>
                                     <span class="honor-year">2025</span>
                                 </div>
                                 <h4 class="honor-award-title">PhilNITS FE Passer</h4>
                                 <p class="honor-award-desc">
-                                    Passed the Fundamental Information Technology Engineers Exam, an international engineering credential aligned with Japan Information-Technology Engineers (ITPEC).
+                                    Passed the Fundamental Information Technology Engineers Examination, an internationally recognized engineering credential aligned with Japan's ITPEC standard.
                                 </p>
                             </div>
                             <div class="honor-award-footer">
-                                <span>National IT Standards</span>
-                                <span>PhilNITS / ITPEC</span>
+                                <span>National IT Standard</span>
+                                <span>PhilNITS / ITPEC Japan</span>
                             </div>
                         </div>
 
                         <div class="honor-award-card glass-card rgb-border">
-                            <div>
+                            <div class="honor-card-content">
                                 <div class="honor-header-row">
-                                    <span class="honor-badge-pill honor-badge-first">Level 3</span>
+                                    <span class="honor-badge-pill honor-badge-first">Global Benchmark</span>
                                     <span class="honor-year">2025</span>
                                 </div>
                                 <h4 class="honor-award-title">TOPCIT Level 3</h4>
                                 <p class="honor-award-desc">
-                                    Achieved Level 3 competency in the Test of Practical Competency in IT, demonstrating high proficiency in software development and database design.
+                                    Attained Level 3 competency in the Test of Practical Competency in IT, validating practical engineering abilities in software development, data architectures, and algorithms.
                                 </p>
                             </div>
                             <div class="honor-award-footer">
-                                <span>Global IT Standard</span>
+                                <span>Global Competency Standard</span>
                                 <span>IITP Korea / DICT</span>
                             </div>
                         </div>
 
                         <div class="honor-award-card glass-card rgb-border">
-                            <div>
+                            <div class="honor-card-content">
                                 <div class="honor-header-row">
-                                    <span class="honor-badge-pill honor-badge-first">Certified</span>
+                                    <span class="honor-badge-pill honor-badge-first">Cloud Architecture</span>
                                     <span class="honor-year">2025</span>
                                 </div>
-                                <h4 class="honor-award-title">AWS Certified</h4>
+                                <h4 class="honor-award-title">AWS Academy Certified</h4>
                                 <p class="honor-award-desc">
-                                    Completed AWS Academy Cloud Foundations and Cloud Architecting, verifying hands-on competence in EC2, S3, VPCs, and reliable cloud deployments.
+                                    Completed AWS Academy Cloud Foundations and Cloud Architecting curricula, verifying hands-on proficiency in EC2, S3, VPCs, IAM security, and resilient cloud architectures.
                                 </p>
                             </div>
                             <div class="honor-award-footer">
                                 <span>Amazon Web Services</span>
-                                <span>Cloud Infra</span>
+                                <span>Cloud Infrastructure</span>
                             </div>
                         </div>
 
                         <div class="honor-award-card glass-card rgb-border">
-                            <div>
+                            <div class="honor-card-content">
                                 <div class="honor-header-row">
-                                    <span class="honor-badge-pill honor-badge-champion">Verified</span>
+                                    <span class="honor-badge-pill honor-badge-first">Algorithm Mastery</span>
                                     <span class="honor-year">2024</span>
                                 </div>
                                 <h4 class="honor-award-title">CodeChum C &amp; Java Certified</h4>
                                 <p class="honor-award-desc">
-                                    Certified in low-level memory logic, object-oriented design, algorithm optimization, and concurrent data structure implementations.
+                                    Certified in low-level memory allocation, object-oriented software patterns, algorithmic time-complexity optimization, and concurrent data structure implementations.
                                 </p>
                             </div>
                             <div class="honor-award-footer">
-                                <span>CodeChum Platform</span>
-                                <span>Algorithms</span>
+                                <span>CodeChum Examination</span>
+                                <span>Algorithms &amp; Data Structures</span>
                             </div>
                         </div>
 
                         <div class="honor-award-card glass-card rgb-border">
-                            <div>
+                            <div class="honor-card-content">
                                 <div class="honor-header-row">
-                                    <span class="honor-badge-pill honor-badge-scopus">Honors</span>
+                                    <span class="honor-badge-pill honor-badge-first">DOST Distinction</span>
                                     <span class="honor-year">2022</span>
                                 </div>
-                                <h4 class="honor-award-title">PSHS-CVisC STEM Honors</h4>
+                                <h4 class="honor-award-title">PSHS STEM Academic Honors</h4>
                                 <p class="honor-award-desc">
-                                    Graduated with Academic Honors and Dean's Lister placement from Philippine Science High School – Central Visayas Campus, the premier national STEM scholarship institution.
+                                    Graduated with Academic Honors and Dean's Lister honors from Philippine Science High School – Central Visayas Campus, the country's premier specialized government STEM scholarship academy.
                                 </p>
                             </div>
                             <div class="honor-award-footer">
@@ -1589,19 +2195,19 @@
                         </div>
 
                         <div class="honor-award-card glass-card rgb-border">
-                            <div>
+                            <div class="honor-card-content">
                                 <div class="honor-header-row">
-                                    <span class="honor-badge-pill honor-badge-champion">Leadership</span>
+                                    <span class="honor-badge-pill honor-badge-first">Collegiate Leadership</span>
                                     <span class="honor-year">2024 — 2026</span>
                                 </div>
                                 <h4 class="honor-award-title">Koro Teknoy Chorale Leadership</h4>
                                 <p class="honor-award-desc">
-                                    Served as Bass 2 and Presidential Officer-in-Charge of the university's premier collegiate chorale, leading rehearsals, regional tours, and university ceremonies.
+                                    Elected Bass 2 and Presidential Officer-in-Charge of CIT-U's premier collegiate chorale, steering executive rehearsals, university ceremonial tours, and regional music honors.
                                 </p>
                             </div>
                             <div class="honor-award-footer">
                                 <span>CIT-U Collegiate Music</span>
-                                <span>Executive OIC</span>
+                                <span>Presidential OIC &amp; Bass 2</span>
                             </div>
                         </div>
 
@@ -1615,7 +2221,10 @@
         <section id="volunteering" class="section volunteering-section reveal-on-scroll">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title cyber-glitch-text" data-text="Volunteering" data-deciphering="false">Volunteering</h2>
+                    <div class="section-title-wrap">
+                        <span class="section-tech-tag">// 06. LEADERSHIP</span>
+                        <h2 class="section-title cyber-glitch-text" data-text="Leadership & Community" data-deciphering="false">Leadership &amp; Community</h2>
+                    </div>
                     <div class="section-divider"></div>
                 </div>
 
@@ -1623,46 +2232,66 @@
                     
                     <div class="volunteering-card glass-card rgb-border stagger-child" style="--child-idx: 0;">
                         <div class="volunteering-header">
-                            <span class="sleek-badge">Typhoon Relief</span>
-                            <span class="volunteering-period">2023</span>
+                            <span class="sleek-badge">Disaster Response • 2023</span>
+                            <span class="volunteering-period">Cebu City</span>
                         </div>
-                        <h3 class="volunteering-title">Concert for a Cause</h3>
+                        <h3 class="volunteering-title">Typhoon Odette Relief: Concert for a Cause</h3>
                         <p class="volunteering-desc">
-                            Sang in the Bradford Grand Choir for charity following Typhoon Odette to support affected families.
+                            Performed in the Bradford Grand Charity Choir benefit concert following Typhoon Odette, raising emergency aid and distributing vital recovery care packages to affected families.
                         </p>
+                        <div class="volunteering-tag-row">
+                            <span class="timeline-tech-pill">Humanitarian Aid</span>
+                            <span class="timeline-tech-pill">Charity Concert</span>
+                            <span class="timeline-tech-pill">Bradford Grand Choir</span>
+                        </div>
                     </div>
 
                     <div class="volunteering-card glass-card rgb-border stagger-child" style="--child-idx: 1;">
                         <div class="volunteering-header">
-                            <span class="sleek-badge">Outreach</span>
-                            <span class="volunteering-period">2023</span>
+                            <span class="sleek-badge">Community Welfare • 2023</span>
+                            <span class="volunteering-period">Barangay Labangon</span>
                         </div>
-                        <h3 class="volunteering-title">NSTP Labangon Outreach</h3>
+                        <h3 class="volunteering-title">NSTP Labangon Community Outreach</h3>
                         <p class="volunteering-desc">
-                            Distributed care packages, supplies, and donations to disabled individuals in Labangon, Cebu.
+                            Spearheaded field logistics and hands-on distribution of nutritional food packs, hygiene supplies, and assistance to disabled residents and underserved households across Labangon, Cebu.
                         </p>
+                        <div class="volunteering-tag-row">
+                            <span class="timeline-tech-pill">Direct Relief</span>
+                            <span class="timeline-tech-pill">Social Welfare</span>
+                            <span class="timeline-tech-pill">Community Fieldwork</span>
+                        </div>
                     </div>
 
                     <div class="volunteering-card glass-card rgb-border stagger-child" style="--child-idx: 2;">
                         <div class="volunteering-header">
-                            <span class="sleek-badge">Choir Performance</span>
-                            <span class="volunteering-period">2022</span>
+                            <span class="sleek-badge">Choral Ministry • 2022</span>
+                            <span class="volunteering-period">Household of Faith</span>
                         </div>
-                        <h3 class="volunteering-title">Easter Cantata</h3>
+                        <h3 class="volunteering-title">Easter Cantata Musical Ministry</h3>
                         <p class="volunteering-desc">
-                            Volunteered to sing in the Household of Faith Choir for the Easter Sunday community gathering.
+                            Volunteered vocal talents as choral singer in the Household of Faith Easter Sunday musical ministry and fellowship celebration for local community assemblies.
                         </p>
+                        <div class="volunteering-tag-row">
+                            <span class="timeline-tech-pill">Choral Worship</span>
+                            <span class="timeline-tech-pill">Community Gathering</span>
+                            <span class="timeline-tech-pill">Vocal Music</span>
+                        </div>
                     </div>
 
                     <div class="volunteering-card glass-card rgb-border stagger-child" style="--child-idx: 3;">
                         <div class="volunteering-header">
-                            <span class="sleek-badge">Choir Performance</span>
-                            <span class="volunteering-period">2022</span>
+                            <span class="sleek-badge">Annual Charity • 2022</span>
+                            <span class="volunteering-period">Household of Faith</span>
                         </div>
-                        <h3 class="volunteering-title">Christmas Cantata</h3>
+                        <h3 class="volunteering-title">Christmas Cantata Charity Gathering</h3>
                         <p class="volunteering-desc">
-                            Volunteered in the Household of Faith Choir for the annual Christmas Cantata charity gathering.
+                            Volunteered in the annual Christmas Cantata charitable program, assisting in event organization and bringing festive choral music and holiday donations to local families.
                         </p>
+                        <div class="volunteering-tag-row">
+                            <span class="timeline-tech-pill">Holiday Charity</span>
+                            <span class="timeline-tech-pill">Community Outreach</span>
+                            <span class="timeline-tech-pill">Choral Ensemble</span>
+                        </div>
                     </div>
 
                 </div>
@@ -1673,11 +2302,18 @@
         <section id="contact" class="section contact-section reveal-on-scroll">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title cyber-glitch-text" data-text="Contact" data-deciphering="false">Contact</h2>
+                    <div class="section-title-wrap">
+                        <span class="section-tech-tag">// 07. DISPATCH</span>
+                        <h2 class="section-title cyber-glitch-text" data-text="Contact & Connect" data-deciphering="false">Contact &amp; Connect</h2>
+                    </div>
                     <div class="section-divider"></div>
                 </div>
 
                 <div class="contact-horizontal-card glass-card rgb-border">
+                    <div class="contact-telemetry-badge">
+                        <span class="telemetry-live-dot"></span>
+                        <span class="telemetry-live-label">OPEN FOR ROLES: SOFTWARE ENGINEER • SRE • FULL-STACK // IMMEDIATE START</span>
+                    </div>
                     <div class="contact-header-text">
                         <h3 class="card-heading">Let's Connect &amp; Collaborate</h3>
                         <p class="contact-lead">
