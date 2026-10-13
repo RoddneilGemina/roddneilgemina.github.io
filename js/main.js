@@ -334,9 +334,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Props specified from React Bits <Scanner /> component
         scannerInstance = Scanner.init(scannerContainer, {
-            color1: '#5227FF',
-            color2: '#FF9FFC',
-            color3: '#FFFFFF',
+            color1: '#7fa8ff',
+            color2: '#edeae4',
+            color3: '#374151',
             speed: 0.5,
             sweepSpeed: 0.25,
             sweepWidth: 1.6,
@@ -642,6 +642,130 @@ document.addEventListener('DOMContentLoaded', () => {
             revealObserver.observe(sec);
         }
     });
+
+    // ==========================================================================
+    // 4B. GSAP SCROLLTRIGGER REFINED EDITORIAL MOTION ENGINE
+    // ==========================================================================
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Editorial rise for section headers
+        gsap.utils.toArray('.section-header').forEach(header => {
+            gsap.fromTo(header,
+                { opacity: 0, y: 35 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.85,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: header,
+                        start: 'top 88%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // 2. Tech stack matrix staggered grid reveal
+        const stackGrid = document.getElementById('stack-matrix-grid');
+        if (stackGrid) {
+            gsap.fromTo('.stack-square-cell',
+                { opacity: 0, y: 18 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    stagger: {
+                        amount: 0.45,
+                        grid: 'auto',
+                        from: 'start'
+                    },
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: stackGrid,
+                        start: 'top 82%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        }
+
+        // 3. Staggered reveal for Philosophy Bento Cards
+        gsap.utils.toArray('.philosophy-bento-card').forEach((card, idx) => {
+            gsap.fromTo(card,
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: idx * 0.08,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 86%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // 4. Staggered reveal for Experience Timeline Items
+        gsap.utils.toArray('.timeline-card').forEach((card, idx) => {
+            gsap.fromTo(card,
+                { opacity: 0, x: idx % 2 === 0 ? -24 : 24 },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // 5. Staggered reveal for Research & Publication cards
+        gsap.utils.toArray('.research-card').forEach((card, idx) => {
+            gsap.fromTo(card,
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: idx * 0.1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 86%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // 6. Contact horizontal card reveal
+        const contactCard = document.querySelector('.contact-horizontal-card');
+        if (contactCard) {
+            gsap.fromTo(contactCard,
+                { opacity: 0, y: 35 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.85,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: contactCard,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        }
+    }
 
     // ==========================================================================
     // 5. THEME TOGGLE (COSMIC DARK / LIGHT SLATE)
