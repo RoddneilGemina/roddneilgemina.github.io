@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roddneil B. Gemina | Software Engineer &amp; CS Scholar Portfolio</title>
     <meta name="description" content="Portfolio of Roddneil B. Gemina, Computer Science Scholar from CIT-U. SRE Intern at Opswerks, QA Analyst at DXForm, and AI Researcher.">
-    <link rel="stylesheet" href="css/styles.css?v=9.3">
+    <link rel="stylesheet" href="css/styles.css?v=9.5">
     
     <!-- Google Fonts: Syne (Display), Plus Jakarta Sans (Body), JetBrains Mono (Badges & Code) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +13,9 @@
     
     <!-- React Bits Scanner WebGL Background -->
     <script src="js/scanner.js"></script>
+
+    <!-- React Bits Specular Button (Physics-Based WebGL Lighting) -->
+    <script src="js/specular-button.js"></script>
 </head>
 <body>
 
@@ -126,14 +129,14 @@
                         </p>
 
                         <div class="hero-cta-row hero-cta-left">
-                            <a href="#projects" class="btn-hero-primary">
+                            <a href="#projects" class="btn-hero-primary specular-button specular-button--md" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.3" data-specular-radius="22">
                                 <span>Explore Projects →</span>
                             </a>
-                            <a href="#contact" class="btn-hero-ghost">
+                            <a href="#contact" class="btn-hero-ghost specular-button specular-button--md" data-specular="true" data-specular-line="#38bdf8" data-specular-glow="1.1" data-specular-radius="22">
                                 <svg class="ui-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
                                 <span>Get in Touch</span>
                             </a>
-                            <a href="GeminaResume.pdf" target="_blank" class="btn-hero-outline">
+                            <a href="GeminaResume.pdf" target="_blank" class="btn-hero-outline specular-button specular-button--md" data-specular="true" data-specular-line="#ffffff" data-specular-glow="1" data-specular-radius="22">
                                 <svg class="ui-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"></path></svg>
                                 <span>Resume (CV)</span>
                             </a>
@@ -211,7 +214,7 @@
                         <h2 class="section-title cyber-glitch-text" data-text="Featured Projects" data-deciphering="false">Featured Projects</h2>
                     </div>
                     <div class="section-divider"></div>
-                    <button id="open-all-projects-btn" class="btn-hero-primary projects-header-cta" aria-label="See all projects and researches">
+                    <button id="open-all-projects-btn" class="btn-hero-primary projects-header-cta specular-button specular-button--md" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.3" data-specular-radius="20" aria-label="See all projects and researches">
                         <span>See All Projects &amp; Researches &rarr;</span>
                     </button>
                 </div>
@@ -2062,7 +2065,7 @@
                                 <div class="research-venue">ICETT 2026 (International Conference on Educational &amp; Information Tech)</div>
                             </div>
                             <div class="research-action-row">
-                                <span class="sleek-btn-sm research-inspect-btn"><span>Inspect Full Methodology</span> →</span>
+                                <span class="sleek-btn-sm research-inspect-btn specular-button specular-button--sm" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.2" data-specular-radius="8"><span>Inspect Full Methodology</span> →</span>
                             </div>
                         </div>
                     </div>
@@ -2094,7 +2097,7 @@
                                 <div class="research-venue">Philippine Computing Science Congress (PCSC 2026)</div>
                             </div>
                             <div class="research-action-row">
-                                <span class="sleek-btn-sm research-inspect-btn"><span>Inspect Full Methodology</span> →</span>
+                                <span class="sleek-btn-sm research-inspect-btn specular-button specular-button--sm" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.2" data-specular-radius="8"><span>Inspect Full Methodology</span> →</span>
                             </div>
                         </div>
                     </div>
@@ -2330,7 +2333,7 @@
                                 <span class="method-label">Direct Email</span>
                                 <div class="email-copy-wrapper">
                                     <a href="mailto:roddneilgemina@gmail.com" id="email-link" class="method-value">roddneilgemina@gmail.com</a>
-                                    <button id="copy-email-btn" class="sleek-btn-sm btn-copy" title="Copy Email">
+                                    <button id="copy-email-btn" class="sleek-btn-sm btn-copy specular-button specular-button--sm" data-specular="true" data-specular-line="#10b981" data-specular-glow="1.1" data-specular-radius="6" title="Copy Email">
                                         <svg class="ui-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path></svg>
                                         <span id="copy-btn-text">Copy</span>
                                     </button>
