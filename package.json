@@ -1,0 +1,12 @@
+{
+  "name": "roddneil-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio of Roddneil B. Gemina",
+  "scripts": {
+    "dev": "wrangler pages dev .",
+    "deploy": "wrangler pages deploy . --project-name roddneil-gemina"
+  },
+  "devDependencies": {
+    "wrangler": "^4.150.0"
+  }
+}

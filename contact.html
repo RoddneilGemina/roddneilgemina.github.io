@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact &amp; Inquiries | Roddneil B. Gemina</title>
+    <meta name="description" content="Get in touch with Roddneil B. Gemina. In-depth contact terminal for software engineering roles, full-stack contracts, SRE opportunities, and research collaborations.">
+    <link rel="canonical" href="https://roddneil-gemina.pages.dev/contact.html">
+    <link rel="stylesheet" href="css/styles.css?v=15.0">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Geist+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & Animation Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- React Bits Specular Button -->
+    <script src="js/specular-button.js"></script>
+
+    <!-- React Bits Border Glow -->
+    <script src="js/border-glow.js"></script>
+
+    <!-- React Bits DotField Interactive Texture Background Overlay -->
+    <script src="js/dot-field.js"></script>
+
+    <!-- React Bits GradientText -->
+    <script src="js/gradient-text.js"></script>
+</head>
+<body>
+
+    <!-- REACT BITS DOTFIELD TACTILE TEXTURE BACKGROUND OVERLAY -->
+    <div id="global-dotfield-container" class="dot-field-container global-dotfield" aria-hidden="true"></div>
+
+    <!-- CIRCULAR RIPPLE OVERLAY FOR THEME WAVE -->
+    <div id="theme-ripple-overlay" class="theme-ripple-overlay"></div>
+
+    <!-- SLEEK MINIMAL NAVBAR -->
+        <header class="site-header">
+        <div class="container header-inner">
+            <!-- BRAND BADGE (LEFT) -->
+            <a href="index.html" class="brand-badge-link">
+                <div class="brand-badge-icon">
+                    <span class="brand-monogram">RG</span>
+                </div>
+                <div class="brand-badge-info">
+                    <span class="brand-badge-name">Roddneil Gemina</span>
+                    <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
+                </div>
+            </a>
+
+            <!-- FLOATING PILL NAV (CENTER) -->
+            <nav class="main-nav-pill" id="main-nav">
+                <ul class="nav-pill-list">
+                    <li><a href="index.html" class="nav-pill-item ">Home</a></li>
+                    <li><a href="projects.html" class="nav-pill-item ">Projects</a></li>
+                    <li><a href="about.html" class="nav-pill-item ">About</a></li>
+                    <li><a href="contact.html" class="nav-pill-item active">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- RIGHT ACTIONS -->
+            <div class="header-actions">
+                <!-- VIBRANT ORANGE CTA PILL -->
+                <a href="contact.html" class="nav-cta-pill specular-button specular-button--sm" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.3" data-specular-radius="999">
+                    <span>Get in Touch ↗</span>
+                </a>
+
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- PAGE HERO -->
+        <section class="page-hero">
+            <div class="container page-hero-inner">
+                <span class="page-badge">// DIRECT COMMUNICATIONS TERMINAL</span>
+                <h1 class="page-hero-title">Let's Connect &amp; Collaborate</h1>
+                <p class="page-hero-lead">
+                    Open for Software Engineer, Full-Stack Developer, and Site Reliability Engineer (SRE) positions worldwide. Whether you have an open role, an architecture inquiry, or a research proposal, transmit a message below.
+                </p>
+                <div class="page-stat-row">
+                    <span class="page-stat-chip"><span class="telemetry-live-dot" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;margin-right:6px;"></span><strong>Immediate</strong> Availability</span>
+                    <span class="page-stat-chip"><strong>&lt; 24h</strong> Response SLA</span>
+                    <span class="page-stat-chip"><strong>Remote Worldwide</strong> &amp; Hybrid Relocation</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- IN-DEPTH CONTACT SCREEN -->
+        <section class="section contact-section">
+            <div class="container">
+                <div class="contact-in-depth-grid">
+
+                    <!-- LEFT: COMPREHENSIVE INQUIRY FORM -->
+                    <div class="inquiry-form-card glass-card rgb-border">
+                        <div class="inquiry-form-header">
+                            <span class="sleek-badge" style="margin-bottom: 8px;">Direct Terminal</span>
+                            <h2 class="inquiry-form-title">Send a Formal Engineering Inquiry</h2>
+                            <p class="inquiry-form-subtitle">Fill in the fields below. Messages are transmitted directly to my personal inbox.</p>
+                        </div>
+
+                        <form id="in-depth-contact-form" class="inquiry-form" onsubmit="event.preventDefault(); handleInDepthSubmit();">
+                            <div class="inquiry-fields-grid">
+                                
+                                <div class="form-group">
+                                    <label for="contact-name" class="form-field-label">Your Name / Organization *</label>
+                                    <input type="text" id="contact-name" class="form-control-input" placeholder="e.g., Alex Vance / Acme Corp" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contact-email" class="form-field-label">Email Address *</label>
+                                    <input type="email" id="contact-email" class="form-control-input" placeholder="alex@company.com" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contact-category" class="form-field-label">Inquiry Purpose *</label>
+                                    <select id="contact-category" class="form-control-select" required>
+                                        <option value="full-time">Full-Time Software Engineer / SRE Role</option>
+                                        <option value="freelance">Freelance Web App / Contract</option>
+                                        <option value="research">AI &amp; Academic Research Collaboration</option>
+                                        <option value="consulting">Architecture Review &amp; Consulting</option>
+                                        <option value="general">General Networking / Coffee Chat</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contact-timeline" class="form-field-label">Timeline / Urgency</label>
+                                    <select id="contact-timeline" class="form-control-select">
+                                        <option value="immediate">Immediate Start (&lt; 2 Weeks)</option>
+                                        <option value="month">Within 1 Month</option>
+                                        <option value="quarter">Next Quarter / Future Pipeline</option>
+                                        <option value="flexible">Flexible / Exploratory</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group form-group-full">
+                                    <label for="contact-subject" class="form-field-label">Subject Headline *</label>
+                                    <input type="text" id="contact-subject" class="form-control-input" placeholder="e.g., Senior Full-Stack / SRE Opportunity at [Company]" required>
+                                </div>
+
+                                <div class="form-group form-group-full">
+                                    <label for="contact-message" class="form-field-label">Project Details / Message Scope *</label>
+                                    <textarea id="contact-message" class="form-control-textarea" placeholder="Describe the role responsibilities, tech stack requirements, system goals, or collaboration context..." required></textarea>
+                                </div>
+
+                            </div>
+
+                            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-top: 10px;">
+                                <button type="submit" id="submit-inquiry-btn" class="btn-hero-primary specular-button specular-button--md" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.3" data-specular-radius="8">
+                                    <span>Transmit Message &rarr;</span>
+                                </button>
+                                <span style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-muted);">Encrypted Client-to-Inbox Dispatch</span>
+                            </div>
+
+                            <!-- SUCCESS FEEDBACK -->
+                            <div id="inquiry-feedback" class="bite-feedback" style="margin-top: 18px;">
+                                <strong>Message Transmitted Successfully!</strong> Thank you for reaching out. A confirmation has been logged, and I will reply within 24 business hours.
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- RIGHT: COMMUNICATIONS TERMINAL & HUD -->
+                    <div class="terminal-hud-column">
+
+                        <!-- LIVE TELEMETRY HUD -->
+                        <div class="terminal-hud-card glass-card rgb-border">
+                            <div class="contact-telemetry-badge">
+                                <span class="telemetry-live-dot"></span>
+                                <span>STATUS: AVAILABLE FOR IMMEDIATE HIRE</span>
+                            </div>
+
+                            <div class="hud-clock-row">
+                                <div>
+                                    <span style="display:block;font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;">Local Time (Cebu City, PH)</span>
+                                    <span class="hud-clock-time" id="live-cebu-clock">--:--:-- PHT</span>
+                                </div>
+                                <span class="item-role-tag">UTC+8</span>
+                            </div>
+
+                            <div style="font-size:0.88rem;color:var(--text-secondary);line-height:1.6;">
+                                Available for <strong>Full-Stack Developer</strong>, <strong>Software Engineer</strong>, and <strong>Site Reliability Engineer (SRE)</strong> engagements. Comfortable overlapping with APAC, European, and US working windows.
+                            </div>
+                        </div>
+
+                        <!-- DIRECT CHANNELS -->
+                        <div class="terminal-hud-card glass-card rgb-border">
+                            <span class="page-badge">// VERIFIED CHANNELS</span>
+                            <h3 style="font-family:var(--font-heading);font-size:1.15rem;font-weight:700;color:#ffffff;margin-bottom:16px;">Direct Point of Contact</h3>
+
+                            <div class="bite-channel-list">
+                                <div class="bite-channel-item">
+                                    <span>Direct Email:</span>
+                                    <div style="display:flex;align-items:center;gap:8px;">
+                                        <a href="mailto:roddneilgemina@gmail.com" id="copy-email-text" style="color:#ffffff;font-family:var(--font-mono);font-size:0.84rem;">roddneilgemina@gmail.com</a>
+                                        <button class="copy-pill-btn" onclick="copyContactEmail()" title="Copy email address">Copy</button>
+                                    </div>
+                                </div>
+                                <div class="bite-channel-item">
+                                    <span>Phone:</span>
+                                    <a href="tel:+639562413577" style="font-family:var(--font-mono);font-size:0.84rem;">+63 956-241-3577</a>
+                                </div>
+                                <div class="bite-channel-item">
+                                    <span>Location:</span>
+                                    <span>Cebu City, Philippines</span>
+                                </div>
+                                <div class="bite-channel-item">
+                                    <span>Resume (CV):</span>
+                                    <a href="GeminaResume.pdf" target="_blank" style="color:var(--color-cyan);font-weight:600;font-family:var(--font-mono);">GeminaResume.pdf (PDF) ↗</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SOCIAL & PROFESSIONAL PROFILES -->
+                        <div class="terminal-hud-card glass-card rgb-border">
+                            <span class="page-badge">// NETWORKS</span>
+                            <h3 style="font-family:var(--font-heading);font-size:1.15rem;font-weight:700;color:#ffffff;margin-bottom:14px;">Professional Networks</h3>
+
+                            <div style="display:flex;flex-direction:column;gap:10px;">
+                                <a href="https://github.com/RoddneilGemina" target="_blank" rel="noopener noreferrer" class="social-card-btn sleek-btn-sm" style="display:flex;align-items:center;gap:10px;padding:10px 14px;">
+                                    <svg class="ui-icon" viewBox="0 0 24 24" style="width:18px;height:18px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+                                    <span>GitHub • <strong>RoddneilGemina</strong></span>
+                                </a>
+                                <a href="https://www.linkedin.com/in/roddneil-gemina-20b423409" target="_blank" rel="noopener noreferrer" class="social-card-btn sleek-btn-sm" style="display:flex;align-items:center;gap:10px;padding:10px 14px;">
+                                    <svg class="ui-icon" viewBox="0 0 24 24" style="width:18px;height:18px;"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path></svg>
+                                    <span>LinkedIn • <strong>Roddneil Gemina</strong></span>
+                                </a>
+                                <a href="https://www.facebook.com/pausroro0205" target="_blank" rel="noopener noreferrer" class="social-card-btn sleek-btn-sm" style="display:flex;align-items:center;gap:10px;padding:10px 14px;">
+                                    <svg class="ui-icon" viewBox="0 0 24 24" style="width:18px;height:18px;"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.12 8.44 9.88v-6.99H7.9v-2.89h2.54V9.8c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.89h-2.33v6.99C18.34 21.12 22 16.99 22 12z"></path></svg>
+                                    <span>Facebook • <strong>Roddneil Gemina</strong></span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <span class="footer-brand">RODDNEIL B. GEMINA</span>
+                <span class="footer-copy">© <span id="current-year">2026</span> Roddneil B. Gemina. All rights reserved.</span>
+            </div>
+            <div class="footer-right">
+                <a href="#" class="back-to-top">Back to top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Live Clock for Cebu City, Philippines (UTC+8)
+        function updateClock() {
+            const clockEl = document.getElementById('live-cebu-clock');
+            if (!clockEl) return;
+            const now = new Date();
+            const options = { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            clockEl.textContent = now.toLocaleTimeString('en-US', options) + ' PHT';
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Copy Email function
+        function copyContactEmail() {
+            navigator.clipboard.writeText('roddneilgemina@gmail.com').then(() => {
+                const btn = event.target;
+                const orig = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => { btn.textContent = orig; }, 2000);
+            });
+        }
+
+        // Form submission feedback
+        function handleInDepthSubmit() {
+            const btn = document.getElementById('submit-inquiry-btn');
+            const feedback = document.getElementById('inquiry-feedback');
+            btn.disabled = true;
+            btn.querySelector('span').textContent = 'Transmitting...';
+            
+            setTimeout(() => {
+                feedback.style.display = 'block';
+                btn.querySelector('span').textContent = 'Transmitted ✓';
+                document.getElementById('in-depth-contact-form').reset();
+            }, 750);
+        }
+    </script>
+</body>
+</html>

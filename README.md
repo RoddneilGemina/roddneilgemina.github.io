@@ -9,7 +9,7 @@ Built using HTML5, CSS3 (Grid, Flexbox, Custom Property Themes), and Vanilla Jav
 ## 📄 Candidate Overview
 
 - **Name**: Roddneil B. Gemina
-- **Email**: `roddneil.gemina@cit.edu`
+- **Email**: `roddneilgemina@gmail.com`
 - **Phone**: `0956-241-3577` (`+63 956 241 3577`)
 - **Location**: Cebu City, Philippines
 - **Education**: 
@@ -58,17 +58,36 @@ Built using HTML5, CSS3 (Grid, Flexbox, Custom Property Themes), and Vanilla Jav
 - 📐 **Blueprint Grid Toggle (`Grid: ON/OFF`)**: Graph paper blueprint overlay toggle.
 - 🏷️ **Spec Labels Toggle (`Labels: ON/OFF`)**: Architectural component spec tags overlay toggle.
 - 📄 **Resume Download Link**: Direct link to download [`GeminaResume.pdf`](file:///C:/Users/Admin/Documents/Projects/Portfolio/GeminaResume.pdf).
-- 📋 **Copy Email Button**: 1-click clipboard copy for `roddneil.gemina@cit.edu`.
+- 📋 **Copy Email Button**: 1-click clipboard copy for `roddneilgemina@gmail.com`.
 - 🔍 **Interactive Project Spec Dialog**: Click **"View Specs & Demo"** on any project to view architectural schematics and technical breakdowns.
 
 ---
 
-## 🚀 How to View Locally
+## 🌐 Live Deployment
 
-Simply double-click [`index.html`](file:///C:/Users/Admin/Documents/Projects/Portfolio/index.html) or run a local HTTP server:
+- **Production Domain**: [https://roddneil-gemina.pages.dev](https://roddneil-gemina.pages.dev)
+- **Hosted On**: Cloudflare Pages
 
+---
+
+## 🚀 How to View Locally & Deploy
+
+### Local Development
 ```powershell
+# Using Cloudflare Wrangler Pages dev server
+npm run dev
+
+# Or using Python's built-in HTTP server
 & "$env:LOCALAPPDATA\Python\bin\python.exe" -m http.server 8000
 ```
+Then navigate to `http://localhost:8000` (or the port displayed by Wrangler).
 
-Then navigate to `http://localhost:8000`.
+### Deploying to Cloudflare Pages (`roddneil-gemina.pages.dev`)
+```powershell
+# 1. Authenticate (one-time setup if not logged in)
+npx wrangler login
+
+# 2. Deploy static assets to production
+npm run deploy
+# or: npx wrangler pages deploy . --project-name roddneil-gemina
+```

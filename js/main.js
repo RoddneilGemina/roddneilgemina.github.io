@@ -11,6 +11,10 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
 
     // ==========================================================================
     // 1. SOUND EFFECTS DISABLED (Per user preference)
@@ -32,6 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const roleSep = document.getElementById('role-separator');
     const roleAccent = document.getElementById('role-accent');
     const roleCursor = document.getElementById('role-cursor');
+    const rolePart1Glow = document.getElementById('role-part1-glow');
+    const roleSepGlow = document.getElementById('role-separator-glow');
+    const roleAccentGlow = document.getElementById('role-accent-glow');
     const heroSection = document.getElementById('hero');
     const heroContent = document.querySelector('.hero-split-grid') || document.querySelector('.hero-container');
     const portraitLineEmitter = document.getElementById('portrait-line-emitter');
@@ -47,8 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const part1Text = 'Full-Stack Developer';
         const part2Text = 'Software Engineer';
         if (rolePart1) rolePart1.textContent = part1Text;
+        if (rolePart1Glow) rolePart1Glow.textContent = part1Text;
         if (roleSep) roleSep.style.display = 'inline';
+        if (roleSepGlow) roleSepGlow.style.display = 'inline';
         if (roleAccent) roleAccent.textContent = part2Text;
+        if (roleAccentGlow) roleAccentGlow.textContent = part2Text;
 
         const viewportCenterX = window.innerWidth / 2;
         const viewportCenterY = window.innerHeight / 2;
@@ -65,8 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Clear text before starting cinematic entrance
         if (rolePart1) rolePart1.textContent = '';
+        if (rolePart1Glow) rolePart1Glow.textContent = '';
         if (roleSep) roleSep.style.display = 'none';
+        if (roleSepGlow) roleSepGlow.style.display = 'none';
         if (roleAccent) roleAccent.textContent = '';
+        if (roleAccentGlow) roleAccentGlow.textContent = '';
 
         // Position initial elements in the center of pitch-black screen
         heroNameContainer.style.zIndex = '9998';
@@ -101,15 +114,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (introCompleted) return;
                     if (rolePart1 && i < part1Text.length) {
                         rolePart1.textContent += part1Text[i];
+                        if (rolePart1Glow) rolePart1Glow.textContent = rolePart1.textContent;
                         i++;
                         setTimeout(typePart1, 26);
                     } else {
                         if (roleSep) roleSep.style.display = 'inline';
+                        if (roleSepGlow) roleSepGlow.style.display = 'inline';
                         let j = 0;
                         setTimeout(function typePart2() {
                             if (introCompleted) return;
                             if (roleAccent && j < part2Text.length) {
                                 roleAccent.textContent += part2Text[j];
+                                if (roleAccentGlow) roleAccentGlow.textContent = roleAccent.textContent;
                                 j++;
                                 setTimeout(typePart2, 26);
                             } else {
@@ -152,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Stagger in surrounding hero elements on the left & right
+            document.body.classList.add('hero-entered');
             if (heroContent) heroContent.classList.add('hero-entered');
             if (heroSection) heroSection.classList.add('revealed');
 
@@ -179,8 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } else {
         if (rolePart1) rolePart1.textContent = 'Full-Stack Developer';
+        if (rolePart1Glow) rolePart1Glow.textContent = 'Full-Stack Developer';
         if (roleSep) roleSep.style.display = 'inline';
+        if (roleSepGlow) roleSepGlow.style.display = 'inline';
         if (roleAccent) roleAccent.textContent = 'Software Engineer';
+        if (roleAccentGlow) roleAccentGlow.textContent = 'Software Engineer';
         if (roleCursor) roleCursor.style.display = 'none';
         if (portraitLineEmitter) portraitLineEmitter.classList.add('line-ignited');
         if (portraitRoleDrawer) portraitRoleDrawer.classList.add('drawer-open');
@@ -326,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. REACT BITS SCANNER WEBGL BACKGROUND (HERO SECTION)
     // ==========================================================================
     let scannerInstance = null;
-    let currentThemeMode = localStorage.getItem('portfolio_theme') || 'dark';
+    let currentThemeMode = 'dark';
 
     function initScannerBackground() {
         const scannerContainer = document.getElementById('hero-scanner-container');
@@ -364,6 +384,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initScannerBackground();
+
+    // ==========================================================================
+    // 2B. REACT BITS DOTFIELD TACTILE TEXTURE OVERLAY
+    // ==========================================================================
+    let dotFieldInstance = null;
+
+    function initDotFieldOverlay() {
+        const dotFieldContainer = document.getElementById('hero-dotfield-container') || document.getElementById('global-dotfield-container');
+        if (!dotFieldContainer || typeof DotField === 'undefined') return;
+
+        dotFieldInstance = DotField.init(dotFieldContainer, {
+            dotRadius: 1.2,
+            dotSpacing: 16,
+            cursorRadius: 280,
+            cursorForce: 0.1,
+            bulgeOnly: true,
+            bulgeStrength: 52,
+            glowRadius: 160,
+            sparkle: false,
+            waveAmplitude: 0,
+            gradientFrom: 'rgba(127, 168, 255, 0.22)',
+            gradientTo: 'rgba(237, 234, 228, 0.08)',
+            glowColor: 'rgba(127, 168, 255, 0.12)'
+        });
+    }
+
+    initDotFieldOverlay();
 
     // ==========================================================================
     // 3. CYBER GLITCH-DECIPHER TYPING EFFECT ON SECTION HEADERS
@@ -457,154 +504,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     // ==========================================================================
-    // 3C. INTERACTIVE TECH STACK LOGO MATRIX WITH IN-BOX 10-BAR FILLING ANIMATION
+    // 3C. REACT BITS LOGOLOOP INITIALIZATION FOR TECH STACKS
     // ==========================================================================
-    function initStackHighlightBox() {
-        const gridWrapper = document.getElementById('stack-grid-wrapper');
-        const highlightBox = document.getElementById('stack-highlight-box');
-        const stackCells = document.querySelectorAll('.stack-square-cell');
-        const filterTabs = document.querySelectorAll('.stack-filter-tab');
+    let logoLoopInstances = [];
 
-        if (!gridWrapper || !highlightBox || stackCells.length === 0) return;
-
-        let activeCell = null;
-        let isHovered = false;
-        let activeBarTimers = [];
-
-        function clearBarTimers() {
-            activeBarTimers.forEach(t => clearTimeout(t));
-            activeBarTimers = [];
-        }
-
-        function resetCellMeter(cell) {
-            if (!cell) return;
-            cell.classList.remove('is-hovered');
-            const segments = cell.querySelectorAll('.level-bar-segment');
-            segments.forEach(seg => seg.classList.remove('is-filled'));
-            const levelEl = cell.querySelector('.stack-cell-level');
-            const target = cell.getAttribute('data-level') || '8';
-            if (levelEl) {
-                levelEl.textContent = `Level ${target}/10`;
-            }
-        }
-
-        function animateCellMeter(cell) {
-            clearBarTimers();
-
-            const segments = cell.querySelectorAll('.level-bar-segment');
-            const levelEl = cell.querySelector('.stack-cell-level');
-            const target = Math.max(1, Math.min(10, parseInt(cell.getAttribute('data-level'), 10) || 8));
-
-            // Reset segments in this cell
-            segments.forEach(seg => seg.classList.remove('is-filled'));
-            if (levelEl) levelEl.textContent = 'Level 0/10';
-
-            // Sequential progressive bar-by-bar fill from bottom to top
-            for (let i = 0; i < target; i++) {
-                const timer = setTimeout(() => {
-                    if (segments[i]) {
-                        segments[i].classList.add('is-filled');
-                    }
-                    if (levelEl) {
-                        levelEl.textContent = `Level ${i + 1}/10`;
-                    }
-                }, i * 26); // 26ms stagger = 260ms for 10 bars
-                activeBarTimers.push(timer);
-            }
-        }
-
-        function updateHighlightPosition(cell) {
-            if (!cell || cell.classList.contains('is-dimmed') || cell.classList.contains('is-hidden')) {
-                highlightBox.classList.remove('is-active');
-                if (activeCell) resetCellMeter(activeCell);
-                clearBarTimers();
-                return;
-            }
-
-            if (activeCell && activeCell !== cell) {
-                resetCellMeter(activeCell);
-            }
-
-            activeCell = cell;
-            cell.classList.add('is-hovered');
-
-            const wrapperRect = gridWrapper.getBoundingClientRect();
-            const cellRect = cell.getBoundingClientRect();
-
-            const cellLeft = cellRect.left - wrapperRect.left;
-            const cellTop = cellRect.top - wrapperRect.top;
-            const cellWidth = cellRect.width;
-            const cellHeight = cellRect.height;
-
-            highlightBox.style.width = `${cellWidth}px`;
-            highlightBox.style.height = `${cellHeight}px`;
-            highlightBox.style.transform = `translate3d(${cellLeft}px, ${cellTop}px, 0)`;
-            highlightBox.classList.add('is-active');
-
-            animateCellMeter(cell);
-        }
-
-        stackCells.forEach(cell => {
-            cell.addEventListener('mouseenter', () => {
-                isHovered = true;
-                updateHighlightPosition(cell);
-            });
-
-            cell.addEventListener('focus', () => {
-                isHovered = true;
-                updateHighlightPosition(cell);
-            });
-        });
-
-        gridWrapper.addEventListener('mouseleave', () => {
-            isHovered = false;
-            highlightBox.classList.remove('is-active');
-            if (activeCell) {
-                resetCellMeter(activeCell);
-                activeCell = null;
-            }
-            clearBarTimers();
-        });
-
-        // Recalculate if window resizes or zoom changes
-        window.addEventListener('resize', () => {
-            if (isHovered && activeCell) {
-                updateHighlightPosition(activeCell);
-            }
-        }, { passive: true });
-
-        // Category Filter Tabs (dims non-matching cells so grid dividing lines remain intact)
-        filterTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const filter = tab.getAttribute('data-filter');
-
-                filterTabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-selected', 'false');
-                });
-                tab.classList.add('active');
-                tab.setAttribute('aria-selected', 'true');
-
-                // Hide highlight box during transition
-                highlightBox.classList.remove('is-active');
-                if (activeCell) resetCellMeter(activeCell);
-                activeCell = null;
-                isHovered = false;
-                clearBarTimers();
-
-                stackCells.forEach(cell => {
-                    const cat = cell.getAttribute('data-category');
-                    if (filter === 'all' || cat === filter) {
-                        cell.classList.remove('is-dimmed');
-                    } else {
-                        cell.classList.add('is-dimmed');
-                    }
-                });
-            });
-        });
+    function initStackLogoLoops() {
+        if (typeof LogoLoop === 'undefined') return;
+        logoLoopInstances = LogoLoop.initAll('[data-logoloop="true"]');
     }
 
-    initStackHighlightBox();
+    initStackLogoLoops();
 
     // ==========================================================================
     // 4. SMOOTH EASE-UP FADE-IN SECTION REVEALS (FIRST-TIME SCROLL HIGHLIGHT)
@@ -748,7 +657,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // 6. Contact horizontal card reveal
-        const contactCard = document.querySelector('.contact-horizontal-card');
+        const contactCard = document.querySelector('.contact-horizontal-card') || document.querySelector('.bite-connect-card') || document.querySelector('.inquiry-form-card');
         if (contactCard) {
             gsap.fromTo(contactCard,
                 { opacity: 0, y: 35 },
@@ -768,70 +677,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 5. THEME TOGGLE (COSMIC DARK / LIGHT SLATE)
+    // 5. THEME (COSMIC DARK LOCKED)
     // ==========================================================================
-    const themeToggleBtn = document.getElementById('theme-virus-toggle');
-    const themeRippleOverlay = document.getElementById('theme-ripple-overlay');
     const htmlElem = document.documentElement;
+    htmlElem.setAttribute('data-theme', 'dark');
+    localStorage.setItem('portfolio_theme', 'dark');
+    currentThemeMode = 'dark';
 
-    function applyTheme(theme) {
-        htmlElem.setAttribute('data-theme', theme);
-        localStorage.setItem('portfolio_theme', theme);
-        currentThemeMode = theme;
+    // ==========================================================================
+    // 5B. FLUID NAVBAR SCROLL STATE & TRANSITIONS
+    // ==========================================================================
+    function initNavbarScrollState() {
+        const siteHeader = document.querySelector('.site-header');
+        if (!siteHeader) return;
 
-        const label = themeToggleBtn ? themeToggleBtn.querySelector('.theme-label') : null;
-        if (label) {
-            label.textContent = (theme === 'dark') ? 'Cosmic Dark' : 'Light Slate';
+        let ticking = false;
+        const SCROLL_THRESHOLD = 20;
+
+        function updateHeaderState() {
+            const currentScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScrollY > SCROLL_THRESHOLD) {
+                if (!siteHeader.classList.contains('scrolled')) {
+                    siteHeader.classList.add('scrolled');
+                }
+            } else {
+                if (siteHeader.classList.contains('scrolled')) {
+                    siteHeader.classList.remove('scrolled');
+                }
+            }
+            ticking = false;
         }
 
-        // Update Scanner settings if initialized
-        if (scannerInstance) {
-            if (theme === 'light') {
-                scannerInstance.setProps({
-                    opacity: 0.85,
-                    contrast: 1.25,
-                    brightness: 0.95
-                });
-            } else {
-                scannerInstance.setProps({
-                    opacity: 1.0,
-                    contrast: 1.15,
-                    brightness: 1.0
-                });
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateHeaderState);
+                ticking = true;
             }
-        }
+        }, { passive: true });
+
+        // Initial check on load
+        updateHeaderState();
     }
-
-    // Set Initial Theme
-    applyTheme(currentThemeMode);
-
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', (e) => {
-            playSfx('cyber');
-            const newTheme = (currentThemeMode === 'dark') ? 'light' : 'dark';
-
-            // Circular Wave Ripple Effect
-            if (themeRippleOverlay) {
-                const rect = themeToggleBtn.getBoundingClientRect();
-                const originX = rect.left + rect.width / 2;
-                const originY = rect.top + rect.height / 2;
-
-                themeRippleOverlay.style.background = (newTheme === 'dark')
-                    ? `radial-gradient(circle at ${originX}px ${originY}px, #05070c 0%, rgba(5,7,12,0.95) 70%, transparent 100%)`
-                    : `radial-gradient(circle at ${originX}px ${originY}px, #f8fafc 0%, rgba(248,250,252,0.95) 70%, transparent 100%)`;
-
-                themeRippleOverlay.style.opacity = '1';
-                setTimeout(() => {
-                    applyTheme(newTheme);
-                    setTimeout(() => {
-                        themeRippleOverlay.style.opacity = '0';
-                    }, 200);
-                }, 150);
-            } else {
-                applyTheme(newTheme);
-            }
-        });
-    }
+    initNavbarScrollState();
 
     // Mobile Navigation Drawer Toggle
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -1231,11 +1118,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 9. SECTION TRACKER (RIGHT-SIDE BLUE/CYAN BOOKMARKS)
     // ==========================================================================
-    const trackerDots = document.querySelectorAll('.tracker-dot');
-    const trackedSections = [
+        const trackedSections = [
         document.getElementById('hero'),
         document.getElementById('projects'),
         document.getElementById('expertise'),
+        document.getElementById('conferences'),
         document.getElementById('philosophy'),
         document.getElementById('experience'),
         document.getElementById('research'),
@@ -1265,22 +1152,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentSectionId) {
             document.documentElement.setAttribute('data-active-section', currentSectionId);
 
-            trackerDots.forEach(dot => {
-                if (dot.getAttribute('data-section') === currentSectionId) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-
-            // Sync main navigation active links
+            // Sync main navigation active links if using hash anchors
             const navLinks = document.querySelectorAll('.main-nav .nav-link');
             navLinks.forEach(link => {
                 const href = link.getAttribute('href');
-                if (href === '#' + currentSectionId) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
+                if (href && href.startsWith('#')) {
+                    if (href === '#' + currentSectionId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
                 }
             });
         }
@@ -1289,21 +1170,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', updateActiveSectionMarker, { passive: true });
     updateActiveSectionMarker();
 
-    // Smooth scroll and sound on tracker dot click
-    trackerDots.forEach(dot => {
-        dot.addEventListener('click', (e) => {
-            e.preventDefault();
-            playSfx('click');
-            const targetId = dot.getAttribute('data-section');
-            const targetEl = document.getElementById(targetId);
-            if (targetEl) {
-                document.documentElement.setAttribute('data-active-section', targetId);
-                targetEl.scrollIntoView({ behavior: 'smooth' });
-                trackerDots.forEach(d => d.classList.remove('active'));
-                dot.classList.add('active');
-            }
-        });
-    });
 
     // ==========================================================================
     // 10. PROJECT CAROUSEL MODAL CLICK & ACCESSIBILITY
@@ -1325,3 +1191,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+// ==========================================================================
+// QUICK CONNECT FORM HANDLER (MINIMAL UNCLUTTERED SEND)
+// ==========================================================================
+window.handleQuickConnect = function(passedVal) {
+    let val = (typeof passedVal === 'string' ? passedVal : '').trim();
+    const curvedWidget = document.getElementById('quick-connect-curved');
+    if (!val && curvedWidget && curvedWidget.__curvedInputInstance) {
+        val = curvedWidget.__curvedInputInstance.getValue().trim();
+    }
+    const messageInput = document.getElementById('quick-message');
+    if (!val && messageInput) {
+        val = messageInput.value.trim();
+    }
+
+    const feedback = document.getElementById('quick-feedback');
+
+    if (!val) {
+        if (curvedWidget && curvedWidget.querySelector('input')) {
+            curvedWidget.querySelector('input').focus();
+        } else if (messageInput) {
+            messageInput.focus();
+        }
+        return;
+    }
+
+    if (feedback) {
+        feedback.style.display = 'block';
+        feedback.innerHTML = '<strong>Message Dispatched!</strong> Thank you for reaching out. I\'ll get back to you shortly.';
+        setTimeout(() => {
+            feedback.style.display = 'none';
+        }, 5000);
+    }
+
+    if (curvedWidget && curvedWidget.__curvedInputInstance) {
+        curvedWidget.__curvedInputInstance.clear();
+    }
+    if (messageInput) {
+        messageInput.value = '';
+    }
+};

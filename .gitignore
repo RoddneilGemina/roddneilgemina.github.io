@@ -3,3 +3,12 @@ images/FusionRushDemo.mp4
 
 # Track web-optimized compressed demo video
 !images/fusion-rush-demo.mp4
+
+# Dependencies and scratch
+node_modules/
+scratch/
+
+# IDE and local configs
+.vscode/
+.cursor/
+.agents/
