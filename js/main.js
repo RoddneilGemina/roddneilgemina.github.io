@@ -24,12 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 1B. FULLSCREEN CINEMATIC INTRO SEQUENCE CONTROLLER
+    // 1B. HERO DIRECT DISPLAY INITIALIZER (Intro Sequence Removed)
     // ==========================================================================
     const introCurtain = document.getElementById('intro-curtain-bg');
+    if (introCurtain) {
+        introCurtain.style.display = 'none';
+        introCurtain.remove();
+    }
+    document.body.classList.remove('intro-active');
+    document.body.classList.add('hero-entered');
+
     const heroNameContainer = document.getElementById('hero-name-container');
-    const heroNameWrapper = document.getElementById('hero-name-wrapper');
-    const heroNameAura = document.getElementById('hero-name-aura');
     const heroMetallicGlint = document.getElementById('hero-metallic-glint');
     const heroMainRole = document.getElementById('hero-main-role');
     const rolePart1 = document.getElementById('role-part1');
@@ -44,169 +49,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const portraitLineEmitter = document.getElementById('portrait-line-emitter');
     const portraitRoleDrawer = document.getElementById('portrait-role-drawer');
 
-    let introCompleted = false;
-
-    if (introCurtain && heroNameContainer && heroMainRole) {
-        document.body.classList.add('intro-active');
-        window.scrollTo(0, 0);
-
-        // Pre-fill text momentarily to compute precise rendered bounding box dimensions
-        const part1Text = 'Full-Stack Developer';
-        const part2Text = 'Software Engineer';
-        if (rolePart1) rolePart1.textContent = part1Text;
-        if (rolePart1Glow) rolePart1Glow.textContent = part1Text;
-        if (roleSep) roleSep.style.display = 'inline';
-        if (roleSepGlow) roleSepGlow.style.display = 'inline';
-        if (roleAccent) roleAccent.textContent = part2Text;
-        if (roleAccentGlow) roleAccentGlow.textContent = part2Text;
-
-        const viewportCenterX = window.innerWidth / 2;
-        const viewportCenterY = window.innerHeight / 2;
-
-        const nameTargetEl = heroNameWrapper || heroNameContainer;
-        const nameRect = nameTargetEl.getBoundingClientRect();
-        const roleRect = heroMainRole.getBoundingClientRect();
-
-        const nameTargetX = Math.round(viewportCenterX - (nameRect.left + nameRect.width / 2));
-        const nameTargetY = Math.round((viewportCenterY - 32) - (nameRect.top + nameRect.height / 2));
-
-        const roleTargetX = Math.round(viewportCenterX - (roleRect.left + roleRect.width / 2));
-        const roleTargetY = Math.round((viewportCenterY + 30) - (roleRect.top + roleRect.height / 2));
-
-        // Clear text before starting cinematic entrance
-        if (rolePart1) rolePart1.textContent = '';
-        if (rolePart1Glow) rolePart1Glow.textContent = '';
-        if (roleSep) roleSep.style.display = 'none';
-        if (roleSepGlow) roleSepGlow.style.display = 'none';
-        if (roleAccent) roleAccent.textContent = '';
-        if (roleAccentGlow) roleAccentGlow.textContent = '';
-
-        // Position initial elements in the center of pitch-black screen
-        heroNameContainer.style.zIndex = '9998';
-        heroMainRole.style.zIndex = '9998';
-        heroNameContainer.style.transformOrigin = 'center center';
-        heroNameContainer.style.transform = `translate3d(${nameTargetX}px, ${nameTargetY}px, 0) scale(0.88)`;
-        heroMainRole.style.transform = `translate3d(${roleTargetX}px, ${roleTargetY}px, 0)`;
-        heroNameContainer.style.opacity = '0';
-        heroMainRole.style.opacity = '0';
-
-        // 1. Pitch-black void: Name fades in and grows smoothly
-        setTimeout(() => {
-            if (introCompleted) return;
-            heroNameContainer.style.transition = 'opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1), transform 1.25s cubic-bezier(0.16, 1, 0.3, 1)';
-            heroNameContainer.style.opacity = '1';
-            heroNameContainer.style.transform = `translate3d(${nameTargetX}px, ${nameTargetY}px, 0) scale(1)`;
-            if (heroNameAura) heroNameAura.classList.add('active');
-
-            // 2. Metallic glint and typing of role in tandem
-            setTimeout(() => {
-                if (introCompleted) return;
-
-                // Specular reflection glint sliding across typography
-                if (heroMetallicGlint) heroMetallicGlint.classList.add('sliding');
-
-                // Simultaneously begin typing role
-                heroMainRole.style.transition = 'opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
-                heroMainRole.style.opacity = '1';
-
-                let i = 0;
-                function typePart1() {
-                    if (introCompleted) return;
-                    if (rolePart1 && i < part1Text.length) {
-                        rolePart1.textContent += part1Text[i];
-                        if (rolePart1Glow) rolePart1Glow.textContent = rolePart1.textContent;
-                        i++;
-                        setTimeout(typePart1, 26);
-                    } else {
-                        if (roleSep) roleSep.style.display = 'inline';
-                        if (roleSepGlow) roleSepGlow.style.display = 'inline';
-                        let j = 0;
-                        setTimeout(function typePart2() {
-                            if (introCompleted) return;
-                            if (roleAccent && j < part2Text.length) {
-                                roleAccent.textContent += part2Text[j];
-                                if (roleAccentGlow) roleAccentGlow.textContent = roleAccent.textContent;
-                                j++;
-                                setTimeout(typePart2, 26);
-                            } else {
-                                // Typing complete: hide cursor smoothly
-                                if (roleCursor) {
-                                    roleCursor.style.opacity = '0';
-                                    setTimeout(() => { if (roleCursor) roleCursor.style.display = 'none'; }, 280);
-                                }
-
-                                // 3. Pause for reading, then smoothly glide to resting position on the LEFT side
-                                setTimeout(() => {
-                                    startMoveToLeftColumn();
-                                }, 550);
-                            }
-                        }, 70);
-                    }
-                }
-
-                typePart1();
-            }, 450);
-        }, 320);
-
-        function startMoveToLeftColumn() {
-            if (introCompleted) return;
-
-            // Smooth glide from center to left column resting position
-            const glideDuration = 'transform 1.35s cubic-bezier(0.16, 1, 0.3, 1)';
-            heroNameContainer.style.transition = glideDuration;
-            heroMainRole.style.transition = glideDuration;
-            heroNameContainer.style.transform = 'translate3d(0, 0, 0) scale(1)';
-            heroMainRole.style.transform = 'translate3d(0, 0, 0)';
-
-            // Curtain dissolves revealing background
-            if (introCurtain) introCurtain.style.opacity = '0';
-
-            // Softly fade backlight aura
-            if (heroNameAura) {
-                heroNameAura.style.transition = 'opacity 1.4s ease';
-                heroNameAura.style.opacity = '0';
-            }
-
-            // Stagger in surrounding hero elements on the left & right
-            document.body.classList.add('hero-entered');
-            if (heroContent) heroContent.classList.add('hero-entered');
-            if (heroSection) heroSection.classList.add('revealed');
-
-            // 4. Picture's OWN INTRO: As left side settles, laser line draws across picture and role unfolds!
-            setTimeout(() => {
-                if (portraitLineEmitter) portraitLineEmitter.classList.add('line-ignited');
-                setTimeout(() => {
-                    if (portraitRoleDrawer) portraitRoleDrawer.classList.add('drawer-open');
-                }, 350);
-            }, 600);
-
-            // Clean up intro transition styles
-            setTimeout(() => {
-                introCompleted = true;
-                heroNameContainer.style.transition = '';
-                heroMainRole.style.transition = '';
-                heroNameContainer.style.transform = '';
-                heroMainRole.style.transform = '';
-                heroNameContainer.style.zIndex = '';
-                heroMainRole.style.zIndex = '';
-                if (heroMetallicGlint) heroMetallicGlint.style.display = 'none';
-                document.body.classList.remove('intro-active');
-                if (introCurtain) introCurtain.style.display = 'none';
-            }, 1450);
-        }
-    } else {
-        if (rolePart1) rolePart1.textContent = 'Full-Stack Developer';
-        if (rolePart1Glow) rolePart1Glow.textContent = 'Full-Stack Developer';
-        if (roleSep) roleSep.style.display = 'inline';
-        if (roleSepGlow) roleSepGlow.style.display = 'inline';
-        if (roleAccent) roleAccent.textContent = 'Software Engineer';
-        if (roleAccentGlow) roleAccentGlow.textContent = 'Software Engineer';
-        if (roleCursor) roleCursor.style.display = 'none';
-        if (portraitLineEmitter) portraitLineEmitter.classList.add('line-ignited');
-        if (portraitRoleDrawer) portraitRoleDrawer.classList.add('drawer-open');
-        if (heroSection) heroSection.classList.add('revealed');
-        if (heroContent) heroContent.classList.add('hero-entered');
+    if (rolePart1) rolePart1.textContent = 'Full-Stack Developer';
+    if (rolePart1Glow) rolePart1Glow.textContent = 'Full-Stack Developer';
+    if (roleSep) roleSep.style.display = 'inline';
+    if (roleSepGlow) roleSepGlow.style.display = 'inline';
+    if (roleAccent) roleAccent.textContent = 'Software Engineer';
+    if (roleAccentGlow) roleAccentGlow.textContent = 'Software Engineer';
+    if (roleCursor) roleCursor.style.display = 'none';
+    if (heroMetallicGlint) heroMetallicGlint.style.display = 'none';
+    if (portraitLineEmitter) portraitLineEmitter.classList.add('line-ignited');
+    if (portraitRoleDrawer) portraitRoleDrawer.classList.add('drawer-open');
+    if (heroSection) heroSection.classList.add('revealed');
+    if (heroContent) heroContent.classList.add('hero-entered');
+    if (heroNameContainer) {
+        heroNameContainer.style.opacity = '1';
+        heroNameContainer.style.transform = 'none';
+        heroNameContainer.style.zIndex = '';
     }
+    if (heroMainRole) {
+        heroMainRole.style.opacity = '1';
+        heroMainRole.style.transform = 'none';
+        heroMainRole.style.zIndex = '';
+    }
+
 
     // ==========================================================================
     // 1C. HERO PORTRAIT 3D MOUSE TILT CONTROLLER
@@ -413,6 +278,52 @@ document.addEventListener('DOMContentLoaded', () => {
     initDotFieldOverlay();
 
     // ==========================================================================
+    // 2C. REACT BITS GRADIENT ASCII BACKGROUND (TECH PROFICIENCY SECTION)
+    // ==========================================================================
+    let techGradientASCIIInstance = null;
+
+    function initTechGradientASCII() {
+        const asciiContainer = document.getElementById('tech-gradient-ascii');
+        if (!asciiContainer || typeof GradientASCII === 'undefined') return;
+
+        // If already initialized by auto-init, store reference
+        if (asciiContainer._gradientASCIIInstance) {
+            techGradientASCIIInstance = asciiContainer._gradientASCIIInstance;
+            return;
+        }
+
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
+        techGradientASCIIInstance = GradientASCII.init(asciiContainer, {
+            colors: ['#1e3fd8', '#f6f8ff', '#a5d8ff', '#38bdf8'],
+            shape: 'horizon',
+            characters: ' =+xX0S8#@',
+            cellSize: 18,
+            density: 0.8,
+            glyphOpacity: 0.85,
+            glow: 0.25,
+            depthOfField: 0,
+            flicker: 0.2,
+            softness: 0.5,
+            scale: 1,
+            flow: 0.5,
+            speed: 1,
+            gradientOpacity: 0.85,
+            grain: 0.08,
+            variation: 0,
+            mouseInteraction: true,
+            scrambleRadius: 0.1,
+            clickEffect: 'wave',
+            intro: true,
+            lightMode: isLight,
+            fontFamily: '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
+        });
+        asciiContainer._gradientASCIIInstance = techGradientASCIIInstance;
+    }
+
+    initTechGradientASCII();
+
+    // ==========================================================================
     // 3. CYBER GLITCH-DECIPHER TYPING EFFECT ON SECTION HEADERS
     // ==========================================================================
     const GLITCH_GLYPHS = '0123456789ABCDEF$#@%&*+-/<>~!?';
@@ -516,165 +427,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initStackLogoLoops();
 
     // ==========================================================================
-    // 4. SMOOTH EASE-UP FADE-IN SECTION REVEALS (FIRST-TIME SCROLL HIGHLIGHT)
+    // 4. SECTION VISIBILITY (INTRO ANIMATIONS REMOVED - FULLY VISIBLE ON LOAD)
     // ==========================================================================
-    const revealSections = document.querySelectorAll('.reveal-on-scroll');
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const section = entry.target;
-                section.classList.add('revealed');
-
-                // Trigger subtle high-tech decipher audio
-                playSfx('decipher');
-
-                // Trigger cyber glitch-decipher animation on section header if present
-                const glitchHeader = section.querySelector('.cyber-glitch-text');
-                if (glitchHeader) {
-                    const text = glitchHeader.getAttribute('data-text') || glitchHeader.textContent.trim();
-                    glitchDecipher(glitchHeader, text, 450);
-                }
-
-                // First time only - unobserve so the entrance transition highlights once
-                observer.unobserve(section);
-            }
-        });
-    }, {
-        threshold: 0.08,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
+    const revealSections = document.querySelectorAll(".reveal-on-scroll");
     revealSections.forEach(sec => {
-        // Hero is handled via the intro sequence
-        if (sec.id !== 'hero') {
-            revealObserver.observe(sec);
-        }
+        sec.classList.add("revealed");
     });
-
-    // ==========================================================================
-    // 4B. GSAP SCROLLTRIGGER REFINED EDITORIAL MOTION ENGINE
-    // ==========================================================================
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-
-        // 1. Editorial rise for section headers
-        gsap.utils.toArray('.section-header').forEach(header => {
-            gsap.fromTo(header,
-                { opacity: 0, y: 35 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.85,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: header,
-                        start: 'top 88%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            );
-        });
-
-        // 2. Tech stack matrix staggered grid reveal
-        const stackGrid = document.getElementById('stack-matrix-grid');
-        if (stackGrid) {
-            gsap.fromTo('.stack-square-cell',
-                { opacity: 0, y: 18 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.5,
-                    stagger: {
-                        amount: 0.45,
-                        grid: 'auto',
-                        from: 'start'
-                    },
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: stackGrid,
-                        start: 'top 82%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            );
-        }
-
-        // 3. Staggered reveal for Philosophy Bento Cards
-        gsap.utils.toArray('.philosophy-bento-card').forEach((card, idx) => {
-            gsap.fromTo(card,
-                { opacity: 0, y: 30 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    delay: idx * 0.08,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 86%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            );
-        });
-
-        // 4. Staggered reveal for Experience Timeline Items
-        gsap.utils.toArray('.timeline-card').forEach((card, idx) => {
-            gsap.fromTo(card,
-                { opacity: 0, x: idx % 2 === 0 ? -24 : 24 },
-                {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.8,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            );
-        });
-
-        // 5. Staggered reveal for Research & Publication cards
-        gsap.utils.toArray('.research-card').forEach((card, idx) => {
-            gsap.fromTo(card,
-                { opacity: 0, y: 30 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    delay: idx * 0.1,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 86%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            );
-        });
-
-        // 6. Contact horizontal card reveal
-        const contactCard = document.querySelector('.contact-horizontal-card') || document.querySelector('.bite-connect-card') || document.querySelector('.inquiry-form-card');
-        if (contactCard) {
-            gsap.fromTo(contactCard,
-                { opacity: 0, y: 35 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.85,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: contactCard,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            );
-        }
-    }
 
     // ==========================================================================
     // 5. THEME (COSMIC DARK LOCKED)

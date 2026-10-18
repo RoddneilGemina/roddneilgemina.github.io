@@ -5,7 +5,7 @@
     <title>Contact &amp; Inquiries | Roddneil B. Gemina</title>
     <meta name="description" content="Get in touch with Roddneil B. Gemina. In-depth contact terminal for software engineering roles, full-stack contracts, SRE opportunities, and research collaborations.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/contact.html">
-    <link rel="stylesheet" href="css/styles.css?v=15.0">
+    <link rel="stylesheet" href="css/styles.css?v=17.0">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,10 +14,12 @@
     
     <!-- GSAP & Animation Engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- React Bits Specular Button -->
     <script src="js/specular-button.js"></script>
+
+    <!-- React Bits SpotlightCard -->
+    <script src="js/spotlight-card.js"></script>
 
     <!-- React Bits Border Glow -->
     <script src="js/border-glow.js"></script>
@@ -27,6 +29,7 @@
 
     <!-- React Bits GradientText -->
     <script src="js/gradient-text.js"></script>
+    <script src="js/variable-proximity.js"></script>
 </head>
 <body>
 
@@ -53,9 +56,9 @@
             <!-- FLOATING PILL NAV (CENTER) -->
             <nav class="main-nav-pill" id="main-nav">
                 <ul class="nav-pill-list">
-                    <li><a href="index.html" class="nav-pill-item ">Home</a></li>
-                    <li><a href="projects.html" class="nav-pill-item ">Projects</a></li>
-                    <li><a href="about.html" class="nav-pill-item ">About</a></li>
+                    <li><a href="index.html" class="nav-pill-item">Home</a></li>
+                    <li><a href="projects.html" class="nav-pill-item">Projects</a></li>
+                    <li><a href="about.html" class="nav-pill-item">About</a></li>
                     <li><a href="contact.html" class="nav-pill-item active">Contact</a></li>
                 </ul>
             </nav>
@@ -81,8 +84,7 @@
         <!-- PAGE HERO -->
         <section class="page-hero">
             <div class="container page-hero-inner">
-                <span class="page-badge">// DIRECT COMMUNICATIONS TERMINAL</span>
-                <h1 class="page-hero-title">Let's Connect &amp; Collaborate</h1>
+                <h1 class="page-hero-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 600, 'opsz' 14" data-to-font="'wght' 950, 'opsz' 40" data-radius="140" data-falloff="linear">Let's Connect &amp; Collaborate</span></h1>
                 <p class="page-hero-lead">
                     Open for Software Engineer, Full-Stack Developer, and Site Reliability Engineer (SRE) positions worldwide. Whether you have an open role, an architecture inquiry, or a research proposal, transmit a message below.
                 </p>
@@ -100,10 +102,16 @@
                 <div class="contact-in-depth-grid">
 
                     <!-- LEFT: COMPREHENSIVE INQUIRY FORM -->
-                    <div class="inquiry-form-card glass-card rgb-border">
+                    <div class="inquiry-form-card glass-card spotlight-card"
+                         data-spotlight-card="true"
+                         data-spotlight-color="#00f0ff"
+                         data-intensity="0.18"
+                         data-spotlight-size="380"
+                         data-border-glow="0.8"
+                         data-proximity="140"
+                         data-theme="dark">
                         <div class="inquiry-form-header">
-                            <span class="sleek-badge" style="margin-bottom: 8px;">Direct Terminal</span>
-                            <h2 class="inquiry-form-title">Send a Formal Engineering Inquiry</h2>
+                            <h2 class="inquiry-form-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 550, 'opsz' 12" data-to-font="'wght' 900, 'opsz' 36" data-radius="130" data-falloff="linear">Send a Formal Engineering Inquiry</span></h2>
                             <p class="inquiry-form-subtitle">Fill in the fields below. Messages are transmitted directly to my personal inbox.</p>
                         </div>
 
@@ -171,12 +179,7 @@
                     <div class="terminal-hud-column">
 
                         <!-- LIVE TELEMETRY HUD -->
-                        <div class="terminal-hud-card glass-card rgb-border">
-                            <div class="contact-telemetry-badge">
-                                <span class="telemetry-live-dot"></span>
-                                <span>STATUS: AVAILABLE FOR IMMEDIATE HIRE</span>
-                            </div>
-
+                        <div class="terminal-hud-card glass-card">
                             <div class="hud-clock-row">
                                 <div>
                                     <span style="display:block;font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);text-transform:uppercase;">Local Time (Cebu City, PH)</span>
@@ -191,8 +194,8 @@
                         </div>
 
                         <!-- DIRECT CHANNELS -->
-                        <div class="terminal-hud-card glass-card rgb-border">
-                            <span class="page-badge">// VERIFIED CHANNELS</span>
+                        <div class="terminal-hud-card glass-card">
+                            
                             <h3 style="font-family:var(--font-heading);font-size:1.15rem;font-weight:700;color:#ffffff;margin-bottom:16px;">Direct Point of Contact</h3>
 
                             <div class="bite-channel-list">
@@ -219,8 +222,8 @@
                         </div>
 
                         <!-- SOCIAL & PROFESSIONAL PROFILES -->
-                        <div class="terminal-hud-card glass-card rgb-border">
-                            <span class="page-badge">// NETWORKS</span>
+                        <div class="terminal-hud-card glass-card">
+                            
                             <h3 style="font-family:var(--font-heading);font-size:1.15rem;font-weight:700;color:#ffffff;margin-bottom:14px;">Professional Networks</h3>
 
                             <div style="display:flex;flex-direction:column;gap:10px;">
@@ -247,20 +250,87 @@
 
     </main>
 
-    <!-- FOOTER -->
+        <!-- FOOTER -->
+    <!-- REDESIGNED EXPANDED FOOTER -->
     <footer class="site-footer">
-        <div class="container footer-inner">
-            <div class="footer-left">
-                <span class="footer-brand">RODDNEIL B. GEMINA</span>
-                <span class="footer-copy">© <span id="current-year">2026</span> Roddneil B. Gemina. All rights reserved.</span>
+        <div class="container footer-container">
+            <div class="footer-top-grid">
+                
+                <!-- COL 1: BRAND LOGO & SHORT DESCRIPTION -->
+                <div class="footer-col footer-col-brand">
+                    <a href="index.html" class="brand-badge-link" aria-label="Roddneil Gemina Home">
+                        <div class="brand-badge-icon">
+                            <span class="brand-monogram">RG</span>
+                        </div>
+                        <div class="brand-badge-info">
+                            <span class="brand-badge-name">Roddneil Gemina</span>
+                            <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
+                        </div>
+                    </a>
+                    <p class="footer-desc">
+                        Engineering distributed systems, AI tutoring logic engines, and high-performance interactive interfaces with strict architectural taste.
+                    </p>
+                </div>
+
+                <!-- COL 2: VERTICAL NAVIGATION -->
+                <div class="footer-col footer-col-nav">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-nav-list">
+                        <li><a href="index.html" class="footer-nav-link">Home</a></li>
+                        <li><a href="projects.html" class="footer-nav-link">Projects &amp; Architectures</a></li>
+                        <li><a href="about.html" class="footer-nav-link">About &amp; Accolades</a></li>
+                        <li><a href="contact.html" class="footer-nav-link">Direct Inquiry</a></li>
+                    </ul>
+                </div>
+
+                <!-- COL 3: DIRECT CONNECT LINKS -->
+                <div class="footer-col footer-col-connect">
+                    <h4 class="footer-heading">Connect</h4>
+                    <div class="footer-connect-wrap">
+                        <a href="mailto:roddneilgemina@gmail.com" class="footer-connect-link footer-email-link">roddneilgemina@gmail.com</a>
+                        <div class="footer-social-svgs">
+                            <a href="https://github.com/RoddneilGemina" target="_blank" rel="noopener noreferrer" class="footer-svg-link" title="GitHub Profile" aria-label="GitHub Profile">
+                                <svg viewBox="0 0 24 24" class="footer-svg-icon" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/roddneil-gemina-20b423409" target="_blank" rel="noopener noreferrer" class="footer-svg-link" title="LinkedIn Profile" aria-label="LinkedIn Profile">
+                                <svg viewBox="0 0 24 24" class="footer-svg-icon" fill="currentColor" aria-hidden="true">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="footer-right">
-                <a href="#" class="back-to-top">Back to top ↑</a>
+
+            <!-- FOOTER DIVIDER -->
+            <div class="footer-bottom-divider"></div>
+
+            <!-- FOOTER BOTTOM: COPYRIGHT & WEBSITE STACK LIST -->
+            <div class="footer-bottom-row">
+                <div class="footer-copyright">
+                    <span>&copy; <span id="current-year">2026</span> <strong class="footer-name-bold">Roddneil B. Gemina</strong>. All rights reserved.</span>
+                </div>
+
+                <div class="footer-right-group">
+                    <div class="footer-tech-stack">
+                        <span class="stack-made-label">Built with</span>
+                        <span class="stack-tag">Vanilla JS</span>
+                        <span class="stack-tag">GSAP</span>
+                        <span class="stack-tag">WebGL</span>
+                        <span class="stack-tag">SVG</span>
+                        <span class="stack-tag">Cloudflare</span>
+                    </div>
+
+                    <a href="#main-content" class="footer-back-to-top" title="Back to top">Top &uarr;</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=17.0"></script>
     <script>
         // Live Clock for Cebu City, Philippines (UTC+8)
         function updateClock() {

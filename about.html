@@ -5,7 +5,7 @@
     <title>About | Roddneil B. Gemina - Experience, Education &amp; Accolades</title>
     <meta name="description" content="Biography, industry roles, freelance experience, educational distinctions, certifications, and research accolades of Roddneil B. Gemina, Software Engineer &amp; CS Scholar.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/about.html">
-    <link rel="stylesheet" href="css/styles.css?v=15.0">
+    <link rel="stylesheet" href="css/styles.css?v=17.0">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,10 +14,12 @@
     
     <!-- GSAP & Animation Engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- React Bits Specular Button -->
     <script src="js/specular-button.js"></script>
+
+    <!-- React Bits SpotlightCard -->
+    <script src="js/spotlight-card.js"></script>
 
     <!-- React Bits Border Glow -->
     <script src="js/border-glow.js"></script>
@@ -27,6 +29,7 @@
 
     <!-- React Bits GradientText -->
     <script src="js/gradient-text.js"></script>
+    <script src="js/variable-proximity.js"></script>
 </head>
 <body>
 
@@ -53,10 +56,10 @@
             <!-- FLOATING PILL NAV (CENTER) -->
             <nav class="main-nav-pill" id="main-nav">
                 <ul class="nav-pill-list">
-                    <li><a href="index.html" class="nav-pill-item ">Home</a></li>
-                    <li><a href="projects.html" class="nav-pill-item ">Projects</a></li>
+                    <li><a href="index.html" class="nav-pill-item">Home</a></li>
+                    <li><a href="projects.html" class="nav-pill-item">Projects</a></li>
                     <li><a href="about.html" class="nav-pill-item active">About</a></li>
-                    <li><a href="contact.html" class="nav-pill-item ">Contact</a></li>
+                    <li><a href="contact.html" class="nav-pill-item">Contact</a></li>
                 </ul>
             </nav>
 
@@ -78,31 +81,46 @@
 
     <main id="main-content">
 
-        <!-- PAGE HERO -->
-        <section class="page-hero">
-            <div class="container page-hero-inner">
-                <span class="page-badge">// BIOGRAPHY &amp; INDUSTRY TRACK RECORD</span>
-                <h1 class="page-hero-title">About Roddneil B. Gemina</h1>
-                <p class="page-hero-lead">
-                    Software engineer, computer science scholar, and site reliability engineering intern. Proven track record in cloud orchestration, full-stack application development, and peer-reviewed AI research.
-                </p>
-                <div class="page-stat-row">
-                    <span class="page-stat-chip"><strong>CIT-U</strong> Full CS Scholar</span>
-                    <span class="page-stat-chip"><strong>PSHS</strong> DOST Honors Scholar</span>
-                    <span class="page-stat-chip"><strong>PhilNITS FE</strong> Certified Engineer</span>
-                    <span class="page-stat-chip"><strong>AWS</strong> Cloud Foundations &amp; Architecting</span>
-                    <span class="page-stat-chip"><strong>TOPCIT</strong> Level 3 Practical Benchmark</span>
+        <!-- ABOUT MINI-HERO SECTION -->
+        <section class="about-hero-section">
+            <div class="container about-hero-container">
+                
+                <!-- LEFT CONTENT: BIG "HI I'M RODDNEIL GEMINA" -->
+                <div class="about-hero-content">
+                    <span class="about-hero-greeting">Hi, I'm</span>
+                    <h1 class="about-hero-name">
+                        <span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 650, 'opsz' 14" data-to-font="'wght' 950, 'opsz' 40" data-radius="140" data-falloff="linear">Roddneil Gemina</span>
+                    </h1>
+                    
+                    <p class="about-hero-lead">
+                        Software engineer, computer science scholar, and site reliability engineering intern. Proven track record in cloud orchestration, full-stack application development, and peer-reviewed AI research.
+                    </p>
+
+                    <div class="about-hero-stats">
+                        <span class="page-stat-chip"><strong>CIT-U</strong> Full CS Scholar</span>
+                        <span class="page-stat-chip"><strong>PSHS</strong> DOST Honors Scholar</span>
+                        <span class="page-stat-chip"><strong>PhilNITS FE</strong> Certified Engineer</span>
+                        <span class="page-stat-chip"><strong>AWS</strong> Cloud Foundations &amp; Architecting</span>
+                        <span class="page-stat-chip"><strong>TOPCIT</strong> Level 3 Practical Benchmark</span>
+                    </div>
+
                 </div>
+
+                <!-- RIGHT CONTENT: TALL EDITORIAL PORTRAIT -->
+                <div class="about-hero-figure">
+                    <div class="about-hero-figure-glow" aria-hidden="true"></div>
+                    <img src="images/roddneil.png" alt="Roddneil Gemina - Software Engineer &amp; CS Scholar" class="about-hero-portrait-img" width="731" height="965" loading="eager" fetchpriority="high">
+                </div>
+
             </div>
         </section>
 
         <!-- SECTION 1: INDUSTRY & FREELANCE EXPERIENCE -->
-        <section id="experience" class="section reveal-on-scroll">
+        <section id="experience" class="section">
             <div class="container">
                 <div class="section-header">
                     <div class="section-title-wrap">
-                        <span class="section-tech-tag">// 01. WORK HISTORY</span>
-                        <h2 class="section-title cyber-glitch-text" data-text="Industry & Freelance Experience">Industry &amp; Freelance Experience</h2>
+                        <h2 class="section-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 450, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Industry &amp; Freelance Experience</span></h2>
                     </div>
                     <div class="section-divider"></div>
                 </div>
@@ -117,7 +135,7 @@
                         </h3>
                         
                         <!-- ROLE 1: OPSWERKS SRE -->
-                        <div class="timeline-item glass-card rgb-border">
+                        <div class="timeline-item glass-card">
                             <div class="timeline-header">
                                 <h4 class="item-title">Site Reliability Engineer Intern</h4>
                                 <span class="sleek-badge">2026</span>
@@ -143,7 +161,7 @@
                         </div>
 
                         <!-- ROLE 2: DXFORM QA & FULL-STACK -->
-                        <div class="timeline-item glass-card rgb-border">
+                        <div class="timeline-item glass-card">
                             <div class="timeline-header">
                                 <h4 class="item-title">QA Analyst &amp; Full-Stack</h4>
                                 <span class="sleek-badge">2025</span>
@@ -176,7 +194,7 @@
                         </h3>
 
                         <!-- FREELANCE 1: REFERTOIRE -->
-                        <div class="timeline-item glass-card rgb-border">
+                        <div class="timeline-item glass-card">
                             <div class="timeline-header">
                                 <h4 class="item-title">Lead Full-Stack Engineer — Refertoire</h4>
                                 <span class="sleek-badge">2025</span>
@@ -200,7 +218,7 @@
                         </div>
 
                         <!-- FREELANCE 2: TAKEIT & BESPOKE APPS -->
-                        <div class="timeline-item glass-card rgb-border">
+                        <div class="timeline-item glass-card">
                             <div class="timeline-header">
                                 <h4 class="item-title">Full-Stack Contractor — TakeIt &amp; Commercial Portals</h4>
                                 <span class="sleek-badge">2023 — 2024</span>
@@ -221,21 +239,14 @@
                                 <span class="timeline-tech-pill">QR Validation</span>
                                 <span class="timeline-tech-pill">Cloudflare</span>
                             </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
         </section>
 
         <!-- SECTION 2: EDUCATIONAL BACKGROUND -->
-        <section id="education" class="section reveal-on-scroll">
+        <section id="education" class="section">
             <div class="container">
                 <div class="section-header">
                     <div class="section-title-wrap">
-                        <span class="section-tech-tag">// 02. ACADEMIA &amp; SCHOLARSHIP</span>
-                        <h2 class="section-title cyber-glitch-text" data-text="Educational Background">Educational Background &amp; Honors</h2>
+                        <h2 class="section-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 450, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Educational Background &amp; Honors</span></h2>
                     </div>
                     <div class="section-divider"></div>
                 </div>
@@ -243,7 +254,7 @@
                 <div class="timeline-layout">
                     
                     <!-- CIT-U -->
-                    <div class="timeline-item glass-card rgb-border">
+                    <div class="timeline-item glass-card">
                         <div class="timeline-header">
                             <h3 class="item-title">Bachelor of Science in Computer Science</h3>
                             <span class="sleek-badge">2022 — 2026</span>
@@ -269,7 +280,7 @@
                     </div>
 
                     <!-- PSHS -->
-                    <div class="timeline-item glass-card rgb-border">
+                    <div class="timeline-item glass-card">
                         <div class="timeline-header">
                             <h3 class="item-title">Specialized STEM Secondary Education</h3>
                             <span class="sleek-badge">2016 — 2022</span>
@@ -289,19 +300,15 @@
                             <span class="timeline-tech-pill">Advanced STEM</span>
                             <span class="timeline-tech-pill">Varsity Chess</span>
                         </div>
-                    </div>
-
-                </div>
             </div>
         </section>
 
         <!-- SECTION 3: CERTIFICATIONS & CREDENTIALS -->
-        <section id="certifications" class="section reveal-on-scroll">
+        <section id="certifications" class="section">
             <div class="container">
                 <div class="section-header">
                     <div class="section-title-wrap">
-                        <span class="section-tech-tag">// 03. CREDENTIALS</span>
-                        <h2 class="section-title cyber-glitch-text" data-text="Industry Certifications">Industry Certifications &amp; Accreditations</h2>
+                        <h2 class="section-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 450, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Industry Certifications &amp; Accreditations</span></h2>
                     </div>
                     <div class="section-divider"></div>
                 </div>
@@ -309,7 +316,7 @@
                 <div class="honors-grid">
                     
                     <!-- PHILNITS -->
-                    <div class="honor-award-card glass-card rgb-border">
+                    <div class="honor-award-card glass-card">
                         <div class="honor-card-content">
                             <div class="honor-header-row">
                                 <span class="honor-badge-pill honor-badge-first">National Engineering Standard</span>
@@ -327,7 +334,7 @@
                     </div>
 
                     <!-- AWS -->
-                    <div class="honor-award-card glass-card rgb-border">
+                    <div class="honor-award-card glass-card">
                         <div class="honor-card-content">
                             <div class="honor-header-row">
                                 <span class="honor-badge-pill honor-badge-first">Cloud Architecture</span>
@@ -345,7 +352,7 @@
                     </div>
 
                     <!-- TOPCIT -->
-                    <div class="honor-award-card glass-card rgb-border">
+                    <div class="honor-award-card glass-card">
                         <div class="honor-card-content">
                             <div class="honor-header-row">
                                 <span class="honor-badge-pill honor-badge-first">Global Competency Benchmark</span>
@@ -363,7 +370,7 @@
                     </div>
 
                     <!-- CODECHUM -->
-                    <div class="honor-award-card glass-card rgb-border">
+                    <div class="honor-award-card glass-card">
                         <div class="honor-card-content">
                             <div class="honor-header-row">
                                 <span class="honor-badge-pill honor-badge-first">Algorithms &amp; Data Structures</span>
@@ -378,19 +385,15 @@
                             <span>Algorithmic Complexity</span>
                             <span>CodeChum Examination</span>
                         </div>
-                    </div>
-
-                </div>
             </div>
         </section>
 
         <!-- SECTION 4: RESEARCH & ACCOLADES -->
-        <section id="research" class="section reveal-on-scroll">
+        <section id="research" class="section">
             <div class="container">
                 <div class="section-header">
                     <div class="section-title-wrap">
-                        <span class="section-tech-tag">// 04. RESEARCH &amp; CONFERENCES</span>
-                        <h2 class="section-title cyber-glitch-text" data-text="Scholarly Research & Accolades">Research Publications &amp; Accolades</h2>
+                        <h2 class="section-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 450, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Research Publications &amp; Accolades</span></h2>
                     </div>
                     <div class="section-divider"></div>
                 </div>
@@ -398,7 +401,7 @@
                 <div class="research-grid">
                     
                     <!-- ICETT -->
-                    <div class="research-card glass-card rgb-border">
+                    <div class="research-card glass-card">
                         <div class="research-card-content">
                             <div class="research-badge-row">
                                 <span class="sleek-badge research-scopus-pill">Scopus Indexed • ICETT '26</span>
@@ -427,7 +430,7 @@
                     </div>
 
                     <!-- PCSC -->
-                    <div class="research-card glass-card rgb-border">
+                    <div class="research-card glass-card">
                         <div class="research-card-content">
                             <div class="research-badge-row">
                                 <span class="sleek-badge research-pcsc-pill">PCSC 2026 Presenter • Davao City</span>
@@ -460,12 +463,11 @@
         </section>
 
         <!-- SECTION 5: ENGINEERING PHILOSOPHY -->
-        <section id="philosophy" class="section reveal-on-scroll">
+        <section id="philosophy" class="section">
             <div class="container">
                 <div class="section-header">
                     <div class="section-title-wrap">
-                        <span class="section-tech-tag">// 05. PRINCIPLES</span>
-                        <h2 class="section-title cyber-glitch-text" data-text="Engineering Philosophy">Engineering Philosophy</h2>
+                        <h2 class="section-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 450, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Engineering Philosophy</span></h2>
                     </div>
                     <div class="section-divider"></div>
                 </div>
@@ -473,11 +475,11 @@
                 <div class="philosophy-bento-grid">
                     
                     <!-- PILLAR 1 -->
-                    <div class="philo-card glass-card rgb-border philo-hero-card">
+                    <div class="philo-card glass-card philo-hero-card">
                         <div class="philo-watermark" aria-hidden="true">01</div>
                         <div class="philo-card-body">
                             <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">PILLAR // 01</span>
+                                <span class="philo-pillar-badge">PILLAR 01</span>
                                 <span class="philo-metric-pill">INP &lt; 50ms</span>
                             </div>
                             <h3 class="philo-title">Zero-Lag UX: Interaction Over Decoration</h3>
@@ -493,11 +495,11 @@
                     </div>
 
                     <!-- PILLAR 2 -->
-                    <div class="philo-card glass-card rgb-border philo-compact-card">
+                    <div class="philo-card glass-card philo-compact-card">
                         <div class="philo-watermark" aria-hidden="true">02</div>
                         <div class="philo-card-body">
                             <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">PILLAR // 02</span>
+                                <span class="philo-pillar-badge">PILLAR 02</span>
                                 <span class="philo-metric-pill">99.9% SLO</span>
                             </div>
                             <h3 class="philo-title">Cloud-Native Resilience</h3>
@@ -512,11 +514,11 @@
                     </div>
 
                     <!-- PILLAR 3 -->
-                    <div class="philo-card glass-card rgb-border philo-compact-card">
+                    <div class="philo-card glass-card philo-compact-card">
                         <div class="philo-watermark" aria-hidden="true">03</div>
                         <div class="philo-card-body">
                             <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">PILLAR // 03</span>
+                                <span class="philo-pillar-badge">PILLAR 03</span>
                                 <span class="philo-metric-pill">Defensive</span>
                             </div>
                             <h3 class="philo-title">Defensive Architecture</h3>
@@ -531,11 +533,11 @@
                     </div>
 
                     <!-- PILLAR 4 -->
-                    <div class="philo-card glass-card rgb-border philo-hero-card">
+                    <div class="philo-card glass-card philo-hero-card">
                         <div class="philo-watermark" aria-hidden="true">04</div>
                         <div class="philo-card-body">
                             <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">PILLAR // 04</span>
+                                <span class="philo-pillar-badge">PILLAR 04</span>
                                 <span class="philo-metric-pill">Empirical</span>
                             </div>
                             <h3 class="philo-title">Empirical Optimization</h3>
@@ -554,19 +556,18 @@
         </section>
 
         <!-- SECTION 6: LEADERSHIP & VOLUNTEERING -->
-        <section id="leadership" class="section reveal-on-scroll">
+        <section id="leadership" class="section">
             <div class="container">
                 <div class="section-header">
                     <div class="section-title-wrap">
-                        <span class="section-tech-tag">// 06. IMPACT</span>
-                        <h2 class="section-title cyber-glitch-text" data-text="Leadership & Community">Leadership &amp; Community Engagement</h2>
+                        <h2 class="section-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 450, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Leadership &amp; Community Engagement</span></h2>
                     </div>
                     <div class="section-divider"></div>
                 </div>
 
                 <div class="volunteering-grid">
                     
-                    <div class="volunteering-card glass-card rgb-border">
+                    <div class="volunteering-card glass-card">
                         <div class="volunteering-header">
                             <span class="sleek-badge">Collegiate Music Leadership</span>
                             <span class="volunteering-period">2024 — 2026</span>
@@ -582,7 +583,7 @@
                         </div>
                     </div>
 
-                    <div class="volunteering-card glass-card rgb-border">
+                    <div class="volunteering-card glass-card">
                         <div class="volunteering-header">
                             <span class="sleek-badge">Student Tech Leadership</span>
                             <span class="volunteering-period">2023 — 2025</span>
@@ -601,58 +602,108 @@
                 </div>
 
                 <!-- CTA -->
-                <div class="bite-connect-card" style="margin-top: 50px;">
-                    <div class="bite-connect-grid">
-                        <div>
-                            <span class="page-badge">// GET IN TOUCH</span>
-                            <h3 class="bite-connect-title">Let's discuss an engineering role or project</h3>
-                            <p class="bite-connect-desc">
-                                Actively evaluating Full-Stack Developer, Software Engineer, and Site Reliability Engineer (SRE) opportunities with immediate start availability.
-                            </p>
-                            <a href="contact.html" class="btn-hero-primary specular-button specular-button--md" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.3" data-specular-radius="8">
-                                <span>Go to In-Depth Contact Page &rarr;</span>
-                            </a>
-                        </div>
-                        <div class="bite-direct-panel">
-                            <div class="bite-channels-card">
-                                <div class="bite-channels-header">Quick Contact</div>
-                                <div class="bite-channel-list">
-                                    <div class="bite-channel-item">
-                                        <span>Email:</span>
-                                        <a href="mailto:roddneilgemina@gmail.com"><strong>roddneilgemina@gmail.com</strong></a>
-                                    </div>
-                                    <div class="bite-channel-item">
-                                        <span>Phone:</span>
-                                        <a href="tel:+639562413577"><strong>+63 956-241-3577</strong></a>
-                                    </div>
-                                    <div class="bite-channel-item">
-                                        <span>Location:</span>
-                                        <strong>Cebu City, Philippines</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bite-connect-card spotlight-card"
+                     data-spotlight-card="true"
+                     data-spotlight-color="#00f0ff"
+                     data-intensity="0.22"
+                     data-spotlight-size="360"
+                     data-border-glow="0.85"
+                     data-proximity="140"
+                     data-theme="dark"
+                     style="margin-top: 48px; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; padding: 2.75rem 2rem;">
+                    <h3 class="bite-connect-title" style="margin-bottom: 12px; font-size: clamp(1.6rem, 2.4vw, 2.1rem);">Let's discuss an engineering role or project</h3>
+                    <p class="bite-connect-desc" style="max-width: 540px; margin: 0 auto 26px; color: var(--text-secondary); line-height: 1.6;">
+                        Actively evaluating Full-Stack Developer, Software Engineer, and Site Reliability Engineer (SRE) opportunities with immediate start availability.
+                    </p>
+                    <a href="contact.html" class="btn-hero-primary specular-button specular-button--md" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.3" data-specular-radius="8">
+                        <span>Go to In-Depth Contact Page &rarr;</span>
+                    </a>
                 </div>
-
             </div>
         </section>
 
     </main>
 
-    <!-- FOOTER -->
+        <!-- FOOTER -->
+    <!-- REDESIGNED EXPANDED FOOTER -->
     <footer class="site-footer">
-        <div class="container footer-inner">
-            <div class="footer-left">
-                <span class="footer-brand">RODDNEIL B. GEMINA</span>
-                <span class="footer-copy">© <span id="current-year">2026</span> Roddneil B. Gemina. All rights reserved.</span>
+        <div class="container footer-container">
+            <div class="footer-top-grid">
+                
+                <!-- COL 1: BRAND LOGO & SHORT DESCRIPTION -->
+                <div class="footer-col footer-col-brand">
+                    <a href="index.html" class="brand-badge-link" aria-label="Roddneil Gemina Home">
+                        <div class="brand-badge-icon">
+                            <span class="brand-monogram">RG</span>
+                        </div>
+                        <div class="brand-badge-info">
+                            <span class="brand-badge-name">Roddneil Gemina</span>
+                            <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
+                        </div>
+                    </a>
+                    <p class="footer-desc">
+                        Engineering distributed systems, AI tutoring logic engines, and high-performance interactive interfaces with strict architectural taste.
+                    </p>
+                </div>
+
+                <!-- COL 2: VERTICAL NAVIGATION -->
+                <div class="footer-col footer-col-nav">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-nav-list">
+                        <li><a href="index.html" class="footer-nav-link">Home</a></li>
+                        <li><a href="projects.html" class="footer-nav-link">Projects &amp; Architectures</a></li>
+                        <li><a href="about.html" class="footer-nav-link">About &amp; Accolades</a></li>
+                        <li><a href="contact.html" class="footer-nav-link">Direct Inquiry</a></li>
+                    </ul>
+                </div>
+
+                <!-- COL 3: DIRECT CONNECT LINKS -->
+                <div class="footer-col footer-col-connect">
+                    <h4 class="footer-heading">Connect</h4>
+                    <div class="footer-connect-wrap">
+                        <a href="mailto:roddneilgemina@gmail.com" class="footer-connect-link footer-email-link">roddneilgemina@gmail.com</a>
+                        <div class="footer-social-svgs">
+                            <a href="https://github.com/RoddneilGemina" target="_blank" rel="noopener noreferrer" class="footer-svg-link" title="GitHub Profile" aria-label="GitHub Profile">
+                                <svg viewBox="0 0 24 24" class="footer-svg-icon" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/roddneil-gemina-20b423409" target="_blank" rel="noopener noreferrer" class="footer-svg-link" title="LinkedIn Profile" aria-label="LinkedIn Profile">
+                                <svg viewBox="0 0 24 24" class="footer-svg-icon" fill="currentColor" aria-hidden="true">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="footer-right">
-                <a href="#" class="back-to-top">Back to top ↑</a>
+
+            <!-- FOOTER DIVIDER -->
+            <div class="footer-bottom-divider"></div>
+
+            <!-- FOOTER BOTTOM: COPYRIGHT & WEBSITE STACK LIST -->
+            <div class="footer-bottom-row">
+                <div class="footer-copyright">
+                    <span>&copy; <span id="current-year">2026</span> <strong class="footer-name-bold">Roddneil B. Gemina</strong>. All rights reserved.</span>
+                </div>
+
+                <div class="footer-right-group">
+                    <div class="footer-tech-stack">
+                        <span class="stack-made-label">Built with</span>
+                        <span class="stack-tag">Vanilla JS</span>
+                        <span class="stack-tag">GSAP</span>
+                        <span class="stack-tag">WebGL</span>
+                        <span class="stack-tag">SVG</span>
+                        <span class="stack-tag">Cloudflare</span>
+                    </div>
+
+                    <a href="#main-content" class="footer-back-to-top" title="Back to top">Top &uarr;</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=17.0"></script>
 </body>
 </html>

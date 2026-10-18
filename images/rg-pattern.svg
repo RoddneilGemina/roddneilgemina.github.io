@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 84 84" fill="none">
+  <!-- Staggered 45-Degree Diagonal Grid RG Pattern -->
+  <text 
+    x="21" 
+    y="21" 
+    font-family="'Archivo', 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+    font-weight="900" 
+    font-size="23" 
+    fill="#ffffff" 
+    text-anchor="middle" 
+    dominant-baseline="central" 
+    letter-spacing="-0.03em"
+    transform="rotate(-25 21 21)">RG</text>
+  <text 
+    x="63" 
+    y="63" 
+    font-family="'Archivo', 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+    font-weight="900" 
+    font-size="23" 
+    fill="#ffffff" 
+    text-anchor="middle" 
+    dominant-baseline="central" 
+    letter-spacing="-0.03em"
+    transform="rotate(-25 63 63)">RG</text>
+</svg>

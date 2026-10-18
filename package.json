@@ -8,5 +8,9 @@
   },
   "devDependencies": {
     "wrangler": "^4.150.0"
+  },
+  "dependencies": {
+    "@hugeicons/core-free-icons": "^4.3.5",
+    "@hugeicons/react": "^1.1.10"
   }
 }

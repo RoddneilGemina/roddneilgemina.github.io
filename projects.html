@@ -5,7 +5,7 @@
     <title>Projects &amp; Architectures | Roddneil B. Gemina</title>
     <meta name="description" content="Comprehensive engineering portfolio of Roddneil B. Gemina. Production full-stack platforms, distributed systems, Scopus ICETT '26 and PCSC '26 AI research prototypes.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/projects.html">
-    <link rel="stylesheet" href="css/styles.css?v=15.0">
+    <link rel="stylesheet" href="css/styles.css?v=17.0">
     
     <!-- Google Fonts: Archivo (Display & Body) & Geist Mono (Technical Utility & Buttons) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,6 @@
     
     <!-- GSAP & Animation Engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- React Bits Specular Button (Physics-Based WebGL Lighting) -->
     <script src="js/specular-button.js"></script>
@@ -29,6 +28,9 @@
     <script src="js/gradient-text.js"></script>
     <!-- React Bits SpotlightCard (Interactive Dynamic Cursor & Border Light) -->
     <script src="js/spotlight-card.js"></script>
+    <script src="js/variable-proximity.js"></script>
+    <!-- React Bits CountUp (Physics-Based Animated Number Counter) -->
+    <script src="js/count-up.js"></script>
 </head>
 <body>
 
@@ -55,10 +57,10 @@
             <!-- FLOATING PILL NAV (CENTER) -->
             <nav class="main-nav-pill" id="main-nav">
                 <ul class="nav-pill-list">
-                    <li><a href="index.html" class="nav-pill-item ">Home</a></li>
+                    <li><a href="index.html" class="nav-pill-item">Home</a></li>
                     <li><a href="projects.html" class="nav-pill-item active">Projects</a></li>
-                    <li><a href="about.html" class="nav-pill-item ">About</a></li>
-                    <li><a href="contact.html" class="nav-pill-item ">Contact</a></li>
+                    <li><a href="about.html" class="nav-pill-item">About</a></li>
+                    <li><a href="contact.html" class="nav-pill-item">Contact</a></li>
                 </ul>
             </nav>
 
@@ -83,16 +85,15 @@
         <!-- PAGE HERO -->
         <section class="page-hero">
             <div class="container page-hero-inner">
-                <span class="page-badge">// PRODUCTION SYSTEMS &amp; SCHOLARLY RESEARCH</span>
-                <h1 class="page-hero-title">Engineering Projects &amp; Architectures</h1>
+                <h1 class="page-hero-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 600, 'opsz' 14" data-to-font="'wght' 950, 'opsz' 40" data-radius="140" data-falloff="linear">Engineering Projects &amp; Architectures</span></h1>
                 <p class="page-hero-lead">
                     A comprehensive catalog of production web applications, educational AI reasoning tutors, computer vision proof parsers, and resilient offline-first PWAs engineered with defensive architectures.
                 </p>
                 <div class="page-stat-row">
-                    <span class="page-stat-chip"><strong>8</strong> Verified Applications</span>
-                    <span class="page-stat-chip"><strong>2</strong> Scopus &amp; National Conference Papers</span>
-                    <span class="page-stat-chip"><strong>SRE</strong> Observability &amp; Telemetry Tested</span>
-                    <span class="page-stat-chip"><strong>100%</strong> Offline PWA Architecture</span>
+                    <span class="page-stat-chip"><strong><span class="count-up" data-count-up="true" data-from="0" data-to="8" data-duration="1.6" data-easing="easeOut">8</span></strong> Verified Apps</span>
+                    <span class="page-stat-chip"><strong><span class="count-up" data-count-up="true" data-from="0" data-to="2" data-duration="1.4" data-easing="easeOut">2</span></strong> Scopus &amp; PCSC Papers</span>
+                    <span class="page-stat-chip"><strong>SRE</strong> Telemetry Tested</span>
+                    <span class="page-stat-chip"><strong><span class="count-up" data-count-up="true" data-from="0" data-to="100" data-suffix="%" data-duration="2" data-easing="easeOut">100%</span></strong> Offline PWA</span>
                 </div>
             </div>
         </section>
@@ -105,8 +106,8 @@
                 <div class="projects-page-filters" id="projects-filter-bar">
                     <button class="project-filter-chip active" data-filter="all">All Projects [8]</button>
                     <button class="project-filter-chip" data-filter="research">Research &amp; AI [2]</button>
-                    <button class="project-filter-chip" data-filter="web">Web &amp; Cloud [4]</button>
-                    <button class="project-filter-chip" data-filter="mobile">Mobile &amp; Offline [2]</button>
+                    <button class="project-filter-chip" data-filter="web">Web &amp; Cloud [6]</button>
+                    <button class="project-filter-chip" data-filter="mobile">Mobile &amp; Offline [3]</button>
                     <button class="project-filter-chip" data-filter="game">Systems &amp; Java [1]</button>
                 </div>
 
@@ -172,7 +173,7 @@
                     <!-- PROJECT 3: REFERTOIRE -->
                     <article class="project-catalog-card spotlight-card glass-card open-modal-btn" data-spotlight-card="true" data-spotlight-color="#00f0ff" data-category="web mobile" data-project="p9" tabindex="0" role="button" aria-label="View Refertoire Details">
                         <div class="project-catalog-media">
-                            <img src="images/refertoire.jpg" alt="Refertoire Preview" class="project-catalog-img" loading="lazy">
+                            <img src="images/refertoire.jpg" alt="Refertoire Preview" class="project-catalog-img" loading="eager">
                         </div>
                         <div class="project-catalog-meta">
                             <span class="sleek-badge">Freelance Production PWA</span>
@@ -200,7 +201,7 @@
                     <!-- PROJECT 4: NEXCHEF -->
                     <article class="project-catalog-card spotlight-card glass-card open-modal-btn" data-spotlight-card="true" data-spotlight-color="#00f0ff" data-category="web mobile" data-project="p8" tabindex="0" role="button" aria-label="View Nexchef Details">
                         <div class="project-catalog-media">
-                            <img src="images/nexchef.png" alt="Nexchef Preview" class="project-catalog-img" loading="lazy">
+                            <img src="images/nexchef.png" alt="Nexchef Preview" class="project-catalog-img" loading="eager">
                         </div>
                         <div class="project-catalog-meta">
                             <span class="sleek-badge">Mobile Culinary App</span>
@@ -227,7 +228,7 @@
                     <!-- PROJECT 5: TAKEIT -->
                     <article class="project-catalog-card spotlight-card glass-card open-modal-btn" data-spotlight-card="true" data-spotlight-color="#00f0ff" data-category="web" data-project="p3" tabindex="0" role="button" aria-label="View TakeIt Details">
                         <div class="project-catalog-media">
-                            <img src="images/takeit.png" alt="TakeIt Preview" class="project-catalog-img" loading="lazy">
+                            <img src="images/takeit.png" alt="TakeIt Preview" class="project-catalog-img" loading="eager">
                         </div>
                         <div class="project-catalog-meta">
                             <span class="sleek-badge">Ticketing Platform</span>
@@ -255,7 +256,7 @@
                     <!-- PROJECT 6: DISHCOVER -->
                     <article class="project-catalog-card spotlight-card glass-card open-modal-btn" data-spotlight-card="true" data-spotlight-color="#00f0ff" data-category="web mobile" data-project="p4" tabindex="0" role="button" aria-label="View DishCover Details">
                         <div class="project-catalog-media">
-                            <img src="images/dishcover.png" alt="DishCover Preview" class="project-catalog-img" loading="lazy">
+                            <img src="images/dishcover.png" alt="DishCover Preview" class="project-catalog-img" loading="eager">
                         </div>
                         <div class="project-catalog-meta">
                             <span class="sleek-badge">Food Waste Reduction</span>
@@ -282,7 +283,7 @@
                     <!-- PROJECT 7: CROPCONNECT -->
                     <article class="project-catalog-card spotlight-card glass-card open-modal-btn" data-spotlight-card="true" data-spotlight-color="#00f0ff" data-category="web" data-project="p5" tabindex="0" role="button" aria-label="View CropConnect Details">
                         <div class="project-catalog-media">
-                            <img src="images/cropconnect.png" alt="CropConnect Preview" class="project-catalog-img" loading="lazy">
+                            <img src="images/cropconnect.png" alt="CropConnect Preview" class="project-catalog-img" loading="eager">
                         </div>
                         <div class="project-catalog-meta">
                             <span class="sleek-badge">AgriTech Marketplace</span>
@@ -309,7 +310,7 @@
                     <!-- PROJECT 8: BOMBERMAN -->
                     <article class="project-catalog-card spotlight-card glass-card open-modal-btn" data-spotlight-card="true" data-spotlight-color="#00f0ff" data-category="game" data-project="p6" tabindex="0" role="button" aria-label="View Bomberman Details">
                         <div class="project-catalog-media">
-                            <img src="images/bomberman.png" alt="Bomberman Preview" class="project-catalog-img" loading="lazy">
+                            <img src="images/bomberman.png" alt="Bomberman Preview" class="project-catalog-img" loading="eager">
                         </div>
                         <div class="project-catalog-meta">
                             <span class="sleek-badge">Multiplayer Systems Game</span>
@@ -336,54 +337,104 @@
                 </div>
 
                 <!-- BOTTOM CONTACT CTA -->
-                <div class="bite-connect-card" style="margin-top: 20px;">
-                    <div class="bite-connect-grid">
-                        <div>
-                            <span class="page-badge">// COLLABORATION</span>
-                            <h3 class="bite-connect-title">Want to build something similar?</h3>
-                            <p class="bite-connect-desc">
-                                From complex distributed systems and SRE cloud automation to AI educational algorithms and production web applications.
-                            </p>
-                            <a href="contact.html" class="btn-hero-primary specular-button specular-button--md" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.3" data-specular-radius="8">
-                                <span>Start an Engineering Inquiry &rarr;</span>
-                            </a>
-                        </div>
-                        <div class="bite-direct-panel">
-                            <div class="bite-channels-card">
-                                <div class="bite-channels-header">Direct Contact</div>
-                                <div class="bite-channel-list">
-                                    <div class="bite-channel-item">
-                                        <span>Email:</span>
-                                        <a href="mailto:roddneilgemina@gmail.com"><strong>roddneilgemina@gmail.com</strong></a>
-                                    </div>
-                                    <div class="bite-channel-item">
-                                        <span>Phone:</span>
-                                        <a href="tel:+639562413577"><strong>+63 956-241-3577</strong></a>
-                                    </div>
-                                    <div class="bite-channel-item">
-                                        <span>Availability:</span>
-                                        <strong style="color: #34d399;">Immediate Start</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bite-connect-card spotlight-card"
+                     data-spotlight-card="true"
+                     data-spotlight-color="#00f0ff"
+                     data-intensity="0.22"
+                     data-spotlight-size="360"
+                     data-border-glow="0.85"
+                     data-proximity="140"
+                     data-theme="dark"
+                     style="margin-top: 48px; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; padding: 2.75rem 2rem;">
+                    <h3 class="bite-connect-title" style="margin-bottom: 12px; font-size: clamp(1.6rem, 2.4vw, 2.1rem);">Want to build something similar?</h3>
+                    <p class="bite-connect-desc" style="max-width: 540px; margin: 0 auto 26px; color: var(--text-secondary); line-height: 1.6;">
+                        From complex distributed systems and SRE cloud automation to AI educational algorithms and production web applications.
+                    </p>
+                    <a href="contact.html" class="btn-hero-primary specular-button specular-button--md" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.3" data-specular-radius="8">
+                        <span>Start an Engineering Inquiry &rarr;</span>
+                    </a>
                 </div>
-
             </div>
         </section>
 
     </main>
 
-    <!-- FOOTER -->
+        <!-- FOOTER -->
+    <!-- REDESIGNED EXPANDED FOOTER -->
     <footer class="site-footer">
-        <div class="container footer-inner">
-            <div class="footer-left">
-                <span class="footer-brand">RODDNEIL B. GEMINA</span>
-                <span class="footer-copy">© <span id="current-year">2026</span> Roddneil B. Gemina. All rights reserved.</span>
+        <div class="container footer-container">
+            <div class="footer-top-grid">
+                
+                <!-- COL 1: BRAND LOGO & SHORT DESCRIPTION -->
+                <div class="footer-col footer-col-brand">
+                    <a href="index.html" class="brand-badge-link" aria-label="Roddneil Gemina Home">
+                        <div class="brand-badge-icon">
+                            <span class="brand-monogram">RG</span>
+                        </div>
+                        <div class="brand-badge-info">
+                            <span class="brand-badge-name">Roddneil Gemina</span>
+                            <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
+                        </div>
+                    </a>
+                    <p class="footer-desc">
+                        Engineering distributed systems, AI tutoring logic engines, and high-performance interactive interfaces with strict architectural taste.
+                    </p>
+                </div>
+
+                <!-- COL 2: VERTICAL NAVIGATION -->
+                <div class="footer-col footer-col-nav">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-nav-list">
+                        <li><a href="index.html" class="footer-nav-link">Home</a></li>
+                        <li><a href="projects.html" class="footer-nav-link">Projects &amp; Architectures</a></li>
+                        <li><a href="about.html" class="footer-nav-link">About &amp; Accolades</a></li>
+                        <li><a href="contact.html" class="footer-nav-link">Direct Inquiry</a></li>
+                    </ul>
+                </div>
+
+                <!-- COL 3: DIRECT CONNECT LINKS -->
+                <div class="footer-col footer-col-connect">
+                    <h4 class="footer-heading">Connect</h4>
+                    <div class="footer-connect-wrap">
+                        <a href="mailto:roddneilgemina@gmail.com" class="footer-connect-link footer-email-link">roddneilgemina@gmail.com</a>
+                        <div class="footer-social-svgs">
+                            <a href="https://github.com/RoddneilGemina" target="_blank" rel="noopener noreferrer" class="footer-svg-link" title="GitHub Profile" aria-label="GitHub Profile">
+                                <svg viewBox="0 0 24 24" class="footer-svg-icon" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/roddneil-gemina-20b423409" target="_blank" rel="noopener noreferrer" class="footer-svg-link" title="LinkedIn Profile" aria-label="LinkedIn Profile">
+                                <svg viewBox="0 0 24 24" class="footer-svg-icon" fill="currentColor" aria-hidden="true">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="footer-right">
-                <a href="#" class="back-to-top">Back to top ↑</a>
+
+            <!-- FOOTER DIVIDER -->
+            <div class="footer-bottom-divider"></div>
+
+            <!-- FOOTER BOTTOM: COPYRIGHT & WEBSITE STACK LIST -->
+            <div class="footer-bottom-row">
+                <div class="footer-copyright">
+                    <span>&copy; <span id="current-year">2026</span> <strong class="footer-name-bold">Roddneil B. Gemina</strong>. All rights reserved.</span>
+                </div>
+
+                <div class="footer-right-group">
+                    <div class="footer-tech-stack">
+                        <span class="stack-made-label">Built with</span>
+                        <span class="stack-tag">Vanilla JS</span>
+                        <span class="stack-tag">GSAP</span>
+                        <span class="stack-tag">WebGL</span>
+                        <span class="stack-tag">SVG</span>
+                        <span class="stack-tag">Cloudflare</span>
+                    </div>
+
+                    <a href="#main-content" class="footer-back-to-top" title="Back to top">Top &uarr;</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -439,7 +490,7 @@
         </div>
     </dialog>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=17.0"></script>
     <script>
         // Category filtering logic for projects page
         document.addEventListener('DOMContentLoaded', () => {

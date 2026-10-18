@@ -13,7 +13,7 @@
     <meta name="twitter:title" content="Roddneil B. Gemina | Software Engineer &amp; CS Scholar Portfolio">
     <meta name="twitter:description" content="Portfolio of Roddneil B. Gemina, Computer Science Scholar from CIT-U. SRE Intern at Opswerks, QA Analyst at DXForm, and AI Researcher.">
     <meta name="twitter:url" content="https://roddneil-gemina.pages.dev/">
-    <link rel="stylesheet" href="css/styles.css?v=15.0">
+    <link rel="stylesheet" href="css/styles.css?v=17.0">
     
     <!-- Google Fonts: Archivo (Display & Body) & Geist Mono (Technical Utility & Buttons) per Mike Wilcock Design System -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,6 @@
     
     <!-- GSAP & ScrollTrigger Animation Engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <!-- React Bits Scanner WebGL Background -->
     <script src="js/scanner.js"></script>
@@ -51,12 +50,20 @@
     <script src="js/spotlight-card.js"></script>
     <!-- React Bits CurvedInput (Dynamic Arc Geometry Curved Input Field) -->
     <script src="js/curved-input.js"></script>
+    <!-- React Bits ScrollExpand (Physics-Based Dynamic Expanding Media & Stage) -->
+    <!-- React Bits GlassSurface (Frosted Glass Refraction & Sheen) -->
+    <script src="js/glass-surface.js"></script>
+    <script src="js/scroll-expand.js"></script>
+    <!-- React Bits ProfileCard (Interactive Holographic Tilt & Parallax Card) -->
+    <script src="js/profile-card.js?v=2.1"></script>
+    <!-- React Bits CountUp (Physics-Based Animated Number Counter) -->
+    <script src="js/count-up.js"></script>
+    <!-- React Bits GradientASCII (Interactive WebGL Terminal Light Matrix) -->
+    <script src="js/gradient-ascii.js?v=1.1"></script>
 </head>
 <body>
 
-    <!-- FULLSCREEN CINEMATIC INTRO BLACK CURTAIN OVERLAY -->
-    <div id="intro-curtain-bg" class="intro-curtain-bg" aria-label="Intro Curtain"></div>
-
+    
     <!-- REACT BITS DOTFIELD TACTILE TEXTURE BACKGROUND OVERLAY -->
     <!-- CIRCULAR RIPPLE OVERLAY FOR THEME WAVE -->
     <div id="theme-ripple-overlay" class="theme-ripple-overlay"></div>
@@ -105,7 +112,7 @@
 
         <!-- HERO SECTION (CENTERED IMPACT SHOWCASE) -->
         <!-- HERO SECTION (SPLIT 2-COLUMN SHOWCASE) -->
-        <section id="hero" class="section hero-section reveal-on-scroll">
+        <section id="hero" class="section hero-section">
             <!-- HERO EXCLUSIVE ANIMATED DOTFIELD BACKGROUND -->
             <div id="hero-dotfield-container" class="dot-field-container hero-dotfield" aria-hidden="true"></div>
             <!-- REACT BITS SCANNER 3D BACKGROUND -->
@@ -119,11 +126,6 @@
                     
                     <!-- LEFT COLUMN: STATUS, NAME, CIPHER / GRADIENT TEXT, BIO, ACTIONS, ACCOLADES -->
                     <div class="hero-left-col">
-                        <!-- STATUS PILL (AVAILABLE FOR ROLES) -->
-                        <div class="hero-status-pill">
-                            <span class="status-dot-emerald"></span>
-                            <span>AVAILABLE FOR ROLES • CEBU, PH</span>
-                        </div>
 
                         <!-- MASSIVE NAME -->
                         <div class="hero-name-container floating-name" id="hero-name-container">
@@ -142,18 +144,18 @@
                                 <span class="gradient-text hero-role-gradient" data-gradient-text="true" data-variant="flow" data-speed="8" data-glow="0.45" data-scale="2.6" data-follow-pointer="true" data-colors="#00f0ff,#38bdf8,#a78bfa,#c084fc,#00f0ff" data-colors-light="#0284c7,#2563eb,#7c3aed,#9333ea,#0284c7">
                                     <span class="gradient-text__inner">
                                         <span class="gradient-text__content">
-                                            <span class="role-part1" id="role-part1"></span>
-                                            <span class="role-separator" id="role-separator" style="display: none;">&amp;</span>
-                                            <span class="role-accent" id="role-accent"></span>
+                                            <span class="role-part1" id="role-part1">Full-Stack Developer</span>
+                                            <span class="role-separator" id="role-separator" style="display: inline;">&amp;</span>
+                                            <span class="role-accent" id="role-accent">Software Engineer</span>
                                         </span>
                                         <span class="gradient-text__glow" aria-hidden="true">
-                                            <span class="role-part1-glow" id="role-part1-glow"></span>
-                                            <span class="role-separator-glow" id="role-separator-glow" style="display: none;">&amp;</span>
-                                            <span class="role-accent-glow" id="role-accent-glow"></span>
+                                            <span class="role-part1-glow" id="role-part1-glow">Full-Stack Developer</span>
+                                            <span class="role-separator-glow" id="role-separator-glow" style="display: inline;">&amp;</span>
+                                            <span class="role-accent-glow" id="role-accent-glow">Software Engineer</span>
                                         </span>
                                     </span>
                                 </span>
-                                <span class="role-cursor" id="role-cursor">_</span>
+                                <span class="role-cursor" id="role-cursor" style="display: none;">_</span>
                             </h2>
                         </div>
 
@@ -205,32 +207,59 @@
                     <!-- RIGHT COLUMN: LARGE ROUNDED PORTRAIT CARD WITH TOP WATERMARK & BOTTOM PROFILE HUD -->
                     <div class="hero-right-col">
                         <div class="hero-portrait-card-stage" id="hero-portrait-stage">
-                            <div class="hero-ref-portrait-card" id="hero-portrait-container">
-                                <!-- CARD TOP WATERMARK & CIPHER -->
-                                <div class="portrait-card-header">
-                                    <div class="card-watermark-name">Roddneil Gemina</div>
-                                    <div class="card-role-sub">Software Engineer &amp; CS Scholar</div>
-                                </div>
-
-                                <!-- PORTRAIT PHOTO WRAPPER WITH TRANSPARENT CUTOUT -->
-                                <div class="portrait-card-photo-box">
-                                    <img src="images/roddneil.png" alt="Roddneil Gemina portrait" class="hero-ref-portrait-img" width="731" height="965" loading="eager" fetchpriority="high">
-                                    <div class="portrait-card-vignette" aria-hidden="true"></div>
-                                </div>
-
-                                <!-- FLOATING BOTTOM PROFILE HUD (MATCHING REFERENCE!) -->
-                                <div class="portrait-bottom-hud">
-                                    <div class="hud-avatar-box">
-                                        <img src="images/roddneil.png" alt="Avatar" class="hud-avatar-img">
-                                        <span class="hud-status-dot"></span>
+                            <!-- REACT BITS PROFILE CARD COMPONENT WITH RG LOGO HOLO FOIL -->
+                            <div class="profile-card" 
+                                 id="hero-profile-card"
+                                 data-profile-card="true"
+                                 data-name="Roddneil Gemina"
+                                 data-title="Software Engineer &amp; CS Scholar"
+                                 data-handle="roddneil-gemina"
+                                 data-status="Available for roles"
+                                 data-status-color="#22c55e"
+                                 data-icon-url="/images/rg-pattern.svg"
+                                 data-holo="0.8"
+                                 data-glare="0.5"
+                                 data-tilt-strength="3"
+                                 data-parallax="3"
+                                 data-pattern-size="84px 84px"
+                                 data-radius="16"
+                                 data-theme="dark">
+                                <div class="profile-card__body">
+                                    <div class="profile-card__tile">
+                                        <span class="profile-card__sheen" aria-hidden="true"></span>
+                                        <span class="profile-card__holo" aria-hidden="true">
+                                            <span class="profile-card__holo-glow" aria-hidden="true"></span>
+                                            <span class="profile-card__holo-shift" aria-hidden="true"></span>
+                                        </span>
+                                        <img class="profile-card__photo" src="images/roddneil.png" alt="Roddneil Gemina" loading="lazy" draggable="false">
+                                        <span class="profile-card__scrim" aria-hidden="true"></span>
+                                        <div class="profile-card__info">
+                                            <h3 class="profile-card__name">Roddneil Gemina</h3>
+                                            <p class="profile-card__title">Software Engineer &amp; CS Scholar</p>
+                                        </div>
+                                        <span class="profile-card__tile-rim" aria-hidden="true"></span>
                                     </div>
-                                    <div class="hud-info-box">
-                                        <span class="hud-handle">@roddneil-gemina</span>
-                                        <span class="hud-status-text">Available for roles</span>
+
+                                    <div class="profile-card__footer">
+                                        <span class="profile-card__avatar">
+                                            <img src="images/roddneil.png" alt="Roddneil Gemina Avatar" loading="eager" draggable="false">
+                                        </span>
+                                        <div class="profile-card__meta">
+                                            <span class="profile-card__handle">@roddneil-gemina</span>
+                                            <span class="profile-card__status">Available for roles</span>
+                                        </div>
+                                        <a href="contact.html" class="profile-card__contact" aria-label="Contact Roddneil Gemina">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                                            </svg>
+                                            <span>Contact</span>
+                                        </a>
                                     </div>
-                                    <a href="contact.html" class="btn-hud-contact">
-                                        <span>Contact Me</span>
-                                    </a>
+
+                                    <span class="profile-card__glare" aria-hidden="true"></span>
+                                    <span class="profile-card__shade" aria-hidden="true"></span>
+                                    <span class="profile-card__rim" aria-hidden="true"></span>
                                 </div>
                             </div>
                         </div>
@@ -243,7 +272,7 @@
                     <!-- CARD 1: PROJECTS & BUILDS -->
                     <div class="stat-bento-card stat-card-cyan glass-card">
                         <div class="stat-number-wrap">
-                            <span class="stat-bento-num stat-num-cyan">20+</span>
+                            <span class="stat-bento-num stat-num-cyan count-up" data-count-up="true" data-from="0" data-to="20" data-suffix="+" data-duration="2" data-easing="easeOut" data-trigger="view">20+</span>
                         </div>
                         <div class="stat-bento-label">Projects &amp; Builds</div>
                     </div>
@@ -251,7 +280,7 @@
                     <!-- CARD 2: RESEARCH & CONFERENCES -->
                     <div class="stat-bento-card stat-card-violet glass-card">
                         <div class="stat-number-wrap">
-                            <span class="stat-bento-num stat-num-violet">2</span>
+                            <span class="stat-bento-num stat-num-violet count-up" data-count-up="true" data-from="0" data-to="2" data-duration="1.6" data-easing="easeOut" data-trigger="view">2</span>
                         </div>
                         <div class="stat-bento-label">Scopus &amp; National Papers</div>
                     </div>
@@ -259,7 +288,7 @@
                     <!-- CARD 3: INDUSTRY CERTIFICATIONS -->
                     <div class="stat-bento-card stat-card-emerald glass-card">
                         <div class="stat-number-wrap">
-                            <span class="stat-bento-num stat-num-emerald">5+</span>
+                            <span class="stat-bento-num stat-num-emerald count-up" data-count-up="true" data-from="0" data-to="5" data-suffix="+" data-duration="1.8" data-easing="easeOut" data-trigger="view">5+</span>
                         </div>
                         <div class="stat-bento-label">Industry Certifications</div>
                     </div>
@@ -267,7 +296,7 @@
                     <!-- CARD 4: ARCHITECTURAL RIGOR & SRE -->
                     <div class="stat-bento-card stat-card-blue glass-card">
                         <div class="stat-number-wrap">
-                            <span class="stat-bento-num stat-num-blue">100%</span>
+                            <span class="stat-bento-num stat-num-blue count-up" data-count-up="true" data-from="0" data-to="100" data-suffix="%" data-duration="2.2" data-easing="easeOut" data-trigger="view">100%</span>
                         </div>
                         <div class="stat-bento-label">Architectural Rigor &amp; SRE</div>
                     </div>
@@ -279,7 +308,7 @@
         <div class="section-divider-bar" aria-hidden="true"></div>
 
         <!-- SECTION: FEATURED PROJECTS -->
-        <section id="projects" class="section projects-section reveal-on-scroll">
+        <section id="projects" class="section projects-section">
             <div class="container">
                 <div class="section-header projects-header-flex">
                     <div class="section-title-wrap">
@@ -719,10 +748,28 @@
         <!-- SECTION: SKILLS & STACKS -->
                 <div class="section-divider-bar" aria-hidden="true"></div>
 
-        <!-- SECTION: SKILLS & TECH STACK (REIMAGINED WITH REACT BITS LOGOLOOP) -->
-        <section id="expertise" class="section expertise-section reveal-on-scroll">
-            <div class="container">
-                <div class="section-header">
+        <!-- SECTION: SKILLS & TECH STACK (REIMAGINED WITH REACT BITS SCROLL EXPAND & LOGOLOOP) -->
+        <section id="expertise" class="scroll-expand" data-scroll-expand="true" data-use-window-scroll="true" data-start-width="48" data-start-height="56" data-start-radius="24" data-end-radius="0" data-media-zoom="1.12" data-scroll-distance="1.3" data-hold-distance="0.35">
+            <div class="scroll-expand__track">
+                <div class="scroll-expand__stage">
+                    <div class="scroll-expand__frame">
+                        <!-- React Bits GradientASCII WebGL Interactive Background -->
+                        <div id="tech-gradient-ascii" 
+                             class="gradient-ascii-container tech-proficiency-ascii-bg" 
+                             data-gradient-ascii="true"
+                             data-shape="horizon"
+                             data-characters=" =+xX0S8#@"
+                             data-cell-size="18"
+                             data-density="0.8"
+                             data-glyph-opacity="0.85"
+                             data-gradient-opacity="0.85"
+                             data-glow="0.25"
+                             data-mouse-interaction="true"
+                             data-click-effect="wave"
+                             aria-hidden="true"></div>
+                        <div class="scroll-expand__content-wrapper">
+                            <div class="container tech-expand-container">
+                                <div class="section-header">
                     <div class="section-title-wrap">
                         <h2 class="section-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 450, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Tech Proficiency</span></h2>
                     </div>
@@ -1034,14 +1081,47 @@
                     </div>
                 </div>
             </div>
-        </div>
+                            </div>
+                        </div>
+                        <div class="scroll-expand__glass-surface glass-surface glass-surface--fallback" data-glass-surface="true" data-background-opacity="0.12" data-blur="14" data-displace="0.6">
+                            <span class="glass-surface__sheen" aria-hidden="true"></span>
+                            <span class="glass-surface__rim" aria-hidden="true"></span>
+                        </div>
+                        <div class="scroll-expand__scrim"></div>
+                    </div>
+
+                    <!-- FLOATING RESTING PREVIEW TITLE OVER THE BOX -->
+                    <div class="scroll-expand__title">
+                        <div class="scroll-expand__title-box">
+                            <h2 class="scroll-expand__title-heading">Tech Stacks</h2>
+                            <p class="scroll-expand__title-sub">Full-Stack Frameworks &bull; Cloud Infrastructure &bull; Core Languages</p>
+                        </div>
+                    </div>
+
+                    <!-- FLOATING RESTING SCROLL CUE HINT -->
+                    <div class="scroll-expand__hint" aria-hidden="true">
+                        <svg class="scroll-mouse-icon" width="14" height="22" viewBox="0 0 24 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="32" rx="10"></rect>
+                            <line class="scroll-mouse-wheel" x1="12" y1="8" x2="12" y2="14"></line>
+                        </svg>
+                        <div class="scroll-double-chevrons">
+                            <svg class="chevron-1" width="10" height="5" viewBox="0 0 16 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 1.5L8 6.5L14 1.5"></path>
+                            </svg>
+                            <svg class="chevron-2" width="10" height="5" viewBox="0 0 16 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 1.5L8 6.5L14 1.5"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- SECTION: ENGINEERING PHILOSOPHY & PRINCIPLES -->
                 <div class="section-divider-bar" aria-hidden="true"></div>
 
         <!-- CONFERENCES & SCHOLARLY RESEARCH -->
-        <section id="conferences" class="section conferences-section reveal-on-scroll">
+        <section id="conferences" class="section conferences-section">
             <div class="container">
                 <div class="section-header projects-header-flex">
                     <div class="section-title-wrap">
@@ -1093,9 +1173,16 @@
         <div class="section-divider-bar" aria-hidden="true"></div>
 
         <!-- STREAMLINED UNCLUTTERED CONTACT AREA ("Let's connect!") -->
-        <section id="contact" class="section contact-section reveal-on-scroll">
+        <section id="contact" class="section contact-section">
             <div class="container">
-                <div class="bite-connect-card bite-connect-card--minimal">
+                <div class="bite-connect-card bite-connect-card--minimal spotlight-card"
+                     data-spotlight-card="true"
+                     data-spotlight-color="#00f0ff"
+                     data-intensity="0.22"
+                     data-spotlight-size="360"
+                     data-border-glow="0.85"
+                     data-proximity="140"
+                     data-theme="dark">
                     <div class="bite-connect-header">
                         <h2 class="bite-connect-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 550, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Let's connect!</span></h2>
                         <p class="bite-connect-desc">
@@ -1530,7 +1617,7 @@
         </div>
     </dialog>
 
-    <script src="js/main.js?v=14.0"></script>
+    <script src="js/main.js?v=17.0"></script>
 
 
 </body></html>

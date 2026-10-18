@@ -12,3 +12,4 @@ scratch/
 .vscode/
 .cursor/
 .agents/
+.wrangler/
