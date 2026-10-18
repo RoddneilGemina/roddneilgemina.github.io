@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1440" viewBox="0 0 1024 1440" fill="none">
+  <!-- Clean Crisp White Card Background -->
+  <rect width="1024" height="1440" fill="#ffffff" />
+
+  <!-- Center: Large RG Logo Watermark -->
+  <g transform="translate(512, 640)">
+    <!-- Subtle outer geometric ring -->
+    <circle cx="0" cy="0" r="280" fill="none" stroke="#e4e4e7" stroke-width="3" stroke-dasharray="12 12" />
+    <circle cx="0" cy="0" r="240" fill="none" stroke="#e4e4e7" stroke-width="2" />
+    <text x="0" y="24" 
+          font-family="'Archivo', 'Outfit', 'Inter', sans-serif" 
+          font-weight="900" 
+          font-size="340" 
+          fill="#d4d4d8" 
+          text-anchor="middle" 
+          dominant-baseline="central" 
+          letter-spacing="-0.05em">RG</text>
+  </g>
+
+  <!-- Bottom: Website Domain in Clean Monospace -->
+  <text x="512" y="1270" 
+        font-family="'Geist Mono', 'SF Mono', 'Courier New', monospace" 
+        font-weight="700" 
+        font-size="36" 
+        fill="#18181b" 
+        text-anchor="middle" 
+        letter-spacing="-0.01em">roddneil-gemina.pages.dev</text>
+</svg>

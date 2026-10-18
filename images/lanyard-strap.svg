@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="192" viewBox="0 0 768 192" fill="none">
+  <!-- Obsidian Strap Background -->
+  <rect width="768" height="192" fill="#090d16" />
+  
+  <!-- Subtle Ballistic Fabric Grid Texture -->
+  <defs>
+    <pattern id="fabricWeave" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M 0 0 L 8 8 M 8 0 L 0 8" stroke="#121a29" stroke-width="1.2" />
+      <rect x="0" y="0" width="8" height="8" fill="none" stroke="#101826" stroke-width="0.5" />
+    </pattern>
+    <linearGradient id="cyanSheen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="50%" stop-color="#7fa8ff" />
+      <stop offset="100%" stop-color="#00f0ff" />
+    </linearGradient>
+    <linearGradient id="metalRim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(0, 240, 255, 0.6)" />
+      <stop offset="50%" stop-color="rgba(255, 255, 255, 0.15)" />
+      <stop offset="100%" stop-color="rgba(0, 240, 255, 0.4)" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="768" height="192" fill="url(#fabricWeave)" />
+  
+  <!-- Outer Stitching Lines -->
+  <line x1="0" y1="14" x2="768" y2="14" stroke="#00f0ff" stroke-width="2.5" stroke-dasharray="8 6" opacity="0.85" />
+  <line x1="0" y1="178" x2="768" y2="178" stroke="#00f0ff" stroke-width="2.5" stroke-dasharray="8 6" opacity="0.85" />
+  
+  <!-- Inner Edge Highlight -->
+  <line x1="0" y1="20" x2="768" y2="20" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <line x1="0" y1="172" x2="768" y2="172" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  
+  <!-- SEGMENT 1 (X: 0 to 384) -->
+  <!-- RG Monogram Badge 1 -->
+  <g transform="translate(48, 96)">
+    <rect x="-34" y="-34" width="68" height="68" rx="14" fill="#0c1424" stroke="url(#cyanSheen)" stroke-width="2.5" />
+    <text x="0" y="2" font-family="'Archivo', 'Outfit', system-ui, sans-serif" font-weight="900" font-size="28" fill="#00f0ff" text-anchor="middle" dominant-baseline="central" letter-spacing="-0.04em">RG</text>
+  </g>
+  
+  <!-- Text Content 1 -->
+  <text x="108" y="86" font-family="'Archivo', 'Outfit', system-ui, sans-serif" font-weight="900" font-size="26" fill="#ffffff" letter-spacing="0.08em">RODDNEIL GEMINA</text>
+  <text x="108" y="118" font-family="'Geist Mono', monospace" font-weight="600" font-size="13" fill="#00f0ff" letter-spacing="0.22em">SOFTWARE ENGINEER</text>
+  <circle cx="348" cy="96" r="3.5" fill="#38bdf8" />
+
+  <!-- SEGMENT 2 (X: 384 to 768) -->
+  <!-- RG Monogram Badge 2 -->
+  <g transform="translate(432, 96)">
+    <rect x="-34" y="-34" width="68" height="68" rx="14" fill="#0c1424" stroke="url(#cyanSheen)" stroke-width="2.5" />
+    <text x="0" y="2" font-family="'Archivo', 'Outfit', system-ui, sans-serif" font-weight="900" font-size="28" fill="#00f0ff" text-anchor="middle" dominant-baseline="central" letter-spacing="-0.04em">RG</text>
+  </g>
+  
+  <!-- Text Content 2 -->
+  <text x="492" y="86" font-family="'Archivo', 'Outfit', system-ui, sans-serif" font-weight="900" font-size="26" fill="#ffffff" letter-spacing="0.08em">RODDNEIL GEMINA</text>
+  <text x="492" y="118" font-family="'Geist Mono', monospace" font-weight="600" font-size="13" fill="#38bdf8" letter-spacing="0.22em">CS SCHOLAR • SRE</text>
+  <circle cx="732" cy="96" r="3.5" fill="#00f0ff" />
+</svg>

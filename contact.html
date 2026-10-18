@@ -5,7 +5,7 @@
     <title>Contact &amp; Inquiries | Roddneil B. Gemina</title>
     <meta name="description" content="Get in touch with Roddneil B. Gemina. In-depth contact terminal for software engineering roles, full-stack contracts, SRE opportunities, and research collaborations.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/contact.html">
-    <link rel="stylesheet" href="css/styles.css?v=17.0">
+    <link rel="stylesheet" href="css/styles.css?v=24.0">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +30,8 @@
     <!-- React Bits GradientText -->
     <script src="js/gradient-text.js"></script>
     <script src="js/variable-proximity.js"></script>
+    <!-- React Bits GooeyNav (WebGL2 Metaball Fluid Navigation) -->
+    <script src="js/gooey-nav.js?v=2.2"></script>
 </head>
 <body>
 
@@ -53,14 +55,61 @@
                 </div>
             </a>
 
-            <!-- FLOATING PILL NAV (CENTER) -->
-            <nav class="main-nav-pill" id="main-nav">
-                <ul class="nav-pill-list">
-                    <li><a href="index.html" class="nav-pill-item">Home</a></li>
-                    <li><a href="projects.html" class="nav-pill-item">Projects</a></li>
-                    <li><a href="about.html" class="nav-pill-item">About</a></li>
-                    <li><a href="contact.html" class="nav-pill-item active">Contact</a></li>
-                </ul>
+            <!-- REACT BITS GOOEY NAV (CENTER) -->
+            <nav class="gooey-nav gooey-nav--md gooey-nav--framed main-nav-pill"
+                 id="main-nav"
+                 data-gooey-nav="true"
+                 data-theme="dark"
+                 data-color="#00f0ff"
+                 data-colors="#00f0ff,#38bdf8,#7fa8ff"
+                 data-particle-count="15"
+                 data-spread="56"
+                 data-animation-time="600"
+                 data-time-variance="300"
+                 data-gooeyness="0.5"
+                 data-wobble="0.5"
+                 data-hover-effect="true">
+                <span class="gooey-nav__rim"></span>
+                <div class="gooey-nav__stage">
+                    <canvas class="gooey-nav__canvas" aria-hidden="true"></canvas>
+                    <span class="gooey-nav__fallback" aria-hidden="true"></span>
+                    <ul class="gooey-nav__list">
+                        <li class="gooey-nav__item" data-gooey-index="0">
+                            <a href="index.html" class="gooey-nav__link">
+                                <span class="gooey-nav__label">Home</span>
+                            </a>
+                        </li>
+                        <li class="gooey-nav__item" data-gooey-index="1">
+                            <a href="projects.html" class="gooey-nav__link">
+                                <span class="gooey-nav__label">Work</span>
+                            </a>
+                        </li>
+                        <li class="gooey-nav__item" data-gooey-index="2">
+                            <a href="about.html" class="gooey-nav__link">
+                                <span class="gooey-nav__label">About</span>
+                            </a>
+                        </li>
+                        <li class="gooey-nav__item" data-gooey-index="3" data-active="">
+                            <a href="contact.html" class="gooey-nav__link active" aria-current="page">
+                                <span class="gooey-nav__label">Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="gooey-nav__list gooey-nav__list--active" aria-hidden="true">
+                        <li class="gooey-nav__item">
+                            <span class="gooey-nav__link"><span class="gooey-nav__label">Home</span></span>
+                        </li>
+                        <li class="gooey-nav__item">
+                            <span class="gooey-nav__link"><span class="gooey-nav__label">Work</span></span>
+                        </li>
+                        <li class="gooey-nav__item">
+                            <span class="gooey-nav__link"><span class="gooey-nav__label">About</span></span>
+                        </li>
+                        <li class="gooey-nav__item">
+                            <span class="gooey-nav__link"><span class="gooey-nav__label">Contact</span></span>
+                        </li>
+                    </ul>
+                </div>
             </nav>
 
             <!-- RIGHT ACTIONS -->

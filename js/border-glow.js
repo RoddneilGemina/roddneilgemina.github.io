@@ -1,11 +1,12 @@
 /**
- * BorderGlow Component (Vanilla JavaScript Implementation)
- * Based on React Bits BorderGlow component.
+ * BorderGlow Component (Vanilla JavaScript + CSS Ray-Traced Implementation)
+ * Based on React Bits <BorderGlow /> component.
  * Features:
  * - Directional edge proximity calculation with cone-spread mask
  * - Angle-following ray-traced mesh gradient border and soft ambient edge lighting
  * - Configurable HSL glow color, intensity, and gradient stops
- * - Optional intro sweep animation
+ * - Optional intro sweep animation on mount
+ * - Accessible and light/dark theme aware
  */
 
 (function (global) {
@@ -38,6 +39,17 @@
       card.style.setProperty(GRADIENT_KEYS[i], `radial-gradient(at ${GRADIENT_POSITIONS[i]}, ${c} 0px, transparent 50%)`);
     }
     card.style.setProperty('--gradient-base', `linear-gradient(${colors[0]} 0 100%)`);
+  }
+
+  function isLightColor(color) {
+    if (!color) return false;
+    const value = color.trim().replace('#', '');
+    if (!/^[\da-f]{3}([\da-f]{3})?$/i.test(value)) return false;
+    const hex = value.length === 3 ? value.split('').map(char => char + char).join('') : value;
+    const red = parseInt(hex.slice(0, 2), 16);
+    const green = parseInt(hex.slice(2, 4), 16);
+    const blue = parseInt(hex.slice(4, 6), 16);
+    return red * 0.2126 + green * 0.7152 + blue * 0.0722 > 180;
   }
 
   function easeOutCubic(x) { return 1 - Math.pow(1 - x, 3); }
@@ -89,17 +101,19 @@
     // Read attributes or fallback
     const edgeSensitivity = options.edgeSensitivity !== undefined ? options.edgeSensitivity : (parseFloat(card.dataset.edgeSensitivity) || 30);
     const glowColor = options.glowColor || card.dataset.glowColor || '185 100 65';
-    const backgroundColor = options.backgroundColor || card.dataset.bgColor || '';
-    const borderRadius = options.borderRadius !== undefined ? options.borderRadius : (parseFloat(card.dataset.borderRadius) || parseFloat(getComputedStyle(card).borderRadius) || 24);
-    const glowRadius = options.glowRadius !== undefined ? options.glowRadius : (parseFloat(card.dataset.glowRadius) || 36);
+    const backgroundColor = options.backgroundColor || card.dataset.bgColor || card.dataset.backgroundColor || '#080e1c';
+    const borderRadius = options.borderRadius !== undefined ? options.borderRadius : (parseFloat(card.dataset.borderRadius) || 28);
+    const glowRadius = options.glowRadius !== undefined ? options.glowRadius : (parseFloat(card.dataset.glowRadius) || 40);
     const glowIntensity = options.glowIntensity !== undefined ? options.glowIntensity : (parseFloat(card.dataset.glowIntensity) || 1.1);
-    const coneSpread = options.coneSpread !== undefined ? options.coneSpread : (parseFloat(card.dataset.coneSpread) || 28);
+    const coneSpread = options.coneSpread !== undefined ? options.coneSpread : (parseFloat(card.dataset.coneSpread) || 25);
     const fillOpacity = options.fillOpacity !== undefined ? options.fillOpacity : (parseFloat(card.dataset.fillOpacity) || 0.45);
-    const animated = options.animated !== undefined ? options.animated : (card.dataset.borderGlowAnimated === 'true');
+    const animated = options.animated !== undefined ? options.animated : (card.dataset.animated === 'true' || card.dataset.borderGlowAnimated === 'true');
 
     // Parse colors
     let colors = options.colors;
-    if (!colors && card.dataset.glowColors) {
+    if (!colors && card.dataset.colors) {
+      colors = card.dataset.colors.split(',').map(s => s.trim());
+    } else if (!colors && card.dataset.glowColors) {
       colors = card.dataset.glowColors.split(',').map(s => s.trim());
     }
     if (!colors || colors.length < 3) {
@@ -110,8 +124,12 @@
       card.classList.add('border-glow-card');
     }
 
+    if (isLightColor(backgroundColor)) {
+      card.classList.add('border-glow-card--light');
+    }
+
     // Set core CSS variables
-    if (backgroundColor) card.style.setProperty('--card-bg', backgroundColor);
+    card.style.setProperty('--card-bg', backgroundColor);
     card.style.setProperty('--edge-sensitivity', edgeSensitivity);
     card.style.setProperty('--border-radius', `${borderRadius}px`);
     card.style.setProperty('--glow-padding', `${glowRadius}px`);
@@ -158,7 +176,8 @@
     card.addEventListener('pointermove', handlePointerMove, { passive: true });
     card.addEventListener('pointerleave', handlePointerLeave);
 
-    if (animated) {
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    if (animated && !reducedMotion) {
       const angleStart = 110;
       const angleEnd = 465;
       card.classList.add('sweep-active');

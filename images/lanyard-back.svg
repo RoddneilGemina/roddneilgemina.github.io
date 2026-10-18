@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1440" viewBox="0 0 1024 1440" fill="none">
+  <defs>
+    <linearGradient id="backBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a101f" />
+      <stop offset="50%" stop-color="#070a14" />
+      <stop offset="100%" stop-color="#04060c" />
+    </linearGradient>
+
+    <linearGradient id="holoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="25%" stop-color="#a855f7" />
+      <stop offset="50%" stop-color="#ec4899" />
+      <stop offset="75%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#00f0ff" />
+    </linearGradient>
+
+    <pattern id="diagGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 0 20 L 40 20 M 20 0 L 20 40" stroke="#00f0ff" stroke-width="0.7" opacity="0.08" />
+    </pattern>
+  </defs>
+
+  <!-- Base Card Body -->
+  <rect width="1024" height="1440" fill="url(#backBg)" />
+  <rect width="1024" height="1440" fill="url(#diagGrid)" />
+
+  <!-- Outer Card Bevel Edge Glow -->
+  <rect x="24" y="24" width="976" height="1392" rx="36" fill="none" stroke="url(#holoGradient)" stroke-width="2.5" />
+  <rect x="36" y="36" width="952" height="1368" rx="26" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.2" />
+
+  <!-- Slot guide -->
+  <rect x="402" y="60" width="220" height="46" rx="23" fill="#030508" stroke="rgba(0, 240, 255, 0.4)" stroke-width="2" opacity="0.6" />
+
+  <!-- TOP BRANDING -->
+  <text x="512" y="180" font-family="'Geist Mono', monospace" font-weight="700" font-size="16" fill="#00f0ff" text-anchor="middle" letter-spacing="0.3em">RESEARCH &amp; CLOUD SYSTEMS PORTFOLIO</text>
+  <line x1="212" y1="210" x2="812" y2="210" stroke="rgba(0, 240, 255, 0.3)" stroke-width="1.5" />
+
+  <!-- GIANT CENTER EMBLEM: RG MONOGRAM -->
+  <g transform="translate(512, 540)">
+    <!-- Concentric Holographic Rings -->
+    <circle cx="0" cy="0" r="280" fill="none" stroke="rgba(0, 240, 255, 0.15)" stroke-width="1.5" stroke-dasharray="10 10" />
+    <circle cx="0" cy="0" r="240" fill="none" stroke="url(#holoGradient)" stroke-width="2" opacity="0.4" />
+    <circle cx="0" cy="0" r="200" fill="none" stroke="rgba(0, 240, 255, 0.2)" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="160" fill="#081020" stroke="url(#holoGradient)" stroke-width="3" />
+    
+    <!-- Central RG Monogram Glyph -->
+    <text x="0" y="16" font-family="'Archivo', 'Outfit', system-ui, sans-serif" font-weight="900" font-size="120" fill="url(#holoGradient)" text-anchor="middle" dominant-baseline="central" letter-spacing="-0.04em">RG</text>
+  </g>
+
+  <!-- KEY RESEARCH CITATIONS -->
+  <g transform="translate(512, 870)">
+    <text x="0" y="0" font-family="'Archivo', sans-serif" font-weight="800" font-size="28" fill="#ffffff" text-anchor="middle" letter-spacing="0.08em">PEER-REVIEWED RESEARCH</text>
+    
+    <rect x="-380" y="30" width="760" height="96" rx="18" fill="#091326" stroke="rgba(0, 240, 255, 0.25)" stroke-width="1.5" />
+    <text x="-350" y="70" font-family="'Geist Mono', monospace" font-weight="700" font-size="18" fill="#00f0ff">ICETT 2026</text>
+    <text x="-210" y="70" font-family="'Archivo', sans-serif" font-weight="600" font-size="16" fill="#ffffff">BalikLoom: Philippine Indigenous Textile ML</text>
+    <text x="-350" y="102" font-family="'Geist Mono', monospace" font-weight="500" font-size="13" fill="#94a3b8">Published &amp; Presented • Kuala Lumpur, Malaysia</text>
+
+    <rect x="-380" y="146" width="760" height="96" rx="18" fill="#091326" stroke="rgba(0, 240, 255, 0.25)" stroke-width="1.5" />
+    <text x="-350" y="186" font-family="'Geist Mono', monospace" font-weight="700" font-size="18" fill="#00f0ff">PCSC 2026</text>
+    <text x="-210" y="186" font-family="'Archivo', sans-serif" font-weight="600" font-size="16" fill="#ffffff">Chest-X: Mobile Medical AI Diagnostics</text>
+    <text x="-350" y="218" font-family="'Geist Mono', monospace" font-weight="500" font-size="13" fill="#94a3b8">Philippine Computer Society National Conference</text>
+  </g>
+
+  <!-- BOTTOM PORTFOLIO URL / QR BLOCK -->
+  <line x1="132" y1="1200" x2="892" y2="1200" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" />
+  
+  <text x="512" y="1255" font-family="'Archivo', sans-serif" font-weight="800" font-size="28" fill="#ffffff" text-anchor="middle">RODDNEIL GEMINA</text>
+  <text x="512" y="1295" font-family="'Geist Mono', monospace" font-weight="600" font-size="18" fill="#00f0ff" text-anchor="middle" letter-spacing="0.15em">HTTPS://RODDNEIL-GEMINA.PAGES.DEV</text>
+  <text x="512" y="1335" font-family="'Geist Mono', monospace" font-weight="500" font-size="13" fill="#64748b" text-anchor="middle" letter-spacing="0.25em">INTERACTIVE 3D BADGE • FLIP TO VIEW FRONT</text>
+</svg>

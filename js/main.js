@@ -1,5 +1,5 @@
 /**
- * RODDNEIL B. GEMINA — DEEP COSMIC BLACK & LUMINOUS CYAN PORTFOLIO ENGINE (js/main.js)
+ * RODDNEIL B. GEMINA: DEEP COSMIC BLACK & LUMINOUS CYAN PORTFOLIO ENGINE (js/main.js)
  * Features:
  * 1. Web Audio API Synthesized High-Tech SFX
  * 2. Three.js 3D Cosmic Space with Floating Polyhedrons & Cyan/Violet Ambient Lights
@@ -585,11 +585,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const projectData = {
         p1: {
-            title: 'Fusion Rush: Gamified Boolean Logic & AI Tutoring',
-            type: 'Scopus ICETT 2026 Paper',
+            title: 'ICETT 2026: Fusion Rush AI Reasoning Tutor',
+            type: 'Scopus Indexed Conference Paper (Singapore)',
             image: 'images/fusionrush.jpg',
             orientation: 'square',
-            oneLiner: 'Gamified discrete math AI tutoring platform accepted at Scopus-indexed ICETT 2026.',
+            oneLiner: '14th International Conference on Educational and Information Technology (ICETT 2026, Singapore).',
             problem: 'Students struggle with abstract inference rules and formal proof derivation in Discrete Mathematics, leading to steep learning curves and high disengagement in fundamental computing courses.',
             goal: 'Provide an adaptive, gamified AI tutor that reinforces logical deduction through interactive levels, instant rule feedback, and intelligent hint generation.',
             contributions: 'Lead Researcher, Algorithm Architect & Full-Stack Developer',
@@ -599,11 +599,11 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         p2: {
-            title: 'Visual AI Logic Proof Parser & Evaluator',
-            type: 'PCSC 2026 Davao Presentation',
+            title: 'PCSC 2026: Visual AI Logic Proof Parser',
+            type: '26th Philippine Computing Science Congress Presentation',
             image: 'images/visualai.jpg',
             orientation: 'square',
-            oneLiner: 'Computer vision model scanning and scoring handwritten discrete math proofs.',
+            oneLiner: '26th Philippine Computing Science Congress (PCSC 2026, Davao City).',
             problem: 'Manual verification and grading of student handwritten discrete math proofs is time-consuming, prone to human inconsistency, and provides delayed feedback.',
             goal: 'Deliver a high-accuracy visual parsing pipeline using OCR and AST-based logical rule verification to scan, evaluate, and provide step-by-step scoring of handwritten proofs.',
             contributions: 'Lead Computer Vision Researcher & Presenter (PCSC 2026, Davao City)',
@@ -613,7 +613,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         p9: {
-            title: 'Refertoire — Sheet Music Repertoire Manager',
+            title: 'Refertoire: Sheet Music Repertoire Manager',
             type: 'Freelance Offline-First App',
             image: 'images/refertoire.jpg',
             orientation: 'landscape',
@@ -624,7 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
             techStack: ['Offline-First', 'PWA', 'IndexedDB', 'Service Workers', 'Vanilla JS', 'Tailwind']
         },
         p8: {
-            title: 'Nexchef — Live Cooking & Recipe Platform',
+            title: 'Nexchef: Live Cooking & Recipe Platform',
             type: 'Freelance Mobile App',
             image: 'images/nexchef.png',
             orientation: 'portrait',

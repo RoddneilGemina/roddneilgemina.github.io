@@ -93,7 +93,7 @@
           intro: ds.intro !== undefined ? ds.intro !== 'false' : true,
           theme: ds.theme || 'dark',
           backdropColor: ds.backdropColor || null,
-          iconUrl: ds.iconUrl || '/images/rg-pattern.svg',
+          iconUrl: ds.iconUrl || 'images/rg-pattern.svg',
           patternSize: ds.patternSize || '66px 66px',
           statusColor: ds.statusColor || '#22c55e'
         },

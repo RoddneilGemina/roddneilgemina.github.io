@@ -5,7 +5,7 @@
     <title>About | Roddneil B. Gemina - Experience, Education &amp; Accolades</title>
     <meta name="description" content="Biography, industry roles, freelance experience, educational distinctions, certifications, and research accolades of Roddneil B. Gemina, Software Engineer &amp; CS Scholar.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/about.html">
-    <link rel="stylesheet" href="css/styles.css?v=17.0">
+    <link rel="stylesheet" href="css/styles.css?v=24.0">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +14,9 @@
     
     <!-- GSAP & Animation Engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- Three.js 3D Engine (Lanyard physics & WebGL rendering) -->
+    <script src="js/vendor/three.min.js"></script>
 
     <!-- React Bits Specular Button -->
     <script src="js/specular-button.js"></script>
@@ -27,11 +30,20 @@
     <!-- React Bits DotField Interactive Texture Background Overlay -->
     <script src="js/dot-field.js"></script>
 
-    <!-- React Bits GradientText -->
+    <!-- React Bits GradientText & VariableProximity -->
     <script src="js/gradient-text.js"></script>
     <script src="js/variable-proximity.js"></script>
+
+    <!-- React Bits ProfileCard (Dual-Axis 3D Tilt & Holographic Foil) -->
+    <script src="js/profile-card.js"></script>
+
+    <!-- React Bits GooeyNav (WebGL2 Metaball Fluid Navigation) -->
+    <script src="js/gooey-nav.js?v=2.2"></script>
+
+    <!-- React Bits Lanyard (3D Physics Avatar Badge with RG Hologram) -->
+    <script src="js/lanyard.js?v=2.0"></script>
 </head>
-<body>
+<body class="about-page">
 
     <!-- REACT BITS DOTFIELD TACTILE TEXTURE BACKGROUND OVERLAY -->
     <div id="global-dotfield-container" class="dot-field-container global-dotfield" aria-hidden="true"></div>
@@ -53,14 +65,61 @@
                 </div>
             </a>
 
-            <!-- FLOATING PILL NAV (CENTER) -->
-            <nav class="main-nav-pill" id="main-nav">
-                <ul class="nav-pill-list">
-                    <li><a href="index.html" class="nav-pill-item">Home</a></li>
-                    <li><a href="projects.html" class="nav-pill-item">Projects</a></li>
-                    <li><a href="about.html" class="nav-pill-item active">About</a></li>
-                    <li><a href="contact.html" class="nav-pill-item">Contact</a></li>
-                </ul>
+            <!-- REACT BITS GOOEY NAV (CENTER) -->
+            <nav class="gooey-nav gooey-nav--md gooey-nav--framed main-nav-pill"
+                 id="main-nav"
+                 data-gooey-nav="true"
+                 data-theme="dark"
+                 data-color="#00f0ff"
+                 data-colors="#00f0ff,#38bdf8,#7fa8ff"
+                 data-particle-count="15"
+                 data-spread="56"
+                 data-animation-time="600"
+                 data-time-variance="300"
+                 data-gooeyness="0.5"
+                 data-wobble="0.5"
+                 data-hover-effect="true">
+                <span class="gooey-nav__rim"></span>
+                <div class="gooey-nav__stage">
+                    <canvas class="gooey-nav__canvas" aria-hidden="true"></canvas>
+                    <span class="gooey-nav__fallback" aria-hidden="true"></span>
+                    <ul class="gooey-nav__list">
+                        <li class="gooey-nav__item" data-gooey-index="0">
+                            <a href="index.html" class="gooey-nav__link">
+                                <span class="gooey-nav__label">Home</span>
+                            </a>
+                        </li>
+                        <li class="gooey-nav__item" data-gooey-index="1">
+                            <a href="projects.html" class="gooey-nav__link">
+                                <span class="gooey-nav__label">Work</span>
+                            </a>
+                        </li>
+                        <li class="gooey-nav__item" data-gooey-index="2" data-active="">
+                            <a href="about.html" class="gooey-nav__link active" aria-current="page">
+                                <span class="gooey-nav__label">About</span>
+                            </a>
+                        </li>
+                        <li class="gooey-nav__item" data-gooey-index="3">
+                            <a href="contact.html" class="gooey-nav__link">
+                                <span class="gooey-nav__label">Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="gooey-nav__list gooey-nav__list--active" aria-hidden="true">
+                        <li class="gooey-nav__item">
+                            <span class="gooey-nav__link"><span class="gooey-nav__label">Home</span></span>
+                        </li>
+                        <li class="gooey-nav__item">
+                            <span class="gooey-nav__link"><span class="gooey-nav__label">Work</span></span>
+                        </li>
+                        <li class="gooey-nav__item">
+                            <span class="gooey-nav__link"><span class="gooey-nav__label">About</span></span>
+                        </li>
+                        <li class="gooey-nav__item">
+                            <span class="gooey-nav__link"><span class="gooey-nav__label">Contact</span></span>
+                        </li>
+                    </ul>
+                </div>
             </nav>
 
             <!-- RIGHT ACTIONS -->
@@ -81,14 +140,44 @@
 
     <main id="main-content">
 
-        <!-- ABOUT MINI-HERO SECTION -->
+        <!-- ABOUT HERO SECTION -->
         <section class="about-hero-section">
+            <!-- FULL-SECTION 3D LANYARD INTERACTIVE BADGE CANVAS -->
+            <div id="about-lanyard"
+                 class="lanyard lanyard--fullsection"
+                 style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5;"
+                 data-lanyard="true"
+                 data-anchor-target="#lanyard-anchor-target"
+                 data-anchor="right"
+                 data-front-image="images/card-front.png"
+                 data-back-image="images/card-back.png"
+                 data-strap-image="images/band.png"
+                 data-strap-color="#111111"
+                 data-card-color="#ffffff"
+                 data-finish="holographic"
+                 data-metal="silver"
+                 data-orientation="portrait"
+                 data-size="0.62"
+                 data-strap-length="0.46"
+                 data-strap-width="0.72"
+                 data-gravity="1.1"
+                 data-damping="0.45"
+                 data-elasticity="0.5"
+                 data-breeze="0.4"
+                 data-interactive="true"
+                 data-intro="true"
+                 role="img"
+                 aria-label="3D Interactive Holographic Credential Badge for Roddneil Gemina with RG Monogram.">
+            </div>
+
             <div class="container about-hero-container">
                 
-                <!-- LEFT CONTENT: BIG "HI I'M RODDNEIL GEMINA" -->
+                <!-- LEFT CONTENT: INTRO & CREDENTIALS -->
                 <div class="about-hero-content">
-                    <span class="about-hero-greeting">Hi, I'm</span>
+
+
                     <h1 class="about-hero-name">
+                        <span class="about-hero-greeting">Hi, I'm</span>
                         <span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 650, 'opsz' 14" data-to-font="'wght' 950, 'opsz' 40" data-radius="140" data-falloff="linear">Roddneil Gemina</span>
                     </h1>
                     
@@ -104,12 +193,20 @@
                         <span class="page-stat-chip"><strong>TOPCIT</strong> Level 3 Practical Benchmark</span>
                     </div>
 
+                    <div class="about-hero-actions">
+                        <a href="contact.html" class="specular-button specular-button--md" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.3" data-specular-radius="999">
+                            <span>Get in Touch ↗</span>
+                        </a>
+                        <a href="GeminaResume.pdf" target="_blank" rel="noopener noreferrer" class="about-hero-btn-ghost">
+                            <span>Download Resume / CV ↓</span>
+                        </a>
+                    </div>
+
                 </div>
 
-                <!-- RIGHT CONTENT: TALL EDITORIAL PORTRAIT -->
-                <div class="about-hero-figure">
-                    <div class="about-hero-figure-glow" aria-hidden="true"></div>
-                    <img src="images/roddneil.png" alt="Roddneil Gemina - Software Engineer &amp; CS Scholar" class="about-hero-portrait-img" width="731" height="965" loading="eager" fetchpriority="high">
+                <!-- RIGHT CONTENT: FIGURE ANCHOR TARGET FOR LANYARD -->
+                <div class="about-hero-figure" id="lanyard-anchor-target" aria-hidden="true">
+                    <div class="about-hero-figure-glow"></div>
                 </div>
 
             </div>
@@ -196,7 +293,7 @@
                         <!-- FREELANCE 1: REFERTOIRE -->
                         <div class="timeline-item glass-card">
                             <div class="timeline-header">
-                                <h4 class="item-title">Lead Full-Stack Engineer — Refertoire</h4>
+                                <h4 class="item-title">Lead Full-Stack Engineer, Refertoire</h4>
                                 <span class="sleek-badge">2025</span>
                             </div>
                             <div class="timeline-meta-row">
@@ -220,8 +317,8 @@
                         <!-- FREELANCE 2: TAKEIT & BESPOKE APPS -->
                         <div class="timeline-item glass-card">
                             <div class="timeline-header">
-                                <h4 class="item-title">Full-Stack Contractor — TakeIt &amp; Commercial Portals</h4>
-                                <span class="sleek-badge">2023 — 2024</span>
+                                <h4 class="item-title">Full-Stack Contractor: TakeIt &amp; Commercial Portals</h4>
+                                <span class="sleek-badge">2023-2024</span>
                             </div>
                             <div class="timeline-meta-row">
                                 <span class="item-subtitle">Independent Clients • Cebu City</span>
@@ -239,6 +336,11 @@
                                 <span class="timeline-tech-pill">QR Validation</span>
                                 <span class="timeline-tech-pill">Cloudflare</span>
                             </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- SECTION 2: EDUCATIONAL BACKGROUND -->
@@ -257,10 +359,10 @@
                     <div class="timeline-item glass-card">
                         <div class="timeline-header">
                             <h3 class="item-title">Bachelor of Science in Computer Science</h3>
-                            <span class="sleek-badge">2022 — 2026</span>
+                            <span class="sleek-badge">2022-2026</span>
                         </div>
                         <div class="timeline-meta-row">
-                            <span class="item-subtitle">Cebu Institute of Technology – University (CIT-U)</span>
+                            <span class="item-subtitle">Cebu Institute of Technology - University (CIT-U)</span>
                             <span class="item-role-tag">Full CS Scholar</span>
                         </div>
                         <div class="timeline-details">
@@ -283,10 +385,10 @@
                     <div class="timeline-item glass-card">
                         <div class="timeline-header">
                             <h3 class="item-title">Specialized STEM Secondary Education</h3>
-                            <span class="sleek-badge">2016 — 2022</span>
+                            <span class="sleek-badge">2016-2022</span>
                         </div>
                         <div class="timeline-meta-row">
-                            <span class="item-subtitle">Philippine Science High School – Central Visayas Campus (PSHS-CVC)</span>
+                            <span class="item-subtitle">Philippine Science High School - Central Visayas Campus (PSHS-CVC)</span>
                             <span class="item-role-tag">DOST Scholar</span>
                         </div>
                         <div class="timeline-details">
@@ -300,6 +402,8 @@
                             <span class="timeline-tech-pill">Advanced STEM</span>
                             <span class="timeline-tech-pill">Varsity Chess</span>
                         </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -385,6 +489,8 @@
                             <span>Algorithmic Complexity</span>
                             <span>CodeChum Examination</span>
                         </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -400,14 +506,21 @@
 
                 <div class="research-grid">
                     
-                    <!-- ICETT -->
+                    <!-- ICETT 2026 -->
                     <div class="research-card glass-card">
                         <div class="research-card-content">
                             <div class="research-badge-row">
-                                <span class="sleek-badge research-scopus-pill">Scopus Indexed • ICETT '26</span>
-                                <span class="project-date">2025 — 2026</span>
+                                <span class="sleek-badge research-scopus-pill">Scopus Indexed • Singapore</span>
+                                <span class="project-date">2025-2026</span>
                             </div>
-                            <h3 class="research-title">Fusion Rush: Enhancing Proficiency in Boolean Logic Algebra through Gamification</h3>
+                            <h3 class="research-conference-heading">ICETT 2026</h3>
+                            <div class="research-conference-sub">14th International Conference on Educational and Information Technology</div>
+
+                            <div class="research-study-box">
+                                <div class="research-study-eyebrow">Accepted Research Paper</div>
+                                <h4 class="research-study-name">Fusion Rush: Enhancing Proficiency in Boolean Logic Algebra through Gamification</h4>
+                            </div>
+
                             <div class="research-authors-strip">
                                 <span>P.M.G. Bascuq, <strong>R.B. Gemina</strong>, B.X. Mendoza, Engr. R. Laviste, Prof. C. Arellano</span>
                             </div>
@@ -423,20 +536,27 @@
                         </div>
                         <div class="research-meta-box">
                             <div class="research-location-wrap">
-                                <div class="research-location">Cebu City • Lead Researcher &amp; Full-Stack Dev</div>
-                                <div class="research-venue">ICETT 2026 (International Conference on Educational &amp; Information Tech)</div>
+                                <div class="research-location">Singapore • Scopus Q3/Q4 Proceeding</div>
+                                <div class="research-venue">Lead Researcher &amp; Full-Stack Dev</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- PCSC -->
+                    <!-- PCSC 2026 -->
                     <div class="research-card glass-card">
                         <div class="research-card-content">
                             <div class="research-badge-row">
-                                <span class="sleek-badge research-pcsc-pill">PCSC 2026 Presenter • Davao City</span>
+                                <span class="sleek-badge research-pcsc-pill">National Congress • Davao City</span>
                                 <span class="project-date">2026</span>
                             </div>
-                            <h3 class="research-title">Visual AI Logic Proof Parser: Parsing Structured Handwritten Discrete Math Proofs</h3>
+                            <h3 class="research-conference-heading">PCSC 2026</h3>
+                            <div class="research-conference-sub">26th Philippine Computing Science Congress</div>
+
+                            <div class="research-study-box">
+                                <div class="research-study-eyebrow">Technical Presentation Paper</div>
+                                <h4 class="research-study-name">Visual AI Logic Proof Parser: Parsing Structured Handwritten Discrete Math Proofs</h4>
+                            </div>
+
                             <div class="research-authors-strip">
                                 <span>P.M.G. Bascuq, <strong>R.B. Gemina</strong>, B.X. Mendoza, Prof. C. Arellano</span>
                             </div>
@@ -474,12 +594,11 @@
 
                 <div class="philosophy-bento-grid">
                     
-                    <!-- PILLAR 1 -->
+                    <!-- DOMAIN: ZERO-LAG UX -->
                     <div class="philo-card glass-card philo-hero-card">
-                        <div class="philo-watermark" aria-hidden="true">01</div>
                         <div class="philo-card-body">
                             <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">PILLAR 01</span>
+                                <span class="philo-pillar-badge">UI Runtime &amp; INP</span>
                                 <span class="philo-metric-pill">INP &lt; 50ms</span>
                             </div>
                             <h3 class="philo-title">Zero-Lag UX: Interaction Over Decoration</h3>
@@ -494,12 +613,11 @@
                         </div>
                     </div>
 
-                    <!-- PILLAR 2 -->
+                    <!-- DOMAIN: CLOUD-NATIVE RESILIENCE -->
                     <div class="philo-card glass-card philo-compact-card">
-                        <div class="philo-watermark" aria-hidden="true">02</div>
                         <div class="philo-card-body">
                             <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">PILLAR 02</span>
+                                <span class="philo-pillar-badge">High Availability &amp; SRE</span>
                                 <span class="philo-metric-pill">99.9% SLO</span>
                             </div>
                             <h3 class="philo-title">Cloud-Native Resilience</h3>
@@ -513,13 +631,12 @@
                         </div>
                     </div>
 
-                    <!-- PILLAR 3 -->
+                    <!-- DOMAIN: DEFENSIVE ARCHITECTURE -->
                     <div class="philo-card glass-card philo-compact-card">
-                        <div class="philo-watermark" aria-hidden="true">03</div>
                         <div class="philo-card-body">
                             <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">PILLAR 03</span>
-                                <span class="philo-metric-pill">Defensive</span>
+                                <span class="philo-pillar-badge">Defensive Architecture</span>
+                                <span class="philo-metric-pill">Validation First</span>
                             </div>
                             <h3 class="philo-title">Defensive Architecture</h3>
                             <p class="philo-thesis">
@@ -532,13 +649,12 @@
                         </div>
                     </div>
 
-                    <!-- PILLAR 4 -->
+                    <!-- DOMAIN: EMPIRICAL BENCHMARKING -->
                     <div class="philo-card glass-card philo-hero-card">
-                        <div class="philo-watermark" aria-hidden="true">04</div>
                         <div class="philo-card-body">
                             <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">PILLAR 04</span>
-                                <span class="philo-metric-pill">Empirical</span>
+                                <span class="philo-pillar-badge">Empirical Benchmarking</span>
+                                <span class="philo-metric-pill">Profiled Gains</span>
                             </div>
                             <h3 class="philo-title">Empirical Optimization</h3>
                             <p class="philo-thesis">
@@ -570,9 +686,9 @@
                     <div class="volunteering-card glass-card">
                         <div class="volunteering-header">
                             <span class="sleek-badge">Collegiate Music Leadership</span>
-                            <span class="volunteering-period">2024 — 2026</span>
+                            <span class="volunteering-period">2024-2026</span>
                         </div>
-                        <h3 class="volunteering-title">Koro Teknoy Chorale — Presidential OIC &amp; Bass 2</h3>
+                        <h3 class="volunteering-title">Koro Teknoy Chorale: Presidential OIC &amp; Bass 2</h3>
                         <p class="volunteering-desc">
                             Directed executive management, rehearsal scheduling, and external ceremonial appearances for CIT-U's premier collegiate chorale. Maintained team morale and vocal discipline across major university convocations and regional competitions.
                         </p>
@@ -586,7 +702,7 @@
                     <div class="volunteering-card glass-card">
                         <div class="volunteering-header">
                             <span class="sleek-badge">Student Tech Leadership</span>
-                            <span class="volunteering-period">2023 — 2025</span>
+                            <span class="volunteering-period">2023-2025</span>
                         </div>
                         <h3 class="volunteering-title">Computer Science Guild &amp; Peer Tutoring</h3>
                         <p class="volunteering-desc">
@@ -601,23 +717,30 @@
 
                 </div>
 
-                <!-- CTA -->
-                <div class="bite-connect-card spotlight-card"
-                     data-spotlight-card="true"
-                     data-spotlight-color="#00f0ff"
-                     data-intensity="0.22"
-                     data-spotlight-size="360"
-                     data-border-glow="0.85"
-                     data-proximity="140"
-                     data-theme="dark"
-                     style="margin-top: 48px; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; padding: 2.75rem 2rem;">
-                    <h3 class="bite-connect-title" style="margin-bottom: 12px; font-size: clamp(1.6rem, 2.4vw, 2.1rem);">Let's discuss an engineering role or project</h3>
-                    <p class="bite-connect-desc" style="max-width: 540px; margin: 0 auto 26px; color: var(--text-secondary); line-height: 1.6;">
-                        Actively evaluating Full-Stack Developer, Software Engineer, and Site Reliability Engineer (SRE) opportunities with immediate start availability.
-                    </p>
-                    <a href="contact.html" class="btn-hero-primary specular-button specular-button--md" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.3" data-specular-radius="8">
-                        <span>Go to In-Depth Contact Page &rarr;</span>
-                    </a>
+                <!-- CTA (REACT BITS BORDER GLOW) -->
+                <div class="border-glow-card bite-connect-card-glow"
+                     data-border-glow="true"
+                     data-edge-sensitivity="30"
+                     data-glow-color="185 100 65"
+                     data-bg-color="#080e1c"
+                     data-border-radius="28"
+                     data-glow-radius="40"
+                     data-glow-intensity="1.1"
+                     data-cone-spread="25"
+                     data-colors="#c084fc, #38bdf8, #00f0ff"
+                     data-fill-opacity="0.45"
+                     data-animated="false"
+                     style="max-width: 720px; margin: 0 auto;">
+                    <span class="edge-light"></span>
+                    <div class="border-glow-inner bite-connect-card" style="text-align: center; padding: 2.5rem 2rem; background: transparent; border: none; box-shadow: none;">
+                        <h3 class="bite-connect-title">Let's discuss an engineering role or project</h3>
+                        <p class="bite-connect-desc">
+                            Actively evaluating Full-Stack Developer, Software Engineer, and Site Reliability Engineer (SRE) opportunities with immediate start availability.
+                        </p>
+                        <a href="contact.html" class="specular-button specular-button--md" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.3" data-specular-radius="999">
+                            <span>Go to In-Depth Contact Page &rarr;</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
