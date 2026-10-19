@@ -14,28 +14,28 @@
 
   const DEFAULT_PROJECT_ITEMS = [
     {
-      image: 'images/fusionrush.jpg',
-      title: 'Fusion Rush',
-      badge: "ICETT '26",
-      projectId: 'p1'
-    },
-    {
       image: 'images/resutex.png',
       title: 'ResuTex',
       badge: 'LaTeX ATS Studio',
       projectId: 'p13'
     },
     {
-      image: 'images/visualai.jpg',
-      title: 'Visual AI Proof Parser',
-      badge: "PCSC '26",
-      projectId: 'p2'
-    },
-    {
       image: 'images/aicquire.png',
       title: 'aicquire',
       badge: 'AI Hiring ATS',
       projectId: 'p12'
+    },
+    {
+      image: 'images/fusionrush.jpg',
+      title: 'Fusion Rush',
+      badge: "ICETT '26",
+      projectId: 'p1'
+    },
+    {
+      image: 'images/visualai.jpg',
+      title: 'Visual AI Proof Parser',
+      badge: "PCSC '26",
+      projectId: 'p2'
     },
     {
       image: 'images/refertoire.png',
@@ -58,7 +58,7 @@
     {
       image: 'images/nexchef.png',
       title: 'Nexchef Kitchen',
-      badge: 'Freelance App',
+      badge: 'Mobile Culinary',
       projectId: 'p8'
     },
     {
@@ -68,16 +68,16 @@
       projectId: 'p3'
     },
     {
-      image: 'images/cropconnect.png',
-      title: 'CropConnect',
-      badge: 'AgriTech PWA',
-      projectId: 'p5'
-    },
-    {
       image: 'images/dishcover.png',
       title: 'DishCover',
       badge: 'Smart Pantry AI',
       projectId: 'p4'
+    },
+    {
+      image: 'images/cropconnect.png',
+      title: 'CropConnect',
+      badge: 'AgriTech PWA',
+      projectId: 'p5'
     },
     {
       image: 'images/bomberman.png',

@@ -5,67 +5,76 @@ import './DriftWall.css';
 
 const DEFAULT_ITEMS = [
   {
+    image: 'images/resutex.png',
+    title: 'ResuTex',
+    badge: 'LaTeX ATS Studio',
+    projectId: 'p13'
+  },
+  {
+    image: 'images/aicquire.png',
+    title: 'aicquire',
+    badge: 'AI Hiring ATS',
+    projectId: 'p12'
+  },
+  {
     image: 'images/fusionrush.jpg',
     title: 'Fusion Rush',
-    badge: 'ICETT 2026',
-    projectId: 'p1',
-    href: undefined
+    badge: "ICETT '26",
+    projectId: 'p1'
   },
   {
     image: 'images/visualai.jpg',
     title: 'Visual AI Proof Parser',
-    badge: 'PCSC 2026',
-    projectId: 'p2',
-    href: undefined
+    badge: "PCSC '26",
+    projectId: 'p2'
   },
   {
-    image: 'images/refertoire.jpg',
+    image: 'images/refertoire.png',
     title: 'Refertoire PWA',
-    badge: 'Freelance PWA',
-    projectId: 'p9',
-    href: undefined
+    badge: '100% Offline PWA',
+    projectId: 'p9'
+  },
+  {
+    image: 'images/gigipos.png',
+    title: 'GigiPOS Platform',
+    badge: 'Modern Retail POS',
+    projectId: 'p10'
+  },
+  {
+    image: 'images/whatswap.png',
+    title: 'WhatSwap?!',
+    badge: 'P2P Barter & Bids',
+    projectId: 'p11'
   },
   {
     image: 'images/nexchef.png',
     title: 'Nexchef Kitchen',
-    badge: 'Freelance App',
-    projectId: 'p8',
-    href: undefined
+    badge: 'Mobile Culinary',
+    projectId: 'p8'
   },
   {
     image: 'images/takeit.png',
     title: 'TakeIt QR Tickets',
     badge: 'Crypto Tickets',
-    projectId: 'p5',
-    href: undefined
+    projectId: 'p3'
+  },
+  {
+    image: 'images/dishcover.png',
+    title: 'DishCover',
+    badge: 'Smart Pantry AI',
+    projectId: 'p4'
   },
   {
     image: 'images/cropconnect.png',
     title: 'CropConnect',
     badge: 'AgriTech PWA',
-    projectId: 'p4',
-    href: undefined
-  },
-  {
-    image: 'images/dishcover.png',
-    title: 'DishCover',
-    badge: 'Culinary AI',
-    projectId: 'p3',
-    href: undefined
-  },
-  {
-    image: 'images/etanom.jpg',
-    title: 'Etanom Platform',
-    badge: 'Hydroponics IoT',
-    projectId: 'p6',
-    href: undefined
+    projectId: 'p5'
   },
   {
     image: 'images/bomberman.png',
     title: 'Bomberman Java',
     badge: 'Game Systems',
-    projectId: 'p7',
-    href: undefined
+    projectId: 'p6'
   }
 ];
 
