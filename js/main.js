@@ -613,15 +613,59 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         p9: {
-            title: 'Refertoire: Sheet Music Repertoire Manager',
-            type: 'Freelance Offline-First App',
-            image: 'images/refertoire.jpg',
+            title: 'Refertoire: Ensemble Repertoire Syncing App',
+            type: 'Freelance Offline-First PWA & Android',
+            image: 'images/refertoire.png',
             orientation: 'landscape',
-            oneLiner: 'Keep your ensemble’s entire sheet music repertoire synced, organized, and available 100% offline.',
-            problem: 'Choral ensembles and orchestras frequently perform in remote acoustic venues lacking dependable Wi-Fi, leaving musicians stranded when digital music sheets fail to download.',
-            goal: 'Provide a resilient offline-first PWA with IndexedDB local caching, instant search across gigabytes of scores, and Bluetooth foot-pedal page turning support.',
+            oneLiner: 'Never Forget a Piece. 100% Offline Resilience for musical ensembles.',
+            problem: 'Choral ensembles and orchestras frequently perform in remote acoustic venues lacking dependable Wi-Fi, leaving musicians stranded when digital music scores fail to load or download.',
+            goal: 'Provide a resilient offline-first PWA and Android package with an in-app package installer, squish-free dual-container PDF reader, instant sync, and Bluetooth foot-pedal page turning support.',
             contributions: 'Lead Full-Stack Engineer & Audio Tech Architect',
-            techStack: ['Offline-First', 'PWA', 'IndexedDB', 'Service Workers', 'Vanilla JS', 'Tailwind']
+            techStack: ['Offline-First', 'PWA', 'Android APK', 'IndexedDB', 'Service Workers', 'PDF Reader', 'Tailwind CSS']
+        },
+        p10: {
+            title: 'GigiPOS: Modern Multi-Branch Retail Platform',
+            type: 'Enterprise Retail POS SaaS',
+            image: 'images/gigipos.png',
+            orientation: 'landscape',
+            oneLiner: 'Run smarter retail with one unified dashboard for sales, inventory, and teams.',
+            problem: 'Retail businesses operating across multiple brick-and-mortar branches suffer from fragmented inventory records, slow checkout bottlenecks, and lack of real-time multi-branch visibility.',
+            goal: 'Architect an ultra-fast point of sale platform supporting 120+ branches with a 35s average checkout speed, 99.9% uptime SLA, and real-time branch synchronization.',
+            contributions: 'Platform Architect & Full-Stack Developer',
+            techStack: ['React', 'Node.js', 'PostgreSQL', 'Multi-Branch Sync', 'Redis', 'REST APIs', 'Cloud Architecture']
+        },
+        p11: {
+            title: 'WhatSwap?!: Dynamic P2P Barter & Auction Marketplace',
+            type: 'P2P Marketplace & Real-Time Auctions',
+            image: 'images/whatswap.png',
+            orientation: 'landscape',
+            oneLiner: 'Discover a world of opportunities to trade, bid, and connect with unique items and effortless exchanges.',
+            problem: 'Traditional e-commerce platforms force users into pure monetary transactions, leaving collectors and traders without a trusted ecosystem for item-to-item barter and dynamic bidding.',
+            goal: 'Engineer an interactive trade and auction marketplace featuring multi-party barter negotiations, real-time socket bidding, and verified escrow transaction security.',
+            contributions: 'Full-Stack Engineer & Systems Designer',
+            techStack: ['Web App', 'Real-Time Auctions', 'WebSockets', 'P2P Barter Logic', 'PostgreSQL', 'Node.js', 'Express']
+        },
+        p12: {
+            title: 'aicquire: AI-Powered Applicant Tracking System',
+            type: 'HR Tech & Candidate Matching Platform',
+            image: 'images/aicquire.png',
+            orientation: 'landscape',
+            oneLiner: 'The modern way of hiring: AI-driven applicant tracking, semantic matching, and streamlined workflows.',
+            problem: 'Recruiting teams are overwhelmed by thousands of unstructured applicant resumes, resulting in sluggish hiring cycles, recruiter burnout, and missed top-tier talent.',
+            goal: 'Build an AI-native applicant tracking system with 94% semantic candidate match scoring, multi-stage drag-and-drop Kanban hiring boards, and automated interview scheduling workflows.',
+            contributions: 'Lead Full-Stack Developer & AI Systems Engineer',
+            techStack: ['AI Matching Engine', 'NLP / LLM Parsing', 'React', 'TypeScript', 'Node.js', 'Kanban Pipelines', 'REST API']
+        },
+        p13: {
+            title: 'ResuTex: Autonomous ATS Resume Studio & Compiler',
+            type: 'Autonomous ATS Resume Studio & Compiler',
+            image: 'images/resutex.png',
+            orientation: 'landscape',
+            oneLiner: '100% ATS Parsability. Authentic LaTeX Typesetting paired with ReportLab Python compiler and Gemini 3.8 Flash intelligence.',
+            problem: 'Modern job applicants get rejected by ATS parsers due to invisible formatting artifacts, complex table grids, and non-standard layouts generated by generic rich-text editors.',
+            goal: 'Deliver an autonomous split-screen studio generating single-column Harvard/MIT standard resumes with zero formatting artifacts, sub-second Python compilation, and Gemini 3.8 Flash bullet polish.',
+            contributions: 'Creator & Lead AI Engineer',
+            techStack: ['Python', 'ReportLab Compiler', 'Gemini 3.8 Flash', 'LaTeX Generation', 'AST Parsing', 'Figma Design System']
         },
         p8: {
             title: 'Nexchef: Live Cooking & Recipe Platform',
@@ -809,6 +853,33 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
 
+        // Also populate dedicated fields in projects.html modal if present
+        const modalImg = document.getElementById('modal-project-image');
+        if (modalImg && data.image) {
+            modalImg.src = data.image;
+            modalImg.alt = data.title;
+        }
+        const modalDesc = document.getElementById('modal-project-desc');
+        if (modalDesc) modalDesc.textContent = data.oneLiner || '';
+        const modalProblem = document.getElementById('modal-project-problem');
+        if (modalProblem) modalProblem.textContent = data.problem || '';
+        const modalGoal = document.getElementById('modal-project-goal');
+        if (modalGoal) modalGoal.textContent = data.goal || '';
+        const modalRole = document.getElementById('modal-project-role');
+        if (modalRole) modalRole.textContent = data.contributions || '';
+        const modalStack = document.getElementById('modal-project-stack');
+        if (modalStack) {
+            modalStack.innerHTML = (data.techStack || []).map(t => `<span class="tech-badge">${t}</span>`).join('');
+        }
+        const modalLinks = document.getElementById('modal-project-links');
+        if (modalLinks) {
+            if (data.links && data.links.length > 0) {
+                modalLinks.innerHTML = data.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener noreferrer" class="sleek-btn-sm"><span>${l.label} ↗</span></a>`).join('');
+            } else {
+                modalLinks.innerHTML = '<span class="meta-val" style="color:var(--text-muted);font-size:0.8rem;">Internal Artifact / Proprietary</span>';
+            }
+        }
+
         // Reset to preview tab on open
         switchModalTab('preview');
 
@@ -929,23 +1000,29 @@ document.addEventListener('DOMContentLoaded', () => {
     updateActiveSectionMarker();
 
 
-    // ==========================================================================
-    // 10. PROJECT CAROUSEL MODAL CLICK & ACCESSIBILITY
-    // ==========================================================================
-    document.querySelectorAll('.open-modal-btn, #overlay-projects-grid .project-card').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
+    window.openProjectModal = openProjectModal;
+
+    // Delegated click & accessibility handling for all project cards & buttons
+    document.addEventListener('click', (e) => {
+        // Ignore if clicking close button inside modal
+        if (e.target.closest('.dialog-close-btn, #close-modal-btn, #modal-close-action')) return;
+        
+        const btn = e.target.closest('.open-modal-btn, [data-project], [data-project-id]');
+        if (btn) {
             const pId = btn.getAttribute('data-project') || btn.getAttribute('data-project-id');
             if (pId) openProjectModal(pId);
-        });
+        }
+    });
 
-        btn.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            const btn = e.target.closest('.open-modal-btn, [data-project], [data-project-id]');
+            if (btn && document.activeElement === btn) {
                 e.preventDefault();
                 const pId = btn.getAttribute('data-project') || btn.getAttribute('data-project-id');
                 if (pId) openProjectModal(pId);
             }
-        });
+        }
     });
 
 });

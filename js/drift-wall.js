@@ -20,16 +20,40 @@
       projectId: 'p1'
     },
     {
+      image: 'images/resutex.png',
+      title: 'ResuTex',
+      badge: 'LaTeX ATS Studio',
+      projectId: 'p13'
+    },
+    {
       image: 'images/visualai.jpg',
       title: 'Visual AI Proof Parser',
       badge: "PCSC '26",
       projectId: 'p2'
     },
     {
-      image: 'images/refertoire.jpg',
+      image: 'images/aicquire.png',
+      title: 'aicquire',
+      badge: 'AI Hiring ATS',
+      projectId: 'p12'
+    },
+    {
+      image: 'images/refertoire.png',
       title: 'Refertoire PWA',
-      badge: 'Freelance PWA',
+      badge: '100% Offline PWA',
       projectId: 'p9'
+    },
+    {
+      image: 'images/gigipos.png',
+      title: 'GigiPOS Platform',
+      badge: 'Modern Retail POS',
+      projectId: 'p10'
+    },
+    {
+      image: 'images/whatswap.png',
+      title: 'WhatSwap?!',
+      badge: 'P2P Barter & Bids',
+      projectId: 'p11'
     },
     {
       image: 'images/nexchef.png',
@@ -41,31 +65,25 @@
       image: 'images/takeit.png',
       title: 'TakeIt QR Tickets',
       badge: 'Crypto Tickets',
-      projectId: 'p5'
+      projectId: 'p3'
     },
     {
       image: 'images/cropconnect.png',
       title: 'CropConnect',
       badge: 'AgriTech PWA',
-      projectId: 'p4'
+      projectId: 'p5'
     },
     {
       image: 'images/dishcover.png',
       title: 'DishCover',
-      badge: 'Culinary AI',
-      projectId: 'p3'
-    },
-    {
-      image: 'images/etanom.jpg',
-      title: 'Etanom Platform',
-      badge: 'Hydroponics IoT',
-      projectId: 'p6'
+      badge: 'Smart Pantry AI',
+      projectId: 'p4'
     },
     {
       image: 'images/bomberman.png',
       title: 'Bomberman Java',
       badge: 'Game Systems',
-      projectId: 'p7'
+      projectId: 'p6'
     }
   ];
 
