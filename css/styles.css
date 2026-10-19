@@ -193,15 +193,7 @@ body::before, body::after {
 }
 
 .hero-scanner-container {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 78%, rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 78%, rgba(0, 0, 0, 0) 100%);
+    display: none !important;
 }
 
 .hero-scanner-container canvas {
@@ -667,18 +659,7 @@ body.intro-active .hero-name-container.floating-name {
 
 /* Reduced, clean, subtle backlight aura */
 .hero-name-aura {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.6);
-    width: 110%;
-    height: 140%;
-    background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.12) 0%, rgba(139, 92, 246, 0.06) 45%, transparent 70%);
-    filter: blur(35px);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 1;
-    transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: none !important;
 }
 
 .hero-name-aura.active {
@@ -856,13 +837,7 @@ body:not(.intro-active) .hero-portrait-stage {
 }
 
 .portrait-ambient-glow {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    border-radius: 18px;
-    background: radial-gradient(circle at 50% 12%, rgba(0, 240, 255, 0.14) 0%, transparent 60%),
-                linear-gradient(to top, rgba(5, 7, 12, 0.4) 0%, transparent 30%);
-    transform: translateZ(16px);
+    display: none !important;
 }
 
 /* High-tech HUD Corner Brackets with 3D Depth */
@@ -5643,16 +5618,7 @@ dialog[open] .modal-screenshot-container {
 
 /* Authentic Cosmic Horizon Glow Beam (Cyan & Blue & Violet) */
 .hero-nebula-beam {
-    position: absolute !important;
-    top: 28% !important;
-    left: -10% !important;
-    width: 120% !important;
-    height: 380px !important;
-    background: radial-gradient(ellipse 75% 35% at 50% 50%, rgba(0, 240, 255, 0.12) 0%, rgba(56, 189, 248, 0.07) 35%, rgba(167, 139, 250, 0.04) 65%, transparent 80%) !important;
-    transform: rotate(-7deg) !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
-    filter: blur(55px) !important;
+    display: none !important;
 }
 
 /* 3. Left Hero Column Typography & Spacing */
@@ -8176,7 +8142,7 @@ body:not(.intro-active) .hero-stats-bento {
     margin-bottom: 50px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     overflow: hidden;
-    background: radial-gradient(circle at 80% 30%, rgba(0, 240, 255, 0.04) 0%, transparent 60%);
+    background: transparent;
 }
 
 .about-hero-container {
@@ -8307,16 +8273,7 @@ body:not(.intro-active) .hero-stats-bento {
 }
 
 .about-hero-figure-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 480px;
-    height: 480px;
-    background: radial-gradient(circle, rgba(0, 240, 255, 0.16) 0%, rgba(127, 168, 255, 0.08) 40%, transparent 70%);
-    pointer-events: none;
-    filter: blur(60px);
-    z-index: 0;
+    display: none !important;
 }
 
 /* Full-Section Boundary-Free 3D Lanyard */
