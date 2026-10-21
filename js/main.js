@@ -208,7 +208,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 2. REACT BITS SCANNER WEBGL BACKGROUND (HERO SECTION)
+    // 2. REACT BITS THREADS WEBGL BACKGROUND (HERO SECTION)
+    // ==========================================================================
+    let threadsInstance = null;
+
+    function initThreadsBackground() {
+        const threadsContainer = document.getElementById('hero-threads-container');
+        if (!threadsContainer || typeof Threads === 'undefined') return;
+
+        if (threadsContainer._threadsInstance) {
+            threadsInstance = threadsContainer._threadsInstance;
+            return;
+        }
+
+        threadsInstance = Threads.init(threadsContainer, {
+            color: '#ffffff',
+            accentColor: '#7fa8ff',
+            lineCount: 90,
+            thickness: 0.6,
+            softness: 1.3,
+            amplitude: 1.7,
+            distance: 0.4,
+            waves: 1.05,
+            speed: 0.6,
+            split: 0.04,
+            fray: 0.5,
+            angle: 25,
+            taper: 0.85,
+            brightness: 1.4,
+            parting: 0,
+            enableMouseInteraction: true,
+            fade: 0,
+            opacity: 1
+        });
+        threadsContainer._threadsInstance = threadsInstance;
+    }
+
+    initThreadsBackground();
+
+    // ==========================================================================
+    // 2A. REACT BITS SCANNER WEBGL BACKGROUND (HERO SECTION)
     // ==========================================================================
     let scannerInstance = null;
     let currentThemeMode = 'dark';
@@ -322,6 +361,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initTechGradientASCII();
+
+    // ==========================================================================
+    // 2D. REACT BITS GRID MOTION (FEATURED PROJECTS INTERACTIVE WALL)
+    // ==========================================================================
+    let gridMotionInstance = null;
+
+    function initFeaturedGridMotion() {
+        const gridContainer = document.getElementById('home-grid-motion');
+        if (!gridContainer || typeof GridMotion === 'undefined') return;
+
+        if (gridContainer._gridMotionInstance) {
+            gridMotionInstance = gridContainer._gridMotionInstance;
+            return;
+        }
+
+        gridMotionInstance = GridMotion.init(gridContainer);
+        gridContainer._gridMotionInstance = gridMotionInstance;
+    }
+
+    initFeaturedGridMotion();
 
     // ==========================================================================
     // 3. CYBER GLITCH-DECIPHER TYPING EFFECT ON SECTION HEADERS
@@ -631,7 +690,7 @@ document.addEventListener('DOMContentLoaded', () => {
             oneLiner: 'Run smarter retail with one unified dashboard for sales, inventory, and teams.',
             problem: 'Retail businesses operating across multiple brick-and-mortar branches suffer from fragmented inventory records, slow checkout bottlenecks, and lack of real-time multi-branch visibility.',
             goal: 'Architect an ultra-fast point of sale platform supporting 120+ branches with a 35s average checkout speed, 99.9% uptime SLA, and real-time branch synchronization.',
-            contributions: 'Platform Architect & Full-Stack Developer',
+            contributions: 'QA Analyst and Tester',
             techStack: ['React', 'Node.js', 'PostgreSQL', 'Multi-Branch Sync', 'Redis', 'REST APIs', 'Cloud Architecture']
         },
         p11: {
@@ -653,7 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
             oneLiner: 'The modern way of hiring: AI-driven applicant tracking, semantic matching, and streamlined workflows.',
             problem: 'Recruiting teams are overwhelmed by thousands of unstructured applicant resumes, resulting in sluggish hiring cycles, recruiter burnout, and missed top-tier talent.',
             goal: 'Build an AI-native applicant tracking system with 94% semantic candidate match scoring, multi-stage drag-and-drop Kanban hiring boards, and automated interview scheduling workflows.',
-            contributions: 'Lead Full-Stack Developer & AI Systems Engineer',
+            contributions: 'QA Analyst and Tester',
             techStack: ['AI Matching Engine', 'NLP / LLM Parsing', 'React', 'TypeScript', 'Node.js', 'Kanban Pipelines', 'REST API']
         },
         p13: {
@@ -757,135 +816,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function openProjectModal(projectId) {
-        const data = projectData[projectId];
-        if (!data || !projectModal) return;
-
-        activeModalProject = data;
-
-        const modalContainer = projectModal.querySelector('.modal-screenshot-container');
-        const initialOrient = data.orientation || 'portrait';
-        if (modalContainer) {
-            modalContainer.setAttribute('data-orientation', initialOrient);
-        }
-
-        const typeBadge = document.getElementById('modal-project-type');
-        const titleHeading = document.getElementById('modal-project-title');
-        if (typeBadge) typeBadge.textContent = data.type;
-        if (titleHeading) titleHeading.textContent = data.title;
-
-        // Populate Screenshot Preview Tab
-        if (modalMediaContainer && data.image) {
-            modalMediaContainer.innerHTML = `
-                <img src="${data.image}" 
-                     alt="${data.title} Screenshot" 
-                     class="modal-screenshot-img ${initialOrient}-screenshot" 
-                     data-orientation="${initialOrient}">
-            `;
-
-            const img = modalMediaContainer.querySelector('img');
-            if (img) {
-                const applyOrientation = () => {
-                    const ratio = img.naturalWidth / img.naturalHeight;
-                    let orient = 'landscape';
-                    if (ratio < 0.78) {
-                        orient = 'portrait';
-                    } else if (ratio >= 0.78 && ratio <= 1.18) {
-                        orient = 'square';
-                    } else {
-                        orient = 'landscape';
-                    }
-                    img.className = `modal-screenshot-img ${orient}-screenshot`;
-                    img.setAttribute('data-orientation', orient);
-                    if (modalContainer) {
-                        modalContainer.setAttribute('data-orientation', orient);
-                    }
-                };
-
-                if (img.complete && img.naturalWidth > 0) {
-                    applyOrientation();
-                } else {
-                    img.onload = applyOrientation;
-                }
-            }
-        }
-
-        // Populate Architectural Case Study Tab
-        if (modalCaseStudyContainer) {
-            modalCaseStudyContainer.innerHTML = `
-                <div class="case-study-block">
-                    <span class="case-study-label">
-                        <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                        Problem Statement
-                    </span>
-                    <p class="case-study-text">${data.problem || data.oneLiner}</p>
-                </div>
-
-                <div class="case-study-block">
-                    <span class="case-study-label">
-                        <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
-                        Engineering Objective &amp; Architecture
-                    </span>
-                    <p class="case-study-text">${data.goal || data.oneLiner}</p>
-                </div>
-
-                <div class="case-study-block">
-                    <span class="case-study-label">
-                        <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9z"/></svg>
-                        Core Technologies &amp; Tooling
-                    </span>
-                    <div class="case-study-tech-pills">
-                        ${(data.techStack || []).map(t => `<span class="tech-badge">${t}</span>`).join('')}
-                    </div>
-                </div>
-
-                <div class="case-study-block">
-                    <span class="case-study-label">
-                        <svg style="width:14px;height:14px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                        Engineering Role &amp; Contributions
-                    </span>
-                    <p class="case-study-text">${data.contributions || 'Lead Systems Architect & Full-Stack Developer'}</p>
-                </div>
-
-                ${(data.links && data.links.length > 0) ? `
-                <div class="case-study-actions">
-                    ${data.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener noreferrer" class="btn-hero-primary" style="padding: 6px 16px; font-size: 0.8rem;"><span>${l.label} ↗</span></a>`).join('')}
-                </div>` : ''}
-            `;
-        }
-
-        // Also populate dedicated fields in projects.html modal if present
-        const modalImg = document.getElementById('modal-project-image');
-        if (modalImg && data.image) {
-            modalImg.src = data.image;
-            modalImg.alt = data.title;
-        }
-        const modalDesc = document.getElementById('modal-project-desc');
-        if (modalDesc) modalDesc.textContent = data.oneLiner || '';
-        const modalProblem = document.getElementById('modal-project-problem');
-        if (modalProblem) modalProblem.textContent = data.problem || '';
-        const modalGoal = document.getElementById('modal-project-goal');
-        if (modalGoal) modalGoal.textContent = data.goal || '';
-        const modalRole = document.getElementById('modal-project-role');
-        if (modalRole) modalRole.textContent = data.contributions || '';
-        const modalStack = document.getElementById('modal-project-stack');
-        if (modalStack) {
-            modalStack.innerHTML = (data.techStack || []).map(t => `<span class="tech-badge">${t}</span>`).join('');
-        }
-        const modalLinks = document.getElementById('modal-project-links');
-        if (modalLinks) {
-            if (data.links && data.links.length > 0) {
-                modalLinks.innerHTML = data.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener noreferrer" class="sleek-btn-sm"><span>${l.label} ↗</span></a>`).join('');
-            } else {
-                modalLinks.innerHTML = '<span class="meta-val" style="color:var(--text-muted);font-size:0.8rem;">Internal Artifact / Proprietary</span>';
-            }
-        }
-
-        // Reset to preview tab on open
-        switchModalTab('preview');
-
-        if (!projectModal.open) {
-            projectModal.showModal();
-        }
+        if (!projectId) return;
+        window.location.href = `project.html?id=${encodeURIComponent(projectId)}`;
     }
 
     if (closeModalBtn && projectModal) {
@@ -1004,13 +936,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Delegated click & accessibility handling for all project cards & buttons
     document.addEventListener('click', (e) => {
-        // Ignore if clicking close button inside modal
-        if (e.target.closest('.dialog-close-btn, #close-modal-btn, #modal-close-action')) return;
-        
         const btn = e.target.closest('.open-modal-btn, [data-project], [data-project-id]');
         if (btn) {
+            if (btn.tagName === 'A' && btn.getAttribute('href') && !btn.getAttribute('href').startsWith('#')) {
+                return;
+            }
             const pId = btn.getAttribute('data-project') || btn.getAttribute('data-project-id');
-            if (pId) openProjectModal(pId);
+            if (pId) {
+                e.preventDefault();
+                openProjectModal(pId);
+            }
         }
     });
 
@@ -1018,6 +953,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter' || e.key === ' ') {
             const btn = e.target.closest('.open-modal-btn, [data-project], [data-project-id]');
             if (btn && document.activeElement === btn) {
+                if (btn.tagName === 'A' && btn.getAttribute('href') && !btn.getAttribute('href').startsWith('#')) {
+                    return;
+                }
                 e.preventDefault();
                 const pId = btn.getAttribute('data-project') || btn.getAttribute('data-project-id');
                 if (pId) openProjectModal(pId);

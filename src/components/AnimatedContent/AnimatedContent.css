@@ -1,0 +1,12 @@
+/* AnimatedContent styles from React Bits */
+.animated-content {
+  will-change: transform, opacity, filter;
+}
+
+.animated-content[data-animated="false"] {
+  visibility: hidden;
+}
+
+.animated-content[data-animated="true"] {
+  visibility: visible;
+}

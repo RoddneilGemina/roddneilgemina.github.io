@@ -13,7 +13,7 @@
     <meta name="twitter:title" content="Roddneil B. Gemina | Software Engineer &amp; CS Scholar Portfolio">
     <meta name="twitter:description" content="Portfolio of Roddneil B. Gemina, Computer Science Scholar from CIT-U. SRE Intern at Opswerks, QA Analyst at DXForm, and AI Researcher.">
     <meta name="twitter:url" content="https://roddneil-gemina.pages.dev/">
-    <link rel="stylesheet" href="css/styles.css?v=25.0">
+    <link rel="stylesheet" href="css/styles.css?v=4.1">
     
     <!-- Google Fonts: Archivo (Display & Body) & Geist Mono (Technical Utility & Buttons) per Mike Wilcock Design System -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,8 +22,16 @@
     
     <!-- GSAP & ScrollTrigger Animation Engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- React Bits AnimatedContent (Physics-Based Scroll & Entrance Reveal) -->
+    <script src="js/animated-content.js"></script>
 
     <!-- React Bits Scanner WebGL Background -->
+    <script src="js/ferrofluid.js"></script>
+    <script src="js/threads.js?v=31.0"></script>
+    <script src="js/ghost-fibers.js"></script>
+    <script src="js/prism.js"></script>
     <script src="js/scanner.js"></script>
 
     <!-- React Bits Specular Button (Physics-Based WebGL Lighting) -->
@@ -62,8 +70,9 @@
     <script src="js/gradient-ascii.js?v=1.1"></script>
     <!-- React Bits GooeyNav (WebGL2 Metaball Fluid Navigation) -->
     <script src="js/gooey-nav.js?v=2.2"></script>
-    <!-- React Bits DriftWall (3D Perspective Drifting Wall Showcase) -->
-    <script src="js/drift-wall.js?v=25.0"></script>
+    <!-- React Bits GridMotion (Drifting Parallax Grid with Spotlight Tracking) -->
+    <script src="js/grid-motion.js?v=4.0"></script>
+    <script src="js/navbar.js"></script>
 </head>
 <body>
 
@@ -73,81 +82,43 @@
     <div id="theme-ripple-overlay" class="theme-ripple-overlay"></div>
 
     <!-- SLEEK MINIMAL NAVBAR (MATCHING REFERENCE IMAGE) -->
-    <header class="site-header">
-        <div class="container header-inner">
-            <!-- BRAND BADGE (LEFT) -->
-            <a href="index.html" class="brand-badge-link">
-                <div class="brand-badge-icon">
-                    <span class="brand-monogram">RG</span>
-                </div>
-                <div class="brand-badge-info">
-                    <span class="brand-badge-name">Roddneil Gemina</span>
-                    <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
-                </div>
-            </a>
+        <!-- REACT BITS SIGNATURE NAVBAR (reactbits.dev landing page layout & behavior) -->
+    <header class="site-header ln-navbar">
+        <div class="container header-inner ln-navbar-inner">
+            <!-- BRAND BADGE & DIVIDER & LINKS (LEFT) -->
+            <div class="ln-navbar-left">
+                <a href="index.html" class="ln-navbar-logo brand-badge-link" aria-label="Roddneil Gemina Home">
+                    <div class="brand-badge-icon">
+                        <span class="brand-monogram">RG</span>
+                    </div>
+                    <div class="brand-badge-info">
+                        <span class="brand-badge-name">Roddneil Gemina</span>
+                        <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
+                    </div>
+                </a>
 
-            <!-- REACT BITS GOOEY NAV (CENTER) -->
-            <nav class="gooey-nav gooey-nav--md gooey-nav--framed main-nav-pill"
-                 id="main-nav"
-                 data-gooey-nav="true"
-                 data-theme="dark"
-                 data-color="#00f0ff"
-                 data-colors="#00f0ff,#38bdf8,#7fa8ff"
-                 data-particle-count="15"
-                 data-spread="56"
-                 data-animation-time="600"
-                 data-time-variance="300"
-                 data-gooeyness="0.5"
-                 data-wobble="0.5"
-                 data-hover-effect="true">
-                <span class="gooey-nav__rim"></span>
-                <div class="gooey-nav__stage">
-                    <canvas class="gooey-nav__canvas" aria-hidden="true"></canvas>
-                    <span class="gooey-nav__fallback" aria-hidden="true"></span>
-                    <ul class="gooey-nav__list">
-                        <li class="gooey-nav__item" data-gooey-index="0" data-active="">
-                            <a href="index.html" class="gooey-nav__link active" aria-current="page">
-                                <span class="gooey-nav__label">Home</span>
-                            </a>
-                        </li>
-                        <li class="gooey-nav__item" data-gooey-index="1">
-                            <a href="projects.html" class="gooey-nav__link">
-                                <span class="gooey-nav__label">Work</span>
-                            </a>
-                        </li>
-                        <li class="gooey-nav__item" data-gooey-index="2">
-                            <a href="about.html" class="gooey-nav__link">
-                                <span class="gooey-nav__label">About</span>
-                            </a>
-                        </li>
-                        <li class="gooey-nav__item" data-gooey-index="3">
-                            <a href="contact.html" class="gooey-nav__link">
-                                <span class="gooey-nav__label">Contact</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="gooey-nav__list gooey-nav__list--active" aria-hidden="true">
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">Home</span></span>
-                        </li>
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">Work</span></span>
-                        </li>
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">About</span></span>
-                        </li>
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">Contact</span></span>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                <span class="ln-navbar-divider" aria-hidden="true">/</span>
+
+                <nav class="ln-navbar-links" id="main-nav" aria-label="Primary Navigation">
+                    <div class="ln-navbar-link-highlight" aria-hidden="true"></div>
+                    <a href="index.html" class="ln-navbar-link active" data-nav="home" aria-current="page">Home</a>
+                    <a href="projects.html" class="ln-navbar-link" data-nav="work">Work</a>
+                    <a href="about.html" class="ln-navbar-link" data-nav="about">About</a>
+                    <a href="contact.html" class="ln-navbar-link" data-nav="contact">Contact</a>
+                </nav>
+            </div>
 
             <!-- RIGHT ACTIONS -->
-            <div class="header-actions">
-                <!-- VIBRANT ORANGE CTA PILL -->
-                <a href="contact.html" class="nav-cta-pill">
-                    <span>Get in Touch ↗</span>
+            <div class="ln-navbar-right header-actions">
+                <a href="https://github.com/roddneilgemina" target="_blank" rel="noopener noreferrer" class="ln-navbar-github" aria-label="GitHub Profile">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+
+                <a href="contact.html" class="ln-navbar-cta nav-cta-pill">
+                    <span>Get in Touch</span>
                 </a>
 
                 <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
@@ -164,6 +135,31 @@
         <!-- HERO SECTION (CENTERED IMPACT SHOWCASE) -->
         <!-- HERO SECTION (SPLIT 2-COLUMN SHOWCASE) -->
         <section id="hero" class="section hero-section">
+            <!-- REACT BITS FERROFLUID WEBGL2 BACKGROUND -->
+            <div id="hero-ferrofluid-container" class="ferrofluid-container hero-ferrofluid"
+                 data-ferrofluid="true"
+                 data-colors="#ffffff,#ffffff,#ffffff"
+                 data-spike-height="1"
+                 data-sharpness="2.5"
+                 data-tilt="48"
+                 data-magnets="2"
+                 data-scale="1.6"
+                 data-turbulence="1"
+                 data-fluidity="0.5"
+                 data-speed="0.5"
+                 data-magnetism="1"
+                 data-brightness="1"
+                 data-mouse-interaction="true"
+                 data-mouse-strength="1"
+                 data-mouse-radius="0.22"
+                 data-mouse-dampening="0.15"
+                 data-click-pulse="true"
+                 data-intro="true"
+                 data-transparent="true"
+                 data-opacity="0.95"
+                 aria-hidden="true">
+            </div>
+
             <!-- HERO EXCLUSIVE ANIMATED DOTFIELD BACKGROUND -->
             <div id="hero-dotfield-container" class="dot-field-container hero-dotfield" aria-hidden="true"></div>
 
@@ -215,13 +211,13 @@
                                 <span>Explore Projects →</span>
                             </a>
                             <a href="contact.html" class="btn-hero-ghost btn-hero-solid">
-                                <span>↗ Get in Touch</span>
+                                <span>Get in Touch</span>
                             </a>
                             
                         </div>
 
                         <!-- ACCOLADE CHIPS ROW -->
-                        <div class="hero-accolades-row">
+                        <div class="hero-accolades-row" data-animated-content="true" data-stagger="0.08" data-distance="30" data-threshold="0.05" data-ease="power3.out">
                             <div class="hero-accolade-chip">
                                 <span class="accolade-icon">
                                     <svg viewBox="0 0 24 24" class="accolade-svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1 .45-1 1v1h12v-1c0-.55-.45-1-1-1h-2c-.55 0-1-.45-1-1v-2.34"></path><path d="M6 4h12v7a6 6 0 0 1-12 0V4z"></path></svg>
@@ -313,7 +309,7 @@
                 </div>
 
                 <!-- STATS BENTO ROW (4 PILLARS DIRECTLY UNDER HERO - MATCHING REFERENCE!) -->
-                <div class="hero-stats-bento">
+                <div class="hero-stats-bento" data-animated-content="true" data-stagger="0.1" data-distance="40" data-threshold="0.08" data-ease="power3.out">
                     <!-- CARD 1: PROJECTS & BUILDS -->
                     <div class="stat-bento-card stat-card-cyan glass-card">
                         <div class="stat-number-wrap">
@@ -366,44 +362,52 @@
                 </div>
             </div>
 
-            <!-- REACT BITS DRIFT WALL 3D PERSPECTIVE SHOWCASE (FULL SECTION WITH CAROUSEL-STYLE EDGE FADES) -->
-            <div class="drift-wall-wrapper">
-                <span class="drift-wall-top-overlay" aria-hidden="true"></span>
-                <div id="home-drift-wall"
-                     class="drift-wall"
-                     data-drift-wall="true"
-                     data-columns="5"
-                     data-tile-width="200"
-                     data-tile-height="132"
+            <!-- REACT BITS GRID MOTION SHOWCASE (FEATURED PROJECTS INTERACTIVE DRIFTING WALL) -->
+            <div class="grid-motion-wrapper" style="position: relative; width: 100%; height: 740px;">
+                <div id="home-grid-motion"
+                     class="grid-motion"
+                     style="width: 100%; height: 740px; min-height: 740px; position: relative;"
+                     data-grid-motion="true"
+                     data-rows="3"
+                     data-aspect-ratio="1.38"
                      data-gap="18"
-                     data-tilt="16"
-                     data-turn="-14"
-                     data-perspective="1200"
-                     data-depth="120"
-                     data-speed="42"
-                     data-direction="up"
-                     data-variance="0.45"
-                     data-parallax="0.6"
-                     data-lift="64"
-                     data-fade="0.6"
-                     data-dim="0.55"
-                     data-overlay-color="#060010"
+                     data-radius="14"
+                     data-angle="-12"
+                     data-tilt="0"
+                     data-speed="24"
+                     data-direction="alternate"
+                     data-parallax="0.5"
+                     data-spotlight="0.6"
+                     data-dim="0.35"
+                     data-fade="0.5"
+                     data-fade-bottom="false"
+                     data-grayscale="false"
+                     data-theme="dark"
                      role="region"
-                     aria-label="3D Perspective Drifting Wall of Engineering Projects. Hover to lift, click to inspect details.">
+                     aria-label="Interactive Grid Motion Showcase of Engineering Projects. Hover to focus, click to inspect details.">
                     <script type="application/json">
                     [
-                        { "image": "images/resutex.png", "title": "ResuTex", "badge": "LaTeX ATS Studio", "projectId": "p13" },
-                        { "image": "images/aicquire.png", "title": "aicquire", "badge": "AI Hiring ATS", "projectId": "p12" },
-                        { "image": "images/fusionrush.jpg", "title": "Fusion Rush", "badge": "ICETT '26", "projectId": "p1" },
-                        { "image": "images/visualai.jpg", "title": "Visual AI Proof Parser", "badge": "PCSC '26", "projectId": "p2" },
-                        { "image": "images/refertoire.png", "title": "Refertoire PWA", "badge": "100% Offline PWA", "projectId": "p9" },
-                        { "image": "images/gigipos.png", "title": "GigiPOS Platform", "badge": "Modern Retail POS", "projectId": "p10" },
-                        { "image": "images/whatswap.png", "title": "WhatSwap?!", "badge": "P2P Barter & Bids", "projectId": "p11" },
-                        { "image": "images/nexchef.png", "title": "Nexchef Kitchen", "badge": "Mobile Culinary", "projectId": "p8" },
-                        { "image": "images/takeit.png", "title": "TakeIt QR Tickets", "badge": "Crypto Tickets", "projectId": "p3" },
-                        { "image": "images/dishcover.png", "title": "DishCover", "badge": "Smart Pantry AI", "projectId": "p4" },
-                        { "image": "images/cropconnect.png", "title": "CropConnect", "badge": "AgriTech PWA", "projectId": "p5" },
-                        { "image": "images/bomberman.png", "title": "Bomberman Java", "badge": "Game Systems", "projectId": "p6" }
+                        [
+                            { "image": "images/fusionrush.jpg", "title": "Fusion Rush", "badge": "ICETT '26", "projectId": "p1" },
+                            { "image": "images/visualai.jpg", "title": "Visual AI Proof Parser", "badge": "PCSC '26", "projectId": "p2" },
+                            { "image": "images/takeit.png", "title": "TakeIt QR Tickets", "badge": "Crypto Tickets", "projectId": "p3" },
+                            { "image": "images/cropconnect.png", "title": "CropConnect", "badge": "AgriTech PWA", "projectId": "p5" },
+                            { "image": "images/dxform-logo.webp", "title": "DXForm PH Cloud", "badge": "Enterprise SaaS", "projectId": "p14" }
+                        ],
+                        [
+                            { "image": "images/resutex.png", "title": "ResuTex", "badge": "LaTeX ATS Studio", "projectId": "p13" },
+                            { "image": "images/gigipos.png", "title": "GigiPOS Platform", "badge": "Modern Retail POS", "projectId": "p10" },
+                            { "image": "images/refertoire.png", "title": "Refertoire PWA", "badge": "100% Offline PWA", "projectId": "p9" },
+                            { "image": "images/aicquire.png", "title": "aicquire", "badge": "AI Hiring ATS", "projectId": "p12" },
+                            { "image": "images/dishcover.png", "title": "DishCover", "badge": "Smart Pantry AI", "projectId": "p4" }
+                        ],
+                        [
+                            { "image": "images/whatswap.png", "title": "WhatSwap?!", "badge": "P2P Barter & Bids", "projectId": "p11" },
+                            { "image": "images/nexchef.png", "title": "Nexchef Kitchen", "badge": "Mobile Culinary", "projectId": "p8" },
+                            { "image": "images/bomberman.png", "title": "Bomberman Java", "badge": "Game Systems", "projectId": "p6" },
+                            { "image": "images/etanom.jpg", "title": "E-Tanom Logistics", "badge": "Supply Chain PWA", "projectId": "p7" },
+                            { "image": "images/band.png", "title": "Ensemble Stage Sync", "badge": "Live Audio Metric", "projectId": "p15" }
+                        ]
                     ]
                     </script>
                 </div>
@@ -678,7 +682,7 @@
                             </ul>
                         </div>
                                         <!-- RESUME DOMAIN BREAKDOWN BENTO GRID -->
-                    <div class="stack-domain-grid">
+                    <div class="stack-domain-grid" data-animated-content="true" data-stagger="0.12" data-distance="50" data-threshold="0.1" data-ease="power3.out">
                         <!-- DOMAIN 01: PROGRAMMING LANGUAGES (ELECTRIC CYAN) -->
                         <div class="stack-domain-card box-cyan glass-card border-glow-card" data-border-glow="true" data-glow-colors="#00f0ff,#38bdf8,#0070f3" data-glow-color="180 100 50" data-border-radius="16">
                             <div class="domain-header">
@@ -793,7 +797,7 @@
                     <div class="section-divider"></div>
                     </div>
 
-                <div class="research-grid">
+                <div class="research-grid" data-animated-content="true" data-stagger="0.14" data-distance="50" data-threshold="0.1" data-ease="power3.out">
                     
                     <!-- RESEARCH 1: ICETT 2026 -->
                     <div class="research-card spotlight-card glass-card open-modal-btn" data-spotlight-card="true" data-spotlight-color="#38bdf8" data-project="p1" tabindex="0" role="button" aria-label="Inspect ICETT 2026 Conference Publication">
@@ -807,15 +811,13 @@
                                 <h4 class="research-study-name">Fusion Rush: Boolean Logic Algebra AI Tutor</h4>
                             </div>
 
-                            <p class="research-authors-sub">P.M.G. Bascuq, <strong>R.B. Gemina</strong>, B.X. Mendoza, Engr. R. Laviste, Prof. C. Arellano</p>
+                            <p class="research-authors-sub">F.M.F.G. Bascug, <strong>R.B. Gemina</strong>, B.X. Mendoza, Engr. R. Laviste, Prof. C. Arellano</p>
                         </div>
                         <p class="research-role-sub">
                             Adaptive AI reasoning tutor translating complex discrete math logic proofs into cognitive mechanics with measurable student mastery lift. Accepted at ICETT 2026 in Singapore.
                         </p>
                         <div class="research-action-row">
-                            <span class="sleek-btn-sm">
-                                <span>Read Publication Spec &rarr;</span>
-                            </span>
+                            <a href="project.html?id=p1" class="sleek-btn-sm"><span>Read Publication Spec &rarr;</span></a>
                         </div>
                     </div>
 
@@ -831,15 +833,13 @@
                                 <h4 class="research-study-name">Visual AI Logic Proof Parser &amp; Evaluator</h4>
                             </div>
 
-                            <p class="research-authors-sub">P.M.G. Bascuq, <strong>R.B. Gemina</strong>, B.X. Mendoza, Prof. C. Arellano</p>
+                            <p class="research-authors-sub">F.M.F.G. Bascug, <strong>R.B. Gemina</strong>, B.X. Mendoza, Prof. C. Arellano</p>
                         </div>
                         <p class="research-role-sub">
                             Computer vision OCR pipeline parsing and evaluating multi-step handwritten discrete math inference proofs. Accepted and personally presented at PCSC 2026.
                         </p>
                         <div class="research-action-row">
-                            <span class="sleek-btn-sm">
-                                <span>Read Presentation Spec &rarr;</span>
-                            </span>
+                            <a href="project.html?id=p2" class="sleek-btn-sm"><span>Read Presentation Spec &rarr;</span></a>
                         </div>
                     </div>
 
@@ -1035,9 +1035,7 @@
                             </div>
                         </div>
                         <div class="project-card-footer">
-                            <button class="sleek-btn-sm open-modal-btn" data-project="p1">
-                                <span>Inspect Details</span> →
-                            </button>
+                            <a href="project.html?id=p1" class="sleek-btn-sm open-modal-btn" data-project="p1"><span>Inspect Details</span> →</a>
                             <span class="scopus-tag">ICETT 2026</span>
                         </div>
                     </article>
@@ -1067,9 +1065,7 @@
                             </div>
                         </div>
                         <div class="project-card-footer">
-                            <button class="sleek-btn-sm open-modal-btn" data-project="p2">
-                                <span>Inspect Details</span> →
-                            </button>
+                            <a href="project.html?id=p2" class="sleek-btn-sm open-modal-btn" data-project="p2"><span>Inspect Details</span> →</a>
                             <span class="scopus-tag">PCSC 2026</span>
                         </div>
                     </article>
@@ -1259,9 +1255,7 @@
                             </div>
                         </div>
                         <div class="project-card-footer">
-                            <button class="sleek-btn-sm open-modal-btn" data-project="p8">
-                                <span>Inspect Details</span> →
-                            </button>
+                            <a href="project.html?id=p8" class="sleek-btn-sm open-modal-btn" data-project="p8"><span>Inspect Details</span> →</a>
                             <span class="scopus-tag">Mobile</span>
                         </div>
                     </article>
@@ -1291,9 +1285,7 @@
                             </div>
                         </div>
                         <div class="project-card-footer">
-                            <button class="sleek-btn-sm open-modal-btn" data-project="p3">
-                                <span>Inspect Details</span> →
-                            </button>
+                            <a href="project.html?id=p3" class="sleek-btn-sm open-modal-btn" data-project="p3"><span>Inspect Details</span> →</a>
                             <span class="scopus-tag">Full-Stack</span>
                         </div>
                     </article>
@@ -1323,9 +1315,7 @@
                             </div>
                         </div>
                         <div class="project-card-footer">
-                            <button class="sleek-btn-sm open-modal-btn" data-project="p4">
-                                <span>Inspect Details</span> →
-                            </button>
+                            <a href="project.html?id=p4" class="sleek-btn-sm open-modal-btn" data-project="p4"><span>Inspect Details</span> →</a>
                             <span class="scopus-tag">Product</span>
                         </div>
                     </article>
@@ -1355,9 +1345,7 @@
                             </div>
                         </div>
                         <div class="project-card-footer">
-                            <button class="sleek-btn-sm open-modal-btn" data-project="p5">
-                                <span>Inspect Details</span> →
-                            </button>
+                            <a href="project.html?id=p5" class="sleek-btn-sm open-modal-btn" data-project="p5"><span>Inspect Details</span> →</a>
                             <span class="scopus-tag">AgriTech</span>
                         </div>
                     </article>
@@ -1387,9 +1375,7 @@
                             </div>
                         </div>
                         <div class="project-card-footer">
-                            <button class="sleek-btn-sm open-modal-btn" data-project="p6">
-                                <span>Inspect Details</span> →
-                            </button>
+                            <a href="project.html?id=p6" class="sleek-btn-sm open-modal-btn" data-project="p6"><span>Inspect Details</span> →</a>
                             <span class="scopus-tag">Multiplayer</span>
                         </div>
                     </article>
@@ -1398,34 +1384,6 @@
             </div>
             <div class="overlay-footer">
                 <button id="overlay-close-action" class="btn-hero-outline sleek-btn-sm">Close Overlay</button>
-            </div>
-        </div>
-    </dialog>
-
-    <!-- INTERACTIVE PROJECT SCREENSHOT & CASE STUDY MODAL DIALOG -->
-    <dialog id="project-modal" class="project-dialog sleek-dialog-wrapper" aria-label="Project View">
-        <div class="dialog-container modal-screenshot-container glass-card rgb-border">
-            <div class="dialog-header modal-screenshot-header">
-                <div class="dialog-title-wrapper">
-                    <span class="dialog-badge sleek-badge" id="modal-project-type">TYPE</span>
-                    <h3 id="modal-project-title" class="dialog-title">Project Title</h3>
-                </div>
-                <button id="close-modal-btn" class="dialog-close-btn" aria-label="Close dialog">×</button>
-            </div>
-
-            <!-- MODAL TABS SWITCHER -->
-            <div class="modal-tabs-header">
-                <button class="modal-tab-btn active" id="tab-btn-preview" data-tab="preview">Visual Preview</button>
-                <button class="modal-tab-btn" id="tab-btn-casestudy" data-tab="casestudy">System Architecture &amp; Case Study</button>
-            </div>
-
-            <div class="modal-screenshot-body">
-                <div id="modal-project-media" class="modal-screenshot-frame modal-tab-pane active">
-                    <!-- Dynamic Full Screenshot Image -->
-                </div>
-                <div id="modal-case-study" class="modal-case-study-body modal-tab-pane">
-                    <!-- Dynamic Architectural Case Study Details -->
-                </div>
             </div>
         </div>
     </dialog>

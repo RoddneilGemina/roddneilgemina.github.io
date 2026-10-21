@@ -5,7 +5,7 @@
     <title>About | Roddneil B. Gemina - Experience, Education &amp; Accolades</title>
     <meta name="description" content="Biography, industry roles, freelance experience, educational distinctions, certifications, and research accolades of Roddneil B. Gemina, Software Engineer &amp; CS Scholar.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/about.html">
-    <link rel="stylesheet" href="css/styles.css?v=25.0">
+    <link rel="stylesheet" href="css/styles.css?v=4.1">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +14,10 @@
     
     <!-- GSAP & Animation Engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- React Bits AnimatedContent (Physics-Based Scroll & Entrance Reveal) -->
+    <script src="js/animated-content.js"></script>
 
     <!-- Three.js 3D Engine (Lanyard physics & WebGL rendering) -->
     <script src="js/vendor/three.min.js"></script>
@@ -42,6 +46,7 @@
 
     <!-- React Bits Lanyard (3D Physics Avatar Badge with RG Hologram) -->
     <script src="js/lanyard.js?v=2.0"></script>
+    <script src="js/navbar.js"></script>
 </head>
 <body class="about-page">
 
@@ -52,81 +57,43 @@
     <div id="theme-ripple-overlay" class="theme-ripple-overlay"></div>
 
     <!-- SLEEK MINIMAL NAVBAR -->
-        <header class="site-header">
-        <div class="container header-inner">
-            <!-- BRAND BADGE (LEFT) -->
-            <a href="index.html" class="brand-badge-link">
-                <div class="brand-badge-icon">
-                    <span class="brand-monogram">RG</span>
-                </div>
-                <div class="brand-badge-info">
-                    <span class="brand-badge-name">Roddneil Gemina</span>
-                    <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
-                </div>
-            </a>
+            <!-- REACT BITS SIGNATURE NAVBAR (reactbits.dev landing page layout & behavior) -->
+    <header class="site-header ln-navbar">
+        <div class="container header-inner ln-navbar-inner">
+            <!-- BRAND BADGE & DIVIDER & LINKS (LEFT) -->
+            <div class="ln-navbar-left">
+                <a href="index.html" class="ln-navbar-logo brand-badge-link" aria-label="Roddneil Gemina Home">
+                    <div class="brand-badge-icon">
+                        <span class="brand-monogram">RG</span>
+                    </div>
+                    <div class="brand-badge-info">
+                        <span class="brand-badge-name">Roddneil Gemina</span>
+                        <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
+                    </div>
+                </a>
 
-            <!-- REACT BITS GOOEY NAV (CENTER) -->
-            <nav class="gooey-nav gooey-nav--md gooey-nav--framed main-nav-pill"
-                 id="main-nav"
-                 data-gooey-nav="true"
-                 data-theme="dark"
-                 data-color="#00f0ff"
-                 data-colors="#00f0ff,#38bdf8,#7fa8ff"
-                 data-particle-count="15"
-                 data-spread="56"
-                 data-animation-time="600"
-                 data-time-variance="300"
-                 data-gooeyness="0.5"
-                 data-wobble="0.5"
-                 data-hover-effect="true">
-                <span class="gooey-nav__rim"></span>
-                <div class="gooey-nav__stage">
-                    <canvas class="gooey-nav__canvas" aria-hidden="true"></canvas>
-                    <span class="gooey-nav__fallback" aria-hidden="true"></span>
-                    <ul class="gooey-nav__list">
-                        <li class="gooey-nav__item" data-gooey-index="0">
-                            <a href="index.html" class="gooey-nav__link">
-                                <span class="gooey-nav__label">Home</span>
-                            </a>
-                        </li>
-                        <li class="gooey-nav__item" data-gooey-index="1">
-                            <a href="projects.html" class="gooey-nav__link">
-                                <span class="gooey-nav__label">Work</span>
-                            </a>
-                        </li>
-                        <li class="gooey-nav__item" data-gooey-index="2" data-active="">
-                            <a href="about.html" class="gooey-nav__link active" aria-current="page">
-                                <span class="gooey-nav__label">About</span>
-                            </a>
-                        </li>
-                        <li class="gooey-nav__item" data-gooey-index="3">
-                            <a href="contact.html" class="gooey-nav__link">
-                                <span class="gooey-nav__label">Contact</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="gooey-nav__list gooey-nav__list--active" aria-hidden="true">
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">Home</span></span>
-                        </li>
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">Work</span></span>
-                        </li>
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">About</span></span>
-                        </li>
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">Contact</span></span>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                <span class="ln-navbar-divider" aria-hidden="true">/</span>
+
+                <nav class="ln-navbar-links" id="main-nav" aria-label="Primary Navigation">
+                    <div class="ln-navbar-link-highlight" aria-hidden="true"></div>
+                    <a href="index.html" class="ln-navbar-link" data-nav="home">Home</a>
+                    <a href="projects.html" class="ln-navbar-link" data-nav="work">Work</a>
+                    <a href="about.html" class="ln-navbar-link active" data-nav="about" aria-current="page">About</a>
+                    <a href="contact.html" class="ln-navbar-link" data-nav="contact">Contact</a>
+                </nav>
+            </div>
 
             <!-- RIGHT ACTIONS -->
-            <div class="header-actions">
-                <!-- VIBRANT ORANGE CTA PILL -->
-                <a href="contact.html" class="nav-cta-pill specular-button specular-button--sm" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.3" data-specular-radius="999">
-                    <span>Get in Touch ↗</span>
+            <div class="ln-navbar-right header-actions">
+                <a href="https://github.com/roddneilgemina" target="_blank" rel="noopener noreferrer" class="ln-navbar-github" aria-label="GitHub Profile">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+
+                <a href="contact.html" class="ln-navbar-cta nav-cta-pill">
+                    <span>Get in Touch</span>
                 </a>
 
                 <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
@@ -182,20 +149,20 @@
                     </h1>
                     
                     <p class="about-hero-lead">
-                        Software engineer, computer science scholar, and site reliability engineering intern. Proven track record in cloud orchestration, full-stack application development, and peer-reviewed AI research.
+                        Software Engineer &amp; CS Scholar specializing in Cloud Infrastructure, SRE, and full-stack distributed systems with peer-reviewed AI publications.
                     </p>
 
-                    <div class="about-hero-stats">
+                    <div class="about-hero-stats" data-animated-content="true" data-stagger="0.08" data-distance="30" data-threshold="0.05" data-ease="power3.out">
+                        <span class="page-stat-chip"><strong>Opswerks</strong> SRE Intern</span>
                         <span class="page-stat-chip"><strong>CIT-U</strong> Full CS Scholar</span>
                         <span class="page-stat-chip"><strong>PSHS</strong> DOST Honors Scholar</span>
                         <span class="page-stat-chip"><strong>PhilNITS FE</strong> Certified Engineer</span>
-                        <span class="page-stat-chip"><strong>AWS</strong> Cloud Foundations &amp; Architecting</span>
-                        <span class="page-stat-chip"><strong>TOPCIT</strong> Level 3 Practical Benchmark</span>
+                        <span class="page-stat-chip"><strong>Scopus</strong> Author &amp; Researcher</span>
                     </div>
 
                     <div class="about-hero-actions">
-                        <a href="contact.html" class="specular-button specular-button--md" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.3" data-specular-radius="999">
-                            <span>Get in Touch ↗</span>
+                        <a href="contact.html" class="btn-hero-ghost btn-hero-solid">
+                            <span>Get in Touch</span>
                         </a>
                         <a href="GeminaResume.pdf" target="_blank" rel="noopener noreferrer" class="about-hero-btn-ghost">
                             <span>Download Resume / CV ↓</span>
@@ -211,138 +178,164 @@
             </div>
         </section>
 
-        <!-- SECTION 1: INDUSTRY & FREELANCE EXPERIENCE -->
+        <!-- SECTION 1: CORPORATE & INDUSTRY EXPERIENCE -->
         <section id="experience" class="section">
             <div class="container">
                 <div class="section-header">
                     <div class="section-title-wrap">
-                        <h2 class="section-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 450, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Industry &amp; Freelance Experience</span></h2>
+                        <h2 class="section-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 450, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Corporate &amp; Industry Experience</span></h2>
                     </div>
                     <div class="section-divider"></div>
                 </div>
 
-                <div class="timeline-layout">
+                <!-- BIGGER INDUSTRY ROWS (SEPARATED BY ROW) -->
+                <div class="industry-rows-layout" data-animated-content="true" data-stagger="0.15" data-distance="45" data-threshold="0.1" data-ease="power3.out">
                     
-                    <!-- COLUMN 1: CORPORATE INDUSTRY ROLES -->
-                    <div class="timeline-column">
-                        <h3 class="column-title">
-                            <span class="column-title-dot" aria-hidden="true"></span>
-                            <span>Corporate Industry Roles</span>
-                        </h3>
-                        
-                        <!-- ROLE 1: OPSWERKS SRE -->
-                        <div class="timeline-item glass-card">
-                            <div class="timeline-header">
-                                <h4 class="item-title">Site Reliability Engineer Intern</h4>
-                                <span class="sleek-badge">2026</span>
+                    <!-- INDUSTRY ROW 1: OPSWERKS SRE -->
+                    <div class="industry-row-card glass-card">
+                        <div class="about-brand-header">
+                            <div class="about-brand-logo-stage">
+                                <img src="https://framerusercontent.com/images/SVMOCCDwRjDrno5aEZdiswCLQ.png" alt="OpsWerks Official Brand" class="about-brand-logo-img">
                             </div>
-                            <div class="timeline-meta-row">
-                                <span class="item-subtitle">Opswerks • Cebu City</span>
-                                <span class="item-role-tag">SRE / Cloud Systems</span>
-                            </div>
-                            <ul class="experience-bullets">
-                                <li>Completed an intensive SRE internship automating cloud operations, container orchestration, and continuous deployment workflows.</li>
-                                <li>Operated with Linux system administration, Dockerized container lifecycles, and Kubernetes workload deployments.</li>
-                                <li>Monitored infrastructure telemetry, system health, and service availability across distributed cloud stacks.</li>
-                                <li>Implemented declarative infrastructure-as-code principles, ensuring reproducible deployments and minimizing configuration drift.</li>
-                            </ul>
-                            <div class="timeline-tech-pills-row">
-                                <span class="timeline-tech-pill">Kubernetes</span>
-                                <span class="timeline-tech-pill">Docker</span>
-                                <span class="timeline-tech-pill">Linux</span>
-                                <span class="timeline-tech-pill">AWS</span>
-                                <span class="timeline-tech-pill">Prometheus</span>
-                                <span class="timeline-tech-pill">CI/CD</span>
+                            <div class="about-brand-info">
+                                <div class="about-brand-top">
+                                    <h4 class="about-main-title">Site Reliability Engineer Intern</h4>
+                                    <span class="sleek-badge">2026</span>
+                                </div>
+                                <div class="about-sub-meta">
+                                    <span>OpsWerks • Cebu City</span>
+                                    <span class="item-role-tag">SRE / Cloud Systems</span>
+                                </div>
                             </div>
                         </div>
-
-                        <!-- ROLE 2: DXFORM QA & FULL-STACK -->
-                        <div class="timeline-item glass-card">
-                            <div class="timeline-header">
-                                <h4 class="item-title">QA Analyst &amp; Full-Stack</h4>
-                                <span class="sleek-badge">2025</span>
-                            </div>
-                            <div class="timeline-meta-row">
-                                <span class="item-subtitle">DXForm Technologies • Cebu City</span>
-                                <span class="item-role-tag">QA &amp; Web Systems</span>
-                            </div>
-                            <ul class="experience-bullets">
-                                <li>Executed end-to-end quality assurance, regression test suites, and bug verification across 4 enterprise client web applications.</li>
-                                <li>Authored comprehensive bug reports, triaged edge-case anomalies, and developed full-stack frontend/backend fixes in rapid agile sprints.</li>
-                                <li>Collaborated closely with product leads and engineering teams to establish automated test harnesses, cutting regression cycles by 35%.</li>
-                            </ul>
-                            <div class="timeline-tech-pills-row">
-                                <span class="timeline-tech-pill">QA Automation</span>
-                                <span class="timeline-tech-pill">Regression Testing</span>
-                                <span class="timeline-tech-pill">Bug Triage</span>
-                                <span class="timeline-tech-pill">REST APIs</span>
-                                <span class="timeline-tech-pill">Full-Stack Fixes</span>
-                            </div>
+                        <div class="about-hairline"></div>
+                        <ul class="about-impact-list">
+                            <li><strong>Cluster Orchestration:</strong> Automated declarative Kubernetes deployments and Dockerized container lifecycles across production infrastructure.</li>
+                            <li><strong>Telemetry &amp; SLOs:</strong> Monitored distributed system health and Prometheus alerts to uphold 99.9% service availability and eliminate configuration drift.</li>
+                        </ul>
+                        <div class="timeline-tech-pills-row">
+                            <span class="timeline-tech-pill">Kubernetes</span>
+                            <span class="timeline-tech-pill">Docker</span>
+                            <span class="timeline-tech-pill">Linux</span>
+                            <span class="timeline-tech-pill">AWS</span>
+                            <span class="timeline-tech-pill">Prometheus</span>
+                            <span class="timeline-tech-pill">CI/CD</span>
                         </div>
-
                     </div>
 
-                    <!-- COLUMN 2: FREELANCE & CLIENT WORK -->
-                    <div class="timeline-column">
-                        <h3 class="column-title">
-                            <span class="column-title-dot" aria-hidden="true"></span>
-                            <span>Freelance Engineering &amp; Client Deployments</span>
-                        </h3>
+                    <!-- INDUSTRY ROW 2: DXFORM PH QA & FULL-STACK -->
+                    <div class="industry-row-card glass-card">
+                        <div class="about-brand-header">
+                            <div class="about-brand-logo-stage" style="background: #ffffff; border-color: rgba(255, 255, 255, 0.16);">
+                                <img src="images/dxform-logo.webp" alt="DXForm PH Official Logo" class="about-brand-logo-img">
+                            </div>
+                            <div class="about-brand-info">
+                                <div class="about-brand-top">
+                                    <h4 class="about-main-title">QA Analyst &amp; Full-Stack Developer</h4>
+                                    <span class="sleek-badge">2025</span>
+                                </div>
+                                <div class="about-sub-meta">
+                                    <span>DXForm PH • Cebu City</span>
+                                    <span class="item-role-tag">QA &amp; Web Systems</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-hairline"></div>
+                        <ul class="about-impact-list">
+                            <li><strong>Regression Acceleration:</strong> Executed regression suites and verified bug fixes across enterprise web platforms, cutting cycle turnaround by 35%.</li>
+                            <li><strong>Full-Stack Hardening:</strong> Triaged production anomalies and patched frontend/backend REST API contracts in high-velocity agile sprints.</li>
+                        </ul>
+                        <div class="timeline-tech-pills-row">
+                            <span class="timeline-tech-pill">DXForm PH</span>
+                            <span class="timeline-tech-pill">QA Automation</span>
+                            <span class="timeline-tech-pill">Regression Testing</span>
+                            <span class="timeline-tech-pill">Bug Triage</span>
+                            <span class="timeline-tech-pill">REST APIs</span>
+                            <span class="timeline-tech-pill">Full-Stack Fixes</span>
+                        </div>
+                    </div>
 
+                </div>
+
+                <!-- SMALLER SUB-SECTION: FREELANCE DEPLOYMENTS & CLIENT SYSTEMS -->
+                <div class="freelance-subsection">
+                    <div class="subsection-header">
+                        <h3 class="subsection-title">
+                            <span class="column-title-dot" aria-hidden="true"></span>
+                            <span>Freelance Deployments &amp; Client Systems</span>
+                        </h3>
+                        <p class="subsection-lead">Independent production deliverables, custom software builds, and real-time offline architectures.</p>
+                    </div>
+
+                    <div class="freelance-compact-grid" data-animated-content="true" data-stagger="0.12" data-distance="40" data-threshold="0.1" data-ease="power3.out">
+                        
                         <!-- FREELANCE 1: REFERTOIRE -->
-                        <div class="timeline-item glass-card">
-                            <div class="timeline-header">
-                                <h4 class="item-title">Lead Full-Stack Engineer, Refertoire</h4>
-                                <span class="sleek-badge">2025</span>
+                        <div class="freelance-card glass-card">
+                            <div class="about-brand-header">
+                                <div class="about-brand-logo-stage freelance-logo-stage">
+                                    <img src="images/refertoire.png" alt="Refertoire App Logo" class="about-brand-logo-img">
+                                </div>
+                                <div class="about-brand-info">
+                                    <div class="about-brand-top">
+                                        <h4 class="about-main-title">Lead Full-Stack Engineer, Refertoire</h4>
+                                        <span class="sleek-badge">2025</span>
+                                    </div>
+                                    <div class="about-sub-meta">
+                                        <span>Choral Ensemble Client • Remote</span>
+                                        <span class="item-role-tag">Offline-First PWA</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="timeline-meta-row">
-                                <span class="item-subtitle">Choral Ensemble Client • Remote</span>
-                                <span class="item-role-tag">Offline-First PWA</span>
-                            </div>
-                            <ul class="experience-bullets">
-                                <li>Architected a multi-gigabyte sheet music manager Progressive Web App with 100% offline functionality via IndexedDB and Service Workers.</li>
-                                <li>Engineered custom Bluetooth page-turner pedal integrations and low-latency canvas score annotations for concert performances.</li>
-                                <li>Delivered zero-downtime synchronization when network connectivity restores, handling conflict-free score revisions.</li>
+                            <div class="about-hairline"></div>
+                            <ul class="about-impact-list">
+                                <li><strong>Offline Architecture:</strong> Built multi-gigabyte sheet music PWA with zero-downtime offline caching via IndexedDB and Service Workers.</li>
+                                <li><strong>Stage Hardware:</strong> Engineered Bluetooth HID foot-pedal score navigation and low-latency canvas annotations for live concert tours.</li>
                             </ul>
                             <div class="timeline-tech-pills-row">
-                                <span class="timeline-tech-pill">Offline-First</span>
+                                <span class="timeline-tech-pill">Offline PWA</span>
                                 <span class="timeline-tech-pill">IndexedDB</span>
-                                <span class="timeline-tech-pill">Service Workers</span>
                                 <span class="timeline-tech-pill">Bluetooth HID</span>
-                                <span class="timeline-tech-pill">Vanilla JS</span>
+                                <span class="timeline-tech-pill">Canvas API</span>
                             </div>
                         </div>
 
-                        <!-- FREELANCE 2: TAKEIT & BESPOKE APPS -->
-                        <div class="timeline-item glass-card">
-                            <div class="timeline-header">
-                                <h4 class="item-title">Full-Stack Contractor: TakeIt &amp; Commercial Portals</h4>
-                                <span class="sleek-badge">2023-2024</span>
+                        <!-- FREELANCE 2: TAKEIT -->
+                        <div class="freelance-card glass-card">
+                            <div class="about-brand-header">
+                                <div class="about-brand-logo-stage freelance-logo-stage">
+                                    <img src="images/takeit.png" alt="TakeIt Logo" class="about-brand-logo-img">
+                                </div>
+                                <div class="about-brand-info">
+                                    <div class="about-brand-top">
+                                        <h4 class="about-main-title">Full-Stack Contractor, TakeIt</h4>
+                                        <span class="sleek-badge">2023–2024</span>
+                                    </div>
+                                    <div class="about-sub-meta">
+                                        <span>Commercial Clients • Cebu City</span>
+                                        <span class="item-role-tag">Ticketing Systems</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="timeline-meta-row">
-                                <span class="item-subtitle">Independent Clients • Cebu City</span>
-                                <span class="item-role-tag">Commercial Web Apps</span>
-                            </div>
-                            <ul class="experience-bullets">
-                                <li>Engineered a full-featured direct-to-consumer event management and ticketing platform with cryptographic QR validation gates.</li>
-                                <li>Designed responsive, brand-tailored interfaces and secure backend relational database schemas in PostgreSQL and MySQL.</li>
-                                <li>Configured cloud hosting, custom domains, HTTPS termination, and email transactional systems with high deliverability.</li>
+                            <div class="about-hairline"></div>
+                            <ul class="about-impact-list">
+                                <li><strong>Secure Ticketing:</strong> Engineered direct-to-consumer ticketing platform with cryptographic QR validation gate admission scanners.</li>
+                                <li><strong>Cloud &amp; Schemas:</strong> Structured relational PostgreSQL/MySQL schemas, automated cloud hosting, and secured SSL/TLS with Cloudflare.</li>
                             </ul>
                             <div class="timeline-tech-pills-row">
                                 <span class="timeline-tech-pill">React</span>
                                 <span class="timeline-tech-pill">Node.js</span>
                                 <span class="timeline-tech-pill">PostgreSQL</span>
                                 <span class="timeline-tech-pill">QR Validation</span>
-                                <span class="timeline-tech-pill">Cloudflare</span>
                             </div>
                         </div>
 
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- SECTION 2: EDUCATIONAL BACKGROUND -->
+        <!-- SECTION 2: EDUCATIONAL BACKGROUND & HONORS -->
         <section id="education" class="section">
             <div class="container">
                 <div class="section-header">
@@ -352,49 +345,63 @@
                     <div class="section-divider"></div>
                 </div>
 
-                <div class="timeline-layout">
+                <div class="education-bento-grid" data-animated-content="true" data-stagger="0.15" data-distance="45" data-threshold="0.1" data-ease="power3.out">
                     
                     <!-- CIT-U -->
-                    <div class="timeline-item glass-card">
-                        <div class="timeline-header">
-                            <h3 class="item-title">Bachelor of Science in Computer Science</h3>
-                            <span class="sleek-badge">2022-2026</span>
+                    <div class="education-card glass-card">
+                        <div class="about-brand-header">
+                            <div class="about-brand-logo-stage">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Cebu_Institute_of_Technology_University_logo.png" alt="Cebu Institute of Technology – University Official Seal" class="about-brand-logo-img">
+                            </div>
+                            <div class="about-brand-info">
+                                <div class="about-brand-top">
+                                    <h3 class="about-main-title">Bachelor of Science in Computer Science</h3>
+                                    <span class="sleek-badge honor-year">2022–2026</span>
+                                </div>
+                                <div class="about-sub-meta honors-meta">
+                                    <span>Cebu Institute of Technology - University</span>
+                                    <span class="item-role-tag">Full CS Scholar</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="timeline-meta-row">
-                            <span class="item-subtitle">Cebu Institute of Technology - University (CIT-U)</span>
-                            <span class="item-role-tag">Full CS Scholar</span>
-                        </div>
-                        <div class="timeline-details">
-                            <p><strong>Academic Standing:</strong> Maintained consistent Dean's Lister honors across all academic semesters with top-tier general weighted averages.</p>
-                            <p><strong>Research Contributions:</strong> Co-authored peer-reviewed research papers accepted at Scopus-indexed ICETT 2026 (Singapore) and presented in-person at the Philippine Computing Science Congress (PCSC 2026 in Davao City).</p>
-                            <p><strong>Collegiate Leadership:</strong> Elected Bass 2 and Presidential Officer-in-Charge of the Koro Teknoy Chorale, directing executive logistics, rehearsals, and regional concert tours.</p>
-                            <p><strong>National Credentials Passed:</strong> PhilNITS Fundamental Engineer (FE), TOPCIT Level 3 Competency, AWS Academy Cloud Graduate.</p>
-                        </div>
+                        <div class="about-hairline"></div>
+                        <ul class="about-impact-list honors-list">
+                            <li><strong>Academic Excellence:</strong> Maintained consistent Dean's Lister honors across all collegiate semesters with top-tier academic standing.</li>
+                            <li><strong>Scopus Publication:</strong> Co-authored peer-reviewed research accepted at Scopus-indexed ICETT 2026 (Singapore) and presented at PCSC 2026 (Davao City).</li>
+                            <li><strong>Collegiate Leadership:</strong> Elected Presidential OIC and Bass 2 of Koro Teknoy Chorale, directing executive operations and ceremonial appearances.</li>
+                        </ul>
                         <div class="timeline-tech-pills-row">
-                            <span class="timeline-tech-pill">CS Scholar</span>
+                            <span class="timeline-tech-pill">Full CS Scholar</span>
                             <span class="timeline-tech-pill">Dean's Lister</span>
                             <span class="timeline-tech-pill">Scopus Author</span>
                             <span class="timeline-tech-pill">PCSC Presenter</span>
                             <span class="timeline-tech-pill">PhilNITS FE</span>
-                            <span class="timeline-tech-pill">Koro Teknoy OIC</span>
                         </div>
                     </div>
 
                     <!-- PSHS -->
-                    <div class="timeline-item glass-card">
-                        <div class="timeline-header">
-                            <h3 class="item-title">Specialized STEM Secondary Education</h3>
-                            <span class="sleek-badge">2016-2022</span>
+                    <div class="education-card glass-card">
+                        <div class="about-brand-header">
+                            <div class="about-brand-logo-stage">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Philippine_Science_High_School_System_%28PSHS%29_-_Pisay.svg" alt="Philippine Science High School System Official Seal" class="about-brand-logo-img">
+                            </div>
+                            <div class="about-brand-info">
+                                <div class="about-brand-top">
+                                    <h3 class="about-main-title">Specialized STEM Secondary Education</h3>
+                                    <span class="sleek-badge honor-year">2016–2022</span>
+                                </div>
+                                <div class="about-sub-meta honors-meta">
+                                    <span>Philippine Science High School - Central Visayas</span>
+                                    <span class="item-role-tag">DOST Scholar</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="timeline-meta-row">
-                            <span class="item-subtitle">Philippine Science High School - Central Visayas Campus (PSHS-CVC)</span>
-                            <span class="item-role-tag">DOST Scholar</span>
-                        </div>
-                        <div class="timeline-details">
-                            <p><strong>Academic Honors:</strong> Graduated with Academic Honors and Dean's Lister recognition from the nation's premier specialized government science and technology academy.</p>
-                            <p><strong>Intensive Curriculum:</strong> Completed advanced courses in algorithmic problem solving, calculus, discrete structures, and laboratory sciences under the Department of Science and Technology (DOST).</p>
-                            <p><strong>Athletics &amp; Strategy:</strong> Active member of the Red Hot Pawns (varsity competitive collegiate chess squad) for 2 years.</p>
-                        </div>
+                        <div class="about-hairline"></div>
+                        <ul class="about-impact-list honors-list">
+                            <li><strong>Graduation Honors:</strong> Graduated with Academic Honors and Dean's Lister standing from the country's premier government science high school.</li>
+                            <li><strong>Advanced Curriculum:</strong> Completed intensive coursework in algorithmic problem solving, calculus, discrete mathematics, and laboratory sciences under DOST.</li>
+                            <li><strong>Varsity Athletics:</strong> 2-year competitive chess player for the Red Hot Pawns collegiate varsity squad.</li>
+                        </ul>
                         <div class="timeline-tech-pills-row">
                             <span class="timeline-tech-pill">DOST Scholar</span>
                             <span class="timeline-tech-pill">Academic Honors</span>
@@ -402,6 +409,7 @@
                             <span class="timeline-tech-pill">Varsity Chess</span>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -416,79 +424,71 @@
                     <div class="section-divider"></div>
                 </div>
 
-                <div class="honors-grid">
+                <div class="accreditations-grid honors-grid" data-animated-content="true" data-stagger="0.08" data-distance="40" data-threshold="0.1" data-ease="power3.out">
                     
-                    <!-- PHILNITS -->
-                    <div class="honor-award-card glass-card">
-                        <div class="honor-card-content">
-                            <div class="honor-header-row">
-                                <span class="honor-badge-pill honor-badge-first">National Engineering Standard</span>
-                                <span class="honor-year">2025</span>
-                            </div>
-                            <h3 class="honor-award-title">PhilNITS FE (Fundamental Engineer)</h3>
-                            <p class="honor-award-desc">
-                                Passed the Fundamental Information Technology Engineers Examination (FE), an internationally accredited standard cross-recognized with Japan's ITPEC system verifying computer systems, algorithms, networking, and software engineering competence.
-                            </p>
+                    <!-- 1. PHILNITS FE -->
+                    <article class="accreditation-card glass-card" data-cert="philnits">
+                        <div class="accreditation-logo-stage">
+                            <img src="images/certifications/philnits.png" alt="PhilNITS Foundation Official Logo" class="accreditation-logo-img">
                         </div>
-                        <div class="honor-award-footer">
-                            <span>ITPEC / JITEC Japan Standard</span>
-                            <span>PhilNITS Foundation</span>
+                        <div class="accreditation-content">
+                            <h3 class="accreditation-title">PhilNITS FE</h3>
+                            <div class="accreditation-sub">Fundamental Information Technology Engineer</div>
                         </div>
-                    </div>
+                        <div class="accreditation-hairline"></div>
+                        <div class="accreditation-footer">
+                            <span class="accreditation-source">ITPEC / JITEC Japan</span>
+                            <span class="accreditation-date">April 2025</span>
+                        </div>
+                    </article>
 
-                    <!-- AWS -->
-                    <div class="honor-award-card glass-card">
-                        <div class="honor-card-content">
-                            <div class="honor-header-row">
-                                <span class="honor-badge-pill honor-badge-first">Cloud Architecture</span>
-                                <span class="honor-year">2025</span>
-                            </div>
-                            <h3 class="honor-award-title">AWS Academy Certified Architect</h3>
-                            <p class="honor-award-desc">
-                                Completed AWS Academy Cloud Foundations and Cloud Architecting curricula, verifying hands-on proficiency in Amazon EC2, VPC network topology, S3 storage tiers, IAM least-privilege security, and resilient cloud architectures.
-                            </p>
+                    <!-- 2. AWS ACADEMY ARCHITECT -->
+                    <article class="accreditation-card glass-card" data-cert="aws">
+                        <div class="accreditation-logo-stage">
+                            <img src="images/certifications/aws.svg" alt="Amazon Web Services Official Logo" class="accreditation-logo-img">
                         </div>
-                        <div class="honor-award-footer">
-                            <span>Amazon Web Services</span>
-                            <span>Cloud Infrastructure</span>
+                        <div class="accreditation-content">
+                            <h3 class="accreditation-title">AWS Cloud Architect</h3>
+                            <div class="accreditation-sub">AWS Academy Graduate</div>
                         </div>
-                    </div>
+                        <div class="accreditation-hairline"></div>
+                        <div class="accreditation-footer">
+                            <span class="accreditation-source">Amazon Web Services</span>
+                            <span class="accreditation-date">2025</span>
+                        </div>
+                    </article>
 
-                    <!-- TOPCIT -->
-                    <div class="honor-award-card glass-card">
-                        <div class="honor-card-content">
-                            <div class="honor-header-row">
-                                <span class="honor-badge-pill honor-badge-first">Global Competency Benchmark</span>
-                                <span class="honor-year">2025</span>
-                            </div>
-                            <h3 class="honor-award-title">TOPCIT Level 3 Certified</h3>
-                            <p class="honor-award-desc">
-                                Attained Level 3 competency in the Test of Practical Competency in ICT (TOPCIT), validating applied engineering abilities across technical problem solving, database modeling, software development, and technical communication.
-                            </p>
+                    <!-- 3. TOPCIT LEVEL 3 -->
+                    <article class="accreditation-card glass-card" data-cert="topcit">
+                        <div class="accreditation-logo-stage">
+                            <img src="images/certifications/topcit.png" alt="TOPCIT Official Logo" class="accreditation-logo-img">
                         </div>
-                        <div class="honor-award-footer">
-                            <span>IITP Korea / DICT</span>
-                            <span>Practical Engineering</span>
+                        <div class="accreditation-content">
+                            <h3 class="accreditation-title">TOPCIT Level 3</h3>
+                            <div class="accreditation-sub">Practical Competency in ICT</div>
                         </div>
-                    </div>
+                        <div class="accreditation-hairline"></div>
+                        <div class="accreditation-footer">
+                            <span class="accreditation-source">IITP Korea / DICT</span>
+                            <span class="accreditation-date">2025</span>
+                        </div>
+                    </article>
 
-                    <!-- CODECHUM -->
-                    <div class="honor-award-card glass-card">
-                        <div class="honor-card-content">
-                            <div class="honor-header-row">
-                                <span class="honor-badge-pill honor-badge-first">Algorithms &amp; Data Structures</span>
-                                <span class="honor-year">2024</span>
-                            </div>
-                            <h3 class="honor-award-title">CodeChum C &amp; Java Certified</h3>
-                            <p class="honor-award-desc">
-                                Certified in low-level memory allocation, object-oriented design patterns, algorithmic time and space complexity optimization, and concurrent data structure implementations.
-                            </p>
+                    <!-- 4. CODECHUM C & JAVA -->
+                    <article class="accreditation-card glass-card" data-cert="codechum">
+                        <div class="accreditation-logo-stage">
+                            <img src="images/certifications/codechum.png" alt="CodeChum Official Logo" class="accreditation-logo-img">
                         </div>
-                        <div class="honor-award-footer">
-                            <span>Algorithmic Complexity</span>
-                            <span>CodeChum Examination</span>
+                        <div class="accreditation-content">
+                            <h3 class="accreditation-title">CodeChum C &amp; Java</h3>
+                            <div class="accreditation-sub">Algorithms &amp; Data Structures</div>
                         </div>
-                    </div>
+                        <div class="accreditation-hairline"></div>
+                        <div class="accreditation-footer">
+                            <span class="accreditation-source">CodeChum Standard</span>
+                            <span class="accreditation-date">2024</span>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -503,40 +503,46 @@
                     <div class="section-divider"></div>
                 </div>
 
-                <div class="research-grid">
+                <div class="research-grid" data-animated-content="true" data-stagger="0.14" data-distance="45" data-threshold="0.1" data-ease="power3.out">
                     
                     <!-- ICETT 2026 -->
                     <div class="research-card glass-card">
                         <div class="research-card-content">
-                            <div class="research-badge-row">
-                                <span class="sleek-badge research-scopus-pill">Scopus Indexed • Singapore</span>
-                                <span class="project-date">2025-2026</span>
+                            <div class="about-brand-header">
+                                <div class="about-brand-logo-stage">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Scopus_logo.svg" alt="Elsevier Scopus Official Logo" class="about-brand-logo-img">
+                                </div>
+                                <div class="about-brand-info">
+                                    <div class="about-brand-top">
+                                        <h3 class="about-main-title">ICETT 2026</h3>
+                                        <span class="sleek-badge research-scopus-pill">Scopus Indexed • Singapore</span>
+                                    </div>
+                                    <div class="about-sub-meta research-meta">
+                                        <span>14th Int'l Conference on Educational &amp; Information Tech</span>
+                                        <span class="item-role-tag">Lead Researcher</span>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 class="research-conference-heading">ICETT 2026</h3>
-                            <div class="research-conference-sub">14th International Conference on Educational and Information Technology</div>
 
-                            <div class="research-study-box">
-                                <div class="research-study-eyebrow">Accepted Research Paper</div>
-                                <h4 class="research-study-name">Fusion Rush: Enhancing Proficiency in Boolean Logic Algebra through Gamification</h4>
+                            <div class="research-paper-callout">
+                                <div class="research-paper-tag">Accepted Peer-Reviewed Paper</div>
+                                <h4 class="research-paper-name">Fusion Rush: Enhancing Proficiency in Boolean Logic Algebra through Gamification</h4>
                             </div>
 
                             <div class="research-authors-strip">
-                                <span>P.M.G. Bascuq, <strong>R.B. Gemina</strong>, B.X. Mendoza, Engr. R. Laviste, Prof. C. Arellano</span>
+                                <span>F.M.F.G. Bascug, <strong>R.B. Gemina</strong>, B.X. Mendoza, Engr. R. Laviste, Prof. C. Arellano</span>
                             </div>
-                            <p class="research-desc">
-                                Peer-reviewed conference paper accepted at Scopus-indexed <strong>ICETT 2026</strong>. Architected an adaptive educational AI tutor transforming complex discrete mathematics logic proofs into gamified cognitive mechanics with verifiable student mastery lift.
+
+                            <p class="research-concise-summary">
+                                <strong>Scopus-Indexed AI Architecture:</strong> Designed an adaptive educational logic engine translating discrete math proofs into gamified cognitive mechanics, delivering statistically significant student mastery lift.
                             </p>
-                            <div class="research-tech-row">
+
+                            <div class="timeline-tech-pills-row">
+                                <span class="timeline-tech-pill">Scopus Indexed</span>
                                 <span class="timeline-tech-pill">Python</span>
                                 <span class="timeline-tech-pill">FastAPI</span>
                                 <span class="timeline-tech-pill">AI Reasoning</span>
-                                <span class="timeline-tech-pill">Scopus Indexed</span>
-                            </div>
-                        </div>
-                        <div class="research-meta-box">
-                            <div class="research-location-wrap">
-                                <div class="research-location">Singapore • Scopus Q3/Q4 Proceeding</div>
-                                <div class="research-venue">Lead Researcher &amp; Full-Stack Dev</div>
+                                <span class="timeline-tech-pill">Discrete Math</span>
                             </div>
                         </div>
                     </div>
@@ -544,35 +550,41 @@
                     <!-- PCSC 2026 -->
                     <div class="research-card glass-card">
                         <div class="research-card-content">
-                            <div class="research-badge-row">
-                                <span class="sleek-badge research-pcsc-pill">National Congress • Davao City</span>
-                                <span class="project-date">2026</span>
+                            <div class="about-brand-header">
+                                <div class="about-brand-logo-stage">
+                                    <img src="https://pcsc2026.uic.edu.ph/icon.png" alt="PCSC 2026 Official Logo" class="about-brand-logo-img">
+                                </div>
+                                <div class="about-brand-info">
+                                    <div class="about-brand-top">
+                                        <h3 class="about-main-title">PCSC 2026</h3>
+                                        <span class="sleek-badge research-pcsc-pill">Davao City • In-Person</span>
+                                    </div>
+                                    <div class="about-sub-meta research-meta">
+                                        <span>26th Philippine Computing Science Congress</span>
+                                        <span class="item-role-tag">Congress Presenter</span>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 class="research-conference-heading">PCSC 2026</h3>
-                            <div class="research-conference-sub">26th Philippine Computing Science Congress</div>
 
-                            <div class="research-study-box">
-                                <div class="research-study-eyebrow">Technical Presentation Paper</div>
-                                <h4 class="research-study-name">Visual AI Logic Proof Parser: Parsing Structured Handwritten Discrete Math Proofs</h4>
+                            <div class="research-paper-callout">
+                                <div class="research-paper-tag">Technical Presentation Paper</div>
+                                <h4 class="research-paper-name">Visual AI Logic Proof Parser: Parsing Structured Handwritten Discrete Math Proofs</h4>
                             </div>
 
                             <div class="research-authors-strip">
-                                <span>P.M.G. Bascuq, <strong>R.B. Gemina</strong>, B.X. Mendoza, Prof. C. Arellano</span>
+                                <span>F.M.F.G. Bascug, <strong>R.B. Gemina</strong>, B.X. Mendoza, Prof. C. Arellano</span>
                             </div>
-                            <p class="research-desc">
-                                Computer vision research accepted and <strong>personally presented at the Philippine Computing Science Congress (PCSC 2026) in Davao City</strong>. Built an OCR parsing pipeline evaluating multi-step handwritten discrete math inference proofs.
+
+                            <p class="research-concise-summary">
+                                <strong>Computer Vision Pipeline:</strong> Engineered an OCR parsing system evaluating multi-step handwritten discrete math inference proofs, personally presented in-person at PCSC 2026 in Davao City.
                             </p>
-                            <div class="research-tech-row">
-                                <span class="timeline-tech-pill">Computer Vision</span>
-                                <span class="timeline-tech-pill">OCR Engine</span>
-                                <span class="timeline-tech-pill">PyTorch</span>
+
+                            <div class="timeline-tech-pills-row">
                                 <span class="timeline-tech-pill">PCSC '26 Presenter</span>
-                            </div>
-                        </div>
-                        <div class="research-meta-box">
-                            <div class="research-location-wrap">
-                                <div class="research-location">Davao City • In-Person Congress Presenter</div>
-                                <div class="research-venue">Philippine Computing Science Congress (PCSC 2026)</div>
+                                <span class="timeline-tech-pill">Computer Vision</span>
+                                <span class="timeline-tech-pill">PyTorch</span>
+                                <span class="timeline-tech-pill">OCR Engine</span>
+                                <span class="timeline-tech-pill">Inference Proofs</span>
                             </div>
                         </div>
                     </div>
@@ -591,79 +603,86 @@
                     <div class="section-divider"></div>
                 </div>
 
-                <div class="philosophy-bento-grid">
+                <div class="philosophy-strip-grid" data-animated-content="true" data-stagger="0.1" data-distance="45" data-threshold="0.1" data-ease="power3.out">
                     
-                    <!-- DOMAIN: ZERO-LAG UX -->
-                    <div class="philo-card glass-card philo-hero-card">
-                        <div class="philo-card-body">
-                            <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">UI Runtime &amp; INP</span>
-                                <span class="philo-metric-pill">INP &lt; 50ms</span>
+                    <!-- PILLAR 1: RADICAL EFFICIENCY (CYAN) -->
+                    <div class="philo-pillar-card pillar-cyan">
+                        <div class="philo-top-row">
+                            <div class="philo-logo-stage">
+                                <svg class="philo-pillar-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"></path>
+                                    <circle cx="3" cy="14" r="1" fill="currentColor"></circle>
+                                    <circle cx="20" cy="10" r="1" fill="currentColor"></circle>
+                                </svg>
                             </div>
-                            <h3 class="philo-title">Zero-Lag UX: Interaction Over Decoration</h3>
-                            <p class="philo-thesis">
-                                Interfaces should respond to user intent immediately. Heavy visual flair that compromises interaction latency is a defect, not polish.
-                            </p>
-                            <ul class="philo-principles-list">
-                                <li>Optimistic UI updates with instant local feedback</li>
-                                <li>Sub-100ms render targets across mobile devices</li>
-                                <li>Decoupling expensive computations into background web workers</li>
-                            </ul>
+                            <span class="philo-metric-badge">Lean &amp; Fast</span>
                         </div>
+                        <h3 class="philo-main-title">Radical Efficiency</h3>
+                        <div class="philo-emphasis">Speed, clarity, zero waste.</div>
+                        <p class="philo-short-desc">
+                            Cut straight to what moves the needle. Minimal moving parts, concise pipelines, and high-leverage execution.
+                        </p>
                     </div>
 
-                    <!-- DOMAIN: CLOUD-NATIVE RESILIENCE -->
-                    <div class="philo-card glass-card philo-compact-card">
-                        <div class="philo-card-body">
-                            <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">High Availability &amp; SRE</span>
-                                <span class="philo-metric-pill">99.9% SLO</span>
+                    <!-- PILLAR 2: ZERO OVER-ENGINEERING (AMBER) -->
+                    <div class="philo-pillar-card pillar-amber">
+                        <div class="philo-top-row">
+                            <div class="philo-logo-stage">
+                                <svg class="philo-pillar-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"></path>
+                                    <path d="M10.5 8.5L4 21"></path>
+                                    <path d="M13.5 8.5L20 21"></path>
+                                    <path d="M7 16h10"></path>
+                                </svg>
                             </div>
-                            <h3 class="philo-title">Cloud-Native Resilience</h3>
-                            <p class="philo-thesis">
-                                Distributed systems inevitably experience partial outages. Reliability is achieved through circuit breakers and graceful degradation.
-                            </p>
-                            <ul class="philo-principles-list">
-                                <li>Declarative Kubernetes deployments with automated self-healing</li>
-                                <li>Distributed telemetry via Prometheus &amp; Grafana alerts</li>
-                            </ul>
+                            <span class="philo-metric-badge">Zero Fluff</span>
                         </div>
+                        <h3 class="philo-main-title">Zero Over-Engineering</h3>
+                        <div class="philo-emphasis">Build only what is needed.</div>
+                        <p class="philo-short-desc">
+                            Reject premature abstractions and speculative bloat. Solve the actual problem with the cleanest robust architecture.
+                        </p>
                     </div>
 
-                    <!-- DOMAIN: DEFENSIVE ARCHITECTURE -->
-                    <div class="philo-card glass-card philo-compact-card">
-                        <div class="philo-card-body">
-                            <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">Defensive Architecture</span>
-                                <span class="philo-metric-pill">Validation First</span>
+                    <!-- PILLAR 3: LOOKS GOOD, FEELS GOOD (EMERALD) -->
+                    <div class="philo-pillar-card pillar-emerald">
+                        <div class="philo-top-row">
+                            <div class="philo-logo-stage">
+                                <svg class="philo-pillar-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                                    <circle cx="12" cy="12" r="3.5" fill="currentColor"></circle>
+                                </svg>
                             </div>
-                            <h3 class="philo-title">Defensive Architecture</h3>
-                            <p class="philo-thesis">
-                                Build boundaries that assume all external inputs and microservice dependencies are unreliable until verified.
-                            </p>
-                            <ul class="philo-principles-list">
-                                <li>Strict runtime type boundaries and validation gates</li>
-                                <li>Signed cryptographic tokens with zero client secrets</li>
-                            </ul>
+                            <span class="philo-metric-badge">Aesthetic &amp; Flow</span>
                         </div>
+                        <h3 class="philo-main-title">Looks Good, Feels Good</h3>
+                        <div class="philo-emphasis">Beautiful to see, effortless to use.</div>
+                        <p class="philo-short-desc">
+                            Sharp typography, calibrated layout, and 60 FPS physics. Software that catches the eye and feels instantly natural in hand.
+                        </p>
                     </div>
 
-                    <!-- DOMAIN: EMPIRICAL BENCHMARKING -->
-                    <div class="philo-card glass-card philo-hero-card">
-                        <div class="philo-card-body">
-                            <div class="philo-badge-row">
-                                <span class="philo-pillar-badge">Empirical Benchmarking</span>
-                                <span class="philo-metric-pill">Profiled Gains</span>
+                    <!-- PILLAR 4: TWEAK UNTIL IT HITS (VIOLET) -->
+                    <div class="philo-pillar-card pillar-violet">
+                        <div class="philo-top-row">
+                            <div class="philo-logo-stage">
+                                <svg class="philo-pillar-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+                                    <line x1="12" y1="2" x2="12" y2="4"></line>
+                                    <line x1="12" y1="20" x2="12" y2="22"></line>
+                                    <line x1="2" y1="12" x2="4" y2="12"></line>
+                                    <line x1="20" y1="12" x2="22" y2="12"></line>
+                                </svg>
                             </div>
-                            <h3 class="philo-title">Empirical Optimization</h3>
-                            <p class="philo-thesis">
-                                Measure before modifying. Intuition is valuable for hypothesizing, but profilers and telemetry must confirm real-world performance gains.
-                            </p>
-                            <ul class="philo-principles-list">
-                                <li>Benchmarking algorithmic complexity and memory footprints</li>
-                                <li>Continuous profiling to isolate latency bottlenecks before production</li>
-                            </ul>
+                            <span class="philo-metric-badge">Bullseye</span>
                         </div>
+                        <h3 class="philo-main-title">Tweak Until It Hits</h3>
+                        <div class="philo-emphasis">Calibrate until it clicks.</div>
+                        <p class="philo-short-desc">
+                            Relentless iteration on timing, typography, and ergonomics. Never settling until every detail hits the exact standard.
+                        </p>
                     </div>
 
                 </div>
@@ -680,43 +699,80 @@
                     <div class="section-divider"></div>
                 </div>
 
-                <div class="volunteering-grid">
+                <div class="volunteering-grid" data-animated-content="true" data-stagger="0.12" data-distance="40" data-threshold="0.1" data-ease="power3.out">
                     
                     <div class="volunteering-card glass-card">
-                        <div class="volunteering-header">
-                            <span class="sleek-badge">Collegiate Music Leadership</span>
-                            <span class="volunteering-period">2024-2026</span>
+                        <div class="about-brand-header">
+                            <div class="about-brand-logo-stage" style="background: linear-gradient(135deg, #1e1b4b, #312e81); border-color: rgba(167, 139, 250, 0.4);">
+                                <svg viewBox="0 0 24 24" fill="none" style="width: 28px; height: 28px;" aria-hidden="true">
+                                    <path d="M9 18V5l12-2v13" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="6" cy="18" r="3" fill="#a78bfa"/>
+                                    <circle cx="18" cy="16" r="3" fill="#a78bfa"/>
+                                </svg>
+                            </div>
+                            <div class="about-brand-info">
+                                <div class="about-brand-top">
+                                    <h3 class="about-main-title">Koro Teknoy Chorale</h3>
+                                    <span class="sleek-badge">2024–2026</span>
+                                </div>
+                                <div class="about-sub-meta">
+                                    <span>Presidential Officer-in-Charge &amp; Bass 2</span>
+                                    <span class="item-role-tag">Collegiate Leadership</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="volunteering-title">Koro Teknoy Chorale: Presidential OIC &amp; Bass 2</h3>
+                        <div class="about-hairline"></div>
                         <p class="volunteering-desc">
-                            Directed executive management, rehearsal scheduling, and external ceremonial appearances for CIT-U's premier collegiate chorale. Maintained team morale and vocal discipline across major university convocations and regional competitions.
+                            Directed executive management, rehearsal scheduling, and formal ceremonial appearances for CIT-U's premier collegiate chorale across major university convocations and regional competitions.
                         </p>
                         <div class="volunteering-tag-row">
-                            <span class="timeline-tech-pill">Executive Management</span>
-                            <span class="timeline-tech-pill">Presidential OIC</span>
+                            <span class="timeline-tech-pill">Executive OIC</span>
+                            <span class="timeline-tech-pill">Collegiate Chorale</span>
+                            <span class="timeline-tech-pill">Bass 2</span>
                             <span class="timeline-tech-pill">Convocations</span>
                         </div>
                     </div>
 
                     <div class="volunteering-card glass-card">
-                        <div class="volunteering-header">
-                            <span class="sleek-badge">Student Tech Leadership</span>
-                            <span class="volunteering-period">2023-2025</span>
+                        <div class="about-brand-header">
+                            <div class="about-brand-logo-stage" style="background: linear-gradient(135deg, #0c4a6e, #075985); border-color: rgba(56, 189, 248, 0.4);">
+                                <svg viewBox="0 0 24 24" fill="none" style="width: 28px; height: 28px;" aria-hidden="true">
+                                    <polyline points="16 18 22 12 16 6" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <polyline points="8 6 2 12 8 18" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="about-brand-info">
+                                <div class="about-brand-top">
+                                    <h3 class="about-main-title">Computer Science Guild</h3>
+                                    <span class="sleek-badge">2023–2025</span>
+                                </div>
+                                <div class="about-sub-meta">
+                                    <span>Lead Peer Mentor &amp; Technical Tutor</span>
+                                    <span class="item-role-tag">Student Mentorship</span>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="volunteering-title">Computer Science Guild &amp; Peer Tutoring</h3>
+                        <div class="about-hairline"></div>
                         <p class="volunteering-desc">
-                            Organized peer mentorship cohorts for lower-year students in Discrete Mathematics, Data Structures, and Python. Facilitated code walkthrough sessions and mentored teams in collegiate hackathons.
+                            Organized peer mentorship cohorts and code walkthrough sessions in Discrete Mathematics, Data Structures, and Python, mentoring 60+ lower-year CS students and collegiate hackathon teams.
                         </p>
                         <div class="volunteering-tag-row">
                             <span class="timeline-tech-pill">Technical Mentorship</span>
-                            <span class="timeline-tech-pill">Discrete Math Tutoring</span>
-                            <span class="timeline-tech-pill">Hackathon Mentorship</span>
+                            <span class="timeline-tech-pill">Discrete Math</span>
+                            <span class="timeline-tech-pill">Data Structures</span>
+                            <span class="timeline-tech-pill">Python</span>
                         </div>
                     </div>
 
                 </div>
 
-                <!-- CTA (REACT BITS BORDER GLOW) -->
+            </div>
+        </section>
+
+        <!-- STREAMLINED UNCLUTTERED CONTACT SECTION ("Let's connect!") -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <!-- REACT BITS: BORDER GLOW CARD -->
                 <div class="border-glow-card bite-connect-card-glow"
                      data-border-glow="true"
                      data-edge-sensitivity="30"
@@ -728,17 +784,30 @@
                      data-cone-spread="25"
                      data-colors="#c084fc, #38bdf8, #00f0ff"
                      data-fill-opacity="0.45"
-                     data-animated="false"
-                     style="max-width: 720px; margin: 0 auto;">
+                     data-animated="false">
                     <span class="edge-light"></span>
-                    <div class="border-glow-inner bite-connect-card" style="text-align: center; padding: 2.5rem 2rem; background: transparent; border: none; box-shadow: none;">
-                        <h3 class="bite-connect-title">Let's discuss an engineering role or project</h3>
-                        <p class="bite-connect-desc">
-                            Actively evaluating Full-Stack Developer, Software Engineer, and Site Reliability Engineer (SRE) opportunities with immediate start availability.
-                        </p>
-                        <a href="contact.html" class="specular-button specular-button--md" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.3" data-specular-radius="999">
-                            <span>Go to In-Depth Contact Page &rarr;</span>
-                        </a>
+                    <div class="border-glow-inner bite-connect-card bite-connect-card--minimal">
+                        <div class="bite-connect-header">
+                            <h2 class="bite-connect-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 550, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Let's connect!</span></h2>
+                            <p class="bite-connect-desc">
+                                Actively evaluating Full-Stack Developer, Software Engineer, and SRE opportunities with immediate availability.
+                            </p>
+                        </div>
+
+                        <div class="bite-connect-action-row">
+                            <a href="contact.html" class="contact-cta-btn">
+                                <span>Get in Touch</span>
+                            </a>
+                        </div>
+
+                        <!-- DIRECT CHANNELS: MINIMALIST TEXT WITH DOTS IN BETWEEN -->
+                        <div class="contact-details-row">
+                            <a href="mailto:roddneilgemina@gmail.com" class="contact-details-link" title="Send Email">roddneilgemina@gmail.com</a>
+                            <span class="contact-details-dot" aria-hidden="true">&bull;</span>
+                            <a href="https://github.com/RoddneilGemina" target="_blank" rel="noopener noreferrer" class="contact-details-link" title="GitHub Profile">GitHub</a>
+                            <span class="contact-details-dot" aria-hidden="true">&bull;</span>
+                            <a href="https://www.linkedin.com/in/roddneil-gemina-20b423409" target="_blank" rel="noopener noreferrer" class="contact-details-link" title="LinkedIn Profile">LinkedIn</a>
+                        </div>
                     </div>
                 </div>
             </div>

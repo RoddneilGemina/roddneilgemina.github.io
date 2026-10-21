@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Case Study | Roddneil B. Gemina</title>
+    <meta name="description" content="In-depth architectural case study and engineering specifications by Roddneil B. Gemina, Software Engineer and CS Scholar.">
+    <link rel="canonical" href="https://roddneil-gemina.pages.dev/project.html">
+    <link rel="stylesheet" href="css/styles.css?v=4.1">
+    <link rel="stylesheet" href="css/project-detail.css?v=27.3">
+    
+    <!-- Google Fonts: Archivo (Display & Body) & Geist Mono (Technical Utility & Buttons) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Geist+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & Animation Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- React Bits GooeyNav (WebGL2 Metaball Fluid Navigation) -->
+    <script src="js/gooey-nav.js?v=2.2"></script>
+    <!-- Project Catalog Data -->
+    <script src="js/project-data.js?v=2.0"></script>
+    <!-- Project Detail Dynamic Renderer -->
+    <script src="js/project-detail.js?v=2.0"></script>
+    <script src="js/navbar.js"></script>
+</head>
+<body class="project-detail-page">
+
+    <!-- GLOBAL DOTFIELD BACKGROUND TEXTURE -->
+    <div id="global-dotfield-container" class="dot-field-container global-dotfield" aria-hidden="true"></div>
+
+    <!-- CIRCULAR RIPPLE OVERLAY FOR THEME WAVE -->
+    <div id="theme-ripple-overlay" class="theme-ripple-overlay"></div>
+
+    <!-- SITE NAVBAR -->
+        <!-- REACT BITS SIGNATURE NAVBAR (reactbits.dev landing page layout & behavior) -->
+    <header class="site-header ln-navbar">
+        <div class="container header-inner ln-navbar-inner">
+            <!-- BRAND BADGE & DIVIDER & LINKS (LEFT) -->
+            <div class="ln-navbar-left">
+                <a href="index.html" class="ln-navbar-logo brand-badge-link" aria-label="Roddneil Gemina Home">
+                    <div class="brand-badge-icon">
+                        <span class="brand-monogram">RG</span>
+                    </div>
+                    <div class="brand-badge-info">
+                        <span class="brand-badge-name">Roddneil Gemina</span>
+                        <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
+                    </div>
+                </a>
+
+                <span class="ln-navbar-divider" aria-hidden="true">/</span>
+
+                <nav class="ln-navbar-links" id="main-nav" aria-label="Primary Navigation">
+                    <div class="ln-navbar-link-highlight" aria-hidden="true"></div>
+                    <a href="index.html" class="ln-navbar-link" data-nav="home">Home</a>
+                    <a href="projects.html" class="ln-navbar-link active" data-nav="work" aria-current="page">Work</a>
+                    <a href="about.html" class="ln-navbar-link" data-nav="about">About</a>
+                    <a href="contact.html" class="ln-navbar-link" data-nav="contact">Contact</a>
+                </nav>
+            </div>
+
+            <!-- RIGHT ACTIONS -->
+            <div class="ln-navbar-right header-actions">
+                <a href="https://github.com/roddneilgemina" target="_blank" rel="noopener noreferrer" class="ln-navbar-github" aria-label="GitHub Profile">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+
+                <a href="contact.html" class="ln-navbar-cta nav-cta-pill">
+                    <span>Get in Touch</span>
+                </a>
+
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" class="project-main-container">
+
+        <!-- CONTEXTUAL TOP BREADCRUMB STRIP -->
+        <section class="project-breadcrumb-bar">
+            <div class="container project-breadcrumb-inner">
+                <div class="breadcrumb-left">
+                    <a href="projects.html" class="project-back-pill" id="project-back-link">
+                        <svg viewBox="0 0 24 24" width="16" height="16" style="width: 16px; height: 16px; flex-shrink: 0;" class="back-arrow-svg" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        <span>Back to All Projects</span>
+                    </a>
+                    <div class="breadcrumb-divider">/</div>
+                    <span class="breadcrumb-category" id="project-breadcrumb-category">Engineering</span>
+                    <div class="breadcrumb-divider">/</div>
+                    <span class="breadcrumb-current" id="project-breadcrumb-title">Case Study</span>
+                </div>
+                <div class="breadcrumb-right">
+                    <span class="keyboard-nav-hint">
+                        <kbd>Esc</kbd> all projects &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECT HERO SECTION -->
+        <section class="project-hero-section">
+            <div class="container project-hero-inner">
+                
+                <div class="project-meta-kickers">
+                    <span class="project-kicker-tag" id="project-kicker-badge">Research Paper</span>
+                    <span class="project-timeline-badge" id="project-timeline-chip">2025–2026</span>
+                    <span class="project-status-chip" id="project-status-pill">Accepted &amp; Published</span>
+                </div>
+
+                <h1 class="project-headline" id="project-hero-title">Project Title</h1>
+                <p class="project-subhead" id="project-hero-subtitle">Project Subtitle</p>
+
+                <!-- QUICK METADATA STRIP -->
+                <div class="project-quick-meta-strip">
+                    <div class="quick-meta-item">
+                        <span class="meta-label">My Role</span>
+                        <strong class="meta-val" id="project-meta-role">Lead Architect &amp; Developer</strong>
+                    </div>
+                    <div class="quick-meta-item">
+                        <span class="meta-label">Venue / Organization</span>
+                        <strong class="meta-val" id="project-meta-venue">Academic Conference</strong>
+                    </div>
+                </div>
+
+                <!-- KEY METRICS STRIP -->
+                <div class="project-metrics-container" id="project-metrics-grid">
+                    <!-- Populated dynamically via project-detail.js -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PRIMARY VISUAL SHOWCASE (FULL-WIDTH ADAPTIVE STAGE) -->
+        <section class="project-showcase-section">
+            <div class="container project-showcase-inner">
+                
+                <div class="showcase-header-bar">
+                    <span class="showcase-kicker">// SYSTEM INTERFACE &amp; ARCHITECTURAL PREVIEW</span>
+                    <div class="showcase-controls" id="project-media-controls">
+                        <!-- Populated with video / screenshot toggles if video is available -->
+                    </div>
+                </div>
+
+                <div class="showcase-viewport" id="project-media-viewport">
+                    <!-- Dynamic Browser / Device Frame rendered by project-detail.js -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ARCHITECTURAL SPECIFICATIONS (2-COLUMN EDITORIAL DEEP DIVE) -->
+        <section class="project-deep-dive-section">
+            <div class="container project-deep-dive-inner">
+                
+                <!-- LEFT COLUMN: MAIN ARCHITECTURAL NARRATIVE -->
+                <div class="project-narrative-column">
+                    
+                    <!-- 01. PROBLEM SPACE -->
+                    <article class="spec-narrative-card">
+                        <div class="narrative-section-header">
+                            <span class="narrative-index">01</span>
+                            <div>
+                                <span class="narrative-kicker">PROBLEM STATEMENT &amp; CONSTRAINTS</span>
+                                <h2 class="narrative-title">The Challenge Space</h2>
+                            </div>
+                        </div>
+                        <p class="narrative-body" id="project-problem-text">
+                            Detailed problem description loading...
+                        </p>
+                    </article>
+
+                    <!-- 02. SYSTEM DESIGN & ARCHITECTURE -->
+                    <article class="spec-narrative-card">
+                        <div class="narrative-section-header">
+                            <span class="narrative-index">02</span>
+                            <div>
+                                <span class="narrative-kicker">ENGINEERING SOLUTION &amp; PIPELINE</span>
+                                <h2 class="narrative-title">Architectural Solution</h2>
+                            </div>
+                        </div>
+                        <p class="narrative-body" id="project-solution-text">
+                            Architectural solution loading...
+                        </p>
+                    </article>
+
+                    <!-- 03. KEY TECHNICAL HIGHLIGHTS -->
+                    <article class="spec-narrative-card">
+                        <div class="narrative-section-header">
+                            <span class="narrative-index">03</span>
+                            <div>
+                                <span class="narrative-kicker">CORE CONTRIBUTIONS &amp; SYSTEM METRICS</span>
+                                <h2 class="narrative-title">Key Engineering Highlights</h2>
+                            </div>
+                        </div>
+                        <div class="narrative-highlights-container" id="project-highlights-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- RIGHT COLUMN: STICKY TECHNICAL SPEC SHEET -->
+                <aside class="project-sidebar-column">
+                    <div class="project-sticky-spec-card">
+                        
+                        <div class="spec-sheet-header">
+                            <span class="spec-sheet-badge">TECHNICAL SPEC</span>
+                            <h3 class="spec-sheet-title">System Blueprint</h3>
+                        </div>
+
+                        <div class="spec-property-list">
+                            <div class="spec-property-item">
+                                <span class="spec-prop-label">Primary Role</span>
+                                <span class="spec-prop-val" id="sidebar-project-role">Platform Architect</span>
+                            </div>
+                            <div class="spec-property-item">
+                                <span class="spec-prop-label">Venue / Client</span>
+                                <span class="spec-prop-val" id="sidebar-project-venue">Industry &amp; Research</span>
+                            </div>
+                            <div class="spec-property-item" id="sidebar-authors-wrapper" style="display: none;">
+                                <span class="spec-prop-label">Research Authors</span>
+                                <span class="spec-prop-val" id="sidebar-project-authors"></span>
+                            </div>
+                            <div class="spec-property-item">
+                                <span class="spec-prop-label">Engineering Cycle</span>
+                                <span class="spec-prop-val" id="sidebar-project-timeline">2025–2026</span>
+                            </div>
+                            <div class="spec-property-item">
+                                <span class="spec-prop-label">Deployment Status</span>
+                                <span class="spec-prop-val status-val" id="sidebar-project-status">Production Ready</span>
+                            </div>
+                        </div>
+
+                        <!-- CATEGORIZED TECH TIERS -->
+                        <div class="spec-tech-tiers-wrapper">
+                            <span class="spec-section-label">Engineered Stack</span>
+                            <div id="sidebar-tech-categories">
+                                <!-- Populated dynamically by tier -->
+                            </div>
+                            <div class="spec-all-tags" id="sidebar-tech-stack">
+                                <!-- Fallback badges -->
+                            </div>
+                        </div>
+
+                        <!-- ARTIFACT & PUBLICATION LINKS -->
+                        <div class="spec-links-wrapper">
+                            <span class="spec-section-label">Artifacts &amp; External References</span>
+                            <div id="sidebar-artifact-links">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- INQUIRY COLLABORATION CARD -->
+                        <div class="sidebar-inquiry-box">
+                            <div class="inquiry-box-title">Build Something Similar?</div>
+                            <p class="inquiry-box-desc">
+                                Open to senior software engineering, distributed systems, and AI research contracts.
+                            </p>
+                            <a href="contact.html" class="sidebar-inquiry-btn">
+                                <span>Start an Engineering Inquiry</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- BOTTOM PERSISTENT PAGER (PREVIOUS / NEXT PROJECT) -->
+        <section class="project-pager-section">
+            <div class="container project-pager-inner">
+                
+                <!-- PREVIOUS PROJECT -->
+                <a href="#" id="pager-prev-card" class="project-pager-card pager-prev">
+                    <span class="pager-kicker">← Previous Project</span>
+                    <strong class="pager-title">Previous Project Title</strong>
+                </a>
+
+                <!-- BROWSE ALL CTA -->
+                <div class="pager-center-nav">
+                    <a href="projects.html" class="pager-all-btn">
+                        <svg viewBox="0 0 24 24" width="14" height="14" style="width: 14px; height: 14px; flex-shrink: 0;" class="grid-icon-svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>All 12 Projects</span>
+                    </a>
+                </div>
+
+                <!-- NEXT PROJECT -->
+                <a href="#" id="pager-next-card" class="project-pager-card pager-next">
+                    <span class="pager-kicker">Next Project →</span>
+                    <strong class="pager-title">Next Project Title</strong>
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <span class="footer-brand">RODDNEIL B. GEMINA</span>
+                <span class="footer-copy">© <span id="current-year">2026</span> Roddneil B. Gemina. All rights reserved.</span>
+            </div>
+            <div class="footer-right">
+                <a href="#" class="back-to-top">Back to top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHARED MAIN SCRIPT FOR GOOEY NAV & HEADER SCROLL -->
+    <script src="js/main.js"></script>
+</body>
+</html>

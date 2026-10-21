@@ -5,7 +5,7 @@
     <title>Projects &amp; Architectures | Roddneil B. Gemina</title>
     <meta name="description" content="Comprehensive engineering portfolio of Roddneil B. Gemina. Production full-stack platforms, distributed systems, Scopus ICETT '26 and PCSC '26 AI research prototypes.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/projects.html">
-    <link rel="stylesheet" href="css/styles.css?v=25.0">
+    <link rel="stylesheet" href="css/styles.css?v=4.1">
     
     <!-- Google Fonts: Archivo (Display & Body) & Geist Mono (Technical Utility & Buttons) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,6 +33,7 @@
     <script src="js/count-up.js"></script>
     <!-- React Bits GooeyNav (WebGL2 Metaball Fluid Navigation) -->
     <script src="js/gooey-nav.js?v=2.2"></script>
+    <script src="js/navbar.js"></script>
 </head>
 <body>
 
@@ -43,81 +44,43 @@
     <div id="theme-ripple-overlay" class="theme-ripple-overlay"></div>
 
     <!-- SLEEK MINIMAL NAVBAR -->
-        <header class="site-header">
-        <div class="container header-inner">
-            <!-- BRAND BADGE (LEFT) -->
-            <a href="index.html" class="brand-badge-link">
-                <div class="brand-badge-icon">
-                    <span class="brand-monogram">RG</span>
-                </div>
-                <div class="brand-badge-info">
-                    <span class="brand-badge-name">Roddneil Gemina</span>
-                    <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
-                </div>
-            </a>
+            <!-- REACT BITS SIGNATURE NAVBAR (reactbits.dev landing page layout & behavior) -->
+    <header class="site-header ln-navbar">
+        <div class="container header-inner ln-navbar-inner">
+            <!-- BRAND BADGE & DIVIDER & LINKS (LEFT) -->
+            <div class="ln-navbar-left">
+                <a href="index.html" class="ln-navbar-logo brand-badge-link" aria-label="Roddneil Gemina Home">
+                    <div class="brand-badge-icon">
+                        <span class="brand-monogram">RG</span>
+                    </div>
+                    <div class="brand-badge-info">
+                        <span class="brand-badge-name">Roddneil Gemina</span>
+                        <span class="brand-badge-sub">Software Engineer &amp; CS Scholar</span>
+                    </div>
+                </a>
 
-            <!-- REACT BITS GOOEY NAV (CENTER) -->
-            <nav class="gooey-nav gooey-nav--md gooey-nav--framed main-nav-pill"
-                 id="main-nav"
-                 data-gooey-nav="true"
-                 data-theme="dark"
-                 data-color="#00f0ff"
-                 data-colors="#00f0ff,#38bdf8,#7fa8ff"
-                 data-particle-count="15"
-                 data-spread="56"
-                 data-animation-time="600"
-                 data-time-variance="300"
-                 data-gooeyness="0.5"
-                 data-wobble="0.5"
-                 data-hover-effect="true">
-                <span class="gooey-nav__rim"></span>
-                <div class="gooey-nav__stage">
-                    <canvas class="gooey-nav__canvas" aria-hidden="true"></canvas>
-                    <span class="gooey-nav__fallback" aria-hidden="true"></span>
-                    <ul class="gooey-nav__list">
-                        <li class="gooey-nav__item" data-gooey-index="0">
-                            <a href="index.html" class="gooey-nav__link">
-                                <span class="gooey-nav__label">Home</span>
-                            </a>
-                        </li>
-                        <li class="gooey-nav__item" data-gooey-index="1" data-active="">
-                            <a href="projects.html" class="gooey-nav__link active" aria-current="page">
-                                <span class="gooey-nav__label">Work</span>
-                            </a>
-                        </li>
-                        <li class="gooey-nav__item" data-gooey-index="2">
-                            <a href="about.html" class="gooey-nav__link">
-                                <span class="gooey-nav__label">About</span>
-                            </a>
-                        </li>
-                        <li class="gooey-nav__item" data-gooey-index="3">
-                            <a href="contact.html" class="gooey-nav__link">
-                                <span class="gooey-nav__label">Contact</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="gooey-nav__list gooey-nav__list--active" aria-hidden="true">
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">Home</span></span>
-                        </li>
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">Work</span></span>
-                        </li>
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">About</span></span>
-                        </li>
-                        <li class="gooey-nav__item">
-                            <span class="gooey-nav__link"><span class="gooey-nav__label">Contact</span></span>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                <span class="ln-navbar-divider" aria-hidden="true">/</span>
+
+                <nav class="ln-navbar-links" id="main-nav" aria-label="Primary Navigation">
+                    <div class="ln-navbar-link-highlight" aria-hidden="true"></div>
+                    <a href="index.html" class="ln-navbar-link" data-nav="home">Home</a>
+                    <a href="projects.html" class="ln-navbar-link active" data-nav="work" aria-current="page">Work</a>
+                    <a href="about.html" class="ln-navbar-link" data-nav="about">About</a>
+                    <a href="contact.html" class="ln-navbar-link" data-nav="contact">Contact</a>
+                </nav>
+            </div>
 
             <!-- RIGHT ACTIONS -->
-            <div class="header-actions">
-                <!-- VIBRANT ORANGE CTA PILL -->
-                <a href="contact.html" class="nav-cta-pill specular-button specular-button--sm" data-specular="true" data-specular-line="#00f0ff" data-specular-glow="1.3" data-specular-radius="999">
-                    <span>Get in Touch ↗</span>
+            <div class="ln-navbar-right header-actions">
+                <a href="https://github.com/roddneilgemina" target="_blank" rel="noopener noreferrer" class="ln-navbar-github" aria-label="GitHub Profile">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+
+                <a href="contact.html" class="ln-navbar-cta nav-cta-pill">
+                    <span>Get in Touch</span>
                 </a>
 
                 <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
@@ -184,9 +147,9 @@
                             <span class="tech-badge">Scopus '26</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p1" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
+                            </a>
                             <span class="item-role-tag">Lead Researcher</span>
                         </div>
                     </article>
@@ -212,9 +175,9 @@
                             <span class="tech-badge">AST Parsing</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p2" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
+                            </a>
                             <span class="item-role-tag">Congress Presenter</span>
                         </div>
                     </article>
@@ -240,9 +203,9 @@
                             <span class="tech-badge">ATS Parsing</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p13" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
+                            </a>
                             <span class="item-role-tag">Creator &amp; AI Engineer</span>
                         </div>
                     </article>
@@ -268,10 +231,10 @@
                             <span class="tech-badge">Kanban Pipeline</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p12" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
-                            <span class="item-role-tag">Full-Stack &amp; AI Architect</span>
+                            </a>
+                            <span class="item-role-tag">QA Analyst &amp; Tester</span>
                         </div>
                     </article>
 
@@ -296,9 +259,9 @@
                             <span class="tech-badge">PDF Reader</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p9" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
+                            </a>
                             <span class="item-role-tag">Lead Full-Stack Architect</span>
                         </div>
                     </article>
@@ -324,10 +287,10 @@
                             <span class="tech-badge">Redis</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p10" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
-                            <span class="item-role-tag">Platform Architect</span>
+                            </a>
+                            <span class="item-role-tag">QA Analyst &amp; Tester</span>
                         </div>
                     </article>
 
@@ -352,9 +315,9 @@
                             <span class="tech-badge">Node.js</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p11" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
+                            </a>
                             <span class="item-role-tag">Full-Stack Dev</span>
                         </div>
                     </article>
@@ -379,9 +342,9 @@
                             <span class="tech-badge">Audio Cues</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p8" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
+                            </a>
                             <span class="item-role-tag">Mobile Architect</span>
                         </div>
                     </article>
@@ -407,9 +370,9 @@
                             <span class="tech-badge">QR Validation</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p3" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
+                            </a>
                             <span class="item-role-tag">Full-Stack Dev</span>
                         </div>
                     </article>
@@ -434,9 +397,9 @@
                             <span class="tech-badge">Recipe Engine</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p4" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
+                            </a>
                             <span class="item-role-tag">Frontend &amp; UI</span>
                         </div>
                     </article>
@@ -461,9 +424,9 @@
                             <span class="tech-badge">Logistics Routing</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p5" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
+                            </a>
                             <span class="item-role-tag">Backend Dev</span>
                         </div>
                     </article>
@@ -488,16 +451,21 @@
                             <span class="tech-badge">Custom 2D Engine</span>
                         </div>
                         <div class="project-catalog-footer">
-                            <span class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
+                            <a href="project.html?id=p6" class="sleek-btn-sm specular-button specular-button--sm" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.1" data-specular-radius="6">
                                 <span>Inspect Architecture &amp; Spec &rarr;</span>
-                            </span>
+                            </a>
                             <span class="item-role-tag">Systems Dev</span>
                         </div>
                     </article>
 
                 </div>
+            </div>
+        </section>
 
-                <!-- BOTTOM CONTACT CTA (REACT BITS BORDER GLOW) -->
+        <!-- STREAMLINED UNCLUTTERED CONTACT SECTION ("Let's connect!") -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <!-- REACT BITS: BORDER GLOW CARD -->
                 <div class="border-glow-card bite-connect-card-glow"
                      data-border-glow="true"
                      data-edge-sensitivity="30"
@@ -509,17 +477,30 @@
                      data-cone-spread="25"
                      data-colors="#c084fc, #38bdf8, #00f0ff"
                      data-fill-opacity="0.45"
-                     data-animated="false"
-                     style="margin-top: 48px; max-width: 720px; margin-left: auto; margin-right: auto;">
+                     data-animated="false">
                     <span class="edge-light"></span>
-                    <div class="border-glow-inner bite-connect-card" style="text-align: center; padding: 2.75rem 2rem; background: transparent; border: none; box-shadow: none;">
-                        <h3 class="bite-connect-title" style="margin-bottom: 12px; font-size: clamp(1.6rem, 2.4vw, 2.1rem);">Want to build something similar?</h3>
-                        <p class="bite-connect-desc" style="max-width: 540px; margin: 0 auto 26px; color: var(--text-secondary); line-height: 1.6;">
-                            From complex distributed systems and SRE cloud automation to AI educational algorithms and production web applications.
-                        </p>
-                        <a href="contact.html" class="btn-hero-primary specular-button specular-button--md" data-specular="true" data-specular-line="#7fa8ff" data-specular-glow="1.3" data-specular-radius="8">
-                            <span>Start an Engineering Inquiry &rarr;</span>
-                        </a>
+                    <div class="border-glow-inner bite-connect-card bite-connect-card--minimal">
+                        <div class="bite-connect-header">
+                            <h2 class="bite-connect-title"><span class="variable-proximity" data-variable-proximity="true" data-from-font="'wght' 550, 'opsz' 10" data-to-font="'wght' 950, 'opsz' 40" data-radius="130" data-falloff="linear">Let's connect!</span></h2>
+                            <p class="bite-connect-desc">
+                                From complex distributed systems and SRE cloud automation to AI educational algorithms and production web applications.
+                            </p>
+                        </div>
+
+                        <div class="bite-connect-action-row">
+                            <a href="contact.html" class="contact-cta-btn">
+                                <span>Get in Touch</span>
+                            </a>
+                        </div>
+
+                        <!-- DIRECT CHANNELS: MINIMALIST TEXT WITH DOTS IN BETWEEN -->
+                        <div class="contact-details-row">
+                            <a href="mailto:roddneilgemina@gmail.com" class="contact-details-link" title="Send Email">roddneilgemina@gmail.com</a>
+                            <span class="contact-details-dot" aria-hidden="true">&bull;</span>
+                            <a href="https://github.com/RoddneilGemina" target="_blank" rel="noopener noreferrer" class="contact-details-link" title="GitHub Profile">GitHub</a>
+                            <span class="contact-details-dot" aria-hidden="true">&bull;</span>
+                            <a href="https://www.linkedin.com/in/roddneil-gemina-20b423409" target="_blank" rel="noopener noreferrer" class="contact-details-link" title="LinkedIn Profile">LinkedIn</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -607,56 +588,7 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE PROJECT DETAIL MODAL DIALOG -->
-    <dialog id="project-modal" class="project-modal-dialog sleek-dialog-wrapper">
-        <div class="project-modal-card glass-card">
-            <div class="modal-header-bar">
-                <div class="modal-title-wrap">
-                    <span id="modal-project-type" class="sleek-badge">PROJECT SPEC</span>
-                    <h3 id="modal-project-title" class="modal-heading">Project Title</h3>
-                </div>
-                <button id="close-modal-btn" class="dialog-close-btn" aria-label="Close modal">×</button>
-            </div>
-            <div class="modal-body-scroll">
-                <div class="modal-media-viewport">
-                    <img id="modal-project-image" src="images/fusionrush.jpg" alt="Project Visual Preview" class="modal-hero-img">
-                </div>
-                <div class="modal-content-grid">
-                    <div class="modal-main-details">
-                        <div class="detail-block">
-                            <h4 class="detail-heading">Executive Overview</h4>
-                            <p id="modal-project-desc" class="detail-text">Detailed system description.</p>
-                        </div>
-                        <div class="detail-block">
-                            <h4 class="detail-heading">Problem Solved</h4>
-                            <p id="modal-project-problem" class="detail-text">Problem breakdown.</p>
-                        </div>
-                        <div class="detail-block">
-                            <h4 class="detail-heading">Architectural Solution &amp; Objectives</h4>
-                            <p id="modal-project-goal" class="detail-text">Goal description.</p>
-                        </div>
-                    </div>
-                    <div class="modal-sidebar-meta">
-                        <div class="meta-card-block">
-                            <span class="meta-label">My Contributions</span>
-                            <span id="modal-project-role" class="meta-val">Lead Architect</span>
-                        </div>
-                        <div class="meta-card-block">
-                            <span class="meta-label">Engineered Stack</span>
-                            <div id="modal-project-stack" class="modal-tech-pills"></div>
-                        </div>
-                        <div class="meta-card-block">
-                            <span class="meta-label">Artifact Links</span>
-                            <div id="modal-project-links" class="modal-links-row"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer-bar">
-                <button id="modal-close-action" class="sleek-btn-sm"><span>Close Spec</span></button>
-            </div>
-        </div>
-    </dialog>
+
 
     <script src="js/main.js?v=25.0"></script>
     <script>
