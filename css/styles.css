@@ -8975,13 +8975,14 @@ body:not(.intro-active) .hero-stats-bento {
 
 .philo-pillar-card {
     background: #121111;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--pillar-border, rgba(255, 255, 255, 0.08));
     border-radius: 14px;
-    padding: 26px 22px;
+    padding: 30px 24px;
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
+    min-height: 220px;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
                 border-color 0.3s ease,
                 box-shadow 0.3s ease;
@@ -9019,7 +9020,7 @@ body:not(.intro-active) .hero-stats-bento {
 /* Light Theme Support */
 [data-theme="light"] .philo-pillar-card {
     background: #ffffff;
-    border-color: rgba(15, 23, 42, 0.08);
+    border-color: var(--pillar-border, rgba(15, 23, 42, 0.08));
 }
 
 [data-theme="light"] .philo-pillar-card.pillar-cyan {
@@ -9053,7 +9054,7 @@ body:not(.intro-active) .hero-stats-bento {
 /* Hover States (Minimalist subtle lift & refined color illumination) */
 .philo-pillar-card:hover {
     transform: translateY(-4px);
-    border-color: var(--pillar-border);
+    border-color: var(--pillar-color);
     box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.75), 0 0 24px var(--pillar-glow);
 }
 
@@ -9076,49 +9077,45 @@ body:not(.intro-active) .hero-stats-bento {
     right: 8px;
 }
 
-/* Top Header Row with Logo Stage & Metric Badge */
-.philo-top-row {
+/* Card Content Container (Ensures text is cleanly placed above backdrop) */
+.philo-card-content {
+    position: relative;
+    z-index: 1;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    flex-direction: column;
 }
 
-/* Emblem / Logo Stage */
-.philo-logo-stage {
-    width: 46px;
-    height: 46px;
-    border-radius: 10px;
-    background: var(--pillar-bg);
-    border: 1px solid var(--pillar-border);
+/* Card Backdrop Logo (Watermark matching border color) */
+.philo-card-backdrop {
+    position: absolute;
+    right: 14px;
+    bottom: 12px;
+    width: 92px;
+    height: 92px;
+    color: var(--pillar-border);
+    pointer-events: none;
+    z-index: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.3s ease,
+                opacity 0.3s ease;
 }
 
-.philo-pillar-card:hover .philo-logo-stage {
-    transform: scale(1.06);
-    box-shadow: 0 0 18px var(--pillar-glow);
-}
-
-.philo-pillar-svg {
-    width: 24px;
-    height: 24px;
+.philo-backdrop-svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    stroke-width: 1.3;
+    fill: none;
     display: block;
 }
 
-.philo-metric-badge {
-    font-family: var(--font-mono, monospace);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+.philo-pillar-card:hover .philo-card-backdrop {
+    transform: scale(1.08) translate(-2px, -2px);
     color: var(--pillar-color);
-    padding: 3px 8px;
-    border-radius: 4px;
-    background: var(--pillar-bg);
-    border: 1px solid var(--pillar-border);
+    opacity: 0.65;
 }
 
 /* Main Typography: Clean & High Emphasis */
