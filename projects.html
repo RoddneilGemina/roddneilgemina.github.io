@@ -5,7 +5,7 @@
     <title>Projects &amp; Architectures | Roddneil B. Gemina</title>
     <meta name="description" content="Comprehensive engineering portfolio of Roddneil B. Gemina. Production full-stack platforms, distributed systems, Scopus ICETT '26 and PCSC '26 AI research prototypes.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/projects.html">
-    <link rel="stylesheet" href="css/styles.css?v=9.2">
+    <link rel="stylesheet" href="css/styles.css?v=9.3">
     
     <!-- Google Fonts: Archivo (Display & Body) & Geist Mono (Technical Utility & Buttons) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,8 +24,8 @@
     <!-- React Bits Galaxy (WebGL2 Starfield Background) -->
     <script src="js/galaxy.js?v=2.0"></script>
 
-    <!-- React Bits MagnetLines (WebGL2 Vector Grid Background) -->
-    <script src="js/magnet-lines.js?v=1.0"></script>
+    <!-- React Bits DotGrid (WebGL2 Interactive Physics Grid) -->
+    <script src="js/dot-grid.js?v=1.0"></script>
 
     <!-- React Bits GradientText -->
     <script src="js/gradient-text.js"></script>
@@ -62,22 +62,30 @@
         </div>
     </div>
 
-    <!-- REACT BITS MAGNET LINES BACKGROUND (LOWER SECTIONS) -->
-    <div class="global-magnet-lines-bg" aria-hidden="true">
-        <div class="magnet-lines"
-             data-magnet-lines="true"
-             data-line-color="#efefef"
-             data-spacing="30"
-             data-line-width="2"
-             data-line-height="18"
-             data-mode="orbit"
-             data-shape="line"
-             data-radius="200"
-             data-fade="0.65"
-             data-click-pulse="false"
-             data-idle="true"
+    <!-- REACT BITS DOTGRID BACKGROUND (LOWER SECTIONS) -->
+    <div class="global-dot-grid-bg" aria-hidden="true">
+        <div class="dot-grid"
+             data-dot-grid="true"
+             data-base-color="#3a3446"
+             data-active-color="#ffffff"
+             data-shape="circle"
+             data-dot-size="5"
+             data-gap="18"
+             data-proximity="140"
+             data-strength="1"
+             data-bounce="0.6"
+             data-tension="0.4"
+             data-return-duration="0.8"
+             data-shock-radius="320"
+             data-shock-strength="5"
+             data-swell="0.8"
+             data-stretch="0.5"
+             data-glow="0.5"
+             data-fade="0"
+             data-intro="true"
+             data-click-shock="false"
              style="width: 100%; height: 100%;">
-            <canvas class="magnet-lines__canvas" aria-hidden="true"></canvas>
+            <canvas class="dot-grid__canvas" aria-hidden="true"></canvas>
         </div>
     </div>
 
