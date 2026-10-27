@@ -153,6 +153,9 @@ html {
     scroll-behavior: smooth;
     font-size: 16px;
     height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 body {
@@ -12627,6 +12630,165 @@ body:not(.intro-active) .hero-stats-bento {
     will-change: transform, opacity;
 }
 
+/* ==========================================================================
+   DESIGN ENGINEERING & INTERFACE POLISH SYSTEM
+   Enforcing standards from:
+   - make-interfaces-feel-better
+   - transitions.dev
+   - impeccable craft floor
+   - gsap-performance
+   ========================================================================== */
 
+/* 1. TYPOGRAPHY POLISH: BALANCED HEADINGS & PRETTY BODY TEXT */
+h1, h2, h3, h4, h5, h6,
+.section-title,
+.about-hero-name,
+.hero-title,
+.project-card-title,
+.modal-title,
+.contact-title,
+.research-row-title,
+.subsection-title {
+    text-wrap: balance;
+    letter-spacing: -0.022em;
+}
 
+p,
+.about-hero-lead,
+.project-card-description,
+.bio,
+.gantt-item-desc,
+.research-abstract,
+.hero-lead,
+.subsection-lead,
+.contact-card-sub,
+.about-impact-list li {
+    text-wrap: pretty;
+}
 
+/* Tabular numbers for all dynamically updating numerals, dates, stats and metrics */
+.gantt-year-marker,
+.stat-value,
+.page-stat-chip,
+.year-badge,
+.project-year,
+.gantt-item-years,
+.case-study-metric-val,
+.meta-badge,
+.stat-number,
+.contact-stat-num,
+.edu-float-period,
+.edu-ruler-mark span {
+    font-variant-numeric: tabular-nums;
+}
+
+/* 2. BROWSER SURFACES: THEMED SELECTION, CARET, FOCUS & CUSTOM SCROLLBARS */
+::selection {
+    background: rgba(127, 168, 255, 0.28);
+    color: #ffffff;
+}
+
+input, textarea, [contenteditable] {
+    caret-color: #7fa8ff;
+}
+
+/* Sleek Minimalist Dark Scrollbars */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.32);
+    background-clip: padding-box;
+}
+
+/* Accessible Focus Rings */
+:focus-visible {
+    outline: 2px solid rgba(127, 168, 255, 0.6);
+    outline-offset: 3px;
+}
+
+/* 3. TACTILE INTERACTION: SCALE-ON-PRESS (EXACT 0.96 SPEC) */
+.btn-hero-solid,
+.btn-hero-ghost,
+.about-hero-btn-ghost,
+.ln-navbar-cta,
+.ln-navbar-github,
+.specular-btn,
+.contact-action-btn,
+.gantt-nav-btn,
+.filter-pill,
+.project-card-action,
+.social-icon-btn,
+.nav-cta-pill {
+    transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1),
+                background-color 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.btn-hero-solid:active,
+.btn-hero-ghost:active,
+.about-hero-btn-ghost:active,
+.ln-navbar-cta:active,
+.ln-navbar-github:active,
+.specular-btn:active,
+.contact-action-btn:active,
+.gantt-nav-btn:active,
+.filter-pill:active,
+.project-card-action:active,
+.social-icon-btn:active,
+.nav-cta-pill:active {
+    transform: scale(0.96);
+}
+
+/* 4. SUBTLE IMAGE & THUMBNAIL OUTLINES (PREVENTS EDGE BLEED) */
+.project-card-thumb img,
+.credential-badge-thumb img,
+.about-hero-figure img,
+.freelance-logo-stage img,
+.about-brand-logo-stage img {
+    outline: 1px solid rgba(255, 255, 255, 0.08);
+    outline-offset: -1px;
+}
+
+/* 5. MINIMUM HIT AREA (44x44px ACCESSIBILITY STANDARD) */
+.mobile-menu-toggle,
+.gantt-nav-btn,
+.research-expand-trigger,
+.social-icon-btn {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 6. PREFERS-REDUCED-MOTION ACCESSIBILITY GUARD (ALL SKILLS MANDATORY) */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
