@@ -418,6 +418,7 @@ body::before, body::after {
     pointer-events: none;
 }
 
+.global-galaxy-bg,
 .about-hero-galaxy {
     position: absolute;
     top: 0;

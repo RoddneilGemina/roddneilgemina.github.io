@@ -6,7 +6,7 @@
     <title>Project Case Study | Roddneil B. Gemina</title>
     <meta name="description" content="In-depth architectural case study and engineering specifications by Roddneil B. Gemina, Software Engineer and CS Scholar.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/project.html">
-    <link rel="stylesheet" href="css/styles.css?v=9.0">
+    <link rel="stylesheet" href="css/styles.css?v=9.1">
     <link rel="stylesheet" href="css/project-detail.css?v=27.3">
     
     <!-- Google Fonts: Archivo (Display & Body) & Geist Mono (Technical Utility & Buttons) -->
@@ -20,6 +20,8 @@
     <!-- React Bits GooeyNav (WebGL2 Metaball Fluid Navigation) -->
     <script src="js/gooey-nav.js?v=2.2"></script>
     <!-- Project Catalog Data -->
+    <!-- React Bits Galaxy (WebGL2 Starfield Background) -->
+    <script src="js/galaxy.js?v=2.0"></script>
     <script src="js/project-data.js?v=2.0"></script>
     <!-- Project Detail Dynamic Renderer -->
     <script src="js/project-detail.js?v=2.0"></script>
@@ -31,8 +33,23 @@
     <!-- BLACK IDLE SCREEN (Active while page resources load; fast fade-in upon ready) -->
     <div id="page-idle-curtain" aria-hidden="true"></div>
 
-    <!-- GLOBAL DOTFIELD BACKGROUND TEXTURE -->
-    <div id="global-dotfield-container" class="dot-field-container global-dotfield" aria-hidden="true"></div>
+    <!-- REACT BITS GALAXY BACKGROUND (REPLACING DOTFIELD) -->
+    <div class="global-galaxy-bg" style="width: 100%; height: 600px; position: absolute; top: 0; left: 0; pointer-events: none; z-index: 1; overflow: hidden;" aria-hidden="true">
+        <div class="galaxy-container"
+             data-galaxy="true"
+             data-density="1"
+             data-glow-intensity="0.3"
+             data-flare-intensity="1"
+             data-star-speed="0.3"
+             data-mouse-repulsion="false"
+             data-click-warp="false"
+             data-star-size="0.95"
+             data-speed="0.25"
+             data-rotation-speed="0.01"
+             style="width: 100%; height: 100%;">
+            <canvas class="galaxy-canvas" aria-hidden="true"></canvas>
+        </div>
+    </div>
 
     <!-- CIRCULAR RIPPLE OVERLAY FOR THEME WAVE -->
     <div id="theme-ripple-overlay" class="theme-ripple-overlay"></div>

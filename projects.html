@@ -5,7 +5,7 @@
     <title>Projects &amp; Architectures | Roddneil B. Gemina</title>
     <meta name="description" content="Comprehensive engineering portfolio of Roddneil B. Gemina. Production full-stack platforms, distributed systems, Scopus ICETT '26 and PCSC '26 AI research prototypes.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/projects.html">
-    <link rel="stylesheet" href="css/styles.css?v=9.0">
+    <link rel="stylesheet" href="css/styles.css?v=9.1">
     
     <!-- Google Fonts: Archivo (Display & Body) & Geist Mono (Technical Utility & Buttons) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,8 +21,8 @@
     <!-- React Bits Border Glow (Directional Ray-Traced Mesh Edge Glow) -->
     <script src="js/border-glow.js"></script>
 
-    <!-- React Bits DotField Interactive Texture Background Overlay -->
-    <script src="js/dot-field.js"></script>
+    <!-- React Bits Galaxy (WebGL2 Starfield Background) -->
+    <script src="js/galaxy.js?v=2.0"></script>
 
     <!-- React Bits GradientText -->
     <script src="js/gradient-text.js"></script>
@@ -41,8 +41,23 @@
     <!-- BLACK IDLE SCREEN (Active while page resources load; fast fade-in upon ready) -->
     <div id="page-idle-curtain" aria-hidden="true"></div>
 
-    <!-- REACT BITS DOTFIELD TACTILE TEXTURE BACKGROUND OVERLAY -->
-    <div id="global-dotfield-container" class="dot-field-container global-dotfield" aria-hidden="true"></div>
+    <!-- REACT BITS GALAXY BACKGROUND (REPLACING DOTFIELD) -->
+    <div class="global-galaxy-bg" style="width: 100%; height: 600px; position: absolute; top: 0; left: 0; pointer-events: none; z-index: 1; overflow: hidden;" aria-hidden="true">
+        <div class="galaxy-container"
+             data-galaxy="true"
+             data-density="1"
+             data-glow-intensity="0.3"
+             data-flare-intensity="1"
+             data-star-speed="0.3"
+             data-mouse-repulsion="false"
+             data-click-warp="false"
+             data-star-size="0.95"
+             data-speed="0.25"
+             data-rotation-speed="0.01"
+             style="width: 100%; height: 100%;">
+            <canvas class="galaxy-canvas" aria-hidden="true"></canvas>
+        </div>
+    </div>
 
     <!-- CIRCULAR RIPPLE OVERLAY FOR THEME WAVE -->
     <div id="theme-ripple-overlay" class="theme-ripple-overlay"></div>
