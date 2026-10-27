@@ -6,9 +6,94 @@
 (function(window, document) {
   'use strict';
 
-  const VERTEX = "#version 300 es\nprecision highp float;\n\nlayout(location = 0) in vec2 aCorner;\nlayout(location = 1) in vec4 aMotion;\nlayout(location = 2) in vec2 aState;\n\nuniform vec2 uResolution;\nuniform float uSize;\nuniform float uSwell;\nuniform float uStretch;\nuniform float uGlow;\n\nout vec2 vLocal;\nout vec2 vPoint;\nout float vLength;\nout float vRadius;\nout float vEnergy;\n\nvoid main() {\n  float energy = aState.x;\n  float radius = 0.5 * uSize * aState.y * (1.0 + uSwell * energy);\n  float speed = length(aMotion.zw);\n  float angle = speed > 0.001 ? atan(aMotion.w, aMotion.z) : 0.0;\n  float axis = floor(angle / 1.5707963 + 0.5) * 1.5707963;\n  angle = axis + (angle - axis) * smoothstep(8.0, 70.0, speed);\n  vec2 dir = vec2(cos(angle), sin(angle));\n  float halfLength = min(uSize * 2.0, speed * uStretch * 0.02);\n  float pad = radius * (1.0 + uGlow * energy * 2.5) + 2.0;\n  vec2 local = aCorner * vec2(halfLength + pad, pad);\n  vec2 point = aMotion.xy + dir * local.x + vec2(-dir.y, dir.x) * local.y;\n  vLocal = local;\n  vPoint = point;\n  vLength = halfLength;\n  vRadius = radius;\n  vEnergy = energy;\n  vec2 clip = point / uResolution * 2.0 - 1.0;\n  gl_Position = vec4(clip.x, -clip.y, 0.0, 1.0);\n}\n";
+  const VERTEX = `#version 300 es
+precision highp float;
 
-  const FRAGMENT = "#version 300 es\nprecision highp float;\n\nin vec2 vLocal;\nin vec2 vPoint;\nin float vLength;\nin float vRadius;\nin float vEnergy;\n\nuniform vec2 uResolution;\nuniform vec3 uBase;\nuniform vec3 uActive;\nuniform float uGlow;\nuniform float uOpacity;\nuniform float uFade;\nuniform int uShape;\n\nout vec4 outColor;\n\nfloat smootherstep01(float t) {\n  t = clamp(t, 0.0, 1.0);\n  return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);\n}\n\nvoid main() {\n  float d;\n  if (uShape == 1) {\n    float corner = vRadius * 0.3;\n    vec2 q = abs(vLocal) - vec2(vLength + vRadius, vRadius) + corner;\n    d = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - corner;\n  } else {\n    d = length(vec2(max(abs(vLocal.x) - vLength, 0.0), vLocal.y)) - vRadius;\n  }\n  float aa = max(fwidth(d), 0.0001);\n  float body = clamp(0.5 - d / aa, 0.0, 1.0);\n  float halo = uGlow * vEnergy * 0.5 * exp(-max(d, 0.0) / max(vRadius * 1.3, 0.6));\n  float alpha = body + (1.0 - body) * halo;\n  vec3 color = mix(uBase, uActive, clamp(vEnergy * 1.2, 0.0, 1.0));\n  float fade = 1.0;\n  if (uFade > 0.0) {\n    vec2 edge = min(vPoint, uResolution - vPoint) / (uFade * 0.4 * min(uResolution.x, uResolution.y));\n    fade = smootherstep01(edge.x) * smootherstep01(edge.y);\n  }\n  alpha *= uOpacity * fade;\n  outColor = vec4(color * alpha, alpha);\n}\n";
+layout(location = 0) in vec2 aCorner;
+layout(location = 1) in vec4 aMotion;
+layout(location = 2) in vec2 aState;
+
+uniform vec2 uResolution;
+uniform float uSize;
+uniform float uSwell;
+uniform float uStretch;
+uniform float uGlow;
+
+out vec2 vLocal;
+out vec2 vPoint;
+out float vLength;
+out float vRadius;
+out float vEnergy;
+
+void main() {
+  float energy = aState.x;
+  float radius = 0.5 * uSize * aState.y * (1.0 + uSwell * energy);
+  float speed = length(aMotion.zw);
+  float angle = speed > 0.001 ? atan(aMotion.w, aMotion.z) : 0.0;
+  float axis = floor(angle / 1.5707963 + 0.5) * 1.5707963;
+  angle = axis + (angle - axis) * smoothstep(8.0, 70.0, speed);
+  vec2 dir = vec2(cos(angle), sin(angle));
+  float halfLength = min(uSize * 2.0, speed * uStretch * 0.02);
+  float pad = radius * (1.0 + uGlow * energy * 2.5) + 2.0;
+  vec2 local = aCorner * vec2(halfLength + pad, pad);
+  vec2 point = aMotion.xy + dir * local.x + vec2(-dir.y, dir.x) * local.y;
+  vLocal = local;
+  vPoint = point;
+  vLength = halfLength;
+  vRadius = radius;
+  vEnergy = energy;
+  vec2 clip = point / uResolution * 2.0 - 1.0;
+  gl_Position = vec4(clip.x, -clip.y, 0.0, 1.0);
+}
+`;
+
+  const FRAGMENT = `#version 300 es
+precision highp float;
+
+in vec2 vLocal;
+in vec2 vPoint;
+in float vLength;
+in float vRadius;
+in float vEnergy;
+
+uniform vec2 uResolution;
+uniform vec3 uBase;
+uniform vec3 uActive;
+uniform float uGlow;
+uniform float uOpacity;
+uniform float uFade;
+uniform int uShape;
+
+out vec4 outColor;
+
+float smootherstep01(float t) {
+  t = clamp(t, 0.0, 1.0);
+  return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
+}
+
+void main() {
+  float d;
+  if (uShape == 1) {
+    float corner = vRadius * 0.3;
+    vec2 q = abs(vLocal) - vec2(vLength + vRadius, vRadius) + corner;
+    d = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - corner;
+  } else {
+    d = length(vec2(max(abs(vLocal.x) - vLength, 0.0), vLocal.y)) - vRadius;
+  }
+  float aa = max(fwidth(d), 0.0001);
+  float body = clamp(0.5 - d / aa, 0.0, 1.0);
+  float halo = uGlow * vEnergy * 0.5 * exp(-max(d, 0.0) / max(vRadius * 1.3, 0.6));
+  float alpha = body + (1.0 - body) * halo;
+  vec3 color = mix(uBase, uActive, clamp(vEnergy * 1.2, 0.0, 1.0));
+  float fade = 1.0;
+  if (uFade > 0.0) {
+    vec2 edge = min(vPoint, uResolution - vPoint) / (uFade * 0.4 * min(uResolution.x, uResolution.y));
+    fade = smootherstep01(edge.x) * smootherstep01(edge.y);
+  }
+  alpha *= uOpacity * fade;
+  outColor = vec4(color * alpha, alpha);
+}
+`;
 
   const toRgb = color => {
     const match = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(String(color).trim());
@@ -32,11 +117,6 @@
     const shader = gl.createShader(type);
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.warn('[DotGrid] Shader compile error:', gl.getShaderInfoLog(shader));
-      gl.deleteShader(shader);
-      return null;
-    }
     return shader;
   };
 
@@ -120,14 +200,14 @@
       for (const name of [
         'uResolution',
         'uSize',
+        'uSwell',
+        'uStretch',
+        'uGlow',
         'uBase',
         'uActive',
-        'uGlow',
         'uOpacity',
         'uFade',
-        'uShape',
-        'uSwell',
-        'uStretch'
+        'uShape'
       ]) {
         uniforms[name] = gl.getUniformLocation(program, name);
       }
@@ -135,13 +215,11 @@
 
       const vao = gl.createVertexArray();
       gl.bindVertexArray(vao);
-
       const cornerBuffer = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, cornerBuffer);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       gl.enableVertexAttribArray(0);
       gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-
       const instanceBuffer = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, instanceBuffer);
       gl.enableVertexAttribArray(1);
@@ -150,13 +228,11 @@
       gl.enableVertexAttribArray(2);
       gl.vertexAttribPointer(2, 2, gl.FLOAT, false, 24, 16);
       gl.vertexAttribDivisor(2, 1);
+      gl.bindVertexArray(null);
 
-      const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
-      const view = { width: 1, height: 1, left: 0, top: 0, ratio: 1 };
-      const grid = { count: 0, cols: 0, rows: 0, cell: 1, centerX: 0, centerY: 0, reach: 1 };
-      const pointer = { x: -9999, y: -9999, vx: 0, vy: 0, lastTime: 0, inside: false };
-      const shocks = [];
-
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const view = { width: 0, height: 0, left: 0, top: 0, ratio: 1 };
+      const grid = { count: 0, cols: 1, rows: 1, cell: 1, centerX: 0, centerY: 0, reach: 1 };
       let rest = new Float32Array(0);
       let offset = new Float32Array(0);
       let velocity = new Float32Array(0);
@@ -165,15 +241,15 @@
       let wave = new Float32Array(0);
       let energy = new Float32Array(0);
       let instances = new Float32Array(0);
-      let introStart = performance.now();
-      let lastTime = performance.now();
-      let raf = 0;
+      const pointer = { x: 0, y: 0, vx: 0, vy: 0, time: 0, inside: false, presence: 0 };
+      const shocks = [];
+      let introStart = this.settings.intro && !reduced ? -1 : null;
       let visible = true;
+      let raf = 0;
+      let last = 0;
 
       const rebuild = () => {
-        const s = this.settings;
-        const size = s.dotSize;
-        const spacing = s.gap;
+        const { dotSize: size, gap: spacing } = this.settings;
         const cell = Math.max(2, size + spacing);
         const cols = Math.max(1, Math.floor((view.width + spacing) / cell));
         const rows = Math.max(1, Math.floor((view.height + spacing) / cell));
@@ -210,18 +286,12 @@
 
       const resize = () => {
         const rect = canvas.getBoundingClientRect();
-        const maxDim = 4096;
+        const ratio = Math.min(this.settings.dpr ?? window.devicePixelRatio ?? 1, 2);
         const width = Math.max(1, Math.round(rect.width));
         const height = Math.max(1, Math.round(rect.height));
-        const autoMaxRatio = (width * 2 > maxDim || height * 2 > maxDim) ? 1 : 2;
-        const ratio = Math.min(this.settings.dpr ?? window.devicePixelRatio ?? 1, autoMaxRatio);
         Object.assign(view, { width, height, left: rect.left, top: rect.top, ratio });
-        const pixelWidth = Math.min(maxDim, Math.round(width * ratio));
-        const pixelHeight = Math.min(maxDim, Math.round(height * ratio));
-        if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
-          canvas.width = pixelWidth;
-          canvas.height = pixelHeight;
-        }
+        canvas.width = Math.round(width * ratio);
+        canvas.height = Math.round(height * ratio);
         rebuild();
         render(performance.now());
       };
@@ -245,192 +315,262 @@
           const power = smootherstep(1 - front / Math.max(1, s.shockRadius));
           return { ...shock, front, amplitude: power * s.shockStrength * grid.cell * 0.24 * motion };
         });
-        const coupling = (Math.max(0, s.tension) * 70) / (grid.cell * grid.cell);
-
-        for (let row = 0; row < grid.rows; row++) {
-          for (let col = 0; col < grid.cols; col++) {
-            const i = row * grid.cols + col;
-            const p = i * 2;
-            let fx = -stiffness * offset[p] - damping * velocity[p];
-            let fy = -stiffness * offset[p + 1] - damping * velocity[p + 1];
-
-            if (coupling > 0) {
-              const ox = offset[p];
-              const oy = offset[p + 1];
-              if (col > 0) {
-                fx += (offset[p - 2] - ox) * coupling;
-                fy += (offset[p - 1] - oy) * coupling;
-              }
-              if (col < grid.cols - 1) {
-                fx += (offset[p + 2] - ox) * coupling;
-                fy += (offset[p + 3] - oy) * coupling;
-              }
-              if (row > 0) {
-                fx += (offset[p - grid.cols * 2] - ox) * coupling;
-                fy += (offset[p - grid.cols * 2 + 1] - oy) * coupling;
-              }
-              if (row < grid.rows - 1) {
-                fx += (offset[p + grid.cols * 2] - ox) * coupling;
-                fy += (offset[p + grid.cols * 2 + 1] - oy) * coupling;
-              }
+        const coupling = (Math.max(0, s.tension) * 900) ** 2 / (grid.cell * grid.cell);
+        const viscosity = Math.sqrt(coupling) * 0.06;
+        const limit = Math.sqrt(stiffness + 8 * coupling) + damping + 8 * viscosity;
+        const steps = Math.min(24, Math.max(1, Math.ceil(dt / Math.min(1 / 120, 1.2 / limit))));
+        const h = dt / steps;
+        for (let i = 0; i < grid.count; i++) {
+          const index = i * 2;
+          const rx = rest[index];
+          const ry = rest[index + 1];
+          let ax = 0;
+          let ay = 0;
+          if (drive > 0) {
+            const ex = rx + offset[index] - pointer.x;
+            const ey = ry + offset[index + 1] - pointer.y;
+            const distance = Math.hypot(ex, ey);
+            if (distance < radius) {
+              const weight = smootherstep(1 - distance / radius) * drive;
+              const nx = distance > 0.001 ? ex / distance : 0;
+              const ny = distance > 0.001 ? ey / distance : 0;
+              ax += weight * (dirX + nx * 0.6);
+              ay += weight * (dirY + ny * 0.6);
             }
-
-            if (drive > 0) {
-              const dx = rest[p] + offset[p] - pointer.x;
-              const dy = rest[p + 1] + offset[p + 1] - pointer.y;
-              const d = Math.hypot(dx, dy);
-              if (d < radius) {
-                const f = (1 - smootherstep(d / radius)) * drive;
-                fx += dirX * f;
-                fy += dirY * f;
-              }
+          }
+          let wx = 0;
+          let wy = 0;
+          let wvx = 0;
+          let wvy = 0;
+          for (const shock of active) {
+            if (shock.amplitude <= 0) continue;
+            const ex = rx - shock.x;
+            const ey = ry - shock.y;
+            const distance = Math.hypot(ex, ey);
+            const u = (distance - shock.front) / width;
+            if (Math.abs(u) < 3 && distance > 0.001) {
+              const nx = ex / distance;
+              const ny = ey / distance;
+              const profile = Math.exp(-u * u);
+              const push = shock.amplitude * profile;
+              const rate = ((shock.amplitude * 2 * u * profile) / width) * travel;
+              wx += nx * push;
+              wy += ny * push;
+              wvx += nx * rate;
+              wvy += ny * rate;
+              ax += nx * push * stiffness * 0.35;
+              ay += ny * push * stiffness * 0.35;
             }
-
-            for (const shock of active) {
-              if (shock.amplitude <= 0.001) continue;
-              const dx = rest[p] + offset[p] - shock.x;
-              const dy = rest[p + 1] + offset[p + 1] - shock.y;
-              const d = Math.hypot(dx, dy);
-              const diff = d - shock.front;
-              if (Math.abs(diff) < width) {
-                const sVal = shock.amplitude * (1 - smootherstep(Math.abs(diff) / width));
-                const inv = d > 0.001 ? 1 / d : 0;
-                fx += dx * inv * sVal * 40;
-                fy += dy * inv * sVal * 40;
+          }
+          force[index] = ax;
+          force[index + 1] = ay;
+          const target = i * 4;
+          wave[target] = wx;
+          wave[target + 1] = wy;
+          wave[target + 2] = wvx;
+          wave[target + 3] = wvy;
+        }
+        const { cols, rows } = grid;
+        const stride = cols * 2;
+        for (let n = 0; n < steps; n++) {
+          for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+              const index = (row * cols + col) * 2;
+              let ax = force[index] - stiffness * offset[index] - damping * velocity[index];
+              let ay = force[index + 1] - stiffness * offset[index + 1] - damping * velocity[index + 1];
+              if (coupling > 0) {
+                let lx = -4 * offset[index];
+                let ly = -4 * offset[index + 1];
+                let mx = -4 * velocity[index];
+                let my = -4 * velocity[index + 1];
+                if (col > 0) {
+                  lx += offset[index - 2];
+                  ly += offset[index - 1];
+                  mx += velocity[index - 2];
+                  my += velocity[index - 1];
+                }
+                if (col < cols - 1) {
+                  lx += offset[index + 2];
+                  ly += offset[index + 3];
+                  mx += velocity[index + 2];
+                  my += velocity[index + 3];
+                }
+                if (row > 0) {
+                  lx += offset[index - stride];
+                  ly += offset[index - stride + 1];
+                  mx += velocity[index - stride];
+                  my += velocity[index - stride + 1];
+                }
+                if (row < rows - 1) {
+                  lx += offset[index + stride];
+                  ly += offset[index + stride + 1];
+                  mx += velocity[index + stride];
+                  my += velocity[index + stride + 1];
+                }
+                ax += coupling * lx + viscosity * mx;
+                ay += coupling * ly + viscosity * my;
               }
+              next[index] = velocity[index] + ax * h;
+              next[index + 1] = velocity[index + 1] + ay * h;
             }
-
-            force[p] = fx;
-            force[p + 1] = fy;
+          }
+          for (let i = 0; i < offset.length; i++) {
+            velocity[i] = next[i];
+            offset[i] += velocity[i] * h;
           }
         }
-
-        let maxSpeed = 0;
-        let maxOffset = 0;
         for (let i = 0; i < grid.count; i++) {
-          const p = i * 2;
-          velocity[p] += force[p] * dt;
-          velocity[p + 1] += force[p + 1] * dt;
-          offset[p] += velocity[p] * dt;
-          offset[p + 1] += velocity[p + 1] * dt;
-          const spd = Math.hypot(velocity[p], velocity[p + 1]);
-          const off = Math.hypot(offset[p], offset[p + 1]);
-          if (spd > maxSpeed) maxSpeed = spd;
-          if (off > maxOffset) maxOffset = off;
-          next[p] = rest[p] + offset[p];
-          next[p + 1] = rest[p + 1] + offset[p + 1];
+          const index = i * 2;
+          const target = i * 4;
+          energy[i] = Math.min(
+            1,
+            (Math.hypot(velocity[index] + wave[target + 2], velocity[index + 1] + wave[target + 3]) / 380) * 0.85 +
+              (Math.hypot(offset[index] + wave[target], offset[index + 1] + wave[target + 1]) / (grid.cell * 2.2)) * 0.35
+          );
         }
-
-        const decay = Math.exp(-dt * 4.5);
-        for (let i = 0; i < grid.count; i++) {
-          const p = i * 2;
-          const motionVal = Math.hypot(offset[p], offset[p + 1]) / (grid.cell * 0.45);
-          energy[i] = Math.max(motionVal, energy[i] * decay);
-        }
-
         for (let i = shocks.length - 1; i >= 0; i--) {
-          if ((now - shocks[i].start) / 1000 > s.shockRadius / travel) shocks.splice(i, 1);
+          if (active[i].front > s.shockRadius + width * 3) shocks.splice(i, 1);
         }
-
-        return maxSpeed > 0.5 || maxOffset > 0.5 || shocks.length > 0;
+        const decay = 1 - Math.exp(-dt / 0.08);
+        pointer.vx -= pointer.vx * decay;
+        pointer.vy -= pointer.vy * decay;
+        const presenceTarget = s.mouseInteraction && pointer.inside ? 1 : 0;
+        pointer.presence += (presenceTarget - pointer.presence) * (1 - Math.exp(-dt / 0.2));
       };
 
       const render = now => {
         const s = this.settings;
-        const progress = s.intro ? Math.min(1, (now - introStart) / 1200) : 1;
-        const scaleVal = s.intro ? backOut(progress) : 1;
-
+        const radius = Math.max(1, s.proximity);
+        const introAge = introStart === null ? Infinity : introStart < 0 ? 0 : (now - introStart) / 1000;
+        const introFront = introAge * grid.reach * 1.25;
+        const introBand = grid.cell * 4;
         for (let i = 0; i < grid.count; i++) {
-          const p = i * 2;
-          const inst = i * 6;
-          let delay = 0;
-          if (s.intro && progress < 1) {
-            const d = Math.hypot(rest[p] - grid.centerX, rest[p + 1] - grid.centerY);
-            delay = (d / grid.reach) * 0.45;
+          const index = i * 2;
+          const source = i * 4;
+          const x = rest[index] + offset[index] + wave[source];
+          const y = rest[index + 1] + offset[index + 1] + wave[source + 1];
+          let glowing = energy[i];
+          if (pointer.presence > 0.001) {
+            const distance = Math.hypot(x - pointer.x, y - pointer.y);
+            if (distance < radius)
+              glowing = Math.max(glowing, smootherstep(1 - distance / radius) * 0.4 * pointer.presence);
           }
-          const itemProgress = s.intro ? Math.min(1, Math.max(0, (progress - delay) / (1 - delay || 1))) : 1;
-          const itemScale = s.intro ? backOut(itemProgress) : 1;
-
-          instances[inst] = next[p] * view.ratio;
-          instances[inst + 1] = next[p + 1] * view.ratio;
-          instances[inst + 2] = velocity[p] * view.ratio;
-          instances[inst + 3] = velocity[p + 1] * view.ratio;
-          instances[inst + 4] = energy[i];
-          instances[inst + 5] = itemScale;
+          let scale = 1;
+          if (introStart !== null) {
+            const distance = Math.hypot(rest[index] - grid.centerX, rest[index + 1] - grid.centerY);
+            const appear = Math.min(1, Math.max(0, (introFront - distance) / introBand));
+            scale = appear >= 1 ? 1 : Math.max(0, backOut(appear));
+            glowing = Math.max(glowing, Math.sin(appear * Math.PI) * 0.6);
+          }
+          const target = i * 6;
+          instances[target] = x;
+          instances[target + 1] = y;
+          instances[target + 2] = velocity[index] + wave[source + 2];
+          instances[target + 3] = velocity[index + 1] + wave[source + 3];
+          instances[target + 4] = glowing;
+          instances[target + 5] = scale;
         }
-
+        const base = toRgb(s.baseColor);
+        const accent = toRgb(s.activeColor);
         gl.viewport(0, 0, canvas.width, canvas.height);
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
-
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
         gl.useProgram(program);
-        gl.uniform2f(uniforms.uResolution, canvas.width, canvas.height);
-        gl.uniform1f(uniforms.uSize, s.dotSize * view.ratio);
-        gl.uniform3fv(uniforms.uBase, toRgb(s.baseColor));
-        gl.uniform3fv(uniforms.uActive, toRgb(s.activeColor));
-        gl.uniform1f(uniforms.uGlow, s.glow);
-        gl.uniform1f(uniforms.uOpacity, s.opacity);
-        gl.uniform1f(uniforms.uFade, s.fade);
+        gl.uniform2f(uniforms.uResolution, view.width, view.height);
+        gl.uniform1f(uniforms.uSize, Math.max(0.5, s.dotSize));
+        gl.uniform1f(uniforms.uSwell, reduced ? 0 : Math.max(0, s.swell));
+        gl.uniform1f(uniforms.uStretch, reduced ? 0 : Math.max(0, s.stretch));
+        gl.uniform1f(uniforms.uGlow, Math.max(0, s.glow));
+        gl.uniform3f(uniforms.uBase, base[0], base[1], base[2]);
+        gl.uniform3f(uniforms.uActive, accent[0], accent[1], accent[2]);
+        gl.uniform1f(uniforms.uOpacity, Math.min(1, Math.max(0, s.opacity)));
+        gl.uniform1f(uniforms.uFade, Math.min(1, Math.max(0, s.fade)));
         gl.uniform1i(uniforms.uShape, s.shape === 'square' ? 1 : 0);
-        gl.uniform1f(uniforms.uSwell, s.swell);
-        gl.uniform1f(uniforms.uStretch, s.stretch);
-
+        gl.bindVertexArray(vao);
         gl.bindBuffer(gl.ARRAY_BUFFER, instanceBuffer);
         gl.bufferSubData(gl.ARRAY_BUFFER, 0, instances);
-
-        gl.bindVertexArray(vao);
         gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, grid.count);
+        gl.bindVertexArray(null);
       };
 
-      const loop = now => {
-        raf = 0;
-        if (!visible) return;
-        const dt = Math.min(0.033, (now - lastTime) / 1000);
-        lastTime = now;
-        const animating = step(dt, now);
-        render(now);
-        if (animating || (this.settings.intro && now - introStart < 1400) || pointer.inside) {
-          raf = requestAnimationFrame(loop);
+      const settled = now => {
+        if (shocks.length) return false;
+        if (introStart !== null) {
+          if (introStart < 0 || (now - introStart) / 1000 < 1.6) return false;
+          introStart = null;
         }
+        if (Math.abs(pointer.vx) + Math.abs(pointer.vy) > 1) return false;
+        const presenceTarget = this.settings.mouseInteraction && pointer.inside ? 1 : 0;
+        if (Math.abs(presenceTarget - pointer.presence) > 0.002) return false;
+        for (let i = 0; i < offset.length; i++) {
+          if (Math.abs(offset[i]) > 0.02 || Math.abs(velocity[i]) > 0.5) return false;
+        }
+        return true;
+      };
+
+      const frame = now => {
+        raf = 0;
+        if (this.settings.paused || !visible) return;
+        if (introStart !== null && introStart < 0) introStart = now;
+        const dt = Math.min(0.05, (now - last) / 1000 || 0);
+        last = now;
+        step(dt, now);
+        render(now);
+        if (!settled(now)) raf = requestAnimationFrame(frame);
       };
 
       const wake = () => {
-        if (!raf && visible && !this.settings.paused) {
-          lastTime = performance.now();
-          raf = requestAnimationFrame(loop);
-        }
+        if (raf || this.settings.paused || !visible) return;
+        last = performance.now();
+        raf = requestAnimationFrame(frame);
       };
 
-      const onMove = e => {
+      const locate = event => {
         const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const now = performance.now();
-        const dt = Math.max(0.001, (now - pointer.lastTime) / 1000);
-        pointer.vx = (x - pointer.x) / dt;
-        pointer.vy = (y - pointer.y) / dt;
+        view.left = rect.left;
+        view.top = rect.top;
+        return [event.clientX - rect.left, event.clientY - rect.top];
+      };
+
+      const onMove = event => {
+        if (!this.settings.mouseInteraction) return;
+        const [x, y] = locate(event);
+        const inside = x >= 0 && y >= 0 && x <= view.width && y <= view.height;
+        const time = event.timeStamp || performance.now();
+        if (inside && pointer.inside && pointer.time) {
+          const elapsed = Math.max(4, time - pointer.time) / 1000;
+          const vx = (x - pointer.x) / elapsed;
+          const vy = (y - pointer.y) / elapsed;
+          pointer.vx += (vx - pointer.vx) * 0.6;
+          pointer.vy += (vy - pointer.vy) * 0.6;
+        } else {
+          pointer.vx = 0;
+          pointer.vy = 0;
+        }
         pointer.x = x;
         pointer.y = y;
-        pointer.lastTime = now;
-        pointer.inside = x >= 0 && y >= 0 && x <= view.width && y <= view.height;
-        wake();
-      };
-
-      const onOut = e => {
-        if (!e.relatedTarget) {
-          pointer.inside = false;
+        pointer.time = time;
+        if (inside !== pointer.inside || inside) {
+          pointer.inside = inside;
+          wake();
         }
       };
 
       const onLeave = () => {
         pointer.inside = false;
+        pointer.time = 0;
+        wake();
       };
 
-      const onDown = e => {
-        if (!this.settings.clickShock) return;
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+      const onOut = event => {
+        if (!event.relatedTarget) onLeave();
+      };
+
+      const onDown = event => {
+        if (!this.settings.clickShock || reduced) return;
+        const [x, y] = locate(event);
         if (x < 0 || y < 0 || x > view.width || y > view.height) return;
         shocks.push({ x, y, start: performance.now() });
         if (shocks.length > 6) shocks.shift();
@@ -464,6 +604,26 @@
       };
       document.addEventListener('visibilitychange', onVisibility);
 
+      // Scroll boundary mask: ensure the top 560px (Galaxy starfield) is masked out when at top
+      const isGlobalBg = this.container.classList.contains('global-dot-grid-bg');
+      const updateScrollBoundary = () => {
+        if (!isGlobalBg) return;
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        const heroCut = Math.max(0, 560 - scrollY);
+        if (heroCut > 0) {
+          const mask = `linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) ${heroCut}px, rgba(0,0,0,1) ${heroCut + 80}px)`;
+          this.container.style.maskImage = mask;
+          this.container.style.webkitMaskImage = mask;
+        } else {
+          this.container.style.maskImage = 'none';
+          this.container.style.webkitMaskImage = 'none';
+        }
+      };
+      if (isGlobalBg) {
+        window.addEventListener('scroll', updateScrollBoundary, { passive: true });
+        updateScrollBoundary();
+      }
+
       resize();
       wake();
 
@@ -476,6 +636,9 @@
         window.removeEventListener('pointerout', onOut);
         window.removeEventListener('blur', onLeave);
         document.removeEventListener('visibilitychange', onVisibility);
+        if (isGlobalBg) {
+          window.removeEventListener('scroll', updateScrollBoundary);
+        }
         gl.deleteBuffer(cornerBuffer);
         gl.deleteBuffer(instanceBuffer);
         gl.deleteVertexArray(vao);
