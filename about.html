@@ -5,7 +5,7 @@
     <title>About | Roddneil B. Gemina - Experience, Education &amp; Accolades</title>
     <meta name="description" content="Biography, industry roles, freelance experience, educational distinctions, certifications, and research accolades of Roddneil B. Gemina, Software Engineer &amp; CS Scholar.">
     <link rel="canonical" href="https://roddneil-gemina.pages.dev/about.html">
-    <link rel="stylesheet" href="css/styles.css?v=9.1">
+    <link rel="stylesheet" href="css/styles.css?v=9.2">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +34,9 @@
     <!-- React Bits Galaxy (WebGL2 Starfield Background) -->
     <script src="js/galaxy.js?v=2.0"></script>
 
+    <!-- React Bits MagnetLines (WebGL2 Vector Grid Background) -->
+    <script src="js/magnet-lines.js?v=1.0"></script>
+
     <!-- React Bits GradientText & VariableProximity -->
     <script src="js/gradient-text.js"></script>
     <script src="js/variable-proximity.js"></script>
@@ -56,7 +59,7 @@
     <!-- BLACK IDLE SCREEN (Active while page resources load; fast fade-in upon ready) -->
     <div id="page-idle-curtain" aria-hidden="true"></div>
 
-    <!-- REACT BITS GALAXY BACKGROUND (REPLACING DOTFIELD) -->
+    <!-- REACT BITS GALAXY BACKGROUND (TOP STARFIELD) -->
     <div class="global-galaxy-bg" style="width: 100%; height: 600px; position: absolute; top: 0; left: 0; pointer-events: none; z-index: 1; overflow: hidden;" aria-hidden="true">
         <div class="galaxy-container"
              data-galaxy="true"
@@ -71,6 +74,25 @@
              data-rotation-speed="0.01"
              style="width: 100%; height: 100%;">
             <canvas class="galaxy-canvas" aria-hidden="true"></canvas>
+        </div>
+    </div>
+
+    <!-- REACT BITS MAGNET LINES BACKGROUND (LOWER SECTIONS) -->
+    <div class="global-magnet-lines-bg" aria-hidden="true">
+        <div class="magnet-lines"
+             data-magnet-lines="true"
+             data-line-color="#efefef"
+             data-spacing="30"
+             data-line-width="2"
+             data-line-height="18"
+             data-mode="orbit"
+             data-shape="line"
+             data-radius="200"
+             data-fade="0.65"
+             data-click-pulse="false"
+             data-idle="true"
+             style="width: 100%; height: 100%;">
+            <canvas class="magnet-lines__canvas" aria-hidden="true"></canvas>
         </div>
     </div>
 
