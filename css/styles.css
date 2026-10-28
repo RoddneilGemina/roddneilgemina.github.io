@@ -11654,7 +11654,8 @@ body:not(.intro-active) .hero-stats-bento {
 
 .timeline-item:hover .about-brand-logo-stage,
 .research-card:hover .about-brand-logo-stage,
-.education-card:hover .about-brand-logo-stage {
+.education-card:hover .about-brand-logo-stage,
+.volunteering-card:hover .about-brand-logo-stage {
     transform: scale(1.04);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
 }
