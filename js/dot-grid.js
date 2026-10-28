@@ -527,6 +527,18 @@ void main() {
         raf = requestAnimationFrame(frame);
       };
 
+      const globalBg = this.container.closest('.global-dot-grid-bg') || (this.container.classList.contains('global-dot-grid-bg') ? this.container : null);
+
+      const getHeroCut = () => {
+        if (!globalBg) return 0;
+        const galaxyBg = document.querySelector('.global-galaxy-bg');
+        if (galaxyBg) {
+          const rect = galaxyBg.getBoundingClientRect();
+          return Math.max(0, rect.bottom);
+        }
+        return Math.max(0, 600 - (window.scrollY || window.pageYOffset || 0));
+      };
+
       const locate = event => {
         const rect = canvas.getBoundingClientRect();
         view.left = rect.left;
@@ -536,6 +548,16 @@ void main() {
 
       const onMove = event => {
         if (!this.settings.mouseInteraction) return;
+        if (globalBg) {
+          const heroCut = getHeroCut();
+          if (event.clientY < heroCut) {
+            if (pointer.inside) {
+              pointer.inside = false;
+              wake();
+            }
+            return;
+          }
+        }
         const [x, y] = locate(event);
         const inside = x >= 0 && y >= 0 && x <= view.width && y <= view.height;
         const time = event.timeStamp || performance.now();
@@ -570,6 +592,10 @@ void main() {
 
       const onDown = event => {
         if (!this.settings.clickShock || reduced) return;
+        if (globalBg) {
+          const heroCut = getHeroCut();
+          if (event.clientY < heroCut) return;
+        }
         const [x, y] = locate(event);
         if (x < 0 || y < 0 || x > view.width || y > view.height) return;
         shocks.push({ x, y, start: performance.now() });
@@ -604,23 +630,23 @@ void main() {
       };
       document.addEventListener('visibilitychange', onVisibility);
 
-      // Scroll boundary mask: ensure the top 560px (Galaxy starfield) is masked out when at top
-      const isGlobalBg = this.container.classList.contains('global-dot-grid-bg');
+      // Scroll boundary mask & clip-path: strictly eliminate any overlap with galaxy background above
       const updateScrollBoundary = () => {
-        if (!isGlobalBg) return;
-        const scrollY = window.scrollY || window.pageYOffset || 0;
-        const heroCut = Math.max(0, 560 - scrollY);
-        if (heroCut > 0) {
-          const mask = `linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) ${heroCut}px, rgba(0,0,0,1) ${heroCut + 80}px)`;
-          this.container.style.maskImage = mask;
-          this.container.style.webkitMaskImage = mask;
+        if (!globalBg) return;
+        const cut = Math.round(getHeroCut());
+        if (cut > 0) {
+          const clip = `inset(${cut}px 0 0 0)`;
+          globalBg.style.clipPath = clip;
+          globalBg.style.webkitClipPath = clip;
         } else {
-          this.container.style.maskImage = 'none';
-          this.container.style.webkitMaskImage = 'none';
+          globalBg.style.clipPath = 'none';
+          globalBg.style.webkitClipPath = 'none';
         }
       };
-      if (isGlobalBg) {
+
+      if (globalBg) {
         window.addEventListener('scroll', updateScrollBoundary, { passive: true });
+        window.addEventListener('resize', updateScrollBoundary, { passive: true });
         updateScrollBoundary();
       }
 
@@ -636,8 +662,9 @@ void main() {
         window.removeEventListener('pointerout', onOut);
         window.removeEventListener('blur', onLeave);
         document.removeEventListener('visibilitychange', onVisibility);
-        if (isGlobalBg) {
+        if (globalBg) {
           window.removeEventListener('scroll', updateScrollBoundary);
+          window.removeEventListener('resize', updateScrollBoundary);
         }
         gl.deleteBuffer(cornerBuffer);
         gl.deleteBuffer(instanceBuffer);
