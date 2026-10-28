@@ -529,6 +529,17 @@ void main() {
 
       const globalBg = this.container.closest('.global-dot-grid-bg') || (this.container.classList.contains('global-dot-grid-bg') ? this.container : null);
 
+      const syncGalaxyWithHero = () => {
+        const galaxyBg = document.querySelector('.global-galaxy-bg');
+        const hero = document.querySelector('.about-hero-section, .page-hero, .project-hero-section');
+        if (!galaxyBg || !hero) return;
+        const heroRect = hero.getBoundingClientRect();
+        const heroBottom = Math.round(heroRect.bottom + (window.scrollY || window.pageYOffset || 0));
+        if (heroBottom > 0 && Math.abs(galaxyBg.offsetHeight - heroBottom) > 1) {
+          galaxyBg.style.height = `${heroBottom}px`;
+        }
+      };
+
       const getHeroCut = () => {
         if (!globalBg) return 0;
         const galaxyBg = document.querySelector('.global-galaxy-bg');
@@ -536,7 +547,12 @@ void main() {
           const rect = galaxyBg.getBoundingClientRect();
           return Math.max(0, rect.bottom);
         }
-        return Math.max(0, 600 - (window.scrollY || window.pageYOffset || 0));
+        const hero = document.querySelector('.about-hero-section, .page-hero, .project-hero-section');
+        if (hero) {
+          const rect = hero.getBoundingClientRect();
+          return Math.max(0, rect.bottom);
+        }
+        return Math.max(0, 440 - (window.scrollY || window.pageYOffset || 0));
       };
 
       const locate = event => {
@@ -633,6 +649,7 @@ void main() {
       // Scroll boundary mask & clip-path: strictly eliminate any overlap with galaxy background above
       const updateScrollBoundary = () => {
         if (!globalBg) return;
+        syncGalaxyWithHero();
         const cut = Math.round(getHeroCut());
         if (cut > 0) {
           const clip = `inset(${cut}px 0 0 0)`;
@@ -643,6 +660,18 @@ void main() {
           globalBg.style.webkitClipPath = 'none';
         }
       };
+
+      const heroEl = document.querySelector('.about-hero-section, .page-hero, .project-hero-section');
+      let heroObserver = null;
+      if (heroEl) {
+        syncGalaxyWithHero();
+        heroObserver = new ResizeObserver(() => {
+          syncGalaxyWithHero();
+          updateScrollBoundary();
+          wake();
+        });
+        heroObserver.observe(heroEl);
+      }
 
       if (globalBg) {
         window.addEventListener('scroll', updateScrollBoundary, { passive: true });
@@ -657,6 +686,7 @@ void main() {
         cancelAnimationFrame(raf);
         resizeObserver.disconnect();
         visibilityObserver.disconnect();
+        if (heroObserver) heroObserver.disconnect();
         window.removeEventListener('pointermove', onMove);
         window.removeEventListener('pointerdown', onDown);
         window.removeEventListener('pointerout', onOut);
